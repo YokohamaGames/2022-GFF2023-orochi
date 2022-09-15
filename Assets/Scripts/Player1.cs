@@ -7,11 +7,14 @@ public class Player1 : MonoBehaviour
     [SerializeField] private Vector3 velocity;              // ˆÚ“®•ûŒü
     [SerializeField] private float moveSpeed = 5.0f;        // ˆÚ“®‘¬“x
 
+
+    private Transform _transform;
     private Vector3 latestPos;  //‘O‰ñ‚ÌPosition
 
     void Start()
     {
-
+        _transform = transform;
+        latestPos = _transform.position;
     }
 
     void Update()
@@ -51,4 +54,5 @@ public class Player1 : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(diff); //Œü‚«‚ğ•ÏX‚·‚é
         }
     }
+
 }
