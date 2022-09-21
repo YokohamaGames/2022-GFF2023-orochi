@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player1 : MonoBehaviour
 {
@@ -56,6 +55,10 @@ public class Player1 : MonoBehaviour
 
     [SerializeField]
     private Animator animator = null;
+
+    // ユーザーからの入力
+    Vector2 moveInput = Vector2.zero;
+    Vector2 lookInput = Vector2.zero;
 
     void Start()
     {
@@ -150,14 +153,15 @@ public class Player1 : MonoBehaviour
 
     void UpdateForWalkState()
     {
-        //TODO: 後でステート毎に入れる
-        var h = Input.GetAxis("Horizontal");
-        var v = Input.GetAxis("Vertical");
-
-        var velocity = new Vector3(h, 0, v);
+        // プレイヤーの前後左右の移動
+        var velocity = new Vector3(moveInput.x, 0, moveInput.y);
         velocity = velocity.normalized * speed;
         velocity.y = rigidbody.velocity.y;
         rigidbody.velocity = velocity;
+
+        // プレイヤーの方角を回転
+        transform.Rotate(0, lookInput.x, 0);
+
 
 
         // if(isGrounded == true)
@@ -203,5 +207,49 @@ public class Player1 : MonoBehaviour
     void UpdateForSmallState()
     {
 
+    }
+
+    // ユーザーからのMoveアクションに対して呼び出されます。
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
+
+        // アクションが始まった
+        if (context.started)
+        {
+            Debug.Log($"started : {moveInput}");
+        }
+        // アクションが継続中
+        else if (context.performed)
+        {
+            Debug.Log($"performed : {moveInput}");
+        }
+        // アクションが終了
+        else if (context.canceled)
+        {
+            Debug.Log($"canceled : {moveInput}");
+        }
+    }
+
+    // ユーザーからのMoveアクションに対して呼び出されます。
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        lookInput = context.ReadValue<Vector2>();
+
+        // アクションが始まった
+        if (context.started)
+        {
+            Debug.Log($"started : {lookInput}");
+        }
+        // アクションが継続中
+        else if (context.performed)
+        {
+            Debug.Log($"performed : {lookInput}");
+        }
+        // アクションが終了
+        else if (context.canceled)
+        {
+            Debug.Log($"canceled : {lookInput}");
+        }
     }
 }
