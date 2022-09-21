@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerHPbar : MonoBehaviour
 {
-    public GameObject[] heartArray = new GameObject[3];
-    private int playerhp;
+    public GameObject[] heartArray = new GameObject[6];
+    public int playerhp;
 
     void Start()
     {
