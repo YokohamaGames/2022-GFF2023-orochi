@@ -13,16 +13,15 @@ public class Player1 : MonoBehaviour
     [Tooltip("動くスピードを指定")]
     private float speed = 10.0f;
 
-   /* [SerializeField]
-    [Tooltip("ジャンプ力を指定")]
-    private float upForce = 200f;
-   */
+    /* [SerializeField]
+     [Tooltip("ジャンプ力を指定")]
+     private float upForce = 200f;
+    */
     [SerializeField]
     private bool isGrounded = false;
-   /* [SerializeField]
-    private LayerMask groudLayer;
-   */
-    private Transform _transform;
+    /* [SerializeField]
+     private LayerMask groudLayer;
+    */
 
     float h = 0f;
     float v = 0f;
@@ -54,17 +53,15 @@ public class Player1 : MonoBehaviour
 
     // コンポーネントを事前に参照しておく変数
     new Rigidbody rigidbody;
-    Animator animator;
+
+    [SerializeField]
+    private Animator animator = null;
 
     void Start()
     {
-       // isGrounded = true;
+        // isGrounded = true;
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.centerOfMass = com;
-
-        animator = GetComponent<Animator>();
-
-        _transform = transform;
     }
 
     // Walkステートに遷移させます。
@@ -143,7 +140,6 @@ public class Player1 : MonoBehaviour
             case PlayerState.Small:
                 UpdateForSmallState();
                 break;
-
         }
 
         //TODO: 後でステート毎に入れる
