@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerHPbar : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PlayerHPbar : MonoBehaviour
 
     void Update()
     {
+
         //左クリック ライフポイント減らす
         if (Input.GetMouseButtonDown(0))
         {

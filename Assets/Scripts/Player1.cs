@@ -22,8 +22,6 @@ public class Player1 : MonoBehaviour
      private LayerMask groudLayer;
     */
 
-    float h = 0f;
-    float v = 0f;
 
     // プレイヤーの状態を表します
     enum PlayerState
@@ -216,7 +214,7 @@ public class Player1 : MonoBehaviour
         moveInput = context.ReadValue<Vector2>();
 
         // アクションが始まった
-        if (context.started)
+        /*if (context.started)
         {
             Debug.Log($"started : {moveInput}");
         }
@@ -229,7 +227,7 @@ public class Player1 : MonoBehaviour
         else if (context.canceled)
         {
             Debug.Log($"canceled : {moveInput}");
-        }
+        }*/
     }
 
     // ユーザーからのMoveアクションに対して呼び出されます。
@@ -238,7 +236,7 @@ public class Player1 : MonoBehaviour
         lookInput = context.ReadValue<Vector2>();
 
         // アクションが始まった
-        if (context.started)
+        /*if (context.started)
         {
             Debug.Log($"started : {lookInput}");
         }
@@ -251,6 +249,6 @@ public class Player1 : MonoBehaviour
         else if (context.canceled)
         {
             Debug.Log($"canceled : {lookInput}");
-        }
+        }*/
     }
 }
