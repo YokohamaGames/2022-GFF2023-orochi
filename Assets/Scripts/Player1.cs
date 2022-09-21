@@ -141,11 +141,23 @@ public class Player1 : MonoBehaviour
                 UpdateForSmallState();
                 break;
         }
+    }
 
+    private void FixedUpdate()
+    {
+
+    }
+
+    void UpdateForWalkState()
+    {
         //TODO: 後でステート毎に入れる
-        h = Input.GetAxis("Horizontal") * speed;
-        v = Input.GetAxis("Vertical") * speed;
-        Vector3 direction = new Vector3(h, 0, v);
+        var h = Input.GetAxis("Horizontal");
+        var v = Input.GetAxis("Vertical");
+
+        var velocity = new Vector3(h, 0, v);
+        velocity = velocity.normalized * speed;
+        velocity.y = rigidbody.velocity.y;
+        rigidbody.velocity = velocity;
 
 
         // if(isGrounded == true)
@@ -156,16 +168,6 @@ public class Player1 : MonoBehaviour
         //         rigidbody.AddForce(new Vector3(0, upForce, 0));
         //     }
         // }
-    }
-
-    private void FixedUpdate()
-    {
-        rigidbody.velocity = new Vector3(h, 0, v);
-    }
-
-    void UpdateForWalkState()
-    {
-
     }
 
     void UpdateForJumpReadyState()
