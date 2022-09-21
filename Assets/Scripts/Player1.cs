@@ -144,11 +144,21 @@ public class Player1 : MonoBehaviour
         }
 
         velocity = velocity.normalized * moveSpeed * Time.deltaTime;
-        if (Input.GetButton("Left"))
+        if (Input.GetButtonDown("Left"))
         {
             velocity.x -= 1;
         }
-        transform.position += velocity;
+        if (Input.GetButtonUp("Left"))
+        {
+            velocity.x += 1;
+        }
+      
+        if (velocity.magnitude > 0)
+        {
+            // プレイヤーの位置(transform.position)の更新
+            // 移動方向ベクトル(velocity)を足し込みます
+            transform.position += velocity;
+        }
 
         // if(isGrounded == true)
         // {
