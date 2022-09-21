@@ -30,7 +30,7 @@ public class AttackArea : MonoBehaviour
             Debug.Log("UŒ‚”ÍˆÍŠO");
             Parent_Enemy.AttackArea = false;
            // Parent_Enemy.SearchArea = true;
-            //Parent_Enemy.SetMoveState();
+           Parent_Enemy.SetMoveState();
         }        
     }
 
