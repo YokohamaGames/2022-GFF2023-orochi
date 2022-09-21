@@ -5,25 +5,24 @@ using UnityEngine;
 public class Player1 : MonoBehaviour
 {
     [SerializeField] private Vector3 velocity;              // 移動方向
-    [SerializeField] private float moveSpeed = 5.0f;        // 移動速度
-
-    
 
     [SerializeField]
     [Tooltip("動くスピードを指定")]
     private float speed = 10.0f;
 
-    [SerializeField]
+   /* [SerializeField]
     [Tooltip("ジャンプ力を指定")]
     private float upForce = 200f;
-
+   */
     [SerializeField]
     private bool isGrounded = false;
-    [SerializeField]
+   /* [SerializeField]
     private LayerMask groudLayer;
-
+   */
     private Transform _transform;
-    private Vector3 latestPos;  //前回のPosition
+
+    float h = 0f;
+    float v = 0f;
 
     // プレイヤーの状態を表します
     enum PlayerState
@@ -61,7 +60,6 @@ public class Player1 : MonoBehaviour
         animator = GetComponent<Animator>();
 
         _transform = transform;
-        latestPos = _transform.position;
     }
 
     // Walkステートに遷移させます。
@@ -143,22 +141,10 @@ public class Player1 : MonoBehaviour
 
         }
 
-        velocity = velocity.normalized * moveSpeed * Time.deltaTime;
-        if (Input.GetButtonDown("Left"))
-        {
-            velocity.x -= 1;
-        }
-        if (Input.GetButtonUp("Left"))
-        {
-            velocity.x += 1;
-        }
-      
-        if (velocity.magnitude > 0)
-        {
-            // プレイヤーの位置(transform.position)の更新
-            // 移動方向ベクトル(velocity)を足し込みます
-            transform.position += velocity;
-        }
+        h = Input.GetAxis("Horizontal") * speed;
+        v = Input.GetAxis("Vertical") * speed;
+        Vector3 direction = new Vector3(h, 0, v);
+
 
         // if(isGrounded == true)
         // {
@@ -168,6 +154,11 @@ public class Player1 : MonoBehaviour
         //         rigidbody.AddForce(new Vector3(0, upForce, 0));
         //     }
         // }
+    }
+
+    private void FixedUpdate()
+    {
+        rigidbody.velocity = new Vector3(h, 0, v);
     }
 
     void UpdateForWalkState()
