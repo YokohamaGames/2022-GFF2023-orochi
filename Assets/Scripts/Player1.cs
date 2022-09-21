@@ -146,6 +146,7 @@ public class Player1 : MonoBehaviour
 
         }
 
+        //TODO: 後でステート毎に入れる
         h = Input.GetAxis("Horizontal") * speed;
         v = Input.GetAxis("Vertical") * speed;
         Vector3 direction = new Vector3(h, 0, v);
