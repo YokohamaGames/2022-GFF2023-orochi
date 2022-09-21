@@ -154,8 +154,9 @@ public class Player1 : MonoBehaviour
     void UpdateForWalkState()
     {
         // プレイヤーの前後左右の移動
-        var velocity = new Vector3(moveInput.x, 0, moveInput.y);
-        velocity = velocity.normalized * speed;
+        var velocity = Vector3.zero;
+        velocity = transform.forward * moveInput.y * speed;
+        velocity += transform.right * moveInput.x * speed;
         velocity.y = rigidbody.velocity.y;
         rigidbody.velocity = velocity;
 
