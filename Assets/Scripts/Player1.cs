@@ -7,6 +7,9 @@ public class Player1 : MonoBehaviour
     [SerializeField] private Vector3 velocity;              // 移動方向
 
     [SerializeField]
+    private Vector3 com;
+
+    [SerializeField]
     [Tooltip("動くスピードを指定")]
     private float speed = 10.0f;
 
@@ -57,6 +60,8 @@ public class Player1 : MonoBehaviour
     {
        // isGrounded = true;
         rigidbody = GetComponent<Rigidbody>();
+        rigidbody.centerOfMass = com;
+
         animator = GetComponent<Animator>();
 
         _transform = transform;
