@@ -14,9 +14,7 @@ public class Enemy : MonoBehaviour
     private float AttackSpeed = 1;
     //現在の敵の歩行スピード
     float speed = 1;
-    // //追跡機能を実装します
-    [SerializeField]
-    private Rigidbody enemy;
+   
     //追跡目標を設定します
     [SerializeField]
     private Transform target;
@@ -34,10 +32,20 @@ public class Enemy : MonoBehaviour
 
     public bool AttackArea = false;
 
+    // コンポーネントを事前に参照しておく変数
+    Animator animator;
+    
+    // AnimatorのパラメーターID
+    static readonly int isDiscover = Animator.StringToHash("isDiscover");
+    //static readonly int jumpId = Animator.StringToHash("Jump");
+    //static readonly int landingId = Animator.StringToHash("Landing");
     enum EnemyState
     {
         //待機状態
         Stay,
+
+        //発見状態
+        Discover,
 
         //移動状態
         Move,
@@ -54,7 +62,8 @@ public class Enemy : MonoBehaviour
     EnemyState currentState = EnemyState.Stay;
     void Start()
     {
-
+        animator = GetComponent<Animator>();
+        
     }
 
     // Update is called once per frame
@@ -96,7 +105,7 @@ public class Enemy : MonoBehaviour
             Debug.Log("索敵範囲外");
         }
 
-
+        Debug.Log(currentState);
 
 
 
@@ -109,8 +118,14 @@ public class Enemy : MonoBehaviour
         speed = 0;
     }
 
+    public void SetDiscoverState()
+    {
+        currentState = EnemyState.Discover;
+        animator.SetBool(isDiscover, true);
+    }
     public void SetMoveState()
     {
+        animator.SetBool(isDiscover, false);
         currentState = EnemyState.Move;
         speed = ChaseSpeed;
     }

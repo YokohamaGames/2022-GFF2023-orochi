@@ -18,7 +18,8 @@ public class SearchArea : MonoBehaviour
         {
             Debug.Log("õ“G”ÍˆÍ“à");
             Parent_Enemy.SearchArea = true;
-            Parent_Enemy.SetMoveState();
+            Parent_Enemy.SetDiscoverState();
+            
         }
     }
     //ƒ^[ƒQƒbƒg‚Ìõ“G”ÍˆÍŠO‚Ì’Eo”»’è
