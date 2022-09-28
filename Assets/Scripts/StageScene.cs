@@ -3,9 +3,9 @@ using UnityEngine.EventSystems;
 
 public class StageScene : MonoBehaviour
 {   
-	// ポーズUIを指定します。
+	// UIを指定します。
 	[SerializeField]
-	private PauseUI pauseUI = null;
+	private UI Ui = null;
 
 	// Update is called once per frame
 	void Update()
@@ -15,11 +15,11 @@ public class StageScene : MonoBehaviour
 			//　ポーズUIが表示されてる時は停止
 			if (Mathf.Approximately(Time.timeScale, 1f))
 			{
-				pauseUI.StopGame();
+				Ui.Show();
 			}
 			else
 			{
-				pauseUI.ReStartGame();
+				Ui.Hide();
 			}
 		}
 	}
