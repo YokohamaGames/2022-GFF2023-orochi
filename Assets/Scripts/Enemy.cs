@@ -37,8 +37,7 @@ public class Enemy : MonoBehaviour
     
     // AnimatorのパラメーターID
     static readonly int isDiscover = Animator.StringToHash("isDiscover");
-    //static readonly int jumpId = Animator.StringToHash("Jump");
-    //static readonly int landingId = Animator.StringToHash("Landing");
+    
     enum EnemyState
     {
         //待機状態
@@ -173,20 +172,10 @@ public class Enemy : MonoBehaviour
 
         // 算出した回転値をこのゲームオブジェクトのrotationに代入
         this.transform.rotation = quaternion;
-        /*enemy.updatePosition = true;
-        enemy.updateRotation = true;
-        enemy.destination = target.transform.position;
-        */
+        
     }
 
-    /*private void OnTriggerExit(Collider colision)
-     {
-         if (colision.CompareTag("Player"))
-         {
-             //Debug.Log("索敵範囲外");
-             SearchArea = false;
-         }
-     }*/
+    
 }
 
 
