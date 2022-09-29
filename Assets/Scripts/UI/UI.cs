@@ -11,10 +11,15 @@ public class UI : MonoBehaviour
 	[SerializeField]
 	private GameObject OptionUI = null;
 
+	// SEを参照
+	[SerializeField]
+	private SE Se = null;
+
 	// pause時の初期選択状態に設定するボタンを指定します
 	[SerializeField]
 	private Selectable PauseButton = null;
 
+	// 開始時にUIを非表示
 	void Start()
 	{
 		PauseUI.SetActive(false);
@@ -27,6 +32,8 @@ public class UI : MonoBehaviour
 	{
 		// ポーズの表示
 		PauseUI.SetActive(true);
+		// UIが開かれた音声を再生
+		Se.OpenUI();
 		// 停止
 		Time.timeScale = 0f;
 	}
@@ -37,6 +44,8 @@ public class UI : MonoBehaviour
 		{
 			// ポーズの非表示
 			PauseUI.SetActive(false);
+			// UIが閉じられた音声を再生
+			Se.CloseUI();
 			// 再開
 			Time.timeScale = 1f;
 		} 
@@ -44,6 +53,8 @@ public class UI : MonoBehaviour
 		{
 			// optionの非表示
 			OptionUI.SetActive(false);
+			// UIが閉じられた音声を再生
+			Se.CloseUI();
 		}
 	}
 
@@ -59,6 +70,8 @@ public class UI : MonoBehaviour
 		if (PauseUI.activeInHierarchy) 
 		{
 			OptionUI.SetActive(true);
+			// UIが開かれた音声を再生
+			Se.OpenUI();
 		} 
 	}
 
