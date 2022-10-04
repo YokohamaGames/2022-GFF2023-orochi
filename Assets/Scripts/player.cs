@@ -214,7 +214,7 @@ public class Player : MonoBehaviour
         moveInput = context.ReadValue<Vector2>();
 
         // アクションが始まった
-        /*if (context.started)
+        if (context.started)
         {
             Debug.Log($"started : {moveInput}");
         }
@@ -227,7 +227,7 @@ public class Player : MonoBehaviour
         else if (context.canceled)
         {
             Debug.Log($"canceled : {moveInput}");
-        }*/
+        }
     }
 
     // ユーザーからのMoveアクションに対して呼び出されます。
