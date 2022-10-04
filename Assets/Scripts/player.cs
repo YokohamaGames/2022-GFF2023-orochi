@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        // isGrounded = true;
+        isGrounded = true;
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.centerOfMass = com;
     }
@@ -161,16 +161,8 @@ public class Player : MonoBehaviour
         // プレイヤーの方角を回転
         transform.Rotate(0, lookInput.x, 0);
 
+        //isGrounded = true;
 
-
-        // if(isGrounded == true)
-        // {
-        //     if(Input.GetKeyDown("space"))
-        //     {
-        //         isGrounded = false;
-        //         rigidbody.AddForce(new Vector3(0, upForce, 0));
-        //     }
-        // }
     }
 
     void UpdateForJumpReadyState()
@@ -255,10 +247,14 @@ public class Player : MonoBehaviour
     //Fireボタンを押したら呼び出されます
     public void OnFire(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
+        //if (isGrounded == true)
         {
-            Debug.Log("Fire");                //ジャンプさせます。
-            rigidbody.AddForce(transform.up * upForce / 20f, ForceMode.Impulse);
+            if (context.phase == InputActionPhase.Performed)
+            {
+                Debug.Log("Fire");                //ジャンプさせます。
+                rigidbody.AddForce(transform.up * upForce / 20f, ForceMode.Impulse);
+                //isGrounded = false;
+            }
         }
     }
     public void OnControlPauseUI(InputAction.CallbackContext context)
