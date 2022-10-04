@@ -38,7 +38,10 @@ public class Enemy : MonoBehaviour
 
     // コンポーネントを事前に参照しておく変数
     Animator animator;
-    
+
+    // コンポーネントを事前に参照しておく変数
+    new Rigidbody rigidbody;
+
     // AnimatorのパラメーターID
     static readonly int isDiscover = Animator.StringToHash("isDiscover");
     
@@ -93,7 +96,7 @@ public class Enemy : MonoBehaviour
 
         }
         //索敵範囲と攻撃範囲の中にいるとき攻撃モード
-        if (SearchArea && AttackArea)
+        /*if (SearchArea && AttackArea)
         {
             Debug.Log("攻撃範囲内");
         }
@@ -108,7 +111,7 @@ public class Enemy : MonoBehaviour
             Debug.Log("索敵範囲外");
         }
 
-        Debug.Log(currentState);
+        Debug.Log(currentState);*/
 
 
         // ゲームパッドが接続されていないとnullになる。
@@ -128,7 +131,7 @@ public class Enemy : MonoBehaviour
     public void SetStayState()
     {
         currentState = EnemyState.Stay;
-        speed = 0;
+        
     }
 
     public void SetDiscoverState()
@@ -157,7 +160,20 @@ public class Enemy : MonoBehaviour
     }
 
     void UpdateForMove()
-    {  //ターゲット方向のベクトルを求める
+    {
+
+
+        // プレイヤーの前後左右の移動
+        var velocity = Vector3.zero;
+        velocity = transform.forward * moveInput.y * speed;
+        velocity += transform.right * moveInput.x * speed;
+        velocity.y = rigidbody.velocity.y;
+        rigidbody.velocity = velocity;
+
+        // プレイヤーの方角を回転
+        transform.Rotate(0, lookInput.x, 0);
+
+        /*ターゲット方向のベクトルを求める
         Vector3 vec = target.position - transform.position;
 
         // ターゲットの方向を向く
@@ -167,7 +183,7 @@ public class Enemy : MonoBehaviour
         transform.Translate(Vector3.forward * speed * 0.01f); // 正面方向に移動
 
         // 算出した回転値をこのゲームオブジェクトのrotationに代入
-        this.transform.rotation = quaternion;
+        this.transform.rotation = quaternion;*/
 
 
     }
