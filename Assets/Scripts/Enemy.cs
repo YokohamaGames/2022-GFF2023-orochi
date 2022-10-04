@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 public class Enemy : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float rotMax;
 
+    // ユーザーからの入力
+    Vector2 moveInput = Vector2.zero;
+    Vector2 lookInput = Vector2.zero;
 
     public bool SearchArea = false;
 
@@ -107,7 +111,17 @@ public class Enemy : MonoBehaviour
         Debug.Log(currentState);
 
 
+        // ゲームパッドが接続されていないとnullになる。
+        if (Gamepad.current == null) return;
 
+        if (Gamepad.current.buttonNorth.wasPressedThisFrame)
+        {
+            Debug.Log("Button Northが押された！");
+        }
+        if (Gamepad.current.buttonSouth.wasReleasedThisFrame)
+        {
+            Debug.Log("Button Southが離された！");
+        }
 
     }
 
@@ -175,7 +189,51 @@ public class Enemy : MonoBehaviour
         
     }
 
-    
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        moveInput = context.ReadValue<Vector2>();
+
+        // アクションが始まった
+        /*if (context.started)
+        {
+            Debug.Log($"started : {moveInput}");
+        }
+        // アクションが継続中
+        else if (context.performed)
+        {
+            Debug.Log($"performed : {moveInput}");
+        }
+        // アクションが終了
+        else if (context.canceled)
+        {
+            Debug.Log($"canceled : {moveInput}");
+        }*/
+    }
+
+    // ユーザーからのMoveアクションに対して呼び出されます。
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        lookInput = context.ReadValue<Vector2>();
+
+        // アクションが始まった
+        /*if (context.started)
+        {
+            Debug.Log($"started : {lookInput}");
+        }
+        // アクションが継続中
+        else if (context.performed)
+        {
+            Debug.Log($"performed : {lookInput}");
+        }
+        // アクションが終了
+        else if (context.canceled)
+        {
+            Debug.Log($"canceled : {lookInput}");
+        }*/
+    }
+
 }
+
+
 
 
