@@ -31,15 +31,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Pause",
-                    "type": "Button",
-                    "id": "3ac355d4-9ff7-4086-8316-37ec90cc9731",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -265,12 +256,12 @@
                 },
                 {
                     "name": "",
-                    "id": "fc2f2d9a-7bb6-43db-8ec2-dce11cbbb31b",
-                    "path": "<Gamepad>/start",
+                    "id": "88705ac3-760b-458b-9653-43a60b165621",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Pause",
+                    "groups": "Gamepad",
+                    "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

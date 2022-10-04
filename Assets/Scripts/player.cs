@@ -12,10 +12,10 @@ public class Player : MonoBehaviour
     [Tooltip("動くスピードを指定")]
     private float speed = 10.0f;
 
-    /* [SerializeField]
+     [SerializeField]
      [Tooltip("ジャンプ力を指定")]
-     private float upForce = 200f;
-    */
+     private float upForce = 20f;
+    
     [SerializeField]
     private bool isGrounded = false;
     /* [SerializeField]
@@ -252,8 +252,13 @@ public class Player : MonoBehaviour
         }*/
     }
 
-    public void OnControlPause(InputAction.CallbackContext context)
+    //Fireボタンを押したら呼び出されます
+    public void OnFire(InputAction.CallbackContext context)
     {
-        StageScene.Instance.ControlPauseUI();
+        if (context.phase == InputActionPhase.Performed)
+        {
+            Debug.Log("Fire");                //ジャンプさせます。
+            rigidbody.AddForce(transform.up * upForce / 20f, ForceMode.Impulse);
+        }
     }
 }
