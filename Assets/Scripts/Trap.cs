@@ -29,7 +29,7 @@ public class Trap : MonoBehaviour
             // AudioSource.PlayClipAtPoint(sound, transform.position);
 
             // ‚T•bŒã‚É–C’e‚ð”j‰ó‚·‚é
-            Destroy(shell, 10.0f);
+            Destroy(shell, 5.0f);
 
             
         }
