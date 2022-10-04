@@ -261,4 +261,9 @@ public class Player : MonoBehaviour
             rigidbody.AddForce(transform.up * upForce / 20f, ForceMode.Impulse);
         }
     }
+    public void OnControlPauseUI(InputAction.CallbackContext context)
+    {
+        StageScene.Instance.ControlPauseUI();
+    }
+
 }
