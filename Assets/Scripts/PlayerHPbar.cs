@@ -12,26 +12,28 @@ public class PlayerHPbar : MonoBehaviour
         playerhp = 6;
     }
 
-    void Update()
+    // Damageが呼び出されたらHPが1減る
+    public void Damage()
     {
-        //左クリック ライフポイント減らす
-        if (Input.GetMouseButtonDown(0))
         {
             if (playerhp > 0)
             {
                 playerhp--;
             }
         }
+    }
 
-        //右クリック ライフポイント増やす
-        if (Input.GetMouseButtonDown(1))
+    // Healが呼び出されたらHPが1増える
+    public void Heel()
+    {
+        if (playerhp < 6)
         {
-            if (playerhp < 6)
-            {
-                playerhp++;
-            }
+            playerhp++;
         }
+    }
 
+    void Update()
+    {
         if (playerhp == 6)
         {
             heartArray[5].gameObject.SetActive(true);
