@@ -1,54 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class player : MonoBehaviour
+public class Player : MonoBehaviour
 {
-    [SerializeField] private Vector3 velocity;              // 移動方向
-    [SerializeField] private float moveSpeed = 5.0f;        // 移動速度
+    //移動速度
+    [SerializeField] private float _speed = 3.0f;
 
-    private Vector3 latestPos;  //前回のPosition
+    //x軸方向の入力を保存
+    private float _input_x;
+    //z軸方向の入力を保存
+    private float _input_z;
 
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
-        // WASD入力から、XZ平面(水平な地面)を移動する方向(velocity)を得ます
-        velocity = Vector3.zero;
-        if (Input.GetKey(KeyCode.W))
-            velocity.z += 1;
-        if (Input.GetKey(KeyCode.A))
-            velocity.x -= 1;
-        if (Input.GetKey(KeyCode.S))
-            velocity.z -= 1;
-        if (Input.GetKey(KeyCode.D))
-            velocity.x += 1;
+        //x軸方向、z軸方向の入力を取得
 
-        // 速度ベクトルの長さを1秒でmoveSpeedだけ進むように調整します
-        velocity = velocity.normalized * moveSpeed * Time.deltaTime;
+        _input_x = Input.GetAxis("Horizontal");
 
-        // いずれかの方向に移動している場合
-        if (velocity.magnitude > 0)
-        {
-            // プレイヤーの位置(transform.position)の更新
-            // 移動方向ベクトル(velocity)を足し込みます
-            transform.position += velocity;
-        }
+        _input_z = Input.GetAxis("Vertical");
+
+        //移動の向きなど座標関連はVector3で扱う
+        Vector3 velocity = new Vector3(_input_x, 0, _input_z);
+        //ベクトルの向きを取得
+        Vector3 direction = velocity.normalized;
+
+        //移動距離を計算
+        float distance = _speed * Time.deltaTime;
+        //移動先を計算
+        Vector3 destination = transform.position + direction * distance;
 
 
 
+        //移動先に向けて回転
+        transform.LookAt(destination);
+        //移動先の座標を設定
+        transform.position = destination;
 
 
-        Vector3 diff = transform.position - latestPos;   //前回からどこに進んだかをベクトルで取得
-        latestPos = transform.position;  //前回のPositionの更新
 
-        //ベクトルの大きさが0.01以上の時に向きを変える処理をする
-        if (diff.magnitude > 0.01f)
-        {
-            transform.rotation = Quaternion.LookRotation(diff); //向きを変更する
-        }
+
+
+
     }
+
+    
+
+
+
+
+
 }
