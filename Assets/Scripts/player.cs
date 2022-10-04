@@ -251,4 +251,9 @@ public class Player : MonoBehaviour
             Debug.Log($"canceled : {lookInput}");
         }*/
     }
+
+    public void OnControlPause(InputAction.CallbackContext context)
+    {
+        StageScene.Instance.ControlPauseUI();
+    }
 }

@@ -15,9 +15,15 @@ public class UI : MonoBehaviour
 	[SerializeField]
 	private SE Se = null;
 
-	// pause時の初期選択状態に設定するボタンを指定します
+	// pause時の初期選択状態に設定するボタンを指定
 	[SerializeField]
 	private Selectable FastButton = null;
+
+	// Optionが開かれた時に選択されるボタンを指定
+	[SerializeField]
+	private Selectable OptionButton = null;
+
+	Animator animator;
 
 	// 開始時にUIを非表示
 	void Start()
@@ -25,43 +31,42 @@ public class UI : MonoBehaviour
 		PauseUI.SetActive(false);
 		OptionUI.SetActive(false);
 		FastButton.Select();
+
+		animator = GetComponent<Animator>();
 	}
 
 	// pause画面を表示
-	public void Show()
+	public void Control()
 	{
-		// ポーズの表示
-		PauseUI.SetActive(true);
-		// UIが開かれた音声を再生
-		Se.OpenUI();
-		// 停止
-		Time.timeScale = 0f;
-	}
-	// optionが出ていれば先に隠し、出ていなければpause画面を隠す
-	public void Hide()
-	{
-		if (!OptionUI.activeInHierarchy)
-		{
+		if (!PauseUI.activeSelf)
+        {
+			// ポーズの表示
+			PauseUI.SetActive(true);
+			// UIが開かれた音声を再生
+			Se.OpenUI();
+			// 停止
+			Time.timeScale = 0f;
+			
+		}
+		else if (PauseUI.activeSelf && !OptionUI.activeSelf)
+        {
 			// ポーズの非表示
 			PauseUI.SetActive(false);
 			// UIが閉じられた音声を再生
 			Se.CloseUI();
 			// 再開
 			Time.timeScale = 1f;
-		} 
-		else if (Input.GetKeyDown(KeyCode.Escape))
+		}
+        else if (PauseUI.activeSelf && OptionUI.activeSelf)
 		{
 			// optionの非表示
 			OptionUI.SetActive(false);
 			// UIが閉じられた音声を再生
 			Se.CloseUI();
-		}
-	}
+			FastButton.Select();
 
-	// Backが押されたらReStartGameを呼び出す
-	public void Back()
-	{
-		Hide();
+			animator.SetTrigger("Show");
+		}
 	}
 
 	// Optionボタンが押された時のOption画面の表示
@@ -72,6 +77,10 @@ public class UI : MonoBehaviour
 			OptionUI.SetActive(true);
 			// UIが開かれた音声を再生
 			Se.OpenUI();
+			// Optionが選択された場合にこのボタンを選択状態にします
+			OptionButton.Select();
+
+			animator.SetTrigger("Hide");
 		} 
 	}
 
