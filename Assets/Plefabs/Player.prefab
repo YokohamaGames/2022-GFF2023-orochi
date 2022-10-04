@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4611616855408944639}
   - component: {fileID: 4611616855408944638}
   - component: {fileID: 8627753931573193861}
-  - component: {fileID: 3437007303961224945}
+  - component: {fileID: 8139101171561958033}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3437007303961224945}
+      - m_Target: {fileID: 8139101171561958033}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
@@ -110,7 +110,7 @@ MonoBehaviour:
     m_ActionName: Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3437007303961224945}
+      - m_Target: {fileID: 8139101171561958033}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: OnLook
         m_Mode: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
     m_ActionName: Player/Look[/Mouse/delta]
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3437007303961224945}
+      - m_Target: {fileID: 8139101171561958033}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: OnFire
         m_Mode: 0
@@ -182,7 +182,7 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3437007303961224945}
+      - m_Target: {fileID: 8139101171561958033}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: OnControlPauseUI
         m_Mode: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &3437007303961224945
+--- !u!114 &8139101171561958033
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

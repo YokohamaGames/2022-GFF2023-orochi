@@ -12,10 +12,10 @@ public class Player : MonoBehaviour
     [Tooltip("動くスピードを指定")]
     private float speed = 10.0f;
 
-     [SerializeField]
-     [Tooltip("ジャンプ力を指定")]
-     private float upForce = 20f;
-    
+    [SerializeField]
+    [Tooltip("ジャンプ力を指定")]
+    private float upForce = 20f;
+
     [SerializeField]
     private bool isGrounded = false;
     /* [SerializeField]
