@@ -142,6 +142,40 @@ public class Player : MonoBehaviour
                 UpdateForSmallState();
                 break;
         }
+
+
+        if (Keyboard.current.aKey.isPressed)
+        {
+            moveInput.x = -1;
+        }
+        else if(Keyboard.current.aKey.wasReleasedThisFrame)
+        {
+            moveInput.x = 0;
+        }
+        if (Keyboard.current.dKey.isPressed)
+        {
+            moveInput.x = 1;
+        }
+        else if (Keyboard.current.dKey.wasReleasedThisFrame)
+        {
+            moveInput.x = 0;
+        }
+        if (Keyboard.current.wKey.isPressed)
+        {
+            moveInput.y = 1;
+        }
+        else if (Keyboard.current.wKey.wasReleasedThisFrame)
+        {
+            moveInput.y = 0;
+        }
+        if (Keyboard.current.sKey.isPressed)
+        {
+            moveInput.y = -1;
+        }
+        else if (Keyboard.current.sKey.wasReleasedThisFrame)
+        {
+            moveInput.y = 0;
+        }
     }
 
     private void FixedUpdate()
@@ -204,6 +238,8 @@ public class Player : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+        
+
 
         // アクションが始まった
         if (context.started)
