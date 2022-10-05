@@ -5,12 +5,22 @@ using UnityEngine.InputSystem;
 
 public class PlayerHPbar : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject GameOverUI = null;
+
+    public static PlayerHPbar Instance { get; private set; }
+
     public GameObject[] heartArray = new GameObject[6];
     private int playerhp;
 
     void Start()
     {
         playerhp = 6;
+    }
+
+    private void Awake()
+    {
+        Instance = this;
     }
 
     // Damage‚ªŒÄ‚Ño‚³‚ê‚½‚çHP‚ª1Œ¸‚é
@@ -101,6 +111,8 @@ public class PlayerHPbar : MonoBehaviour
             heartArray[2].gameObject.SetActive(false);
             heartArray[1].gameObject.SetActive(false);
             heartArray[0].gameObject.SetActive(false);
+
+            GameOverUI.SetActive(true);
         }
     }
 }

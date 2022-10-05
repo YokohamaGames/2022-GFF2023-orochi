@@ -148,7 +148,7 @@ public class Player : MonoBehaviour
         {
             moveInput.x = -1;
         }
-        else if(Keyboard.current.aKey.wasReleasedThisFrame)
+        if(Keyboard.current.aKey.wasReleasedThisFrame)
         {
             moveInput.x = 0;
         }
@@ -156,7 +156,7 @@ public class Player : MonoBehaviour
         {
             moveInput.x = 1;
         }
-        else if (Keyboard.current.dKey.wasReleasedThisFrame)
+        if (Keyboard.current.dKey.wasReleasedThisFrame)
         {
             moveInput.x = 0;
         }
@@ -164,7 +164,7 @@ public class Player : MonoBehaviour
         {
             moveInput.y = 1;
         }
-        else if (Keyboard.current.wKey.wasReleasedThisFrame)
+        if (Keyboard.current.wKey.wasReleasedThisFrame)
         {
             moveInput.y = 0;
         }
@@ -172,7 +172,7 @@ public class Player : MonoBehaviour
         {
             moveInput.y = -1;
         }
-        else if (Keyboard.current.sKey.wasReleasedThisFrame)
+        if (Keyboard.current.sKey.wasReleasedThisFrame)
         {
             moveInput.y = 0;
         }
@@ -187,7 +187,14 @@ public class Player : MonoBehaviour
     {
         // プレイヤーの前後左右の移動
         var velocity = Vector3.zero;
-        velocity = transform.forward * moveInput.y * speed;
+        if (moveInput.y > 0)
+        {
+            velocity = transform.forward * moveInput.y * speed;
+        }
+        else if (moveInput.y < 0)
+        {
+            velocity = transform.forward * moveInput.y * speed;
+        }
         velocity += transform.right * moveInput.x * speed;
         velocity.y = rigidbody.velocity.y;
         rigidbody.velocity = velocity;
@@ -298,4 +305,11 @@ public class Player : MonoBehaviour
         StageScene.Instance.ControlPauseUI();
     }
 
+    void OnCollisionEnter (Collision collision)
+    {
+        if (collision.gameObject.tag == "enemy")
+        {
+            PlayerHPbar.Instance.Damage();
+        }
+    }
 }

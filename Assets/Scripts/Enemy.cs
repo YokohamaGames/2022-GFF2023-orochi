@@ -139,7 +139,7 @@ public class Enemy : MonoBehaviour
     }
     public void SetMoveState()
     {
-        animator.SetBool(isDiscover, false);
+        //animator.SetBool(isDiscover, false);
         currentState = EnemyState.Move;
         speed = ChaseSpeed;
     }
