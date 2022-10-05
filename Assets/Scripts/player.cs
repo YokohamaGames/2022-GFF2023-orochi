@@ -142,6 +142,40 @@ public class Player : MonoBehaviour
                 UpdateForSmallState();
                 break;
         }
+
+
+        if (Keyboard.current.aKey.isPressed)
+        {
+            moveInput.x = -1;
+        }
+        if(Keyboard.current.aKey.wasReleasedThisFrame)
+        {
+            moveInput.x = 0;
+        }
+        if (Keyboard.current.dKey.isPressed)
+        {
+            moveInput.x = 1;
+        }
+        if (Keyboard.current.dKey.wasReleasedThisFrame)
+        {
+            moveInput.x = 0;
+        }
+        if (Keyboard.current.wKey.isPressed)
+        {
+            moveInput.y = 1;
+        }
+        if (Keyboard.current.wKey.wasReleasedThisFrame)
+        {
+            moveInput.y = 0;
+        }
+        if (Keyboard.current.sKey.isPressed)
+        {
+            moveInput.y = -1;
+        }
+        if (Keyboard.current.sKey.wasReleasedThisFrame)
+        {
+            moveInput.y = 0;
+        }
     }
 
     private void FixedUpdate()
@@ -153,7 +187,14 @@ public class Player : MonoBehaviour
     {
         // プレイヤーの前後左右の移動
         var velocity = Vector3.zero;
-        velocity = transform.forward * moveInput.y * speed;
+        if (moveInput.y > 0)
+        {
+            velocity = transform.forward * moveInput.y * speed;
+        }
+        else if (moveInput.y < 0)
+        {
+            velocity = transform.forward * moveInput.y * speed;
+        }
         velocity += transform.right * moveInput.x * speed;
         velocity.y = rigidbody.velocity.y;
         rigidbody.velocity = velocity;
@@ -204,6 +245,8 @@ public class Player : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
+        
+
 
         // アクションが始まった
         if (context.started)
@@ -262,4 +305,11 @@ public class Player : MonoBehaviour
         StageScene.Instance.ControlPauseUI();
     }
 
+    void OnCollisionEnter (Collision collision)
+    {
+        if (collision.gameObject.tag == "enemy")
+        {
+            PlayerHPbar.Instance.Damage();
+        }
+    }
 }

@@ -197,6 +197,18 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 2b709f3f-251c-4238-a686-44a299f7e502
     m_ActionName: Player/Pause[/XInputControllerWindows/start]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f95a5927-2bde-427f-acf6-09a0357878c3
+    m_ActionName: Enemy/Move[/XInputControllerWindows/leftStick,/XInputControllerWindows1/leftStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 55864307-775a-446e-9a73-95c30330e7c7
+    m_ActionName: Enemy/Look[/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 3f625c62-52b9-4fbd-98ef-2aa56d0e4063
+    m_ActionName: Enemy/Fire[/XInputControllerWindows/rightTrigger,/XInputControllerWindows1/rightTrigger,/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -296,6 +308,10 @@ PrefabInstance:
     - target: {fileID: 8450496283715797362, guid: 8813cf1098e0c9b408b11e84f179a128, type: 3}
       propertyPath: m_Name
       value: PlayerHP
+      objectReference: {fileID: 0}
+    - target: {fileID: 8450496283715797362, guid: 8813cf1098e0c9b408b11e84f179a128, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8450496283715797365, guid: 8813cf1098e0c9b408b11e84f179a128, type: 3}
       propertyPath: m_Pivot.x
@@ -489,6 +505,10 @@ PrefabInstance:
     - target: {fileID: 8450496283715797362, guid: 8813cf1098e0c9b408b11e84f179a128, type: 3}
       propertyPath: m_Name
       value: PlayerHP
+      objectReference: {fileID: 0}
+    - target: {fileID: 8450496283715797362, guid: 8813cf1098e0c9b408b11e84f179a128, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8450496283715797365, guid: 8813cf1098e0c9b408b11e84f179a128, type: 3}
       propertyPath: m_Pivot.x

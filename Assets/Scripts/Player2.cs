@@ -142,6 +142,39 @@ public class Player2 : MonoBehaviour
                 UpdateForSmallState();
                 break;
         }
+
+        if (Keyboard.current.leftArrowKey.isPressed)
+        {
+            moveInput.x = -1;
+        }
+        else if (Keyboard.current.leftArrowKey.wasReleasedThisFrame)
+        {
+            moveInput.x = 0;
+        }
+        if (Keyboard.current.rightArrowKey.isPressed)
+        {
+            moveInput.x = 1;
+        }
+        else if (Keyboard.current.rightArrowKey.wasReleasedThisFrame)
+        {
+            moveInput.x = 0;
+        }
+        if (Keyboard.current.upArrowKey.isPressed)
+        {
+            moveInput.y = 1;
+        }
+        else if (Keyboard.current.upArrowKey.wasReleasedThisFrame)
+        {
+            moveInput.y = 0;
+        }
+        if (Keyboard.current.downArrowKey.isPressed)
+        {
+            moveInput.y = -1;
+        }
+        else if (Keyboard.current.downArrowKey.wasReleasedThisFrame)
+        {
+            moveInput.y = 0;
+        }
     }
 
     private void FixedUpdate()

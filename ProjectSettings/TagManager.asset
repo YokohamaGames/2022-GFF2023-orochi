@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Search_Feild
   - AttackArea
+  - enemy
   layers:
   - Default
   - TransparentFX

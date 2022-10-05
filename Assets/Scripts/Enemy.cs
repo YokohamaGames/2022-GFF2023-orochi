@@ -92,8 +92,6 @@ public class Enemy : MonoBehaviour
                     break;
             }
 
-
-
         }
         //õ“G”ÍˆÍ‚ÆUŒ‚”ÍˆÍ‚Ì’†‚É‚¢‚é‚Æ‚«UŒ‚ƒ‚[ƒh
         /*if (SearchArea && AttackArea)
@@ -137,11 +135,11 @@ public class Enemy : MonoBehaviour
     public void SetDiscoverState()
     {
         currentState = EnemyState.Discover;
-        animator.SetBool(isDiscover, true);
+        //animator.SetBool(isDiscover, true);
     }
     public void SetMoveState()
     {
-        animator.SetBool(isDiscover, false);
+        //animator.SetBool(isDiscover, false);
         currentState = EnemyState.Move;
         speed = ChaseSpeed;
     }
