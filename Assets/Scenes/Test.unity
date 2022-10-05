@@ -228,7 +228,7 @@ MonoBehaviour:
   player: {fileID: 21296956}
   distance: 15
   vRotation: {x: 0, y: 0, z: 0, w: 0}
-  hRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+  hRotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!1 &888958280
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,7 +356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8725697602556706220, guid: 8364168cfe75d1f43965620bd710e339, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -300
       objectReference: {fileID: 0}
     - target: {fileID: 8725697602556706220, guid: 8364168cfe75d1f43965620bd710e339, type: 3}
       propertyPath: m_LocalRotation.w
