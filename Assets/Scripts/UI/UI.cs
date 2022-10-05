@@ -11,6 +11,10 @@ public class UI : MonoBehaviour
 	[SerializeField]
 	private GameObject OptionUI = null;
 
+	// ゲームオーバーを参照
+	[SerializeField]
+	private GameObject GameOverUI = null;
+
 	// SEを参照
 	[SerializeField]
 	private SE Se = null;
@@ -30,6 +34,7 @@ public class UI : MonoBehaviour
 	{
 		PauseUI.SetActive(false);
 		OptionUI.SetActive(false);
+		GameOverUI.SetActive(false);
 		FastButton.Select();
 
 		animator = GetComponent<Animator>();
@@ -83,6 +88,17 @@ public class UI : MonoBehaviour
 			animator.SetTrigger("Hide");
 		} 
 	}
+
+	// GmaeOverが呼び出されたら表示する
+	public void GameOver()
+	{
+		GameOverUI.SetActive(true);
+	}
+
+	public void Retry()
+    {
+		SceneManager.LoadScene("Stage");
+    }
 
 	// Homeが押されたらsceneをTitleへ移行する
 	public void Home()
