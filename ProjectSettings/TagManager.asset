@@ -7,6 +7,7 @@ TagManager:
   - Search_Feild
   - AttackArea
   - enemy
+  - Swamp
   layers:
   - Default
   - TransparentFX
