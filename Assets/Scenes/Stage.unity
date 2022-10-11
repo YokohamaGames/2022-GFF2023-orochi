@@ -538,6 +538,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1440353447}
     m_Modifications:
     - target: {fileID: 255069908, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+      propertyPath: Ui
+      value: 
+      objectReference: {fileID: 616625829}
+    - target: {fileID: 255069908, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: GameOverUI
       value: 
       objectReference: {fileID: 675066016}
@@ -3189,6 +3193,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
+--- !u!114 &2142150310 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2590261801313746071, guid: 913ddcdd1b8a78245aef4fb7711c2a02, type: 3}
+  m_PrefabInstance: {fileID: 2590261800205616418}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2590261800205616418
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3196,6 +3211,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1440353447}
     m_Modifications:
+    - target: {fileID: 2590261799537980802, guid: 913ddcdd1b8a78245aef4fb7711c2a02, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2590261799597503362, guid: 913ddcdd1b8a78245aef4fb7711c2a02, type: 3}
       propertyPath: m_Name
       value: UI
@@ -3288,10 +3307,42 @@ PrefabInstance:
       propertyPath: Se
       value: 
       objectReference: {fileID: 1522733868}
+    - target: {fileID: 2590261799597503367, guid: 913ddcdd1b8a78245aef4fb7711c2a02, type: 3}
+      propertyPath: GameOverButton
+      value: 
+      objectReference: {fileID: 2142150310}
     - target: {fileID: 2590261801027083612, guid: 913ddcdd1b8a78245aef4fb7711c2a02, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1852260613}
+    - target: {fileID: 2590261801125298747, guid: 913ddcdd1b8a78245aef4fb7711c2a02, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590261801125298747, guid: 913ddcdd1b8a78245aef4fb7711c2a02, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590261801125298747, guid: 913ddcdd1b8a78245aef4fb7711c2a02, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590261801313746065, guid: 913ddcdd1b8a78245aef4fb7711c2a02, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590261801313746071, guid: 913ddcdd1b8a78245aef4fb7711c2a02, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590261801313746071, guid: 913ddcdd1b8a78245aef4fb7711c2a02, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2590261801313746071, guid: 913ddcdd1b8a78245aef4fb7711c2a02, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2590261801600530006, guid: 913ddcdd1b8a78245aef4fb7711c2a02, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
