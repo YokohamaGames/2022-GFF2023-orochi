@@ -143,7 +143,7 @@ public class Player : MonoBehaviour
                 break;
         }
 
-
+        // 二人分操作するための一時的な移動
         if (Keyboard.current.aKey.isPressed)
         {
             moveInput.x = -1;
@@ -247,7 +247,7 @@ public class Player : MonoBehaviour
         moveInput = context.ReadValue<Vector2>();
         
 
-
+        /*
         // アクションが始まった
         if (context.started)
         {
@@ -262,7 +262,7 @@ public class Player : MonoBehaviour
         else if (context.canceled)
         {
             Debug.Log($"canceled : {moveInput}");
-        }
+        }*/
     }
 
     // ユーザーからのMoveアクションに対して呼び出されます。
