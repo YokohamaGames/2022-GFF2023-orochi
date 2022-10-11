@@ -94,7 +94,7 @@ public class Enemy : MonoBehaviour
 
         }
         //索敵範囲と攻撃範囲の中にいるとき攻撃モード
-        /*if (SearchArea && AttackArea)
+        if (SearchArea && AttackArea)
         {
             Debug.Log("攻撃範囲内");
         }
@@ -109,7 +109,7 @@ public class Enemy : MonoBehaviour
             Debug.Log("索敵範囲外");
         }
 
-        Debug.Log(currentState);*/
+        Debug.Log(currentState);
 
 
         // ゲームパッドが接続されていないとnullになる。
