@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// 
 public class Player : MonoBehaviour
 {
     [SerializeField] private Vector3 velocity;              // 移動方向
@@ -52,7 +53,11 @@ public class Player : MonoBehaviour
     new Rigidbody rigidbody;
 
     [SerializeField]
-    private Animator animator = null;
+    [Tooltip("大中小のそれぞれのオブジェクトを指定します。")]
+    private GameObject[] bodies = null;
+
+    // 現在のAnimator(大中小のいずれか)
+    Animator currentAnimator = null;
 
     // ユーザーからの入力
     Vector2 moveInput = Vector2.zero;
@@ -63,6 +68,11 @@ public class Player : MonoBehaviour
         isGrounded = true;
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.centerOfMass = com;
+
+        bodies[0].SetActive(false);
+        bodies[1].SetActive(true);
+        bodies[2].SetActive(false);
+        currentAnimator = bodies[1].GetComponent<Animator>();
     }
 
     // Walkステートに遷移させます。
