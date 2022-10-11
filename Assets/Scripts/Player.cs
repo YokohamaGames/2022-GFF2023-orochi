@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         moveBehaviour.Move(new Vector3(moveInput.x, 0, moveInput.y));
-        moveBehaviour.Rotate(lookInput.x);
+        //moveBehaviour.Rotate(lookInput.x);
     }
 
     // ユーザーからのMoveアクションに対して呼び出されます。

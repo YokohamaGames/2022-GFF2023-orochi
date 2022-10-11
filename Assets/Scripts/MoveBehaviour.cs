@@ -201,15 +201,18 @@ public class MoveBehaviour : MonoBehaviour
     {
         // プレイヤーの前後左右の移動
         var velocity = Vector3.zero;
-        if (motion.z > 0)
+        //velocity = transform.forward * motion.z * speed;
+        //velocity += transform.right * motion.x * speed;
+        velocity = new Vector3(0, 0, 1) * motion.z * speed;
+        velocity += new Vector3(1, 0, 0) * motion.x * speed;
+
+        velocity.y = 0;
+        if (velocity.magnitude >= 0.01f)
         {
-            velocity = transform.forward * motion.z * speed;
+            Debug.Log($"velocity : {velocity}");
+            transform.LookAt(transform.position + velocity.normalized, Vector3.up);
         }
-        else if (motion.z < 0)
-        {
-            velocity = transform.forward * motion.z * speed;
-        }
-        velocity += transform.right * motion.x * speed;
+
         velocity.y = rigidbody.velocity.y;
         rigidbody.velocity = velocity;
     }

@@ -106,10 +106,10 @@ public class Enemy : MonoBehaviour
         //索敵範囲外の時Stay
         else if (!SearchArea)
         {
-            Debug.Log("索敵範囲外");
+            //Debug.Log("索敵範囲外");
         }
 
-        Debug.Log(currentState);
+        //Debug.Log(currentState);
 
 
         // ゲームパッドが接続されていないとnullになる。
