@@ -75,6 +75,24 @@ public class Player : MonoBehaviour
         currentAnimator = bodies[1].GetComponent<Animator>();
     }
 
+    // 指定した方向へ移動します。
+    public void Move(Vector3 motion)
+    {
+        // プレイヤーの前後左右の移動
+        var velocity = Vector3.zero;
+        if (motion.z > 0)
+        {
+            velocity = transform.forward * motion.z * speed;
+        }
+        else if (motion.z < 0)
+        {
+            velocity = transform.forward * motion.z * speed;
+        }
+        velocity += transform.right * motion.x * speed;
+        velocity.y = rigidbody.velocity.y;
+        rigidbody.velocity = velocity;
+    }
+
     // Walkステートに遷移させます。
     void SetWalkState()
     {
@@ -195,19 +213,7 @@ public class Player : MonoBehaviour
 
     void UpdateForWalkState()
     {
-        // プレイヤーの前後左右の移動
-        var velocity = Vector3.zero;
-        if (moveInput.y > 0)
-        {
-            velocity = transform.forward * moveInput.y * speed;
-        }
-        else if (moveInput.y < 0)
-        {
-            velocity = transform.forward * moveInput.y * speed;
-        }
-        velocity += transform.right * moveInput.x * speed;
-        velocity.y = rigidbody.velocity.y;
-        rigidbody.velocity = velocity;
+        Move(new Vector3(moveInput.x, 0, moveInput.y));
 
         // プレイヤーの方角を回転
         transform.Rotate(0, lookInput.x, 0);
