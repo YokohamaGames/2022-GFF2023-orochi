@@ -4,328 +4,47 @@ using UnityEngine.InputSystem;
 // 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Vector3 velocity;              // ˆÚ“®•ûŒü
+    MoveBehaviour moveBehaviour;
 
-    [SerializeField]
-    private Vector3 com;
-
-    [SerializeField]
-    [Tooltip("“®‚­ƒXƒs[ƒh‚ğw’è")]
-    private float speed = 10.0f;
-
-    [SerializeField]
-    [Tooltip("ƒWƒƒƒ“ƒv—Í‚ğw’è")]
-    private float upForce = 20f;
-
-    [SerializeField]
-    private bool isGrounded = false;
-    /* [SerializeField]
-     private LayerMask groudLayer;
-    */
-
-
-    // ƒvƒŒƒCƒ„[‚Ìó‘Ô‚ğ•\‚µ‚Ü‚·
-    enum PlayerState
-    {
-        // •à‚«
-        Walk,
-        // ƒWƒƒƒ“ƒv‚Ì—\”õ“®ì
-        JumpReady,
-        // ƒWƒƒƒ“ƒv’†
-        Jumping,
-        // ‰ñ”ğ’†
-        Avoid,
-        // UŒ‚
-        Attack,
-        // ‘å
-        Big,
-        // ’†
-        Medium,
-        // ¬
-        Small,
-        // ƒMƒ~ƒbƒNŒn
-        G1, G2, G3,
-    }
-    // Œ»İ‚ÌƒvƒŒƒCƒ„[‚Ìó‘Ô
-    PlayerState currentState = PlayerState.Walk;
-
-    // ƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ–‘O‚ÉQÆ‚µ‚Ä‚¨‚­•Ï”
-    new Rigidbody rigidbody;
-
-    [SerializeField]
-    [Tooltip("‘å’†¬‚Ì‚»‚ê‚¼‚ê‚ÌƒIƒuƒWƒFƒNƒg‚ğw’è‚µ‚Ü‚·B")]
-    private GameObject[] bodies = null;
-
-    // Œ»İ‚ÌAnimator(‘å’†¬‚Ì‚¢‚¸‚ê‚©)
-    Animator currentAnimator = null;
-
-    // ƒ†[ƒU[‚©‚ç‚Ì“ü—Í
+    // ãƒ¦ãƒ¼ã‚¶ãƒ¼ã‹ã‚‰ã®å…¥åŠ›
     Vector2 moveInput = Vector2.zero;
     Vector2 lookInput = Vector2.zero;
 
     void Start()
     {
-        isGrounded = true;
-        rigidbody = GetComponent<Rigidbody>();
-        rigidbody.centerOfMass = com;
-
-        bodies[0].SetActive(false);
-        bodies[1].SetActive(true);
-        bodies[2].SetActive(false);
-        currentAnimator = bodies[1].GetComponent<Animator>();
+        moveBehaviour = GetComponent<MoveBehaviour>();
     }
 
-    // w’è‚µ‚½•ûŒü‚ÖˆÚ“®‚µ‚Ü‚·B
-    public void Move(Vector3 motion)
-    {
-        // ƒvƒŒƒCƒ„[‚Ì‘OŒã¶‰E‚ÌˆÚ“®
-        var velocity = Vector3.zero;
-        if (motion.z > 0)
-        {
-            velocity = transform.forward * motion.z * speed;
-        }
-        else if (motion.z < 0)
-        {
-            velocity = transform.forward * motion.z * speed;
-        }
-        velocity += transform.right * motion.x * speed;
-        velocity.y = rigidbody.velocity.y;
-        rigidbody.velocity = velocity;
-    }
-
-    // WalkƒXƒe[ƒg‚É‘JˆÚ‚³‚¹‚Ü‚·B
-    void SetWalkState()
-    {
-        currentState = PlayerState.Walk;
-    }
-
-    // JumpReadyƒXƒe[ƒg‚É‘JˆÚ‚³‚¹‚Ü‚·B
-    void SetJumpReadyState()
-    {
-        currentState = PlayerState.JumpReady;
-    }
-
-    // JumpingƒXƒe[ƒg‚É‘JˆÚ‚³‚¹‚Ü‚·B
-    void SetJumpingState()
-    {
-        currentState = PlayerState.Jumping;
-    }
-
-    // AvoidƒXƒe[ƒg‚É‘JˆÚ‚³‚¹‚Ü‚·B
-    void SetAvoidState()
-    {
-        currentState = PlayerState.Avoid;
-    }
-
-    // AttackƒXƒe[ƒg‚É‘JˆÚ‚³‚¹‚Ü‚·B
-    void SetAttackState()
-    {
-        currentState = PlayerState.Attack;
-    }
-
-    // BigƒXƒe[ƒg‚É‘JˆÚ‚³‚¹‚Ü‚·B
-    void SetBigState()
-    {
-        currentState = PlayerState.Big;
-    }
-
-    // MediumƒXƒe[ƒg‚É‘JˆÚ‚³‚¹‚Ü‚·B
-    void SetMediumState()
-    {
-        currentState = PlayerState.Medium;
-    }
-
-    // SmallƒXƒe[ƒg‚É‘JˆÚ‚³‚¹‚Ü‚·B
-    void SetSmallState()
-    {
-        currentState = PlayerState.Small;
-    }
-
+    // Update is called once per frame
     void Update()
     {
-        switch (currentState)
-        {
-            case PlayerState.Walk:
-                UpdateForWalkState();
-                break;
-            case PlayerState.JumpReady:
-                UpdateForJumpReadyState();
-                break;
-            case PlayerState.Jumping:
-                UpdateForJumpingState();
-                break;
-            case PlayerState.Avoid:
-                UpdateForAvoidState();
-                break;
-            case PlayerState.Attack:
-                UpdateForAttackState();
-                break;
-            case PlayerState.Big:
-                UpdateForBigState();
-                break;
-            case PlayerState.Medium:
-                UpdateForMediumState();
-                break;
-            case PlayerState.Small:
-                UpdateForSmallState();
-                break;
-        }
-
-        // “ñl•ª‘€ì‚·‚é‚½‚ß‚Ìˆê“I‚ÈˆÚ“®
-        if (Keyboard.current.aKey.isPressed)
-        {
-            moveInput.x = -1;
-        }
-        if(Keyboard.current.aKey.wasReleasedThisFrame)
-        {
-            moveInput.x = 0;
-        }
-        if (Keyboard.current.dKey.isPressed)
-        {
-            moveInput.x = 1;
-        }
-        if (Keyboard.current.dKey.wasReleasedThisFrame)
-        {
-            moveInput.x = 0;
-        }
-        if (Keyboard.current.wKey.isPressed)
-        {
-            moveInput.y = 1;
-        }
-        if (Keyboard.current.wKey.wasReleasedThisFrame)
-        {
-            moveInput.y = 0;
-        }
-        if (Keyboard.current.sKey.isPressed)
-        {
-            moveInput.y = -1;
-        }
-        if (Keyboard.current.sKey.wasReleasedThisFrame)
-        {
-            moveInput.y = 0;
-        }
+        moveBehaviour.Move(new Vector3(moveInput.x, 0, moveInput.y));
+        moveBehaviour.Rotate(lookInput.x);
     }
 
-    private void FixedUpdate()
-    {
-
-    }
-
-    void UpdateForWalkState()
-    {
-        Move(new Vector3(moveInput.x, 0, moveInput.y));
-
-        // ƒvƒŒƒCƒ„[‚Ì•ûŠp‚ğ‰ñ“]
-        transform.Rotate(0, lookInput.x, 0);
-
-        //isGrounded = true;
-
-    }
-
-    void UpdateForJumpReadyState()
-    {
-
-    }
-
-    void UpdateForJumpingState()
-    {
-
-    }
-
-    void UpdateForAvoidState()
-    {
-
-    }
-
-    void UpdateForAttackState()
-    {
-
-    }
-
-    void UpdateForBigState()
-    {
-
-    }
-
-    void UpdateForMediumState()
-    {
-
-    }
-
-    void UpdateForSmallState()
-    {
-
-    }
-
-    // ƒ†[ƒU[‚©‚ç‚ÌMoveƒAƒNƒVƒ‡ƒ“‚É‘Î‚µ‚ÄŒÄ‚Ño‚³‚ê‚Ü‚·B
+    // ãƒ¦ãƒ¼ã‚¶ãƒ¼ã‹ã‚‰ã®Moveã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã«å¯¾ã—ã¦å‘¼ã³å‡ºã•ã‚Œã¾ã™ã€‚
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-        
-
-        /*
-        // ƒAƒNƒVƒ‡ƒ“‚ªn‚Ü‚Á‚½
-        if (context.started)
-        {
-            Debug.Log($"started : {moveInput}");
-        }
-        // ƒAƒNƒVƒ‡ƒ“‚ªŒp‘±’†
-        else if (context.performed)
-        {
-            Debug.Log($"performed : {moveInput}");
-        }
-        // ƒAƒNƒVƒ‡ƒ“‚ªI—¹
-        else if (context.canceled)
-        {
-            Debug.Log($"canceled : {moveInput}");
-        }*/
     }
 
-    // ƒ†[ƒU[‚©‚ç‚ÌMoveƒAƒNƒVƒ‡ƒ“‚É‘Î‚µ‚ÄŒÄ‚Ño‚³‚ê‚Ü‚·B
+    // ãƒ¦ãƒ¼ã‚¶ãƒ¼ã‹ã‚‰ã®Moveã‚¢ã‚¯ã‚·ãƒ§ãƒ³ã«å¯¾ã—ã¦å‘¼ã³å‡ºã•ã‚Œã¾ã™ã€‚
     public void OnLook(InputAction.CallbackContext context)
     {
         lookInput = context.ReadValue<Vector2>();
-
-        // ƒAƒNƒVƒ‡ƒ“‚ªn‚Ü‚Á‚½
-        /*if (context.started)
-        {
-            Debug.Log($"started : {lookInput}");
-        }
-        // ƒAƒNƒVƒ‡ƒ“‚ªŒp‘±’†
-        else if (context.performed)
-        {
-            Debug.Log($"performed : {lookInput}");
-        }
-        // ƒAƒNƒVƒ‡ƒ“‚ªI—¹
-        else if (context.canceled)
-        {
-            Debug.Log($"canceled : {lookInput}");
-        }*/
     }
 
-    //Fireƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚çŒÄ‚Ño‚³‚ê‚Ü‚·
+    //Fireãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸã‚‰å‘¼ã³å‡ºã•ã‚Œã¾ã™
     public void OnFire(InputAction.CallbackContext context)
     {
-        //if (isGrounded == true)
+        if (context.phase == InputActionPhase.Performed)
         {
-            if (context.phase == InputActionPhase.Performed)
-            {
-                Debug.Log("Fire");                //ƒWƒƒƒ“ƒv‚³‚¹‚Ü‚·B
-                rigidbody.AddForce(transform.up * upForce / 20f, ForceMode.Impulse);
-                //isGrounded = false;
-            }
+            moveBehaviour.Fire();
         }
     }
+
     public void OnControlPauseUI(InputAction.CallbackContext context)
     {
         StageScene.Instance.ControlPauseUI();
-    }
-
-    void OnCollisionEnter (Collision collision)
-    {
-        if (collision.gameObject.tag == "enemy")
-        {
-            PlayerHPbar.Instance.Damage();
-        }
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4611616855408944639}
   - component: {fileID: 4611616855408944638}
   - component: {fileID: 8627753931573193861}
+  - component: {fileID: 4129374599012601482}
   - component: {fileID: 8139101171561958033}
   m_Layer: 0
   m_Name: Player
@@ -186,7 +187,7 @@ MonoBehaviour:
       - m_Target: {fileID: 8139101171561958033}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: OnControlPauseUI
-        m_Mode: 0
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -202,6 +203,23 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &4129374599012601482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3692574325790560158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a9635571cf4f5544bf8c3ca351cafba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  upForce: 20
+  com: {x: 0, y: 0, z: 0}
+  bodies: []
+  isGrounded: 0
 --- !u!114 &8139101171561958033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,15 +232,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09c179e35e39df841831e85f2529fa1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
-  com: {x: 0, y: 0, z: 0}
-  speed: 10
-  upForce: 120
-  isGrounded: 0
-  bodies:
-  - {fileID: 3338153816573040047}
-  - {fileID: 5011908580591328293}
-  - {fileID: 6860331318434800165}
 --- !u!1001 &2491309611424835838
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -287,11 +296,6 @@ PrefabInstance:
 --- !u!4 &2672976096965889813 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 288ede220ab8faf449bc1f6a33097e9c, type: 3}
-  m_PrefabInstance: {fileID: 2491309611424835838}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3338153816573040047 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 288ede220ab8faf449bc1f6a33097e9c, type: 3}
   m_PrefabInstance: {fileID: 2491309611424835838}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5281747771021189492
@@ -442,11 +446,6 @@ PrefabInstance:
 --- !u!4 &6088614152505096351 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9d56e1c0670679444a7a20f970c6dee8, type: 3}
-  m_PrefabInstance: {fileID: 6049921089868799860}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6860331318434800165 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9d56e1c0670679444a7a20f970c6dee8, type: 3}
   m_PrefabInstance: {fileID: 6049921089868799860}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8450496283496910813
