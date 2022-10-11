@@ -15,6 +15,10 @@ public class UI : MonoBehaviour
 	[SerializeField]
 	private GameObject GameOverUI = null;
 
+	// ステージクリアを参照
+	[SerializeField]
+	private GameObject StageClearUI = null;
+
 	// SEを参照
 	[SerializeField]
 	private SE Se = null;
@@ -31,6 +35,10 @@ public class UI : MonoBehaviour
 	[SerializeField]
 	private Selectable GameOverButton = null;
 
+	// StageClearが開かれた時に選択されるボタン
+	[SerializeField]
+	private Selectable StageClearButton = null;
+
 	Animator animator;
 
 	// 開始時にUIを非表示
@@ -39,6 +47,7 @@ public class UI : MonoBehaviour
 		PauseUI.SetActive(false);
 		OptionUI.SetActive(false);
 		GameOverUI.SetActive(false);
+		StageClearUI.SetActive(false);
 		FastButton.Select();
 
 		animator = GetComponent<Animator>();
@@ -102,6 +111,12 @@ public class UI : MonoBehaviour
 			GameOverButton.Select();
 		}
 	}
+
+	public void StageClear()
+    {
+		StageClearUI.SetActive(true);
+		StageClearButton.Select();
+    }
 
 	public void Retry()
     {
