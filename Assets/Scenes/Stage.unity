@@ -545,6 +545,10 @@ PrefabInstance:
       propertyPath: GameOverUI
       value: 
       objectReference: {fileID: 675066016}
+    - target: {fileID: 3097776650140120080, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3629714747814946063, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: GameOverUI
       value: 
@@ -605,9 +609,13 @@ PrefabInstance:
       propertyPath: m_Size.z
       value: 3.8
       objectReference: {fileID: 0}
+    - target: {fileID: 4611616855408944638, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7546353742900521224, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8139101171561958033, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: upForce
@@ -865,6 +873,7 @@ MonoBehaviour:
   distance: 15
   vRotation: {x: 0, y: 0, z: 0, w: 0}
   hRotation: {x: 0, y: 0, z: 0, w: 0}
+  low: 30
 --- !u!1 &595374468
 GameObject:
   m_ObjectHideFlags: 0

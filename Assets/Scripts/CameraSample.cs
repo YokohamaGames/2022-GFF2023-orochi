@@ -9,7 +9,7 @@ public class CameraSample : MonoBehaviour
     [SerializeField] private float distance = 15.0f;    // 注視対象プレイヤーからカメラを離す距離
     [SerializeField] private Quaternion vRotation;      // カメラの垂直回転(見下ろし回転)
     [SerializeField] public Quaternion hRotation;      // カメラの水平回転
-    [SerializeField] private float high;
+   // [SerializeField] private float high;
     [SerializeField] private float low;
 
 
