@@ -27,6 +27,10 @@ public class UI : MonoBehaviour
 	[SerializeField]
 	private Selectable OptionButton = null;
 
+	// GameOverが開かれた時に選択されるボタン
+	[SerializeField]
+	private Selectable GameOverButton = null;
+
 	Animator animator;
 
 	// 開始時にUIを非表示
@@ -92,7 +96,11 @@ public class UI : MonoBehaviour
 	// GmaeOverが呼び出されたら表示する
 	public void GameOver()
 	{
-		GameOverUI.SetActive(true);
+		if (!GameOverUI.activeSelf)
+		{
+			GameOverUI.SetActive(true);
+			GameOverButton.Select();
+		}
 	}
 
 	public void Retry()

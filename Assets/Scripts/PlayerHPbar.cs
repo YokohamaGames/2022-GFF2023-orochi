@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerHPbar : MonoBehaviour
 {
     [SerializeField]
-    private GameObject GameOverUI = null;
+    private UI Ui = null;
 
     public static PlayerHPbar Instance { get; private set; }
 
@@ -112,7 +112,7 @@ public class PlayerHPbar : MonoBehaviour
             heartArray[1].gameObject.SetActive(false);
             heartArray[0].gameObject.SetActive(false);
 
-            GameOverUI.SetActive(true);
+            Ui.GameOver();
         }
     }
 }

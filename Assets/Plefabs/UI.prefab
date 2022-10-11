@@ -238,6 +238,7 @@ MonoBehaviour:
   Se: {fileID: 0}
   FastButton: {fileID: 2590261801326129094}
   OptionButton: {fileID: 2590261799670026907}
+  GameOverButton: {fileID: 2590261801313746071}
 --- !u!95 &2590261799597503364
 Animator:
   serializedVersion: 4
@@ -2838,6 +2839,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOver
       objectReference: {fileID: 0}
+    - target: {fileID: 4032607439019898857, guid: df5b057d560bf894a8805af285de4c7c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4032607439643672656, guid: df5b057d560bf894a8805af285de4c7c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2846,7 +2851,8 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2590261799597503367}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4032607439019898861, guid: df5b057d560bf894a8805af285de4c7c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: df5b057d560bf894a8805af285de4c7c, type: 3}
 --- !u!1 &2590261799537980802 stripped
 GameObject:
@@ -2858,3 +2864,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4032607439019898856, guid: df5b057d560bf894a8805af285de4c7c, type: 3}
   m_PrefabInstance: {fileID: 1442496015031157355}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2590261801313746071 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4032607439722970876, guid: df5b057d560bf894a8805af285de4c7c, type: 3}
+  m_PrefabInstance: {fileID: 1442496015031157355}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
