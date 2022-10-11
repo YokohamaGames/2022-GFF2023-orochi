@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     MoveBehaviour moveBehaviour;
 
     // ユーザーからの入力
-    Vector2 moveInput = Vector2.zero;
+    Vector3 moveInput = Vector3.zero;
     Vector2 lookInput = Vector2.zero;
 
     void Start()
@@ -18,14 +18,17 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveBehaviour.Move(new Vector3(moveInput.x, 0, moveInput.y));
+        moveBehaviour.Move(moveInput);
         //moveBehaviour.Rotate(lookInput.x);
     }
 
     // ユーザーからのMoveアクションに対して呼び出されます。
     public void OnMove(InputAction.CallbackContext context)
     {
-        moveInput = context.ReadValue<Vector2>();
+        var moveInput = context.ReadValue<Vector2>();
+        this.moveInput.x = moveInput.x;
+        this.moveInput.y = 0;
+        this.moveInput.z = moveInput.y;
     }
 
     // ユーザーからのMoveアクションに対して呼び出されます。
