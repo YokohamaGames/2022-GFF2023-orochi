@@ -201,13 +201,13 @@ public class MoveBehaviour : MonoBehaviour
     {
         // プレイヤーの前後左右の移動
         var velocity = motion;
+        // 地上歩行キャラクターを標準とするのでy座標移動は無視
         velocity.y = 0;
-        if (velocity.magnitude >= 0.01f)
+        if (velocity.sqrMagnitude >= 0.0001f)
         {
-            velocity.Normalize();
-            transform.LookAt(transform.position + velocity, Vector3.up);
+            transform.LookAt(transform.position + velocity.normalized, Vector3.up);
+            velocity *= speed;
         }
-        velocity *= speed;
         velocity.y = rigidbody.velocity.y;
         rigidbody.velocity = velocity;
     }
