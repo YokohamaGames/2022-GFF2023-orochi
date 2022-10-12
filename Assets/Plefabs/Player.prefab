@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4611616855408944639}
   - component: {fileID: 4611616855408944638}
   - component: {fileID: 8627753931573193861}
+  - component: {fileID: 7552103752944929780}
   - component: {fileID: 8139101171561958033}
   m_Layer: 0
   m_Name: Player
@@ -214,6 +215,23 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &7552103752944929780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3692574325790560158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3a4dde9c76c3142a36d1a0ec424404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  com: {x: 0, y: 0, z: 0}
+  speed: 10
+  upForce: 20
+  isGrounded: 0
+  animator: {fileID: 0}
 --- !u!114 &8139101171561958033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,12 +244,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09c179e35e39df841831e85f2529fa1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
-  com: {x: 0, y: 0, z: 0}
-  speed: 10
-  upForce: 20
-  isGrounded: 0
-  animator: {fileID: 0}
 --- !u!1001 &2491309611424835838
 PrefabInstance:
   m_ObjectHideFlags: 0
