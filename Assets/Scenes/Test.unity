@@ -566,10 +566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4068290217516786248}
-  distance: 10
-  vRotation: {x: 0, y: 0, z: 0, w: 0}
-  hRotation: {x: 0, y: 0, z: 0, w: 0}
-  low: 18
+  offset: {x: 0, y: 0, z: -5}
 --- !u!222 &1129501632
 CanvasRenderer:
   m_ObjectHideFlags: 0
