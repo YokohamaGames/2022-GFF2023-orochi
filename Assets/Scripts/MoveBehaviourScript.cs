@@ -55,6 +55,7 @@ public class MoveBehaviourScript : MonoBehaviour
      private LayerMask groudLayer;
     */
 
+
     // コンポーネントを事前に参照しておく変数
     new Rigidbody rigidbody;
 
@@ -130,7 +131,8 @@ public class MoveBehaviourScript : MonoBehaviour
 
     void UpdateForAttackState()
     {
-
+            Debug.Log("攻撃");
+        StartCoroutine(DelayCoroutine());
     }
 
     void UpdateForBigState()
@@ -199,17 +201,24 @@ public class MoveBehaviourScript : MonoBehaviour
     // 指定した方向へ移動します。
     public void Move(Vector3 motion)
     {
-        // プレイヤーの前後左右の移動
-        var velocity = motion;
-        // 地上歩行キャラクターを標準とするのでy座標移動は無視
-        velocity.y = 0;
-        if (velocity.sqrMagnitude >= 0.0001f)
+        // 攻撃している時以
+        //TODO: 今はAttack時のみ除外
+        if (currentState != PlayerState.Attack)
         {
-            transform.LookAt(transform.position + velocity.normalized, Vector3.up);
-            velocity *= speed;
+            // プレイヤーの前後左右の移動
+            var velocity = motion;
+            // 地上歩行キャラクターを標準とするのでy座標移動は無視
+            velocity.y = 0;
+            if (velocity.sqrMagnitude >= 0.0001f)
+            {
+                transform.LookAt(transform.position + velocity.normalized, Vector3.up);
+                velocity *= speed;
+
+                Debug.Log(velocity);
+            }
+            velocity.y = rigidbody.velocity.y;
+            rigidbody.velocity = velocity;
         }
-        velocity.y = rigidbody.velocity.y;
-        rigidbody.velocity = velocity;
     }
 
     // プレイヤーの方角を回転させます。
@@ -218,24 +227,50 @@ public class MoveBehaviourScript : MonoBehaviour
         transform.Rotate(0, deltaAngle, 0);
     }
 
-    // 攻撃します。
+    // 攻撃します
     public void Fire()
     {
         if (isGrounded == true)
         {
-            //TODO: 攻撃モーションは未実装なので、ジャンプで代用
-            Debug.Log("Fire");
+            SetAttackState();
+        }
+    }
+
+    // ジャンプします。
+    public void Jump()
+    {
+        if (isGrounded == true)
+        {
+            // spaceが押されたらジャンプ
             rigidbody.AddForce(transform.up * upForce / 20f, ForceMode.Impulse);
-            //isGrounded = false;
+            isGrounded = false;
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "enemy")
+        if (currentState == PlayerState.Walk)
         {
-            PlayerHPbar.Instance.Damage();
+            if (collision.gameObject.tag == "enemy")
+            {
+                PlayerHPbar.Instance.Damage();
+            }
         }
+        
+        if (collision.gameObject.tag == "ground")
+        {
+            isGrounded = true;
+        }
+    }
+
+    public IEnumerator DelayCoroutine()
+    {
+        speed = 0;
+        // 1秒間待つ
+        yield return new WaitForSeconds(1);
+
+        // StateをWalkに戻す
+        SetWalkState();
     }
 }
 

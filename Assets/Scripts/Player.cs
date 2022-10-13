@@ -41,12 +41,21 @@ public class Player : MonoBehaviour
 
     }
 
-    //Fireボタンを押したら呼び出されます
+    // Fireボタンを押したら呼び出されます
     public void OnFire(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
+        if (context.phase == InputActionPhase.Started)
         {
             moveBehaviour.Fire();
+        }
+    }
+
+    // Jumpボタンを押したら呼び出されます
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            moveBehaviour.Jump();
         }
     }
     public void OnControlPauseUI(InputAction.CallbackContext context)

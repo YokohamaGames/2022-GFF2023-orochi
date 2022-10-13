@@ -47,7 +47,7 @@ public class Player2 : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            moveBehaviour.Fire();
+            moveBehaviour.Jump();
         }
     }
 }

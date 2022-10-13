@@ -8,6 +8,7 @@ TagManager:
   - AttackArea
   - enemy
   - Swamp
+  - ground
   layers:
   - Default
   - TransparentFX
