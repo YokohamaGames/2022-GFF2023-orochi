@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 1633171233238886714}
   - component: {fileID: 1633171233238886715}
   - component: {fileID: 4307010690676094474}
+  - component: {fileID: 3466409081791956804}
   - component: {fileID: 4307010690676094581}
   m_Layer: 0
   m_Name: Enemy 2
@@ -351,6 +352,23 @@ MonoBehaviour:
   m_DefaultActionMap: Enemy
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &3466409081791956804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7035401418459900334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3a4dde9c76c3142a36d1a0ec424404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  upForce: 20
+  com: {x: 0, y: 0, z: 0}
+  bodies: []
+  isGrounded: 0
 --- !u!114 &4307010690676094581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,17 +376,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7035401418459900334}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57004c8e4184e3d49b0f1ad56cbef2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
-  com: {x: 0, y: 0, z: 0}
-  speed: 10
-  upForce: 20
-  isGrounded: 0
-  animator: {fileID: 0}
 --- !u!1001 &8851970587709818076
 PrefabInstance:
   m_ObjectHideFlags: 0
