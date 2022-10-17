@@ -1,9 +1,19 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class Player : MonoBehaviour
-{
+{   //コンポーネントを事前に取得
     MoveBehaviourScript moveBehaviour;
+    Rigidbody player_rigidbody;
+
+    
+    //Playerのアニメーターの取得
+    Animator animator;
+
+    // AnimatorのパラメーターID
+    static readonly int isAttackId = Animator.StringToHash("isAttack");
+    static readonly int isJumpId = Animator.StringToHash("isJump");
 
 
     // ユーザーからの入力
@@ -13,6 +23,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         moveBehaviour = GetComponent<MoveBehaviourScript>();
+        animator = GetComponent<Animator>();
     }
 
 
@@ -46,6 +57,8 @@ public class Player : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
+            animator.SetTrigger(isAttackId);
+            Tackle();
             moveBehaviour.Fire();
         }
     }
@@ -55,6 +68,7 @@ public class Player : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
+            animator.SetTrigger(isJumpId);
             moveBehaviour.Jump();
         }
     }
@@ -63,4 +77,16 @@ public class Player : MonoBehaviour
         StageScene.Instance.ControlPauseUI();
     }
 
+    //Fireボタンで呼び出されるタックル攻撃。addForceを使用せずtransformで代用。向いている方向に座標を+する。
+    void Tackle()
+    {
+        var player_transform = transform.position;
+        player_transform += transform.forward;
+        transform.position = player_transform;
+    
+    }
+
+    
 }
+
+

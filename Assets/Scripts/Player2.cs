@@ -1,19 +1,29 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
+
 
 public class Player2 : MonoBehaviour
 {
-
+    //スクリプトの取得
     MoveBehaviourScript moveBehaviour;
+    PlayerAnimation player_animation;
+    //Playerのアニメーターの取得
+    Animator animator;
 
+    // AnimatorのパラメーターID
+   // static readonly int isAttackId = Animator.StringToHash("isAttack");
 
     // ユーザーからの入力
     Vector3 moveInput = Vector3.zero;
     Vector2 lookInput = Vector2.zero;
 
+    
     void Start()
     {
         moveBehaviour = GetComponent<MoveBehaviourScript>();
+        animator = GetComponent<Animator>();
+        player_animation = GetComponent<PlayerAnimation>();
     }
 
 
@@ -47,7 +57,9 @@ public class Player2 : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            moveBehaviour.Jump();
+            player_animation.SetAnimation();
+            
+            moveBehaviour.Fire();
         }
     }
 }
