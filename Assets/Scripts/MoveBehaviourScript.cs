@@ -265,9 +265,10 @@ public class MoveBehaviourScript : MonoBehaviour
 
     public IEnumerator DelayCoroutine()
     {
-        speed = 0;
+        rigidbody.velocity = Vector3.zero;
+
         // 1•bŠÔ‘Ò‚Â
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1); 
 
         // State‚ðWalk‚É–ß‚·
         SetWalkState();
