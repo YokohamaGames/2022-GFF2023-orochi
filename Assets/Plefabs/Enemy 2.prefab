@@ -201,7 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChaseSpeed: 0
   AttackSpeed: 1
-  target: {fileID: 0}
+  target: {fileID: 4068290216166233380, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
   anim: {fileID: 0}
   rotMax: 0
   SearchArea: 0
@@ -365,7 +365,7 @@ MonoBehaviour:
     m_ActionName: Player Test/Fire[/Keyboard/k]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Enemy
+  m_DefaultActionMap: 02cf5790-ef53-42d6-b8c7-30ab9c42414a
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &3466409081791956804
@@ -384,7 +384,7 @@ MonoBehaviour:
   upForce: 20
   com: {x: 0, y: 0, z: 0}
   bodies: []
-  animator: {fileID: 0}
+  animator: {fileID: 8568832986679519111}
   isGrounded: 0
 --- !u!114 &4307010690676094581
 MonoBehaviour:
@@ -455,6 +455,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7a4ef8ca6518ee4f99643fc67d764af, type: 3}
+--- !u!1 &6301899595828581892 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c7a4ef8ca6518ee4f99643fc67d764af, type: 3}
+  m_PrefabInstance: {fileID: 6608383306566691669}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8568832986679519111
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6301899595828581892}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8f7aaadb84db3c14a99daf7ace2adbf2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &6647041366360198334 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c7a4ef8ca6518ee4f99643fc67d764af, type: 3}
