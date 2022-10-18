@@ -109,6 +109,8 @@ public class UI : MonoBehaviour
 		{
 			GameOverUI.SetActive(true);
 			GameOverButton.Select();
+
+			MoveBehaviourScript.Instance.SetDeadState();
 		}
 	}
 

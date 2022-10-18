@@ -25,6 +25,8 @@ public class MoveBehaviourScript : MonoBehaviour
     [SerializeField]
     Animator animator;
 
+    public static MoveBehaviourScript Instance { get; private set; }
+
     // AnimatorのパラメーターID
     static readonly int isAttackId = Animator.StringToHash("isAttack");
 
@@ -50,6 +52,8 @@ public class MoveBehaviourScript : MonoBehaviour
         Medium,
         // 小
         Small,
+        // ゲームオーバー
+        Dead,
         // ギミック系
         G1, G2, G3,
     }
@@ -79,6 +83,12 @@ public class MoveBehaviourScript : MonoBehaviour
         currentAnimator = bodies[1].GetComponent<Animator>();
     }
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+
     // Update is called once per frame
     void Update()
     {
@@ -107,6 +117,9 @@ public class MoveBehaviourScript : MonoBehaviour
                 break;
             case PlayerState.Small:
                 UpdateForSmallState();
+                break;
+            case PlayerState.Dead:
+                UpdateForDeadState();
                 break;
         }
     }
@@ -157,6 +170,11 @@ public class MoveBehaviourScript : MonoBehaviour
 
     }
 
+    void UpdateForDeadState()
+    {
+        Debug.Log("死んだ");
+    }
+
     // Walkステートに遷移させます。
     void SetWalkState()
     {
@@ -188,29 +206,34 @@ public class MoveBehaviourScript : MonoBehaviour
     }
 
     // Bigステートに遷移させます。
-    void SetBigState()
+    public void SetBigState()
     {
         currentState = PlayerState.Big;
     }
 
     // Mediumステートに遷移させます。
-    void SetMediumState()
+    public void SetMediumState()
     {
         currentState = PlayerState.Medium;
     }
 
     // Smallステートに遷移させます。
-    void SetSmallState()
+    public void SetSmallState()
     {
         currentState = PlayerState.Small;
+    }
+
+    public void SetDeadState()
+    {
+        currentState = PlayerState.Dead;
     }
 
     // 指定した方向へ移動します。
     public void Move(Vector3 motion)
     {
-        // 攻撃している時以
-        //TODO: 今はAttack時のみ除外
-        if (currentState != PlayerState.Attack)
+        // ゲームオーバーの時以外
+        //TODO: 今はDead時のみ除外
+        if (currentState != PlayerState.Dead)
         {
             // プレイヤーの前後左右の移動
             var velocity = motion;
@@ -283,6 +306,32 @@ public class MoveBehaviourScript : MonoBehaviour
     public void Attack()
     {
         animator.SetTrigger(isAttackId);
+    }
+
+    public void Big()
+    {
+        bodies[0].SetActive(false);
+        bodies[1].SetActive(false);
+        bodies[2].SetActive(true);
+        currentAnimator = bodies[1].GetComponent<Animator>();
+    }
+
+    public void Medium()
+    {
+        Debug.Log("中型状態");
+
+        bodies[0].SetActive(false);
+        bodies[1].SetActive(true);
+        bodies[2].SetActive(false);
+        currentAnimator = bodies[1].GetComponent<Animator>();
+    }
+
+    public void Small()
+    {
+        bodies[0].SetActive(true);
+        bodies[1].SetActive(false);
+        bodies[2].SetActive(false);
+        currentAnimator = bodies[1].GetComponent<Animator>();
     }
 }
 
