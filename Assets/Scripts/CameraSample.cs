@@ -8,7 +8,9 @@ public class CameraSample : MonoBehaviour
 
     [SerializeField] private Vector3 offset;     // playerとの距離
 
-    [SerializeField] private float num;
+    [SerializeField]
+    [Tooltip("X座標を軸に回転させます")]
+    private float rotate;
     private void Start()
     {
         
@@ -25,7 +27,7 @@ public class CameraSample : MonoBehaviour
 
         // ローカル座標を基準に回転
         Vector3 localAngle = myTransform.localEulerAngles;
-        localAngle.x = num;
+        localAngle.x = rotate;
         myTransform.localEulerAngles = localAngle;
 
     }
