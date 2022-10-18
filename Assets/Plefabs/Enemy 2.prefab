@@ -148,7 +148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7035401418459900334}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.27, y: 1.18, z: 30}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -351,6 +351,18 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 88ddac1d-e65e-45ee-8baf-fb56cc66b657
     m_ActionName: Player Test/Move[/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2990fd71-aef3-4c84-a6c6-e06d833469cf
+    m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fc9ed0db-acf1-4b0d-8cce-da17b7b5afe2
+    m_ActionName: Player/Avoid
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7b959858-8407-484f-9e8e-423790f22963
+    m_ActionName: Player Test/Fire[/Keyboard/k]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Enemy
@@ -372,6 +384,7 @@ MonoBehaviour:
   upForce: 20
   com: {x: 0, y: 0, z: 0}
   bodies: []
+  animator: {fileID: 0}
   isGrounded: 0
 --- !u!114 &4307010690676094581
 MonoBehaviour:

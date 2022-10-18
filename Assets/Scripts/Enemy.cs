@@ -171,7 +171,7 @@ public class Enemy : MonoBehaviour
         // プレイヤーの方角を回転
         transform.Rotate(0, lookInput.x, 0);
 
-        /*ターゲット方向のベクトルを求める
+        //ターゲット方向のベクトルを求める
         Vector3 vec = target.position - transform.position;
 
         // ターゲットの方向を向く
@@ -181,7 +181,7 @@ public class Enemy : MonoBehaviour
         transform.Translate(Vector3.forward * speed * 0.01f); // 正面方向に移動
 
         // 算出した回転値をこのゲームオブジェクトのrotationに代入
-        this.transform.rotation = quaternion;*/
+        this.transform.rotation = quaternion;
 
 
     }
