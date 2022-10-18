@@ -14,6 +14,7 @@ public class SearchArea : MonoBehaviour
     //ƒ^[ƒQƒbƒg‚Ìõ“G”ÍˆÍ“à‚ÌN“ü”»’è
     private void OnTriggerEnter(Collider colision)
     {
+        
         if (colision.CompareTag("Player"))
         {
             Debug.Log("õ“G”ÍˆÍ“à");

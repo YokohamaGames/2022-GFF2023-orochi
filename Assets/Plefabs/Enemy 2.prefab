@@ -199,11 +199,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dafbec853b050674895451d2a308810f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChaseSpeed: 0
+  ChaseSpeed: 2
   AttackSpeed: 1
   target: {fileID: 4068290216166233380, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
   anim: {fileID: 0}
   rotMax: 0
+  searchArea: {fileID: 1633171232591537834}
+  attackArea: {fileID: 1633171232906517876}
   SearchArea: 0
   AttackArea: 0
 --- !u!114 &4307010690676094474
@@ -365,7 +367,7 @@ MonoBehaviour:
     m_ActionName: Player Test/Fire[/Keyboard/k]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 02cf5790-ef53-42d6-b8c7-30ab9c42414a
+  m_DefaultActionMap: Player Test
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &3466409081791956804

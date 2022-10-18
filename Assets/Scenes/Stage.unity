@@ -4535,6 +4535,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1633171233238886715, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
+      propertyPath: ChaseSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4307010690676094474, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
       propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

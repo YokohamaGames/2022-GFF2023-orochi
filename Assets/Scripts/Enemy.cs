@@ -27,6 +27,12 @@ public class Enemy : MonoBehaviour
     //敵の回転速度を設定します
     [SerializeField]
     private float rotMax;
+    //子オブジェクトを取得
+    [SerializeField]
+    private SearchArea searchArea;
+    //子オブジェクトを取得
+    [SerializeField]
+    private AttackArea attackArea;
 
     // ユーザーからの入力
     Vector2 moveInput = Vector2.zero;
@@ -88,6 +94,9 @@ public class Enemy : MonoBehaviour
                 case EnemyState.Attack:
                     UpdateForAttack();
                     break;
+                case EnemyState.Discover:
+                    UpDateForDiscover();
+                    break;
                 default:
                     break;
             }
@@ -112,17 +121,7 @@ public class Enemy : MonoBehaviour
         Debug.Log(currentState);
 
 
-        // ゲームパッドが接続されていないとnullになる。
-        if (Gamepad.current == null) return;
-
-        if (Gamepad.current.buttonNorth.wasPressedThisFrame)
-        {
-            Debug.Log("Button Northが押された！");
-        }
-        if (Gamepad.current.buttonSouth.wasReleasedThisFrame)
-        {
-            Debug.Log("Button Southが離された！");
-        }
+        
 
     }
 
@@ -135,7 +134,7 @@ public class Enemy : MonoBehaviour
     public void SetDiscoverState()
     {
         currentState = EnemyState.Discover;
-        //animator.SetBool(isDiscover, true);
+        animator.SetBool(isDiscover, true);
     }
     public void SetMoveState()
     {
@@ -196,11 +195,27 @@ public class Enemy : MonoBehaviour
         // Quaternion(回転値)を取得
         Quaternion quaternion = Quaternion.LookRotation(vec);
         //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(vec.x, 0, vec.z)), rotMax);
+        // 算出した回転値をこのゲームオブジェクトのrotationに代入
+        transform.rotation = quaternion;
         transform.Translate(Vector3.forward * speed * 0.01f); // 正面方向に移動
 
-        // 算出した回転値をこのゲームオブジェクトのrotationに代入
-        this.transform.rotation = quaternion;
         
+        
+    }
+    void UpDateForDiscover()
+    {
+        speed = ChaseSpeed;
+        if(currentState == EnemyState.Discover)
+        {
+            //ターゲット方向のベクトルを求める
+            Vector3 vec = target.position - transform.position;
+            // Quaternion(回転値)を取得 回転する度数を取得
+            Quaternion quaternion = Quaternion.LookRotation(vec);
+            //取得した度数分オブジェクトを回転させる
+            transform.rotation = quaternion;
+            transform.Translate(Vector3.forward * speed * 0.01f); // 正面方向に移動
+
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
