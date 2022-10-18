@@ -205,6 +205,17 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "c4c4d6d1-ef20-4e98-abd9-6eba356fc4ea",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "WASD",
                     "id": "f59ca872-a24d-488d-a7ab-17d24841de0e",
                     "path": "Dpad",
