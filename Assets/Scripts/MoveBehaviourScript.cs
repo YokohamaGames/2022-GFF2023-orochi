@@ -21,6 +21,13 @@ public class MoveBehaviourScript : MonoBehaviour
     [Tooltip("大中小のそれぞれのオブジェクトを指定します。")]
     private GameObject[] bodies = null;
 
+    //Playerのアニメーターの取得
+    [SerializeField]
+    Animator animator;
+
+    // AnimatorのパラメーターID
+    static readonly int isAttackId = Animator.StringToHash("isAttack");
+
     // 現在のAnimator(大中小のいずれか)
     Animator currentAnimator = null;
 
@@ -272,6 +279,10 @@ public class MoveBehaviourScript : MonoBehaviour
 
         // StateをWalkに戻す
         SetWalkState();
+    }
+    public void Attack()
+    {
+        animator.SetTrigger(isAttackId);
     }
 }
 

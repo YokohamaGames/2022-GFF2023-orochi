@@ -8,11 +8,7 @@ public class Player2 : MonoBehaviour
     //スクリプトの取得
     MoveBehaviourScript moveBehaviour;
     PlayerAnimation player_animation;
-    //Playerのアニメーターの取得
-    Animator animator;
-
-    // AnimatorのパラメーターID
-   // static readonly int isAttackId = Animator.StringToHash("isAttack");
+    
 
     // ユーザーからの入力
     Vector3 moveInput = Vector3.zero;
@@ -22,7 +18,7 @@ public class Player2 : MonoBehaviour
     void Start()
     {
         moveBehaviour = GetComponent<MoveBehaviourScript>();
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
         player_animation = GetComponent<PlayerAnimation>();
     }
 
@@ -57,8 +53,8 @@ public class Player2 : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Performed)
         {
-            player_animation.SetAnimation();
-            
+
+            moveBehaviour.Attack();
             moveBehaviour.Fire();
         }
     }

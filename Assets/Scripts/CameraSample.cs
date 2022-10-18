@@ -10,8 +10,7 @@ public class CameraSample : MonoBehaviour
 
     private void Start()
     {
-        // ƒJƒƒ‰‚Æplayer‚Ì‹——£‚ğ‹‚ß‚é
-        offset = transform.position - player.transform.position;
+        
     }
 
     private void Update()
