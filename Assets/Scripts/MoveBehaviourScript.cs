@@ -73,6 +73,7 @@ public class MoveBehaviourScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         isGrounded = true;
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.centerOfMass = com;
@@ -173,6 +174,7 @@ public class MoveBehaviourScript : MonoBehaviour
     void UpdateForDeadState()
     {
         Debug.Log("死んだ");
+        Time.timeScale = 0;
     }
 
     // Walkステートに遷移させます。
@@ -287,6 +289,7 @@ public class MoveBehaviourScript : MonoBehaviour
             }
         }
         
+        // 接地判定
         if (collision.gameObject.tag == "ground")
         {
             isGrounded = true;
@@ -313,7 +316,7 @@ public class MoveBehaviourScript : MonoBehaviour
         bodies[0].SetActive(false);
         bodies[1].SetActive(false);
         bodies[2].SetActive(true);
-        currentAnimator = bodies[1].GetComponent<Animator>();
+        currentAnimator = bodies[2].GetComponent<Animator>();
     }
 
     public void Medium()
@@ -331,7 +334,7 @@ public class MoveBehaviourScript : MonoBehaviour
         bodies[0].SetActive(true);
         bodies[1].SetActive(false);
         bodies[2].SetActive(false);
-        currentAnimator = bodies[1].GetComponent<Animator>();
+        currentAnimator = bodies[0].GetComponent<Animator>();
     }
 }
 
