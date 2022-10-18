@@ -202,7 +202,7 @@ MonoBehaviour:
   ChaseSpeed: 2
   AttackSpeed: 1
   target: {fileID: 4068290216166233380, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
-  anim: {fileID: 0}
+  animator: {fileID: 8568832986679519111}
   rotMax: 0
   searchArea: {fileID: 1633171232591537834}
   attackArea: {fileID: 1633171232906517876}

@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
     private Transform target;
 
     [SerializeField]
-    private Animation anim;
+    private Animator animator;
 
 
     //敵の回転速度を設定します
@@ -43,14 +43,16 @@ public class Enemy : MonoBehaviour
     public bool AttackArea = false;
 
     // コンポーネントを事前に参照しておく変数
-    Animator animator;
+    //Animator animator;
 
     // コンポーネントを事前に参照しておく変数
     new Rigidbody rigidbody;
 
     // AnimatorのパラメーターID
     static readonly int isDiscover = Animator.StringToHash("isDiscover");
-    
+    static readonly int isLost = Animator.StringToHash("isLost");
+
+
     enum EnemyState
     {
         //待機状態
@@ -74,7 +76,7 @@ public class Enemy : MonoBehaviour
     EnemyState currentState = EnemyState.Stay;
     void Start()
     {
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
         
     }
 
@@ -128,13 +130,14 @@ public class Enemy : MonoBehaviour
     public void SetStayState()
     {
         currentState = EnemyState.Stay;
+        animator.SetTrigger(isLost);
         
     }
 
     public void SetDiscoverState()
     {
         currentState = EnemyState.Discover;
-        animator.SetBool(isDiscover, true);
+        animator.SetTrigger(isDiscover);
     }
     public void SetMoveState()
     {
@@ -260,6 +263,7 @@ public class Enemy : MonoBehaviour
             Debug.Log($"canceled : {lookInput}");
         }*/
     }
+
 
 }
 
