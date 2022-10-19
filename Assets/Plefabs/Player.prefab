@@ -276,8 +276,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3a4dde9c76c3142a36d1a0ec424404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  upForce: 100
+  BIGspeed: 5
+  MEDIUMspeed: 15
+  SMALLspeed: 25
+  BIGup: 100
+  MEDIUMup: 120
+  SMALLup: 150
   com: {x: 0, y: 0, z: 0}
   bodies:
   - {fileID: 7694051258388356809}

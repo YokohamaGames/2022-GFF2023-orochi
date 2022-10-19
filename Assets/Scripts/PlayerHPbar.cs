@@ -59,6 +59,8 @@ public class PlayerHPbar : MonoBehaviour
             heartArray[2].gameObject.SetActive(true);
             heartArray[1].gameObject.SetActive(true);
             heartArray[0].gameObject.SetActive(true);
+
+            MoveBehaviourScript.Instance.Big();
         }
         else if (playerhp == 5)
         {
@@ -69,6 +71,7 @@ public class PlayerHPbar : MonoBehaviour
             heartArray[1].gameObject.SetActive(true);
             heartArray[0].gameObject.SetActive(true);
 
+            MoveBehaviourScript.Instance.Big();
         }
 
         else if (playerhp == 4)
@@ -134,6 +137,7 @@ public class PlayerHPbar : MonoBehaviour
             heartArray[1].gameObject.SetActive(false);
             heartArray[0].gameObject.SetActive(true);
 
+            MoveBehaviourScript.Instance.Small();
         }
 
         else if (playerhp == 0)

@@ -7,12 +7,12 @@ using UnityEngine.InputSystem;
 public class MoveBehaviourScript : MonoBehaviour
 {
     [SerializeField]
-    [Tooltip("動くスピードを指定")]
-    private float speed = 10.0f;
+    [Tooltip("大・中・小の動くスピードを指定")]
+    private float BIGspeed, MEDIUMspeed, SMALLspeed;
 
     [SerializeField]
-    [Tooltip("ジャンプ力を指定")]
-    private float upForce = 20f;
+    [Tooltip("大・中・小のジャンプ力を指定")]
+    private float BIGup, MEDIUMup, SMALLup;
 
     [SerializeField]
     private Vector3 com;
@@ -33,6 +33,9 @@ public class MoveBehaviourScript : MonoBehaviour
     // 現在のAnimator(大中小のいずれか)
     Animator currentAnimator = null;
 
+    // 今のスピードとジャンプ力
+    private float speed = 5.0f;
+    private float upForce = 100f;
 
     // プレイヤーの状態を表します
     enum PlayerState
@@ -74,6 +77,7 @@ public class MoveBehaviourScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         Time.timeScale = 1;
         isGrounded = true;
         rigidbody = GetComponent<Rigidbody>();
@@ -134,7 +138,18 @@ public class MoveBehaviourScript : MonoBehaviour
 
     void UpdateForWalkState()
     {
-        //isGrounded = true;
+        if (PlayerHPbar.Instance.big)
+        {
+            speed = BIGspeed;
+        }
+        else if (PlayerHPbar.Instance.med)
+        {
+            speed = MEDIUMspeed;
+        }
+        else if (PlayerHPbar.Instance.min)
+        {
+            speed = SMALLspeed;
+        }
     }
 
     void UpdateForJumpReadyState()
@@ -144,7 +159,10 @@ public class MoveBehaviourScript : MonoBehaviour
 
     void UpdateForJumpingState()
     {
-
+        if (isGrounded == false)
+        {
+            speed = 5;
+        }
     }
 
     void UpdateForAvoidState()
@@ -155,7 +173,6 @@ public class MoveBehaviourScript : MonoBehaviour
     void UpdateForAttackState()
     {
             Debug.Log("攻撃");
-        StartCoroutine(DelayCoroutine());
     }
 
     void UpdateForBigState()
@@ -278,12 +295,14 @@ public class MoveBehaviourScript : MonoBehaviour
             // spaceが押されたらジャンプ
             rigidbody.AddForce(transform.up * upForce / 20f, ForceMode.Impulse);
             isGrounded = false;
+
+            SetJumpingState();
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (currentState == PlayerState.Walk)
+        if (currentState == PlayerState.Walk || currentState == PlayerState.Jumping)
         {
             if (collision.gameObject.tag == "enemy")
             {
@@ -295,43 +314,48 @@ public class MoveBehaviourScript : MonoBehaviour
         if (collision.gameObject.tag == "ground")
         {
             isGrounded = true;
+            SetWalkState();
         }
     }
 
     public IEnumerator DelayCoroutine()
     {
-        rigidbody.velocity = Vector3.zero;
-
         // 1秒間待つ
         yield return new WaitForSeconds(1); 
-
-        // StateをWalkに戻す
-        SetWalkState();
     }
     public void Attack()
     {
         animator.SetTrigger(isAttackId);
     }
 
+    // 大きい時
     public void Big()
     {
+        speed = BIGspeed;
+        upForce = BIGup;
+
             bodies[0].SetActive(false);
             bodies[1].SetActive(false);
             bodies[2].SetActive(true);
     }
 
+    // 中型の時
     public void Medium()
     {
-            Debug.Log("中型");
+        speed = MEDIUMspeed;
+        upForce = MEDIUMup;
 
             bodies[0].SetActive(false);
             bodies[1].SetActive(true);
             bodies[2].SetActive(false);
-        
     }
 
+    // 小さい時
     public void Small()
     {
+        speed = SMALLspeed;
+        upForce = SMALLup;
+
             bodies[0].SetActive(true);
             bodies[1].SetActive(false);
             bodies[2].SetActive(false);
