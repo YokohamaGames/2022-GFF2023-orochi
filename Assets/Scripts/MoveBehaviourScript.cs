@@ -33,6 +33,7 @@ public class MoveBehaviourScript : MonoBehaviour
     // 現在のAnimator(大中小のいずれか)
     Animator currentAnimator = null;
 
+
     // プレイヤーの状態を表します
     enum PlayerState
     {
@@ -78,8 +79,8 @@ public class MoveBehaviourScript : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.centerOfMass = com;
 
-        bodies[0].SetActive(false);
-        bodies[1].SetActive(true);
+        bodies[0].SetActive(true);
+        bodies[1].SetActive(false);
         bodies[2].SetActive(false);
         currentAnimator = bodies[1].GetComponent<Animator>();
     }
@@ -313,28 +314,26 @@ public class MoveBehaviourScript : MonoBehaviour
 
     public void Big()
     {
-        bodies[0].SetActive(false);
-        bodies[1].SetActive(false);
-        bodies[2].SetActive(true);
-        currentAnimator = bodies[2].GetComponent<Animator>();
+            bodies[0].SetActive(false);
+            bodies[1].SetActive(false);
+            bodies[2].SetActive(true);
     }
 
     public void Medium()
     {
-        Debug.Log("中型状態");
+            Debug.Log("中型");
 
-        bodies[0].SetActive(false);
-        bodies[1].SetActive(true);
-        bodies[2].SetActive(false);
-        currentAnimator = bodies[1].GetComponent<Animator>();
+            bodies[0].SetActive(false);
+            bodies[1].SetActive(true);
+            bodies[2].SetActive(false);
+        
     }
 
     public void Small()
     {
-        bodies[0].SetActive(true);
-        bodies[1].SetActive(false);
-        bodies[2].SetActive(false);
-        currentAnimator = bodies[0].GetComponent<Animator>();
+            bodies[0].SetActive(true);
+            bodies[1].SetActive(false);
+            bodies[2].SetActive(false);
     }
 }
 
