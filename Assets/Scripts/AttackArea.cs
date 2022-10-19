@@ -18,7 +18,7 @@ public class AttackArea : MonoBehaviour
         {
             Debug.Log("UŒ‚”ÍˆÍ“à");
             Parent_Enemy.AttackArea = true;
-            Parent_Enemy.SetAttackState();
+            Parent_Enemy.SetAttackReadyState();
 
         }
     }

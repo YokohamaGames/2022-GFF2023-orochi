@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
-
+//敵のAiとステータス設定
 public class Enemy : MonoBehaviour
 {
-
+    //敵のステータスに関する数値設定
 
     //敵の追跡時歩行スピードを設定します
     [SerializeField]
@@ -15,7 +15,9 @@ public class Enemy : MonoBehaviour
     private float AttackSpeed = 1;
     //現在の敵の歩行スピード
     float speed = 1;
-   
+    float TimeCount = 0;                        //時間をカウントする変数。攻撃範囲にとどまっている時間のカウント
+    [SerializeField]
+    private float TimetoAttack = 2;
     //追跡目標を設定します
     [SerializeField]
     private Transform target;
@@ -42,15 +44,18 @@ public class Enemy : MonoBehaviour
 
     public bool AttackArea = false;
 
-    // コンポーネントを事前に参照しておく変数
-    //Animator animator;
 
     // コンポーネントを事前に参照しておく変数
     new Rigidbody rigidbody;
-
+    //Animator animator;
+    
     // AnimatorのパラメーターID
     static readonly int isDiscover = Animator.StringToHash("isDiscover");
     static readonly int isLost = Animator.StringToHash("isLost");
+    static readonly int isAttackReady = Animator.StringToHash("isAttackReady");
+    static readonly int isAttack = Animator.StringToHash("isAttack");
+
+
 
 
     enum EnemyState
@@ -64,6 +69,8 @@ public class Enemy : MonoBehaviour
         //移動状態
         Move,
 
+        //攻撃準備
+        AttackReady,
         //攻撃状態
         Attack,
 
@@ -99,6 +106,9 @@ public class Enemy : MonoBehaviour
                 case EnemyState.Discover:
                     UpDateForDiscover();
                     break;
+                case EnemyState.AttackReady:
+                    UpdateForAttackReady();
+                    break;
                 default:
                     break;
             }
@@ -120,8 +130,8 @@ public class Enemy : MonoBehaviour
             Debug.Log("索敵範囲外");
         }
 
-        Debug.Log(currentState);
-
+        //Debug.Log(currentState);
+        Debug.Log(TimeCount);
 
         
 
@@ -145,15 +155,26 @@ public class Enemy : MonoBehaviour
         currentState = EnemyState.Move;
         speed = ChaseSpeed;
     }
+    public void SetAttackReadyState()
+    {
+        currentState = EnemyState.AttackReady;
+        speed = AttackSpeed;                   //攻撃範囲に入ったら様子見で移動速度を小さくする
+        animator.SetTrigger(isAttackReady);
+        
+    }
     public void SetAttackState()
     {
         currentState = EnemyState.Attack;
-        speed = AttackSpeed;
+        speed = 0;
+        TimeCount = 0;
+        animator.SetTrigger(isAttack);
+
     }
     public void SetEscapeState()
     {
 
     }
+    //待機状態のアップデート処理
     void UpdateForStay()
     {
         //Debug.Log("待機中");
@@ -187,7 +208,18 @@ public class Enemy : MonoBehaviour
 
 
     }
-
+    //攻撃範囲にとどまっている時間をカウントして一定時間を超えたらAttackStateに切り替え、カウントを0にリセット
+    void UpdateForAttackReady()
+    {
+       // if (TimeCount > 2)
+           // TimeCount = 0;
+        TimeCount += Time.deltaTime;
+        if(TimeCount > TimetoAttack)
+        {
+            //TimeCount = 0;
+            SetAttackState();
+        }
+    }
     void UpdateForAttack()
     {
 
