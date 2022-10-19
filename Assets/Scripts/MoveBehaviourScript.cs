@@ -79,9 +79,10 @@ public class MoveBehaviourScript : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.centerOfMass = com;
 
-        bodies[0].SetActive(true);
+        // ‰‚ß‚Í‘å‚«‚¢ó‘Ô
+        bodies[0].SetActive(false);
         bodies[1].SetActive(false);
-        bodies[2].SetActive(false);
+        bodies[2].SetActive(true);
         currentAnimator = bodies[1].GetComponent<Animator>();
     }
 

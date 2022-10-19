@@ -85,6 +85,7 @@ public class PlayerHPbar : MonoBehaviour
                 MoveBehaviourScript.Instance.Medium();
 
                 big = false;
+                med = true;
             }
         }
 
