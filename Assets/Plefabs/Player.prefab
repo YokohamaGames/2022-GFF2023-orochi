@@ -288,6 +288,9 @@ MonoBehaviour:
   - {fileID: 5030688753723487832}
   - {fileID: 4500577095744262443}
   animator: {fileID: 0}
+  big: 0
+  medium: 0
+  small: 0
   isGrounded: 0
 --- !u!114 &8139101171561958033
 MonoBehaviour:
@@ -359,6 +362,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4fa82f3e99506ea46a6c187ba35cd71f, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4fa82f3e99506ea46a6c187ba35cd71f, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fa82f3e99506ea46a6c187ba35cd71f, type: 3}
@@ -571,6 +578,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: ac26727a27477be489995244feb380b4, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ac26727a27477be489995244feb380b4, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac26727a27477be489995244feb380b4, type: 3}

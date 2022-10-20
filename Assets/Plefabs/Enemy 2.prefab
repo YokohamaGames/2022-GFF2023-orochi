@@ -103,7 +103,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1633171232906517876
 MonoBehaviour:
@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 4307010690676094474}
   - component: {fileID: 3466409081791956804}
   - component: {fileID: 4307010690676094581}
+  - component: {fileID: 3514578804667060070}
   m_Layer: 0
   m_Name: Enemy 2
   m_TagString: enemy
@@ -201,6 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChaseSpeed: 2
   AttackSpeed: 1
+  TimetoAttack: 2
   target: {fileID: 4068290216166233380, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
   animator: {fileID: 8568832986679519111}
   rotMax: 0
@@ -382,11 +384,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3a4dde9c76c3142a36d1a0ec424404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  upForce: 20
+  BIGspeed: 0
+  MEDIUMspeed: 0
+  SMALLspeed: 0
+  BIGup: 0
+  MEDIUMup: 0
+  SMALLup: 0
   com: {x: 0, y: 0, z: 0}
   bodies: []
   animator: {fileID: 8568832986679519111}
+  big: 0
+  medium: 0
+  small: 0
   isGrounded: 0
 --- !u!114 &4307010690676094581
 MonoBehaviour:
@@ -400,6 +409,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57004c8e4184e3d49b0f1ad56cbef2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3514578804667060070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7035401418459900334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec0389833a51b44090b7fa03b56d75d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  edit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &6608383306566691669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -482,6 +506,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7775397545866392297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6301899595828581892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec0389833a51b44090b7fa03b56d75d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  edit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1633171233238886715}
+        m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
+        m_MethodName: SetAttackReadyState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &6647041366360198334 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c7a4ef8ca6518ee4f99643fc67d764af, type: 3}
