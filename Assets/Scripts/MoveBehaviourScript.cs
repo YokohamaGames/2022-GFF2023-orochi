@@ -25,7 +25,7 @@ public class MoveBehaviourScript : MonoBehaviour
     [SerializeField]
     Animator animator;
 
-    public static MoveBehaviourScript Instance { get; private set; }
+    public bool big, medium, small;
 
     // AnimatorÇÃÉpÉâÉÅÅ[É^Å[ID
     static readonly int isAttackId = Animator.StringToHash("isAttack");
@@ -88,12 +88,12 @@ public class MoveBehaviourScript : MonoBehaviour
         bodies[1].SetActive(false);
         bodies[2].SetActive(true);
         currentAnimator = bodies[1].GetComponent<Animator>();
+
+        big = true;
+        medium = false;
+        small = false;
     }
 
-    private void Awake()
-    {
-        Instance = this;
-    }
 
 
     // Update is called once per frame
@@ -129,6 +129,28 @@ public class MoveBehaviourScript : MonoBehaviour
                 UpdateForDeadState();
                 break;
         }
+
+        // HPÇ™5à»è„ÇÃéû
+        if (StageScene.Instance.playerhp == 6 || StageScene.Instance.playerhp == 5)
+        {
+            Big();
+        }
+        // HPÇ™3Å`4ÇÃéû
+        if (StageScene.Instance.playerhp == 4 || StageScene.Instance.playerhp == 3)
+        {
+            Medium();
+        }
+        // HPÇ™1Å`2ÇÃéû
+        if (StageScene.Instance.playerhp == 2 || StageScene.Instance.playerhp == 1)
+        {
+            Small();
+        }
+        // HPÇ™0ÇÃéû
+        if (StageScene.Instance.playerhp == 0)
+        {
+            SetDeadState();
+        }
+
     }
 
     private void FixedUpdate()
@@ -138,15 +160,15 @@ public class MoveBehaviourScript : MonoBehaviour
 
     void UpdateForWalkState()
     {
-        if (PlayerHPbar.Instance.big)
+        if (big)
         {
             speed = BIGspeed;
         }
-        else if (PlayerHPbar.Instance.med)
+        else if (medium)
         {
             speed = MEDIUMspeed;
         }
-        else if (PlayerHPbar.Instance.min)
+        else if (small)
         {
             speed = SMALLspeed;
         }
@@ -159,10 +181,8 @@ public class MoveBehaviourScript : MonoBehaviour
 
     void UpdateForJumpingState()
     {
-        if (isGrounded == false)
-        {
             speed = 5;
-        }
+        Debug.Log("ÉWÉÉÉìÉv");
     }
 
     void UpdateForAvoidState()
@@ -331,34 +351,47 @@ public class MoveBehaviourScript : MonoBehaviour
     // ëÂÇ´Ç¢éû
     public void Big()
     {
-        speed = BIGspeed;
+        Debug.Log("ëÂå^");
+
         upForce = BIGup;
 
             bodies[0].SetActive(false);
             bodies[1].SetActive(false);
             bodies[2].SetActive(true);
+
+        big = true;
+        medium = false;
     }
 
     // íÜå^ÇÃéû
     public void Medium()
     {
-        speed = MEDIUMspeed;
+        Debug.Log("íÜå^");
+
         upForce = MEDIUMup;
 
             bodies[0].SetActive(false);
             bodies[1].SetActive(true);
             bodies[2].SetActive(false);
+
+        big = false;
+        medium = true;
+        small = false;
     }
 
     // è¨Ç≥Ç¢éû
     public void Small()
     {
-        speed = SMALLspeed;
+        Debug.Log("è¨å^");
+
         upForce = SMALLup;
 
             bodies[0].SetActive(true);
             bodies[1].SetActive(false);
             bodies[2].SetActive(false);
+
+        medium = false;
+        small = true;
     }
 }
 
