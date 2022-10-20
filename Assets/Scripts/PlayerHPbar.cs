@@ -15,7 +15,6 @@ public class PlayerHPbar : MonoBehaviour
 
     void Start()
     {
-        StageScene.Instance.playerhp = 6;
 
     }
 
