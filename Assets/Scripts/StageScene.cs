@@ -9,6 +9,8 @@ public class StageScene : MonoBehaviour
 	[SerializeField]
 	private UI Ui = null;
 
+    // プレイヤーのHPを指定
+    public int playerhp;
     private void Awake()
     {
         Instance = this;
@@ -19,6 +21,14 @@ public class StageScene : MonoBehaviour
         if (Time.timeScale > 0)
         {
             Ui.Control();
+        }
+    }
+
+    public void Update()
+    {
+        if (playerhp == 0)
+        {
+            Ui.GameOver();
         }
     }
 }
