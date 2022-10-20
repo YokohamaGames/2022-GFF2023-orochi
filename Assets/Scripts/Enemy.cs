@@ -8,24 +8,23 @@ public class Enemy : MonoBehaviour
 {
     //敵のステータスに関する数値設定
 
-    //敵の追跡時歩行スピードを設定します
+    
     [SerializeField]
-    private float ChaseSpeed;
+    private float ChaseSpeed;                              //敵の追跡時歩行スピードを設定
+
     [SerializeField]
-    private float AttackSpeed = 1;
-    //現在の敵の歩行スピード
-    float speed = 1;
-    float TimeCount = 0;                        //時間をカウントする変数。攻撃範囲にとどまっている時間のカウント
+    private float AttackReadySpeed = 1;                    //攻撃準備時の歩行スピードを設定  
+
     [SerializeField]
-    private float TimetoAttack = 2;
-    //追跡目標を設定します
+    private float TimetoAttack = 2;                        //攻撃準備から攻撃までの時間の設定
+
     [SerializeField]
-    private Transform target;
+    private Transform target;                              //追跡目標の設定
 
     [SerializeField]
     private Animator animator;
 
-
+    
     //敵の回転速度を設定します
     [SerializeField]
     private float rotMax;
@@ -36,13 +35,13 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private AttackArea attackArea;
 
-    // ユーザーからの入力
-    Vector2 moveInput = Vector2.zero;
-    Vector2 lookInput = Vector2.zero;
+    float timetoattack;                                    //攻撃時間を設定した時間にリセットする変数
+    
 
     public bool SearchArea = false;
 
     public bool AttackArea = false;
+    float speed = 1;                                       //現在の敵の歩行スピード
 
 
     // コンポーネントを事前に参照しておく変数
@@ -55,7 +54,7 @@ public class Enemy : MonoBehaviour
     static readonly int isAttackReady = Animator.StringToHash("isAttackReady");
     static readonly int isAttack = Animator.StringToHash("isAttack");
 
-
+    
 
 
     enum EnemyState
@@ -84,6 +83,8 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         //animator = GetComponent<Animator>();
+        rigidbody = GetComponent<Rigidbody>();             
+        timetoattack = TimetoAttack;                       //攻撃時間を指定した時間にリセットする変数に値を代入
         
     }
 
@@ -104,7 +105,7 @@ public class Enemy : MonoBehaviour
                     UpdateForAttack();
                     break;
                 case EnemyState.Discover:
-                    UpDateForDiscover();
+                    UpdateForDiscover();
                     break;
                 case EnemyState.AttackReady:
                     UpdateForAttackReady();
@@ -114,7 +115,7 @@ public class Enemy : MonoBehaviour
             }
 
         }
-        //索敵範囲と攻撃範囲の中にいるとき攻撃モード
+        /*索敵範囲と攻撃範囲の中にいるとき攻撃モード
         if (SearchArea && AttackArea)
         {
             Debug.Log("攻撃範囲内");
@@ -129,8 +130,8 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("索敵範囲外");
         }
-
-        Debug.Log(currentState);
+        */
+        
         //Debug.Log(TimeCount);
 
         
@@ -151,14 +152,13 @@ public class Enemy : MonoBehaviour
     }
     public void SetMoveState()
     {
-        //animator.SetBool(isDiscover, false);
         currentState = EnemyState.Move;
         speed = ChaseSpeed;
     }
     public void SetAttackReadyState()
     {
         currentState = EnemyState.AttackReady;
-        speed = AttackSpeed;                   //攻撃範囲に入ったら様子見で移動速度を小さくする
+        speed = 0;                                         //攻撃範囲に入ったら様子見で移動速度を小さくする
         animator.SetTrigger(isAttackReady);
         
     }
@@ -166,7 +166,8 @@ public class Enemy : MonoBehaviour
     {
         currentState = EnemyState.Attack;
         speed = 0;
-        TimeCount = 0;
+        timetoattack = TimetoAttack;                       ////攻撃までの時間のカウントをリセット
+
         animator.SetTrigger(isAttack);
 
     }
@@ -184,16 +185,7 @@ public class Enemy : MonoBehaviour
     {
 
 
-        // プレイヤーの前後左右の移動
-        var velocity = Vector3.zero;
-        velocity = transform.forward * moveInput.y * speed;
-        velocity += transform.right * moveInput.x * speed;
-        velocity.y = rigidbody.velocity.y;
-        rigidbody.velocity = velocity;
-
-        // プレイヤーの方角を回転
-        transform.Rotate(0, lookInput.x, 0);
-
+       
         //ターゲット方向のベクトルを求める
         Vector3 vec = target.position - transform.position;
 
@@ -201,7 +193,7 @@ public class Enemy : MonoBehaviour
         // Quaternion(回転値)を取得
         Quaternion quaternion = Quaternion.LookRotation(vec);
         //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(vec.x, 0, vec.z)), rotMax);
-        transform.Translate(Vector3.forward * speed * 0.01f); // 正面方向に移動
+        rigidbody.velocity = new Vector3(0, 0, speed);  // 正面方向に移動
 
         // 算出した回転値をこのゲームオブジェクトのrotationに代入
         this.transform.rotation = quaternion;
@@ -211,12 +203,13 @@ public class Enemy : MonoBehaviour
     //攻撃範囲にとどまっている時間をカウントして一定時間を超えたらAttackStateに切り替え、カウントを0にリセット
     void UpdateForAttackReady()
     {
-       // if (TimeCount > 2)
-           // TimeCount = 0;
-        TimeCount += Time.deltaTime;
-        if(TimeCount > TimetoAttack)
+        
+        Debug.Log(timetoattack);
+        timetoattack -= Time.deltaTime;
+        
+        if(0 > timetoattack)                               //攻撃までの時間が0になればステート遷移。カウントをリセットする。
         {
-            //TimeCount = 0;
+            
             SetAttackState();
         }
     }
@@ -230,14 +223,14 @@ public class Enemy : MonoBehaviour
         // Quaternion(回転値)を取得
         Quaternion quaternion = Quaternion.LookRotation(vec);
         //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(vec.x, 0, vec.z)), rotMax);
-        // 算出した回転値をこのゲームオブジェクトのrotationに代入
-        transform.rotation = quaternion;
-        transform.Translate(Vector3.forward * speed * 0.01f); // 正面方向に移動
+        rigidbody.velocity = new Vector3(0, 0, speed);  // 正面方向に移動
 
-        
-        
+        // 算出した回転値をこのゲームオブジェクトのrotationに代入
+        this.transform.rotation = quaternion;
+
+
     }
-    void UpDateForDiscover()
+    void UpdateForDiscover()
     {
         speed = ChaseSpeed;
         if(currentState == EnemyState.Discover)
@@ -252,52 +245,9 @@ public class Enemy : MonoBehaviour
 
         }
     }
-
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        moveInput = context.ReadValue<Vector2>();
-
-        // アクションが始まった
-        /*if (context.started)
-        {
-            Debug.Log($"started : {moveInput}");
-        }
-        // アクションが継続中
-        else if (context.performed)
-        {
-            Debug.Log($"performed : {moveInput}");
-        }
-        // アクションが終了
-        else if (context.canceled)
-        {
-            Debug.Log($"canceled : {moveInput}");
-        }*/
-    }
-
-    // ユーザーからのMoveアクションに対して呼び出されます。
-    public void OnLook(InputAction.CallbackContext context)
-    {
-        lookInput = context.ReadValue<Vector2>();
-
-        // アクションが始まった
-        /*if (context.started)
-        {
-            Debug.Log($"started : {lookInput}");
-        }
-        // アクションが継続中
-        else if (context.performed)
-        {
-            Debug.Log($"performed : {lookInput}");
-        }
-        // アクションが終了
-        else if (context.canceled)
-        {
-            Debug.Log($"canceled : {lookInput}");
-        }*/
-    }
-
-
 }
+
+
 
 
 
