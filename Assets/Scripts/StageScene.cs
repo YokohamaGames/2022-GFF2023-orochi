@@ -10,6 +10,7 @@ public class StageScene : MonoBehaviour
 	private UI Ui = null;
 
     // プレイヤーのHPを指定
+    [SerializeField]
     public int playerhp;
     private void Awake()
     {
