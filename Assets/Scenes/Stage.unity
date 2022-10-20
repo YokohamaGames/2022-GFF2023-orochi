@@ -482,6 +482,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4500577095744262443, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500577095744262443, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 4611616855408944638, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: m_Size.y
       value: 4.3
@@ -4564,6 +4572,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1633171232591537836, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
+      propertyPath: m_TagString
+      value: Search_Feild
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633171232906517878, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
+      propertyPath: m_TagString
+      value: AttackArea
+      objectReference: {fileID: 0}
     - target: {fileID: 1633171233238886714, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
       propertyPath: m_Size.z
       value: 2
@@ -4610,6 +4626,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3466409081791956804, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
       propertyPath: bodies.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3514578804667060070, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4307010690676094474, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
