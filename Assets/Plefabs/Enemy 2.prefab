@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 4307010690676094474}
   - component: {fileID: 3466409081791956804}
   - component: {fileID: 4307010690676094581}
+  - component: {fileID: 3514578804667060070}
   m_Layer: 0
   m_Name: Enemy 2
   m_TagString: enemy
@@ -201,6 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChaseSpeed: 2
   AttackSpeed: 1
+  TimetoAttack: 2
   target: {fileID: 4068290216166233380, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
   animator: {fileID: 8568832986679519111}
   rotMax: 0
@@ -400,6 +402,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57004c8e4184e3d49b0f1ad56cbef2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3514578804667060070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7035401418459900334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec0389833a51b44090b7fa03b56d75d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enemy_Script: {fileID: 0}
 --- !u!1001 &6608383306566691669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -482,6 +497,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7775397545866392297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6301899595828581892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec0389833a51b44090b7fa03b56d75d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enemy_Script: {fileID: 1633171233238886715}
 --- !u!4 &6647041366360198334 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c7a4ef8ca6518ee4f99643fc67d764af, type: 3}

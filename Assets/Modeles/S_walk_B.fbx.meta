@@ -22,12 +22,15 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'L_asi02' has translation animation that
+      will be discarded.\n\t'R_asi02' has translation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -112,7 +115,107 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: S_walk_B(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hip
+      parentName: S_walk_B(Clone)
+      position: {x: -0, y: 0.8744998, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_asi01
+      parentName: hip
+      position: {x: -0.3185356, y: -0.17283905, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_asi02
+      parentName: L_asi01
+      position: {x: -0.015216689, y: 0.019791419, z: -1.6028608}
+      rotation: {x: 0.22982794, y: -0.20395717, z: 0.049324468, w: 0.95034087}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_asi03
+      parentName: L_asi02
+      position: {x: -3.5083046e-16, y: 0, z: 0.97605795}
+      rotation: {x: -0.17669208, y: 0, z: -0, w: 0.9842662}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_04
+      parentName: L_asi03
+      position: {x: 2.0650148e-16, y: 7.46625e-17, z: 0.6852024}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_asi01
+      parentName: hip
+      position: {x: 0.31853598, y: -0.17283888, z: 0}
+      rotation: {x: 1, y: 0, z: 0, w: -6.123234e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_asi02
+      parentName: R_asi01
+      position: {x: 0.015215999, y: 0.37880558, z: -0.04402902}
+      rotation: {x: 0.027445024, y: -0.20975398, z: 0.005890107, w: 0.9773512}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_asi03
+      parentName: R_asi02
+      position: {x: 0.00000027008605, y: -0.00000024014358, z: -0.9760582}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_04
+      parentName: R_asi03
+      position: {x: -0.000002777562, y: 0.000000009758433, z: -0.68520135}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: waist
+      parentName: hip
+      position: {x: -0, y: 0.38376126, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: chest
+      parentName: waist
+      position: {x: -0, y: 0.3367701, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_kata
+      parentName: chest
+      position: {x: -0.7344396, y: 0.30976364, z: 0}
+      rotation: {x: 0, y: 0, z: 0.56849694, w: 0.82268536}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_hiji
+      parentName: L_kata
+      position: {x: -0.6865734, y: 3.5527136e-17, z: 0}
+      rotation: {x: 0, y: 0, z: 0.0021534385, w: 0.9999977}
+      scale: {x: 1, y: 1, z: 1}
+    - name: L_te
+      parentName: L_hiji
+      position: {x: -0.560074, y: -1.1191048e-14, z: 0}
+      rotation: {x: 0, y: -0, z: -0.57026726, w: 0.82145923}
+      scale: {x: 1, y: 1, z: 1}
+    - name: neck
+      parentName: chest
+      position: {x: -0, y: 0.4150887, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: head
+      parentName: neck
+      position: {x: -0, y: 1.9501338, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_kata
+      parentName: chest
+      position: {x: 0.73443997, y: 0.30975977, z: 0}
+      rotation: {x: 0.82268536, y: -0.56849694, z: 3.48104e-17, w: -5.037495e-17}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_hiji
+      parentName: R_kata
+      position: {x: 0.6865706, y: -0.00000027377217, z: 3.352742e-23}
+      rotation: {x: -3.0693193e-29, y: 2.6372017e-19, z: 0.0021534385, w: 0.9999977}
+      scale: {x: 1, y: 1, z: 1}
+    - name: R_te
+      parentName: R_hiji
+      position: {x: 0.560072, y: 0.000003062413, z: -2.957789e-19}
+      rotation: {x: 1.9221243e-24, y: -6.9724715e-17, z: -0.57026726, w: 0.82145923}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -123,13 +226,13 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
