@@ -4,6 +4,13 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 //敵のAiとステータス設定
+
+ //マジックナンバーをに名前を付けるクラス
+public static class Define
+{
+    public const float Number_of_Attack_Type = 4;          //攻撃種類数
+}
+
 public class Enemy : MonoBehaviour
 {
     //敵のステータスに関する数値設定
@@ -23,7 +30,6 @@ public class Enemy : MonoBehaviour
 
     [SerializeField]
     private Animator animator;
-
     
     //敵の回転速度を設定します
     [SerializeField]
@@ -43,6 +49,7 @@ public class Enemy : MonoBehaviour
     public bool AttackArea = false;
     float speed = 1;                                       //現在の敵の歩行スピード
 
+    int[] AttacksCount = { 0, 0, 0 };                      //攻撃の種類分配列を用意。技を使ったらカウントを+1する。
 
     // コンポーネントを事前に参照しておく変数
     new Rigidbody rigidbody;
@@ -53,30 +60,23 @@ public class Enemy : MonoBehaviour
     static readonly int isLost = Animator.StringToHash("isLost");
     static readonly int isAttackReady = Animator.StringToHash("isAttackReady");
     static readonly int isAttack = Animator.StringToHash("isAttack");
+    static readonly int isAttack2 = Animator.StringToHash("isAttack2");
+    static readonly int isAttack3 = Animator.StringToHash("isAttack3");
 
-    
+
+
 
 
     enum EnemyState
     {
-        //待機状態
-        Stay,
-
-        //発見状態
-        Discover,
-
-        //移動状態
-        Move,
-
-        //攻撃準備
-        AttackReady,
-        //攻撃状態
-        Attack,
-
-        //回避状態
-        Escape,
-
-
+        Stay,                                              //  待機
+        Discover,                                          //  発見
+        Move,                                              //  移動
+        AttackReady,                                       //  攻撃準備
+        Attack,                                            ////攻撃////
+        Attack2,                                           //    |
+        Attack3,                                           //  攻撃////
+        Escape,                                            //  回避
     }
 
     EnemyState currentState = EnemyState.Stay;
@@ -101,12 +101,15 @@ public class Enemy : MonoBehaviour
                 case EnemyState.Move:
                     UpdateForMove();
                     break;
-                case EnemyState.Attack:
-                    UpdateForAttack();
-                    break;
                 case EnemyState.Discover:
                     UpdateForDiscover();
                     break;
+                case EnemyState.Attack:
+                case EnemyState.Attack2:
+                case EnemyState.Attack3:
+                    UpdateForAttack();
+                    break;
+                
                 case EnemyState.AttackReady:
                     UpdateForAttackReady();
                     break;
@@ -162,13 +165,29 @@ public class Enemy : MonoBehaviour
         animator.SetTrigger(isAttackReady);
         
     }
+    //ランダムに攻撃する
     public void SetAttackState()
     {
+        float tmp = Random.Range(1.0f, 4.0f);              //1～攻撃種類数の乱数を取得
+        int random = (int)tmp;                             //float型の乱数をint型にキャスト
+        //Debug.Log(random);
+        switch (random)
+        {
+            case 1:animator.SetTrigger(isAttack);
+                break;
+            case 2:animator.SetTrigger(isAttack2);
+                break;
+            case 3:animator.SetTrigger(isAttack3);
+                break;
+            default:
+                break;
+        }
         currentState = EnemyState.Attack;
-        speed = 0;
+        speed = 0;                                         //立ち止まる
         timetoattack = TimetoAttack;                       ////攻撃までの時間のカウントをリセット
 
-        animator.SetTrigger(isAttack);
+        //animator.SetTrigger(isAttack);
+        //AttacksCount[0] += 1;
 
     }
     public void SetEscapeState()
@@ -204,7 +223,7 @@ public class Enemy : MonoBehaviour
     void UpdateForAttackReady()
     {
         
-        Debug.Log(timetoattack);
+        //Debug.Log(timetoattack);
         timetoattack -= Time.deltaTime;
         
         if(0 > timetoattack)                               //攻撃までの時間が0になればステート遷移。カウントをリセットする。
@@ -245,6 +264,14 @@ public class Enemy : MonoBehaviour
 
         }
     }
+    //配列の中身の最小値を探す関数:未完成
+    /*void CheckAttackCount(int[] atk_array)
+    {
+        for (int i = 0; i < atk_array.Length; i++)
+        {
+            if(atk_array[i] )
+        }
+    }*/
 }
 
 
