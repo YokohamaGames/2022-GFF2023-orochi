@@ -32,4 +32,10 @@ public class StageScene : MonoBehaviour
             Ui.GameOver();
         }
     }
+
+    public void Heal()
+    {
+        Debug.Log("‰ñ•œ");
+        playerhp += 1;
+    }
 }

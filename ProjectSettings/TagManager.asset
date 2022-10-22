@@ -10,6 +10,7 @@ TagManager:
   - Swamp
   - ground
   - Stage
+  - Bone
   layers:
   - Default
   - TransparentFX
