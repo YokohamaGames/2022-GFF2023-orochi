@@ -134,10 +134,11 @@ public class Enemy : MonoBehaviour
             Debug.Log("õ“G”ÍˆÍŠO");
         }
         */
-        
+
         //Debug.Log(TimeCount);
 
-        
+        Debug.Log(currentState);
+        Debug.Log(timetoattack);
 
     }
 
