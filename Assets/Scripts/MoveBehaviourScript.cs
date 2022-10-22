@@ -336,6 +336,7 @@ public class MoveBehaviourScript : MonoBehaviour
             isGrounded = true;
             SetWalkState();
         }
+
     }
 
     public IEnumerator DelayCoroutine()
