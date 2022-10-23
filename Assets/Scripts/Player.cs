@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            PlayerHPbar.Instance.Damage();
+            StageScene.Instance.Damage();
         }
     }
 

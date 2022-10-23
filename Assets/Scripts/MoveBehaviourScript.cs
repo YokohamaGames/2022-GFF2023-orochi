@@ -41,6 +41,8 @@ public class MoveBehaviourScript : MonoBehaviour
     private float speed = 5.0f;
     private float upForce = 100f;
 
+    private bool ButtonEnabled = true;
+
     // プレイヤーの状態を表します
     enum PlayerState
     {
@@ -62,6 +64,8 @@ public class MoveBehaviourScript : MonoBehaviour
         Small,
         // ゲームオーバー
         Dead,
+        // 無敵
+        Invincible,
         // ギミック系
         G1, G2, G3,
     }
@@ -132,6 +136,9 @@ public class MoveBehaviourScript : MonoBehaviour
             case PlayerState.Dead:
                 UpdateForDeadState();
                 break;
+            case PlayerState.Invincible:
+                UpdateForInvincible();
+                break;
         }
 
         // HPが5以上の時
@@ -196,9 +203,10 @@ public class MoveBehaviourScript : MonoBehaviour
 
     void UpdateForAttackState()
     {
-            Debug.Log("攻撃");
+        StartCoroutine(DelayCoroutine());
     }
 
+    
     void UpdateForBigState()
     {
 
@@ -213,11 +221,17 @@ public class MoveBehaviourScript : MonoBehaviour
     {
 
     }
+    
 
     void UpdateForDeadState()
     {
         Debug.Log("死んだ");
         Time.timeScale = 0;
+    }
+
+    void UpdateForInvincible()
+    {
+        StartCoroutine(DelayCoroutine());
     }
 
     // Walkステートに遷移させます。
@@ -273,6 +287,11 @@ public class MoveBehaviourScript : MonoBehaviour
         currentState = PlayerState.Dead;
     }
 
+    public void SetInvincible()
+    {
+        currentState = PlayerState.Invincible;
+    }
+
     // 指定した方向へ移動します。
     public void Move(Vector3 motion)
     {
@@ -307,14 +326,24 @@ public class MoveBehaviourScript : MonoBehaviour
     {
         if (isGrounded == true)
         {
-            SetAttackState();
-        }
+            if (ButtonEnabled == false)
+            {
+                return;
+            }
+            else
+            {
+                SetAttackState();
 
-        //Fireボタンで呼び出されるタックル攻撃。addForceを使用せずtransformで代用。向いている方向に座標を+する。
-        var player_transform = transform.position;
-            player_transform += transform.forward;
-            transform.position = player_transform;
-        
+                //Fireボタンで呼び出されるタックル攻撃。addForceを使用せずtransformで代用。向いている方向に座標を+する。
+                var player_transform = transform.position;
+                player_transform += transform.forward;
+                transform.position = player_transform;
+
+                ButtonEnabled = false;
+
+                StartCoroutine(ButtonCoroutine());
+            }
+        }
     }
 
     // ジャンプします。
@@ -336,7 +365,8 @@ public class MoveBehaviourScript : MonoBehaviour
         {
             if (collision.gameObject.tag == "enemy")
             {
-                PlayerHPbar.Instance.Damage();
+               　StageScene.Instance.Damage();
+                SetInvincible();
             }
         }
         
@@ -352,8 +382,19 @@ public class MoveBehaviourScript : MonoBehaviour
     public IEnumerator DelayCoroutine()
     {
         // 1秒間待つ
-        yield return new WaitForSeconds(1); 
+        yield return new WaitForSeconds(1);
+
+        SetWalkState();
     }
+
+    public IEnumerator ButtonCoroutine()
+    {
+        // 2秒待つ
+        yield return new WaitForSeconds(2);
+
+        ButtonEnabled = true;
+    }
+    
     public void Attack()
     {
         animator.SetTrigger(isAttackId);
@@ -365,6 +406,8 @@ public class MoveBehaviourScript : MonoBehaviour
         var player_transform = transform.position;
         player_transform -= transform.forward * avo;
         transform.position = player_transform;
+
+        SetAvoidState();
     }
     // 大きい時
     public void Big()

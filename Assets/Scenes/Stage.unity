@@ -968,6 +968,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 6326434}
   offset: {x: 0, y: 8, z: -10}
+  BIGoffset: {x: 0, y: 15, z: -20}
+  MIDOLEoffset: {x: 0, y: 12, z: -15}
+  SMALLoffset: {x: 0, y: 8, z: -10}
   rotate: 20
 --- !u!1001 &509882734
 PrefabInstance:

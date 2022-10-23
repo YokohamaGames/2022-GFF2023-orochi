@@ -9,6 +9,16 @@ public class CameraSample : MonoBehaviour
     [SerializeField] private Vector3 offset;     // player‚Æ‚Ì‹——£
 
     [SerializeField]
+    [Tooltip("‘å‚«‚¢Žž‚ÌƒJƒƒ‰")]
+    private Vector3 BIGoffset;
+    [SerializeField]
+    [Tooltip("’†Œ^‚ÌŽž‚ÌƒJƒƒ‰")]
+    private Vector3 MIDOLEoffset;
+    [SerializeField]
+    [Tooltip("¬‚³‚¢Žž‚ÌƒJƒƒ‰")]
+    private Vector3 SMALLoffset;
+
+    [SerializeField]
     [Tooltip("XÀ•W‚ðŽ²‚É‰ñ“]‚³‚¹‚Ü‚·")]
     private float rotate;
     private void Start()
@@ -30,5 +40,18 @@ public class CameraSample : MonoBehaviour
         localAngle.x = rotate;
         myTransform.localEulerAngles = localAngle;
 
+        if (StageScene.Instance.playerhp >= 5)
+        {
+            offset = BIGoffset;
+        }
+        else if(StageScene.Instance.playerhp <= 2)
+        {
+            offset = SMALLoffset;
+        }
+        else
+        {
+            offset = MIDOLEoffset;
+        }
     }
+
 }

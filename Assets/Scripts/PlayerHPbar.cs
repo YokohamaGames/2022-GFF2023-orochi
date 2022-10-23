@@ -23,16 +23,6 @@ public class PlayerHPbar : MonoBehaviour
         Instance = this;
     }
 
-    // Damage‚ªŒÄ‚Ño‚³‚ê‚½‚çHP‚ª1Œ¸‚é
-    public void Damage()
-    {
-        {
-            if (StageScene.Instance.playerhp > 0)
-            {
-                StageScene.Instance.playerhp--;
-            }
-        }
-    }
 
     // Heal‚ªŒÄ‚Ño‚³‚ê‚½‚çHP‚ª1‘‚¦‚é
     public void Heel()

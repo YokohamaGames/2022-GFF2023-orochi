@@ -38,4 +38,15 @@ public class StageScene : MonoBehaviour
         Debug.Log("‰ñ•œ");
         playerhp += 1;
     }
+
+    // Damage‚ªŒÄ‚Ño‚³‚ê‚½‚çHP‚ª1Œ¸‚é
+    public void Damage()
+    {
+        {
+            if (playerhp > 0)
+            {
+                playerhp--;
+            }
+        }
+    }
 }
