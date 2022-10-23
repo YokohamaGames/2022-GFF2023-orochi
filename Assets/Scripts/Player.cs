@@ -77,6 +77,14 @@ public class Player : MonoBehaviour
         StageScene.Instance.ControlPauseUI();
     }
 
+    public void OnInjury(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            PlayerHPbar.Instance.Damage();
+        }
+    }
+
     //Fireボタンで呼び出されるタックル攻撃。addForceを使用せずtransformで代用。向いている方向に座標を+する。
     void Tackle()
     {
