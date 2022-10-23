@@ -15,6 +15,10 @@ public class MoveBehaviourScript : MonoBehaviour
     private float BIGup, MEDIUMup, SMALLup;
 
     [SerializeField]
+    [Tooltip("回避の幅を指定")]
+    private float avo;
+
+    [SerializeField]
     private Vector3 com;
 
     [SerializeField]
@@ -305,6 +309,12 @@ public class MoveBehaviourScript : MonoBehaviour
         {
             SetAttackState();
         }
+
+        //Fireボタンで呼び出されるタックル攻撃。addForceを使用せずtransformで代用。向いている方向に座標を+する。
+        var player_transform = transform.position;
+            player_transform += transform.forward;
+            transform.position = player_transform;
+        
     }
 
     // ジャンプします。
@@ -349,6 +359,13 @@ public class MoveBehaviourScript : MonoBehaviour
         animator.SetTrigger(isAttackId);
     }
 
+    public void Avoid()
+    {
+        // transformで代用
+        var player_transform = transform.position;
+        player_transform -= transform.forward * avo;
+        transform.position = player_transform;
+    }
     // 大きい時
     public void Big()
     {

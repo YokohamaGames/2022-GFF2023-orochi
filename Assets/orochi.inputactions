@@ -293,10 +293,10 @@
                 {
                     "name": "",
                     "id": "28afca6b-6e63-4f63-8ea0-20be1a7a1fcd",
-                    "path": "",
+                    "path": "<Keyboard>/rightShift",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Avoid",
                     "isComposite": false,
                     "isPartOfComposite": false

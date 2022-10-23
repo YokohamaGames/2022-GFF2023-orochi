@@ -58,7 +58,6 @@ public class Player : MonoBehaviour
         if (context.phase == InputActionPhase.Started)
         {
             animator.SetTrigger(isAttackId);
-            Tackle();
             moveBehaviour.Fire();
         }
     }
@@ -77,6 +76,7 @@ public class Player : MonoBehaviour
         StageScene.Instance.ControlPauseUI();
     }
 
+    // Injuryボタンを押したら呼び出されます
     public void OnInjury(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)
@@ -85,16 +85,14 @@ public class Player : MonoBehaviour
         }
     }
 
-    //Fireボタンで呼び出されるタックル攻撃。addForceを使用せずtransformで代用。向いている方向に座標を+する。
-    void Tackle()
+    public void OnAvoid(InputAction.CallbackContext context)
     {
-        var player_transform = transform.position;
-        player_transform += transform.forward;
-        transform.position = player_transform;
-    
+        if (context.phase == InputActionPhase.Started)
+        {
+            moveBehaviour.Avoid();
+        }
     }
 
-    
 }
 
 
