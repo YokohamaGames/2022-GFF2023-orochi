@@ -9,13 +9,21 @@ public class ReciveEvent : MonoBehaviour
    
 
     [SerializeField]
-    UnityEvent edit;
+    UnityEvent[] edit;
     private void Start()
     {
         
     }
     public void ReceiveAnimationEvent()
     {
-        edit.Invoke();
+        edit[0].Invoke();
+    }
+    public void ReceiveAnimationEvent2()
+    {
+        edit[1].Invoke();
+    }
+    public void ReceiveAnimationEvent3()
+    {
+        edit[2].Invoke();
     }
 }

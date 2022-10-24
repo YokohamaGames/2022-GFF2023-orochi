@@ -198,6 +198,7 @@ public class Enemy : MonoBehaviour
     public void SetColliderOn(Collider collider)
     {
         collider.enabled = true;
+        Debug.Log("ŒÄ‚Î‚ê‚½");
     }
     //“–‚½‚è”»’è‚ğOFF‚É‚·‚éŠÖ”
     public void SetColliderOff(Collider collider)
