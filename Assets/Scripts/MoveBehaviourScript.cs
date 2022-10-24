@@ -295,9 +295,8 @@ public class MoveBehaviourScript : MonoBehaviour
     // 指定した方向へ移動します。
     public void Move(Vector3 motion)
     {
-        // ゲームオーバーの時以外
-        //TODO: 今はDead時のみ除外
-        if (currentState != PlayerState.Dead)
+        // WalkとJumpingの時だけ
+        if (currentState == PlayerState.Walk || currentState == PlayerState.Jumping)
         {
             // プレイヤーの前後左右の移動
             var velocity = motion;
@@ -308,7 +307,6 @@ public class MoveBehaviourScript : MonoBehaviour
                 transform.LookAt(transform.position + velocity.normalized, Vector3.up);
                 velocity *= speed;
 
-                Debug.Log(velocity);
             }
             velocity.y = rigidbody.velocity.y;
             rigidbody.velocity = velocity;
@@ -402,12 +400,12 @@ public class MoveBehaviourScript : MonoBehaviour
 
     public void Avoid()
     {
-        // transformで代用
-        var player_transform = transform.position;
-        player_transform -= transform.forward * avo;
-        transform.position = player_transform;
+        if (currentState == PlayerState.Walk)
+        {
+            rigidbody.AddForce(-transform.forward * avo, ForceMode.VelocityChange);
 
-        SetAvoidState();
+            SetInvincible();
+        }
     }
     // 大きい時
     public void Big()
