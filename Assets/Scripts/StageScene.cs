@@ -12,6 +12,11 @@ public class StageScene : MonoBehaviour
     // プレイヤーのHPを指定
     [SerializeField]
     public int playerhp;
+
+    // 敵のHPを指定
+    [SerializeField]
+    public int Enemyhp;
+
     private void Awake()
     {
         Instance = this;
@@ -42,11 +47,17 @@ public class StageScene : MonoBehaviour
     // Damageが呼び出されたらHPが1減る
     public void Damage()
     {
+        if (playerhp > 0)
         {
-            if (playerhp > 0)
-            {
-                playerhp--;
-            }
+            playerhp--;
+        }
+    }
+
+    public void EnemyDamage()
+    {
+        if (Enemyhp > 0)
+        {
+            Enemyhp--;
         }
     }
 }
