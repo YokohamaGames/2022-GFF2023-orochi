@@ -363,7 +363,7 @@ public class MoveBehaviourScript : MonoBehaviour
     {
         if (currentState == PlayerState.Walk || currentState == PlayerState.Jumping)
         {
-            if (collision.gameObject.tag == "enemy")
+            if (collision.gameObject.tag == "Enemy_Weapon")
             {
                Å@StageScene.Instance.Damage();
                 SetInvincible();
