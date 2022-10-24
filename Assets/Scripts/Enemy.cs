@@ -40,7 +40,8 @@ public class Enemy : MonoBehaviour
     //子オブジェクトを取得
     [SerializeField]
     private AttackArea attackArea;
-
+    [SerializeField]
+    private Collider Weapon_Collider;                      //敵の持つ武器の当たり判定を取得
     float timetoattack;                                    //攻撃時間を設定した時間にリセットする変数
     
 
@@ -51,6 +52,7 @@ public class Enemy : MonoBehaviour
 
     int[] AttacksCount = { 0, 0, 0 };                      //攻撃の種類分配列を用意。技を使ったらカウントを+1する。
 
+    
     // コンポーネントを事前に参照しておく変数
     new Rigidbody rigidbody;
     //Animator animator;
@@ -171,6 +173,7 @@ public class Enemy : MonoBehaviour
     {
         float tmp = Random.Range(1.0f, 4.0f);              //1～攻撃種類数の乱数を取得
         int random = (int)tmp;                             //float型の乱数をint型にキャスト
+        //SetColliderOn(Weapon_Collider);
         //Debug.Log(random);
         switch (random)
         {
@@ -191,6 +194,17 @@ public class Enemy : MonoBehaviour
         //AttacksCount[0] += 1;
 
     }
+    //当たり判定をONにする関数
+    public void SetColliderOn(Collider collider)
+    {
+        collider.enabled = true;
+    }
+    //当たり判定をOFFにする関数
+    public void SetColliderOff(Collider collider)
+    {
+        collider.enabled = false;
+    }
+
     public void SetEscapeState()
     {
 
