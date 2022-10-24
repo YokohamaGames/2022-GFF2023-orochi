@@ -194,7 +194,7 @@
                 {
                     "name": "",
                     "id": "88705ac3-760b-458b-9653-43a60b165621",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -292,11 +292,33 @@
                 },
                 {
                     "name": "",
+                    "id": "0a71437c-9a43-4dac-9e5f-4db6cbe563f7",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "28afca6b-6e63-4f63-8ea0-20be1a7a1fcd",
                     "path": "<Keyboard>/rightShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
+                    "action": "Avoid",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e78ee8c7-fc41-4207-a10f-dd61388fe491",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Avoid",
                     "isComposite": false,
                     "isPartOfComposite": false
