@@ -65,6 +65,8 @@ public class Enemy : MonoBehaviour
     static readonly int isAttack2 = Animator.StringToHash("isAttack2");
     static readonly int isAttack3 = Animator.StringToHash("isAttack3");
 
+    public EnemyShot enemyshot;
+
 
 
 
@@ -141,6 +143,11 @@ public class Enemy : MonoBehaviour
 
         Debug.Log(currentState);
         Debug.Log(timetoattack);
+
+        
+            enemyshot.Enemyshot();
+
+        
 
     }
 
