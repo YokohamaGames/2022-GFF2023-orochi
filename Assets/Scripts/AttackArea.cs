@@ -16,7 +16,7 @@ public class AttackArea : MonoBehaviour
     {
         if (colision.CompareTag("Player"))
         {
-            Debug.Log("UŒ‚”ÍˆÍ“à");
+            //Debug.Log("UŒ‚”ÍˆÍ“à");
             Parent_Enemy.AttackArea = true;
             Parent_Enemy.SetAttackReadyState();
 
@@ -27,7 +27,7 @@ public class AttackArea : MonoBehaviour
     {
         if (colision.CompareTag("Player"))
         {
-            Debug.Log("UŒ‚”ÍˆÍŠO");
+            //Debug.Log("UŒ‚”ÍˆÍŠO");
             Parent_Enemy.AttackArea = false;
            // Parent_Enemy.SearchArea = true;
            Parent_Enemy.SetDiscoverState();
