@@ -102,6 +102,12 @@ public class UI : MonoBehaviour
 		} 
 	}
 
+	// ‘€ìà–¾‚ª‰Ÿ‚³‚ê‚½‚É‘€ìà–¾‰æ–Ê‚ğ•\¦
+	public void Guide()
+    {
+
+    }
+
 	// GmaeOver‚ªŒÄ‚Ño‚³‚ê‚½‚ç•\¦‚·‚é
 	public void GameOver()
 	{
