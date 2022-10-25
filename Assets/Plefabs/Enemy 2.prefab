@@ -103,7 +103,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2
+  m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1633171232906517876
 MonoBehaviour:
@@ -118,6 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Parent_Enemy: {fileID: 1633171233238886715}
+  Transition_time: 2
 --- !u!1 &7035401418459900334
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,14 +199,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChaseSpeed: 2
-  AttackReadySpeed: 1
-  TimetoAttack: 1.5
+  AttackReadySpeed: 5
+  TimetoAttack: 1
   target: {fileID: 4068290216166233380, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
   animator: {fileID: 8568832986679519111}
   rotMax: 0
   searchArea: {fileID: 1633171232591537834}
   attackArea: {fileID: 1633171232906517876}
   Weapon_Collider: {fileID: 8479883396945111149}
+  Transition_Time: 2
   SearchArea: 0
   AttackArea: 0
   enemyshot: {fileID: 0}
@@ -339,8 +341,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.3, z: 3.4}
-  m_Center: {x: 0, y: -0.2, z: -1}
+  m_Size: {x: 0.2, y: 0.45, z: 3.4}
+  m_Center: {x: 0, y: -0.15, z: -1}
 --- !u!1 &6301899595828581892 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c7a4ef8ca6518ee4f99643fc67d764af, type: 3}

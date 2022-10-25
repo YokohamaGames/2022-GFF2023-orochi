@@ -42,8 +42,13 @@ public class Enemy : MonoBehaviour
     private AttackArea attackArea;
     [SerializeField]
     private Collider Weapon_Collider;                      //敵の持つ武器の当たり判定を取得
-    float timetoattack;                                    //攻撃時間を設定した時間にリセットする変数
+    [SerializeField]
+    private float Transition_Time;                         //ステート遷移を遅らせる時間
     
+    float timetoattack;                                    //攻撃時間を設定した時間にリセットする変数
+
+    [SerializeField]
+    int EnemyHp = 2;
 
     public bool SearchArea = false;
 
@@ -65,8 +70,6 @@ public class Enemy : MonoBehaviour
     static readonly int isAttack2 = Animator.StringToHash("isAttack2");
     static readonly int isAttack3 = Animator.StringToHash("isAttack3");
 
-    public EnemyShot enemyshot;
-
 
 
 
@@ -77,9 +80,9 @@ public class Enemy : MonoBehaviour
         Discover,                                          //  発見
         Move,                                              //  移動
         AttackReady,                                       //  攻撃準備
-        Attack,                                            ////攻撃////
-        Attack2,                                           //    |
-        Attack3,                                           //  攻撃////
+        //Attack,                                            ////攻撃////
+        //Attack2,                                           //    |
+        //Attack3,                                           //  攻撃////
         Escape,                                            //  回避
     }
 
@@ -89,7 +92,7 @@ public class Enemy : MonoBehaviour
         //animator = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody>();             
         timetoattack = TimetoAttack;                       //攻撃時間を指定した時間にリセットする変数に値を代入
-        
+        Weapon_Collider.enabled = false;                   //敵の武器の当たり判定をオフ
     }
 
     // Update is called once per frame
@@ -108,11 +111,11 @@ public class Enemy : MonoBehaviour
                 case EnemyState.Discover:
                     UpdateForDiscover();
                     break;
-                case EnemyState.Attack:
-                case EnemyState.Attack2:
-                case EnemyState.Attack3:
-                    UpdateForAttack();
-                    break;
+                //case EnemyState.Attack:
+                //case EnemyState.Attack2:
+                //case EnemyState.Attack3:
+                    //UpdateForAttack();
+                    //break;
                 
                 case EnemyState.AttackReady:
                     UpdateForAttackReady();
@@ -142,13 +145,12 @@ public class Enemy : MonoBehaviour
         //Debug.Log(TimeCount);
 
         Debug.Log(currentState);
-        Debug.Log(timetoattack);
+        //Debug.Log(timetoattack);
 
-        
-            enemyshot.Enemyshot();
-
-        
-
+        if(StageScene.Instance.Enemyhp == 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public void SetStayState()
@@ -173,10 +175,11 @@ public class Enemy : MonoBehaviour
         currentState = EnemyState.AttackReady;
         speed = 0;                                         //攻撃範囲に入ったら様子見で移動速度を小さくする
         animator.SetTrigger(isAttackReady);
-        
+        timetoattack = TimetoAttack;                       ////攻撃までの時間のカウントをリセット
+
     }
     //ランダムに攻撃する
-    public void SetAttackState()
+    public void Attacks()
     {
         float tmp = Random.Range(1.0f, 4.0f);              //1～攻撃種類数の乱数を取得
         int random = (int)tmp;                             //float型の乱数をint型にキャスト
@@ -193,10 +196,8 @@ public class Enemy : MonoBehaviour
             default:
                 break;
         }
-        currentState = EnemyState.Attack;
-        speed = 0;                                         //立ち止まる
+        rigidbody.velocity = Vector3.zero;                       //立ち止まる
         timetoattack = TimetoAttack;                       ////攻撃までの時間のカウントをリセット
-
         //animator.SetTrigger(isAttack);
         //AttacksCount[0] += 1;
 
@@ -245,17 +246,20 @@ public class Enemy : MonoBehaviour
     //攻撃範囲にとどまっている時間をカウントして一定時間を超えたらAttackStateに切り替え、カウントを0にリセット
     void UpdateForAttackReady()
     {
-        
+         rigidbody.velocity = Vector3.zero;
+         Rotate();
+
         //Debug.Log(timetoattack);
         timetoattack -= Time.deltaTime;
         
         if(0 > timetoattack)                               //攻撃までの時間が0になればステート遷移。カウントをリセットする。
         {
             
-            SetAttackState();
+            Attacks();
+            
         }
     }
-    void UpdateForAttack()
+    void Rotate()
     {
 
         //ターゲット方向のベクトルを求める
@@ -295,6 +299,13 @@ public class Enemy : MonoBehaviour
             if(atk_array[i] )
         }
     }*/
+
+    IEnumerator DelayState()
+    {
+        yield return new WaitForSeconds(Transition_Time);
+    }
+
+    
 }
 
 

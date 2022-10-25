@@ -43,6 +43,8 @@ public class MoveBehaviourScript : MonoBehaviour
 
     private bool ButtonEnabled = true;
 
+
+
     // プレイヤーの状態を表します
     enum PlayerState
     {
@@ -332,10 +334,7 @@ public class MoveBehaviourScript : MonoBehaviour
             {
                 SetAttackState();
 
-                //Fireボタンで呼び出されるタックル攻撃。addForceを使用せずtransformで代用。向いている方向に座標を+する。
-                var player_transform = transform.position;
-                player_transform += transform.forward;
-                transform.position = player_transform;
+                rigidbody.AddForce(transform.forward * 10, ForceMode.VelocityChange);
 
                 ButtonEnabled = false;
 
@@ -357,25 +356,38 @@ public class MoveBehaviourScript : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
         if (currentState == PlayerState.Walk || currentState == PlayerState.Jumping)
         {
-            if (collision.gameObject.tag == "Enemy_Weapon")
+            if (collision.CompareTag("Enemy_Weapon"))
             {
-               　StageScene.Instance.Damage();
+                StageScene.Instance.Damage();
                 SetInvincible();
             }
         }
-        
+        else if(currentState == PlayerState.Attack)
+        { 
+            if (collision.CompareTag("enemy"))
+            {
+                StageScene.Instance.Enemyhp--;
+                Debug.Log(StageScene.Instance.Enemyhp);
+            }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
         // 接地判定
         if (collision.gameObject.tag == "ground")
         {
             isGrounded = true;
             SetWalkState();
         }
-
     }
+       
+
+    
 
     public IEnumerator DelayCoroutine()
     {
@@ -452,5 +464,6 @@ public class MoveBehaviourScript : MonoBehaviour
         medium = false;
         small = true;
     }
+
 }
 

@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
 
 
     // ユーザーからの入力
-    Vector3 moveInput = Vector3.zero;
+    Vector2 moveInput = Vector2.zero;
     Vector2 lookInput = Vector2.zero;
 
     void Start()
@@ -29,7 +29,9 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        moveBehaviour.Move(moveInput);
+        var motion = Camera.main.transform.forward * moveInput.y;
+        motion += Camera.main.transform.right * moveInput.x;
+        moveBehaviour.Move(motion);
     }
     private void FixedUpdate()
     {
@@ -39,10 +41,7 @@ public class Player : MonoBehaviour
     // ユーザーからのMoveアクションに対して呼び出されます。
     public void OnMove(InputAction.CallbackContext context)
     {
-        var moveInput = context.ReadValue<Vector2>();
-        this.moveInput.x = moveInput.x;
-        this.moveInput.y = 0;
-        this.moveInput.z = moveInput.y;
+        moveInput = context.ReadValue<Vector2>();
     }
 
     // ユーザーからのMoveアクションに対して呼び出されます。
