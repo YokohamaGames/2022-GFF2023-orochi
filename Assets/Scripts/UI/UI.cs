@@ -60,6 +60,8 @@ public class UI : MonoBehaviour
 		FastButton.Select();
 
 		animator = GetComponent<Animator>();
+
+		animator.SetTrigger("Start");
 	}
 
 	// pause画面を表示
@@ -161,8 +163,8 @@ public class UI : MonoBehaviour
 	// Homeが押されたらsceneをTitleへ移行する
 	public void Home()
 	{
-		SceneManager.LoadScene("Title");
-		// 再開
-		Time.timeScale = 1f;
+        SceneManager.LoadScene("Title");
+        // 再開
+        Time.timeScale = 1f;
 	}
 }
