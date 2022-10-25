@@ -17,6 +17,8 @@ public class StageScene : MonoBehaviour
     [SerializeField]
     public int Enemyhp;
 
+    
+
     private void Awake()
     {
         Instance = this;
@@ -35,6 +37,9 @@ public class StageScene : MonoBehaviour
         if (playerhp == 0)
         {
             Ui.GameOver();
+        } else if(Enemyhp == 0)
+        {
+            Destroy(this);
         }
     }
 
@@ -60,4 +65,6 @@ public class StageScene : MonoBehaviour
             Enemyhp--;
         }
     }
+
+    
 }

@@ -46,7 +46,9 @@ public class Enemy : MonoBehaviour
     private float Transition_Time;                         //ステート遷移を遅らせる時間
     
     float timetoattack;                                    //攻撃時間を設定した時間にリセットする変数
-    
+
+    [SerializeField]
+    int EnemyHp = 2;
 
     public bool SearchArea = false;
 
@@ -90,7 +92,7 @@ public class Enemy : MonoBehaviour
         //animator = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody>();             
         timetoattack = TimetoAttack;                       //攻撃時間を指定した時間にリセットする変数に値を代入
-        
+        Weapon_Collider.enabled = false;                   //敵の武器の当たり判定をオフ
     }
 
     // Update is called once per frame
@@ -145,6 +147,10 @@ public class Enemy : MonoBehaviour
         Debug.Log(currentState);
         //Debug.Log(timetoattack);
 
+        if(StageScene.Instance.Enemyhp == 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public void SetStayState()
@@ -298,6 +304,8 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(Transition_Time);
     }
+
+    
 }
 
 
