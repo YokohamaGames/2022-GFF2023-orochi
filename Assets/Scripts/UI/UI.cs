@@ -11,6 +11,10 @@ public class UI : MonoBehaviour
 	[SerializeField]
 	private GameObject OptionUI = null;
 
+	// ガイドを参照
+	[SerializeField]
+	private GameObject GuideUI = null;
+
 	// ゲームオーバーを参照
 	[SerializeField]
 	private GameObject GameOverUI = null;
@@ -31,6 +35,10 @@ public class UI : MonoBehaviour
 	[SerializeField]
 	private Selectable OptionButton = null;
 
+	// Guideが開かれた時に選択されるボタンを指定
+	[SerializeField]
+	private Selectable GuideButton = null;
+
 	// GameOverが開かれた時に選択されるボタン
 	[SerializeField]
 	private Selectable GameOverButton = null;
@@ -46,6 +54,7 @@ public class UI : MonoBehaviour
 	{
 		PauseUI.SetActive(false);
 		OptionUI.SetActive(false);
+		GuideUI	.SetActive(false);
 		GameOverUI.SetActive(false);
 		StageClearUI.SetActive(false);
 		FastButton.Select();
@@ -66,7 +75,7 @@ public class UI : MonoBehaviour
 			Time.timeScale = 0f;
 			
 		}
-		else if (PauseUI.activeSelf && !OptionUI.activeSelf)
+		else if (PauseUI.activeSelf && !OptionUI.activeSelf && !GuideUI.activeSelf)
         {
 			// ポーズの非表示
 			PauseUI.SetActive(false);
@@ -79,6 +88,16 @@ public class UI : MonoBehaviour
 		{
 			// optionの非表示
 			OptionUI.SetActive(false);
+			// UIが閉じられた音声を再生
+			Se.CloseUI();
+			FastButton.Select();
+
+			animator.SetTrigger("Show");
+		}
+		else if (PauseUI.activeSelf && GuideUI.activeSelf)
+		{
+			// Guideの非表示
+			GuideUI.SetActive(false);
 			// UIが閉じられた音声を再生
 			Se.CloseUI();
 			FastButton.Select();
@@ -105,8 +124,17 @@ public class UI : MonoBehaviour
 	// 操作説明が押された時に操作説明画面を表示
 	public void Guide()
     {
+		if (PauseUI.activeInHierarchy)
+		{
+			GuideUI.SetActive(true);
+			// UIが開かれた音声を再生
+			Se.OpenUI();
+			// Guideが選択された場合にこのボタンを選択状態にします
+			GuideButton.Select();
 
-    }
+			animator.SetTrigger("Hide");
+		}
+	}
 
 	// GmaeOverが呼び出されたら表示する
 	public void GameOver()
@@ -134,5 +162,7 @@ public class UI : MonoBehaviour
 	public void Home()
 	{
 		SceneManager.LoadScene("Title");
+		// 再開
+		Time.timeScale = 1f;
 	}
 }
