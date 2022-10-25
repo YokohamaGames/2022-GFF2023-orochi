@@ -74,15 +74,15 @@ public class Enemy : MonoBehaviour
 
 
 
-    enum EnemyState
+     enum EnemyState
     {
         Stay,                                              //  待機
         Discover,                                          //  発見
         Move,                                              //  移動
         AttackReady,                                       //  攻撃準備
-        //Attack,                                            ////攻撃////
-        //Attack2,                                           //    |
-        //Attack3,                                           //  攻撃////
+        Attack,                                            ////攻撃////
+        Attack2,                                           //    |
+        Attack3,                                           //  攻撃////
         Escape,                                            //  回避
     }
 
@@ -111,11 +111,11 @@ public class Enemy : MonoBehaviour
                 case EnemyState.Discover:
                     UpdateForDiscover();
                     break;
-                //case EnemyState.Attack:
-                //case EnemyState.Attack2:
-                //case EnemyState.Attack3:
-                    //UpdateForAttack();
-                    //break;
+                case EnemyState.Attack:
+                case EnemyState.Attack2:
+                case EnemyState.Attack3:
+                    UpdateForAttack();
+                    break;
                 
                 case EnemyState.AttackReady:
                     UpdateForAttackReady();
@@ -178,6 +178,14 @@ public class Enemy : MonoBehaviour
         timetoattack = TimetoAttack;                       ////攻撃までの時間のカウントをリセット
 
     }
+    //Animatorのセットトリガーはしない
+    public void SetAttackReady()
+    {
+        currentState = EnemyState.AttackReady;
+        speed = AttackReadySpeed;                                         //攻撃範囲に入ったら様子見で移動速度を小さくする
+        timetoattack = TimetoAttack;                       ////攻撃までの時間のカウントをリセット
+        
+    }
     //ランダムに攻撃する
     public void Attacks()
     {
@@ -187,12 +195,15 @@ public class Enemy : MonoBehaviour
         //Debug.Log(random);
         switch (random)
         {
-            case 1:animator.SetTrigger(isAttack);
-                break;
-            case 2:animator.SetTrigger(isAttack2);
-                break;
-            case 3:animator.SetTrigger(isAttack3);
-                break;
+            case 1:currentState = EnemyState.Attack;
+                   animator.SetTrigger(isAttack);
+                   break;
+            case 2:currentState = EnemyState.Attack2;
+                   animator.SetTrigger(isAttack2);
+                   break;
+            case 3:currentState = EnemyState.Attack3;
+                   animator.SetTrigger(isAttack3);
+                   break;
             default:
                 break;
         }
@@ -290,6 +301,17 @@ public class Enemy : MonoBehaviour
             transform.Translate(Vector3.forward * speed * 0.01f); // 正面方向に移動
 
         }
+    }
+
+    void UpdateForAttack()
+    {
+        speed = 0;
+        //ターゲット方向のベクトルを求める
+        Vector3 vec = target.position - transform.position;
+        // Quaternion(回転値)を取得 回転する度数を取得
+        Quaternion quaternion = Quaternion.LookRotation(vec);
+        //取得した度数分オブジェクトを回転させる
+        transform.rotation = quaternion;
     }
     //配列の中身の最小値を探す関数:未完成
     /*void CheckAttackCount(int[] atk_array)

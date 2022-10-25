@@ -21,7 +21,6 @@ public class AttackArea : MonoBehaviour
         {
             //Debug.Log("UŒ‚”ÍˆÍ“à");
             Parent_Enemy.AttackArea = true;
-            StartCoroutine(DelayState());
 
             Parent_Enemy.SetAttackReadyState();
 
@@ -36,14 +35,9 @@ public class AttackArea : MonoBehaviour
             Parent_Enemy.AttackArea = false;
             // Parent_Enemy.SearchArea = true;
             
-            StartCoroutine(DelayState());
            Parent_Enemy.SetDiscoverState();
         }        
     }
 
-    //w’èŠÔ‘Ò‚ÂŠÖ”
-    IEnumerator DelayState()
-    {
-        yield return new WaitForSeconds(Transition_time);
-    }
+    
 }
