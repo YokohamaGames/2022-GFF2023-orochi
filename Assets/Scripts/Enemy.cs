@@ -75,9 +75,9 @@ public class Enemy : MonoBehaviour
         Discover,                                          //  発見
         Move,                                              //  移動
         AttackReady,                                       //  攻撃準備
-        Attack,                                            ////攻撃////
-        Attack2,                                           //    |
-        Attack3,                                           //  攻撃////
+        //Attack,                                            ////攻撃////
+        //Attack2,                                           //    |
+        //Attack3,                                           //  攻撃////
         Escape,                                            //  回避
     }
 
@@ -106,11 +106,11 @@ public class Enemy : MonoBehaviour
                 case EnemyState.Discover:
                     UpdateForDiscover();
                     break;
-                case EnemyState.Attack:
-                case EnemyState.Attack2:
-                case EnemyState.Attack3:
-                    UpdateForAttack();
-                    break;
+                //case EnemyState.Attack:
+                //case EnemyState.Attack2:
+                //case EnemyState.Attack3:
+                    //UpdateForAttack();
+                    //break;
                 
                 case EnemyState.AttackReady:
                     UpdateForAttackReady();
@@ -140,7 +140,7 @@ public class Enemy : MonoBehaviour
         //Debug.Log(TimeCount);
 
         Debug.Log(currentState);
-        Debug.Log(timetoattack);
+        //Debug.Log(timetoattack);
 
     }
 
@@ -166,10 +166,11 @@ public class Enemy : MonoBehaviour
         currentState = EnemyState.AttackReady;
         speed = 0;                                         //攻撃範囲に入ったら様子見で移動速度を小さくする
         animator.SetTrigger(isAttackReady);
-        
+        timetoattack = TimetoAttack;                       ////攻撃までの時間のカウントをリセット
+
     }
     //ランダムに攻撃する
-    public void SetAttackState()
+    public void Attacks()
     {
         float tmp = Random.Range(1.0f, 4.0f);              //1～攻撃種類数の乱数を取得
         int random = (int)tmp;                             //float型の乱数をint型にキャスト
@@ -186,8 +187,8 @@ public class Enemy : MonoBehaviour
             default:
                 break;
         }
-        currentState = EnemyState.Attack;
-        speed = 0;                                         //立ち止まる
+        //currentState = EnemyState.Attack;
+        speed = AttackReadySpeed;                          //立ち止まる
         timetoattack = TimetoAttack;                       ////攻撃までの時間のカウントをリセット
 
         //animator.SetTrigger(isAttack);
@@ -245,10 +246,10 @@ public class Enemy : MonoBehaviour
         if(0 > timetoattack)                               //攻撃までの時間が0になればステート遷移。カウントをリセットする。
         {
             
-            SetAttackState();
+            Attacks();
         }
     }
-    void UpdateForAttack()
+    /*void UpdateForAttack()
     {
 
         //ターゲット方向のベクトルを求める
@@ -264,7 +265,7 @@ public class Enemy : MonoBehaviour
         this.transform.rotation = quaternion;
 
 
-    }
+    }*/
     void UpdateForDiscover()
     {
         speed = ChaseSpeed;
