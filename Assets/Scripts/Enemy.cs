@@ -250,6 +250,7 @@ public class Enemy : MonoBehaviour
         {
             
             Attacks();
+            
         }
     }
     void Rotate()
