@@ -20,7 +20,7 @@ public class Shell : MonoBehaviour
     {
         Debug.Log("ÚG");
 
-       // Destroy(gameObject);
+        Destroy(this.gameObject);
 
     }
 }

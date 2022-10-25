@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trap : MonoBehaviour
+public class EnemyShot : MonoBehaviour
 {
     public GameObject shellPrefab;
     public AudioClip sound;
@@ -12,10 +12,11 @@ public class Trap : MonoBehaviour
 
     void Update()
     {
-        count += 1;
+       /* count += 1;
 
         //àÍíËä‘äuÇ≈íeÇî≠éÀÇ∑ÇÈ
-        if (count % 480 == 0)
+        //if (count % 480 == 0)
+        if(Input.GetKey(KeyCode.F))
         {
             GameObject shell = Instantiate(shellPrefab, transform.position, Quaternion.identity);
             Rigidbody shellRb = shell.GetComponent<Rigidbody>();
@@ -32,7 +33,16 @@ public class Trap : MonoBehaviour
             Destroy(shell, 5.0f);
 
             
-        }
+        }*/
+    }
+
+    public void Enemyshot()
+    {
+        GameObject shell = Instantiate(shellPrefab, transform.position, Quaternion.identity);
+        Rigidbody shellRb = shell.GetComponent<Rigidbody>();
+        Debug.Log("î≠éÀ");
+        // íeë¨Çê›íË
+        shellRb.AddForce(transform.forward * 1500);
     }
 
     
