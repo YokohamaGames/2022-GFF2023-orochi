@@ -42,6 +42,9 @@ public class Enemy : MonoBehaviour
     private AttackArea attackArea;
     [SerializeField]
     private Collider Weapon_Collider;                      //敵の持つ武器の当たり判定を取得
+    [SerializeField]
+    private float Transition_Time;                         //ステート遷移を遅らせる時間
+    
     float timetoattack;                                    //攻撃時間を設定した時間にリセットする変数
     
 
@@ -187,10 +190,8 @@ public class Enemy : MonoBehaviour
             default:
                 break;
         }
-        //currentState = EnemyState.Attack;
-        speed = AttackReadySpeed;                          //立ち止まる
+        rigidbody.velocity = Vector3.zero;                       //立ち止まる
         timetoattack = TimetoAttack;                       ////攻撃までの時間のカウントをリセット
-
         //animator.SetTrigger(isAttack);
         //AttacksCount[0] += 1;
 
@@ -239,7 +240,9 @@ public class Enemy : MonoBehaviour
     //攻撃範囲にとどまっている時間をカウントして一定時間を超えたらAttackStateに切り替え、カウントを0にリセット
     void UpdateForAttackReady()
     {
-        
+         rigidbody.velocity = Vector3.zero;
+         Rotate();
+
         //Debug.Log(timetoattack);
         timetoattack -= Time.deltaTime;
         
@@ -249,7 +252,7 @@ public class Enemy : MonoBehaviour
             Attacks();
         }
     }
-    /*void UpdateForAttack()
+    void Rotate()
     {
 
         //ターゲット方向のベクトルを求める
@@ -265,7 +268,7 @@ public class Enemy : MonoBehaviour
         this.transform.rotation = quaternion;
 
 
-    }*/
+    }
     void UpdateForDiscover()
     {
         speed = ChaseSpeed;
@@ -289,6 +292,11 @@ public class Enemy : MonoBehaviour
             if(atk_array[i] )
         }
     }*/
+
+    IEnumerator DelayState()
+    {
+        yield return new WaitForSeconds(Transition_Time);
+    }
 }
 
 

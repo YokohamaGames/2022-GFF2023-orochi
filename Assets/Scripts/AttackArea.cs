@@ -7,6 +7,9 @@ public class AttackArea : MonoBehaviour
     //親のスクリプトを取得
     [SerializeField]
     Enemy Parent_Enemy = null;
+
+    [SerializeField]
+    float Transition_time;
     private void Start()
     {
         
@@ -18,6 +21,8 @@ public class AttackArea : MonoBehaviour
         {
             //Debug.Log("攻撃範囲内");
             Parent_Enemy.AttackArea = true;
+            StartCoroutine(DelayState());
+
             Parent_Enemy.SetAttackReadyState();
 
         }
@@ -29,9 +34,16 @@ public class AttackArea : MonoBehaviour
         {
             //Debug.Log("攻撃範囲外");
             Parent_Enemy.AttackArea = false;
-           // Parent_Enemy.SearchArea = true;
+            // Parent_Enemy.SearchArea = true;
+            
+            StartCoroutine(DelayState());
            Parent_Enemy.SetDiscoverState();
         }        
     }
 
+    //指定時間待つ関数
+    IEnumerator DelayState()
+    {
+        yield return new WaitForSeconds(Transition_time);
+    }
 }

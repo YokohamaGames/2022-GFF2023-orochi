@@ -7,6 +7,7 @@ public class SearchArea : MonoBehaviour
     //親のスクリプトの取得
     [SerializeField]
     Enemy Parent_Enemy = null;
+
     private void Start()
     {
 
@@ -19,6 +20,7 @@ public class SearchArea : MonoBehaviour
         {
             //Debug.Log("索敵範囲内");
             Parent_Enemy.SearchArea = true;
+
             Parent_Enemy.SetDiscoverState();
             
         }
@@ -30,8 +32,10 @@ public class SearchArea : MonoBehaviour
         {
             //Debug.Log("索敵範囲外");
             Parent_Enemy.SearchArea = false;
+
             Parent_Enemy.SetStayState();
         }
     }
 
+    
 }

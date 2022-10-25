@@ -118,6 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Parent_Enemy: {fileID: 1633171233238886715}
+  Transition_time: 2
 --- !u!1 &7035401418459900334
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,6 +207,7 @@ MonoBehaviour:
   searchArea: {fileID: 1633171232591537834}
   attackArea: {fileID: 1633171232906517876}
   Weapon_Collider: {fileID: 8479883396945111149}
+  Transition_Time: 2
   SearchArea: 0
   AttackArea: 0
 --- !u!114 &3514578804667060070
@@ -335,11 +337,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6234584515074041085}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.3, z: 3.4}
-  m_Center: {x: 0, y: -0.2, z: -1}
+  m_Size: {x: 0.2, y: 0.45, z: 3.4}
+  m_Center: {x: 0, y: -0.15, z: -1}
 --- !u!1 &6301899595828581892 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c7a4ef8ca6518ee4f99643fc67d764af, type: 3}
