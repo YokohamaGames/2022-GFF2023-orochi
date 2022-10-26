@@ -44,9 +44,11 @@ public class Enemy : MonoBehaviour
     private Collider Weapon_Collider;                      //“G‚Ì‚Â•Ší‚Ì“–‚½‚è”»’è‚ğæ“¾
     [SerializeField]
     private float Transition_Time;                         //ƒXƒe[ƒg‘JˆÚ‚ğ’x‚ç‚¹‚éŠÔ
-    
+    [SerializeField]
+    private GameObject shellPrefab;
     float timetoattack;                                    //UŒ‚ŠÔ‚ğİ’è‚µ‚½ŠÔ‚ÉƒŠƒZƒbƒg‚·‚é•Ï”
-
+    [SerializeField]
+    private Transform Enemy_L_Hand;                        //“G‚Ì¶è‚ÌÀ•W‚ğæ“¾‚µ‚Ü‚·
     [SerializeField]
     int EnemyHp = 2;
 
@@ -327,7 +329,15 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(Transition_Time);
     }
 
-    
+    public void EnemyShotAttack()
+    {
+        GameObject shell = Instantiate(shellPrefab, Enemy_L_Hand.transform.position, Quaternion.identity);
+        Rigidbody shellRb = shell.GetComponent<Rigidbody>();
+        Debug.Log("”­Ë");
+        // ’e‘¬‚ğİ’è
+        shellRb.AddForce(transform.forward * 1500);
+        Destroy(shell, 1.0f);
+    }
 }
 
 

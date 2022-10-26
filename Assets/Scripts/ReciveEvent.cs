@@ -17,6 +17,7 @@ public class ReciveEvent : MonoBehaviour
     public void ReceiveAnimationEvent()
     {
         edit[0].Invoke();
+        
     }
     public void ReceiveAnimationEvent2()
     {
@@ -26,4 +27,10 @@ public class ReciveEvent : MonoBehaviour
     {
         edit[2].Invoke();
     }
+    public void ReceiveAnimationEvent4()
+    {
+        edit[3].Invoke();
+        
+    }
+
 }

@@ -131,7 +131,6 @@ GameObject:
   - component: {fileID: 1633171233238886713}
   - component: {fileID: 1633171233238886714}
   - component: {fileID: 1633171233238886715}
-  - component: {fileID: 3514578804667060070}
   m_Layer: 8
   m_Name: Enemy 2
   m_TagString: enemy
@@ -208,25 +207,11 @@ MonoBehaviour:
   attackArea: {fileID: 1633171232906517876}
   Weapon_Collider: {fileID: 8479883396945111149}
   Transition_Time: 2
+  shellPrefab: {fileID: 1861180931737820419, guid: dab3c90c1a6268145b07a73ece0b59a1, type: 3}
+  Enemy_L_Hand: {fileID: 8734296870527284895}
   EnemyHp: 2
   SearchArea: 0
   AttackArea: 0
-  enemyshot: {fileID: 0}
---- !u!114 &3514578804667060070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7035401418459900334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eec0389833a51b44090b7fa03b56d75d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  edit:
-  - m_PersistentCalls:
-      m_Calls: []
 --- !u!1001 &6608383306566691669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -292,24 +277,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7a4ef8ca6518ee4f99643fc67d764af, type: 3}
---- !u!1 &30928241443509688 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6618128200071642861, guid: c7a4ef8ca6518ee4f99643fc67d764af, type: 3}
-  m_PrefabInstance: {fileID: 6608383306566691669}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1020239011776097932
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 30928241443509688}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.02, y: 0.006, z: 0.009}
-  m_Center: {x: 0, y: 0, z: 0.002}
 --- !u!1 &6234584515074041085 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8273112449836331096, guid: c7a4ef8ca6518ee4f99643fc67d764af, type: 3}
@@ -426,13 +393,13 @@ MonoBehaviour:
         m_CallState: 2
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7035401418459900334}
+      - m_Target: {fileID: 1633171233238886715}
         m_TargetAssemblyTypeName: Enemy, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 2
+        m_MethodName: EnemyShotAttack
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 8479883396945111149}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Collider, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -441,5 +408,10 @@ MonoBehaviour:
 --- !u!4 &6647041366360198334 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c7a4ef8ca6518ee4f99643fc67d764af, type: 3}
+  m_PrefabInstance: {fileID: 6608383306566691669}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8734296870527284895 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -6736323872140632630, guid: c7a4ef8ca6518ee4f99643fc67d764af, type: 3}
   m_PrefabInstance: {fileID: 6608383306566691669}
   m_PrefabAsset: {fileID: 0}
