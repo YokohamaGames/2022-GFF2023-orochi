@@ -21,6 +21,9 @@ public class CameraSample : MonoBehaviour
     [SerializeField]
     [Tooltip("XÀ•W‚ğ²‚É‰ñ“]‚³‚¹‚Ü‚·")]
     private float rotate;
+
+    
+
     private void Start()
     {
         

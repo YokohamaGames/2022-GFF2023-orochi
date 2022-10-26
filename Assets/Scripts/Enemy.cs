@@ -149,10 +149,6 @@ public class Enemy : MonoBehaviour
         Debug.Log(currentState);
         //Debug.Log(timetoattack);
 
-        if(StageScene.Instance.Enemyhp == 0)
-        {
-            Destroy(this.gameObject);
-        }
     }
 
     public void SetStayState()
@@ -337,6 +333,16 @@ public class Enemy : MonoBehaviour
         // íeë¨Çê›íË
         shellRb.AddForce(transform.forward * 1500);
         Destroy(shell, 1.0f);
+    }
+
+    public void EnemyDamage()
+    {
+        EnemyHp--;
+
+        if (EnemyHp <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
 
