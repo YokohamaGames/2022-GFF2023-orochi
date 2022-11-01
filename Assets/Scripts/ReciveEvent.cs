@@ -14,9 +14,9 @@ public class ReciveEvent : MonoBehaviour
     {
         
     }
-    public void ReceiveAnimationEvent()
+    public void ReceiveAnimationEvent(int id)
     {
-        edit[0].Invoke();
+        edit[id].Invoke();
         
     }
     public void ReceiveAnimationEvent2()

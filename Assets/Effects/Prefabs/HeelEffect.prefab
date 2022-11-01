@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: 5283776961123228860}
   - component: {fileID: 5283776961123228858}
   - component: {fileID: 5283776961123228859}
+  - component: {fileID: 1085168134629494869}
   m_Layer: 0
   m_Name: Particle System (3)
   m_TagString: Untagged
@@ -173,7 +174,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 5
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 3
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -4942,6 +4943,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &1085168134629494869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5283776961123228861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a0565ced9da904aa473f25279877c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5283776961137514489
 GameObject:
   m_ObjectHideFlags: 0
@@ -4953,6 +4966,7 @@ GameObject:
   - component: {fileID: 5283776961137514488}
   - component: {fileID: 5283776961137514470}
   - component: {fileID: 5283776961137514471}
+  - component: {fileID: 8174554375243380936}
   m_Layer: 0
   m_Name: Particle System (1)
   m_TagString: Untagged
@@ -4985,7 +4999,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 5
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 3
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -9754,6 +9768,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &8174554375243380936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5283776961137514489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a0565ced9da904aa473f25279877c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5283776961444262478
 GameObject:
   m_ObjectHideFlags: 0
@@ -9765,6 +9791,7 @@ GameObject:
   - component: {fileID: 5283776961444262477}
   - component: {fileID: 5283776961444262475}
   - component: {fileID: 5283776961444262476}
+  - component: {fileID: 7387909695868851361}
   m_Layer: 0
   m_Name: Particle System (2)
   m_TagString: Untagged
@@ -9797,7 +9824,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 5
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 3
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -14566,6 +14593,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &7387909695868851361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5283776961444262478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a0565ced9da904aa473f25279877c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5283776961801607649
 GameObject:
   m_ObjectHideFlags: 0
@@ -14577,6 +14616,7 @@ GameObject:
   - component: {fileID: 5283776961801607648}
   - component: {fileID: 5283776961801607662}
   - component: {fileID: 5283776961801607663}
+  - component: {fileID: 7389442640941026360}
   m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
@@ -14609,7 +14649,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 5
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 3
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -19378,3 +19418,15 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &7389442640941026360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5283776961801607649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54a0565ced9da904aa473f25279877c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
