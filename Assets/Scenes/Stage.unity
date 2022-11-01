@@ -431,6 +431,67 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6517848141191641701, guid: d7eed1bc32b6aac42840d4ecf94196ff, type: 3}
   m_PrefabInstance: {fileID: 1519172396}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &180992876
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5283776960068745541, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283776960068745541, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283776960068745541, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283776960068745541, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283776960068745541, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283776960068745541, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283776960068745541, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283776960068745541, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283776960068745541, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283776960068745541, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283776960068745541, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283776960068745542, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
+      propertyPath: m_Name
+      value: HeelEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283776961123228858, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
+      propertyPath: lengthInSec
+      value: 0.5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
 --- !u!4 &192349229 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6517848141191641701, guid: d7eed1bc32b6aac42840d4ecf94196ff, type: 3}
@@ -2217,17 +2278,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2871229999654563450, guid: f2b44a072eb57fb4aaa1057a369b0c5b, type: 3}
   m_PrefabInstance: {fileID: 2126256977}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1292194428 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1633171233238886715, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
-  m_PrefabInstance: {fileID: 2021191248}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dafbec853b050674895451d2a308810f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1418849036 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6517848141191641701, guid: d7eed1bc32b6aac42840d4ecf94196ff, type: 3}
@@ -3225,7 +3275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba576b93dfd80744696721dbf99f165e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent_Enemy: {fileID: 1292194428}
+  Parent_Enemy: {fileID: 0}
   Transition_time: 0
 --- !u!1 &1913152719
 GameObject:
