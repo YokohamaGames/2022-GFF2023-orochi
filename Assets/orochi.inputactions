@@ -365,11 +365,33 @@
                 },
                 {
                     "name": "",
+                    "id": "93f4bbe4-975c-4be0-a877-f5ee0178f30f",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "ChangeS",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "79e2b650-ef81-4dd5-9b9e-52bbba7128a8",
                     "path": "<Keyboard>/l",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
+                    "action": "ChangeB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "37c09d71-6b16-45f4-a11d-54b0e2614b65",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "ChangeB",
                     "isComposite": false,
                     "isPartOfComposite": false

@@ -50,6 +50,9 @@ public class MoveBehaviourScript : MonoBehaviour
     // Avatarオブジェクトへの参照
     public GameObject avatar = null;
 
+    //回復エフェクトの指定
+    [SerializeField]
+    public GameObject HealObject;
 
     // プレイヤーの状態を表します
     enum PlayerState
@@ -297,7 +300,7 @@ public class MoveBehaviourScript : MonoBehaviour
             velocity.y = 0;
             if (velocity.sqrMagnitude >= 0.0001f)
             {
-                transform.LookAt(transform.position + velocity.normalized, Vector3.up);
+                avatar.transform.LookAt(transform.position + velocity.normalized, Vector3.up);
                 velocity *= speed;
 
             }
@@ -306,12 +309,6 @@ public class MoveBehaviourScript : MonoBehaviour
         }
     }
 
-    // プレイヤーの方角を回転させます。
-   /* public void Rotate(float deltaAngle)
-    {
-        transform.Rotate(0, deltaAngle, 0);
-    }
-   */
 
     // 攻撃します
     public void Fire()
@@ -326,7 +323,7 @@ public class MoveBehaviourScript : MonoBehaviour
             {
                 SetAttackState();
 
-                rigidbody.AddForce(transform.forward * 10, ForceMode.VelocityChange);
+                //rigidbody.AddForce(transform.forward * 10, ForceMode.VelocityChange);
 
                 ButtonEnabled = false;
 
@@ -474,10 +471,18 @@ public class MoveBehaviourScript : MonoBehaviour
         {
             Medium();
         }
-        else if (medium)
+        else if(medium)
         {
             Small();
         }
+    }
+
+    //回復中のエフェクト処理
+    public void Heal()
+    {
+        Debug.Log("回復");
+        Instantiate(HealObject, this.transform.position, Quaternion.identity); //パーティクル用ゲームオブジェクト生成
+        //playerhp += 1;
     }
 }
 

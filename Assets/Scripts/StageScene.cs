@@ -12,7 +12,12 @@ public class StageScene : MonoBehaviour
     // プレイヤーのHPを指定
     [SerializeField]
     public int playerhp;
-    
+
+    //回復エフェクトの指定
+    [SerializeField]
+    public GameObject HealObject;
+
+
 
     private void Awake()
     {
@@ -35,9 +40,10 @@ public class StageScene : MonoBehaviour
         } 
     }
 
-    public void Heal()
+    public void Heal(Vector3 EffectTransform)
     {
         Debug.Log("回復");
+        Instantiate(HealObject, EffectTransform, Quaternion.identity); //パーティクル用ゲームオブジェクト生成
         playerhp += 1;
     }
 
