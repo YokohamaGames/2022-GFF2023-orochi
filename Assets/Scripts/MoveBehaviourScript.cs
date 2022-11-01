@@ -300,7 +300,7 @@ public class MoveBehaviourScript : MonoBehaviour
             velocity.y = 0;
             if (velocity.sqrMagnitude >= 0.0001f)
             {
-                transform.LookAt(transform.position + velocity.normalized, Vector3.up);
+                avatar.transform.LookAt(transform.position + velocity.normalized, Vector3.up);
                 velocity *= speed;
 
             }
@@ -309,12 +309,6 @@ public class MoveBehaviourScript : MonoBehaviour
         }
     }
 
-    // ÉvÉåÉCÉÑÅ[ÇÃï˚äpÇâÒì]Ç≥ÇπÇ‹Ç∑ÅB
-   /* public void Rotate(float deltaAngle)
-    {
-        transform.Rotate(0, deltaAngle, 0);
-    }
-   */
 
     // çUåÇÇµÇ‹Ç∑
     public void Fire()
@@ -329,7 +323,7 @@ public class MoveBehaviourScript : MonoBehaviour
             {
                 SetAttackState();
 
-                rigidbody.AddForce(transform.forward * 10, ForceMode.VelocityChange);
+                //rigidbody.AddForce(transform.forward * 10, ForceMode.VelocityChange);
 
                 ButtonEnabled = false;
 
@@ -477,7 +471,7 @@ public class MoveBehaviourScript : MonoBehaviour
         {
             Medium();
         }
-        else if (medium)
+        else if(medium)
         {
             Small();
         }
