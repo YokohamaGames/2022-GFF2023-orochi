@@ -54,6 +54,12 @@ public class MoveBehaviourScript : MonoBehaviour
     [SerializeField]
     public GameObject HealObject;
 
+    //サイズ変更エフェクトの指定
+    [SerializeField]
+    public GameObject ChangeEffect;
+
+    Quaternion EffectAngle = Quaternion.Euler(-90f, 0f, 0f);
+
     // プレイヤーの状態を表します
     enum PlayerState
     {
@@ -410,6 +416,9 @@ public class MoveBehaviourScript : MonoBehaviour
     // 大きい時
     public void Big()
     {
+        //変身エフェクト
+        Instantiate(ChangeEffect, this.transform.position, EffectAngle); //パーティクル用ゲームオブジェクト生成
+
         Debug.Log("大型");
 
         upForce = BIGup;
@@ -427,6 +436,9 @@ public class MoveBehaviourScript : MonoBehaviour
     {
         Debug.Log("中型");
 
+        //変身エフェクト
+        Instantiate(ChangeEffect, this.transform.position, EffectAngle); //パーティクル用ゲームオブジェクト生成
+
         upForce = MEDIUMup;
 
             bodies[0].SetActive(false);
@@ -442,6 +454,9 @@ public class MoveBehaviourScript : MonoBehaviour
     public void Small()
     {
         Debug.Log("小型");
+
+        //変身エフェクト
+        Instantiate(ChangeEffect, this.transform.position, EffectAngle); //パーティクル用ゲームオブジェクト生成
 
         upForce = SMALLup;
 
