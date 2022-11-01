@@ -45,15 +45,15 @@ public class CameraSample : MonoBehaviour
 
         if (StageScene.Instance.playerhp >= 5)
         {
-            offset = BIGoffset;
+            //offset = BIGoffset;
         }
         else if(StageScene.Instance.playerhp <= 2)
         {
-            offset = SMALLoffset;
+            //offset = SMALLoffset;
         }
         else
         {
-            offset = MIDOLEoffset;
+            //offset = MIDOLEoffset;
         }
     }
 
