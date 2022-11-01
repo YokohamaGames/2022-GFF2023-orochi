@@ -55,6 +55,8 @@ public class Enemy : MonoBehaviour
     public bool SearchArea = false;
 
     public bool AttackArea = false;
+
+    public bool LongAttackArea = false;
     float speed = 1;                                       //現在の敵の歩行スピード
 
     int[] AttacksCount = { 0, 0, 0 };                      //攻撃の種類分配列を用意。技を使ったらカウントを+1する。
@@ -150,7 +152,10 @@ public class Enemy : MonoBehaviour
         //Debug.Log(timetoattack);
 
     }
+    public void SetLongAttack()
+    {
 
+    }
     public void SetStayState()
     {
         currentState = EnemyState.Stay;

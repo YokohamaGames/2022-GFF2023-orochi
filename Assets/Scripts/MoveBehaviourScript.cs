@@ -50,6 +50,9 @@ public class MoveBehaviourScript : MonoBehaviour
     // Avatarオブジェクトへの参照
     public GameObject avatar = null;
 
+    //回復エフェクトの指定
+    [SerializeField]
+    public GameObject HealObject;
 
     // プレイヤーの状態を表します
     enum PlayerState
@@ -472,6 +475,14 @@ public class MoveBehaviourScript : MonoBehaviour
         {
             Small();
         }
+    }
+
+    //回復中のエフェクト処理
+    public void Heal()
+    {
+        Debug.Log("回復");
+        Instantiate(HealObject, this.transform.position, Quaternion.identity); //パーティクル用ゲームオブジェクト生成
+        //playerhp += 1;
     }
 }
 
