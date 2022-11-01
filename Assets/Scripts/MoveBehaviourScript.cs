@@ -25,6 +25,7 @@ public class MoveBehaviourScript : MonoBehaviour
     [Tooltip("大中小のそれぞれのオブジェクトを指定します。")]
     private GameObject[] bodies = null;
 
+
     //Playerのアニメーターの取得
     [SerializeField]
     Animator animator;
@@ -43,6 +44,11 @@ public class MoveBehaviourScript : MonoBehaviour
 
     private bool ButtonEnabled = true;
 
+    // プレイヤーのカメラ
+    public Camera playerCamera = null;
+
+    // Avatarオブジェクトへの参照
+    public GameObject avatar = null;
 
 
     // プレイヤーの状態を表します
@@ -316,10 +322,11 @@ public class MoveBehaviourScript : MonoBehaviour
     }
 
     // プレイヤーの方角を回転させます。
-    public void Rotate(float deltaAngle)
+   /* public void Rotate(float deltaAngle)
     {
         transform.Rotate(0, deltaAngle, 0);
     }
+   */
 
     // 攻撃します
     public void Fire()
@@ -370,8 +377,7 @@ public class MoveBehaviourScript : MonoBehaviour
         { 
             if (collision.CompareTag("enemy"))
             {
-                StageScene.Instance.Enemyhp--;
-                Debug.Log(StageScene.Instance.Enemyhp);
+                collision.GetComponent<Enemy>().EnemyDamage();
             }
         }
     }

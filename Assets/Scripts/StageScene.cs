@@ -12,11 +12,6 @@ public class StageScene : MonoBehaviour
     // プレイヤーのHPを指定
     [SerializeField]
     public int playerhp;
-
-    // 敵のHPを指定
-    [SerializeField]
-    public int Enemyhp;
-
     
 
     private void Awake()
@@ -37,10 +32,7 @@ public class StageScene : MonoBehaviour
         if (playerhp == 0)
         {
             Ui.GameOver();
-        } else if(Enemyhp == 0)
-        {
-            Destroy(this);
-        }
+        } 
     }
 
     public void Heal()
@@ -55,14 +47,6 @@ public class StageScene : MonoBehaviour
         if (playerhp > 0)
         {
             playerhp--;
-        }
-    }
-
-    public void EnemyDamage()
-    {
-        if (Enemyhp > 0)
-        {
-            Enemyhp--;
         }
     }
 
