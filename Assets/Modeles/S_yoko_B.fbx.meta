@@ -61,18 +61,18 @@ ModelImporter:
       curves: []
       events:
       - time: 0.63597405
-        functionName: ReceiveAnimationEvent2
+        functionName: ReceiveAnimationEvent
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
-        intParameter: 0
+        intParameter: 1
         messageOptions: 0
       - time: 0.9577928
-        functionName: ReceiveAnimationEvent3
+        functionName: ReceiveAnimationEvent
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
-        intParameter: 0
+        intParameter: 2
         messageOptions: 0
       transformMask: []
       maskType: 3
