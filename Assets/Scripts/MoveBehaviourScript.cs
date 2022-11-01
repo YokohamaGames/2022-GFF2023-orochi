@@ -149,21 +149,6 @@ public class MoveBehaviourScript : MonoBehaviour
                 break;
         }
 
-        // HPÇ™5à»è„ÇÃéû
-        if (StageScene.Instance.playerhp == 6 || StageScene.Instance.playerhp == 5)
-        {
-            Big();
-        }
-        // HPÇ™3Å`4ÇÃéû
-        if (StageScene.Instance.playerhp == 4 || StageScene.Instance.playerhp == 3)
-        {
-            Medium();
-        }
-        // HPÇ™1Å`2ÇÃéû
-        if (StageScene.Instance.playerhp == 2 || StageScene.Instance.playerhp == 1)
-        {
-            Small();
-        }
         // HPÇ™0ÇÃéû
         if (StageScene.Instance.playerhp == 0)
         {
@@ -312,7 +297,7 @@ public class MoveBehaviourScript : MonoBehaviour
             velocity.y = 0;
             if (velocity.sqrMagnitude >= 0.0001f)
             {
-                transform.LookAt(transform.position + velocity.normalized, Vector3.up);
+                avatar.transform.LookAt(transform.position + velocity.normalized, Vector3.up);
                 velocity *= speed;
 
             }
@@ -321,12 +306,6 @@ public class MoveBehaviourScript : MonoBehaviour
         }
     }
 
-    // ÉvÉåÉCÉÑÅ[ÇÃï˚äpÇâÒì]Ç≥ÇπÇ‹Ç∑ÅB
-   /* public void Rotate(float deltaAngle)
-    {
-        transform.Rotate(0, deltaAngle, 0);
-    }
-   */
 
     // çUåÇÇµÇ‹Ç∑
     public void Fire()
@@ -341,7 +320,7 @@ public class MoveBehaviourScript : MonoBehaviour
             {
                 SetAttackState();
 
-                rigidbody.AddForce(transform.forward * 10, ForceMode.VelocityChange);
+                //rigidbody.AddForce(transform.forward * 10, ForceMode.VelocityChange);
 
                 ButtonEnabled = false;
 
@@ -471,5 +450,28 @@ public class MoveBehaviourScript : MonoBehaviour
         small = true;
     }
 
+    public void ChangeR()
+    {
+        if (small)
+        {
+            Medium();
+        }
+        else if (medium)
+        {
+            Big();
+        }
+    }
+
+    public void ChangeL()
+    {
+        if (big)
+        {
+            Medium();
+        }
+        else if(medium)
+        {
+            Small();
+        }
+    }
 }
 

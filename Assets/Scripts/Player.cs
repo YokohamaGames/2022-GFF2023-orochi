@@ -5,6 +5,7 @@ using System.Collections;
 public class Player : MonoBehaviour
 {   //コンポーネントを事前に取得
 
+    
     [Header("Cinemachine")]
     [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
     public GameObject CinemachineCameraTarget;
@@ -21,6 +22,9 @@ public class Player : MonoBehaviour
     [Tooltip("For locking the camera position on all axis")]
     public bool LockCameraPosition = false;
 
+    [SerializeField]
+    public GameObject avatar = null;
+    
 
     MoveBehaviourScript moveBehaviour;
     Rigidbody player_rigidbody;
@@ -38,10 +42,11 @@ public class Player : MonoBehaviour
     Vector2 moveInput = Vector2.zero;
     Vector2 lookInput = Vector2.zero;
 
+    /*
     // cinemachine
     private float _cinemachineTargetYaw;
     private float _cinemachineTargetPitch;
-
+    */
     // player
     private float _speed;
     private float _rotationVelocity;
@@ -51,10 +56,13 @@ public class Player : MonoBehaviour
     private GameObject _mainCamera;
     private CharacterController _controller;
 
+    private const float _threshold = 0.01f;
+
     [Tooltip("キャラが移動方向に向く時の速さ")]
     [Range(0.0f, 0.3f)]
     public float RotationSmoothTime = 0.12f;
 
+    
     void Start()
     {
         moveBehaviour = GetComponent<MoveBehaviourScript>();
@@ -89,7 +97,7 @@ public class Player : MonoBehaviour
                 RotationSmoothTime);
 
             // カメラ位置を基準に入力方向に回転
-            transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+            avatar.transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
         }
 
         Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
@@ -99,12 +107,14 @@ public class Player : MonoBehaviour
                          new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
     }
 
-    // ユーザーからのMoveアクションに対して呼び出されます。
+    // ユーザーからのLookアクションに対して呼び出されます。
     public void OnLook(InputAction.CallbackContext context)
     {
         lookInput = context.ReadValue<Vector2>();
 
+
     }
+   
 
     // Fireボタンを押したら呼び出されます
     public void OnFire(InputAction.CallbackContext context)
@@ -131,13 +141,6 @@ public class Player : MonoBehaviour
     }
 
     // Injuryボタンを押したら呼び出されます
-    public void OnInjury(InputAction.CallbackContext context)
-    {
-        if (context.phase == InputActionPhase.Started)
-        {
-            StageScene.Instance.Damage();
-        }
-    }
 
     public void OnAvoid(InputAction.CallbackContext context)
     {
@@ -146,6 +149,22 @@ public class Player : MonoBehaviour
             moveBehaviour.Avoid();
         }
     }
+
+    public void OnChangeBig(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            moveBehaviour.ChangeR();
+        }
+    }
+    public void OnChangeSmall(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            moveBehaviour.ChangeL();
+        }
+    }
+
 }
 
 
