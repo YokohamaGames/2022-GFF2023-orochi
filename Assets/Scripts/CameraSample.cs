@@ -8,9 +8,12 @@ using Cinemachine;
 // プレイヤー追従カメラ
 public class CameraSample : MonoBehaviour
 {
+    // 1秒間で180度
     public Vector2 rotationSpeed = new Vector2(180, 180);
 
+    [SerializeField]
     CinemachineVirtualCamera vCam = null;
+    [SerializeField]
     Cinemachine3rdPersonFollow follow = null;
 
     private void Start()
@@ -29,10 +32,13 @@ public class CameraSample : MonoBehaviour
             Transform target = vCam.Follow;
             if (target != null)
             {
+                // ターゲットの角度をオイラー角度(x, y, z)で取得
                 Vector3 targetEulerAngles = target.rotation.eulerAngles;
 
+                // y軸の回転を変える
                 targetEulerAngles.y += cameraRotationInput.x * rotationSpeed.y * Time.fixedDeltaTime;
 
+                // オイラー角度をクオータニオンに変換して追跡ターゲットの回転を変える
                 target.transform.rotation = Quaternion.Euler(targetEulerAngles);
             }
         }
