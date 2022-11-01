@@ -339,7 +339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9095778976188401092, guid: cbb7d7ddd3cc726458a4d0cb269d2e8f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9095778976188401098, guid: cbb7d7ddd3cc726458a4d0cb269d2e8f, type: 3}
       propertyPath: SizeModule.enabled
@@ -452,7 +452,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!199 &523144385
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -5245,7 +5245,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
@@ -5434,7 +5434,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5283776960068745541, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5283776960068745541, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
       propertyPath: m_LocalPosition.x
