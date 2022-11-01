@@ -269,22 +269,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8139101171561958033}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnChangeBig
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 1793182a-a2ec-48c2-aaac-75a3e55bbae1
-    m_ActionName: Player/ChangeB[/Keyboard/l]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8139101171561958033}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: OnChangeSmall
         m_Mode: 0
         m_Arguments:
@@ -295,8 +279,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: e86f2fce-bfdc-464b-958f-9b22555a1286
+    m_ActionId: 6527f03f-66eb-492f-9e94-a791b2e4546b
     m_ActionName: Player/ChangeS[/Keyboard/k]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8139101171561958033}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnChangeBig
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ea6efcb5-217c-4a80-b9ea-e0c01cecd82e
+    m_ActionName: Player/ChangeB[/Keyboard/l]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
