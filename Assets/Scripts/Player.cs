@@ -146,6 +146,22 @@ public class Player : MonoBehaviour
             moveBehaviour.Avoid();
         }
     }
+
+    public void OnChangeBig(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            moveBehaviour.ChangeR();
+        }
+    }
+
+    public void OnChangeSmall(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            moveBehaviour.ChangeL();
+        }
+    }
 }
 
 
