@@ -149,21 +149,6 @@ public class MoveBehaviourScript : MonoBehaviour
                 break;
         }
 
-        // HP‚ª5ˆÈã‚Ì
-        if (StageScene.Instance.playerhp == 6 || StageScene.Instance.playerhp == 5)
-        {
-            Big();
-        }
-        // HP‚ª3`4‚Ì
-        if (StageScene.Instance.playerhp == 4 || StageScene.Instance.playerhp == 3)
-        {
-            Medium();
-        }
-        // HP‚ª1`2‚Ì
-        if (StageScene.Instance.playerhp == 2 || StageScene.Instance.playerhp == 1)
-        {
-            Small();
-        }
         // HP‚ª0‚Ì
         if (StageScene.Instance.playerhp == 0)
         {
@@ -471,5 +456,28 @@ public class MoveBehaviourScript : MonoBehaviour
         small = true;
     }
 
+    public void ChangeR()
+    {
+        if (small)
+        {
+            Medium();
+        }
+        else if (medium)
+        {
+            Big();
+        }
+    }
+
+    public void ChangeL()
+    {
+        if (big)
+        {
+            Medium();
+        }
+        else if (medium)
+        {
+            Small();
+        }
+    }
 }
 
