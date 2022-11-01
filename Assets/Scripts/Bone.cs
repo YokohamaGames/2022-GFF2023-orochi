@@ -18,7 +18,7 @@ public class Bone : MonoBehaviour
         {
             
             Vector3 EffectPosition = collision.contacts[0].point;              //プレイヤーの座標を取得
-            EffectPosition.y = -1;                                             //y座標に-1を代入して足元にエフェクトを配置
+            EffectPosition.y = 0;                                             //y座標に-1を代入して足元にエフェクトを配置
             // 骨を取ったら回復
             StageScene.Instance.Heal(EffectPosition);
             Destroy(gameObject);                                               //骨の破壊

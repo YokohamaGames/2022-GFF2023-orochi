@@ -352,6 +352,8 @@ MonoBehaviour:
   small: 0
   playerCamera: {fileID: 0}
   avatar: {fileID: 6481032131687275024}
+  HealObject: {fileID: 0}
+  ChangeEffect: {fileID: 2468501518803022059, guid: d2756e6e38a470243be0b1ea634d4b04, type: 3}
   isGrounded: 0
 --- !u!114 &8139101171561958033
 MonoBehaviour:
@@ -370,6 +372,7 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
+  avatar: {fileID: 0}
   RotationSmoothTime: 0.12
 --- !u!1 &6481032131687275024
 GameObject:
