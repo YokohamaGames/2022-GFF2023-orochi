@@ -270,7 +270,8 @@ MonoBehaviour:
   Transition_Time: 2
   shellPrefab: {fileID: 1861180931737820419, guid: dab3c90c1a6268145b07a73ece0b59a1, type: 3}
   Enemy_L_Hand: {fileID: 8734296870527284895}
-  EnemyHp: 4
+  EnemyHp: 100
+  EnemyHpBar: {fileID: 0}
   SwordEffect: {fileID: 4560698845230157861}
   SearchArea: 0
   AttackArea: 0
