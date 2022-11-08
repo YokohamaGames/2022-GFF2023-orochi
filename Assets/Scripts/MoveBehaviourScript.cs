@@ -21,29 +21,24 @@ public class MoveBehaviourScript : MonoBehaviour
     [SerializeField]
     private Vector3 com;
 
-    [SerializeField]
-    [Tooltip("大中小のそれぞれのオブジェクトを指定します。")]
-    private GameObject[] bodies = null;
-
-
-    //Playerのアニメーターの取得
-    [SerializeField]
-    Animator animator;
-
+    // キャラクターサイズを表します。
     enum BodySize
     {
         Small,
         Medium,
         Big,
     }
+    // 現在のキャラクターサイズ
     BodySize currentBodySize = BodySize.Medium;
 
-
-    // AnimatorのパラメーターID
-    static readonly int isAttackId = Animator.StringToHash("isAttack");
+    [SerializeField]
+    [Tooltip("大中小のそれぞれのオブジェクトを指定します。")]
+    private GameObject[] bodies = null;
 
     // 現在のAnimator(大中小のいずれか)
     Animator currentAnimator = null;
+    // AnimatorのパラメーターID
+    static readonly int isAttackId = Animator.StringToHash("isAttack");
 
     // 今のスピードとジャンプ力
     private float speed = 5.0f;
@@ -122,6 +117,7 @@ public class MoveBehaviourScript : MonoBehaviour
         currentAnimator = bodies[1].GetComponent<Animator>();
 
         currentBodySize = BodySize.Medium;
+        currentAnimator = bodies[1].GetComponent<Animator>();
     }
 
 
@@ -408,7 +404,7 @@ public class MoveBehaviourScript : MonoBehaviour
 
     public void Attack()
     {
-        animator.SetTrigger(isAttackId);
+        currentAnimator.SetTrigger(isAttackId);
     }
 
     public void Avoid()
@@ -435,6 +431,7 @@ public class MoveBehaviourScript : MonoBehaviour
         bodies[2].SetActive(true);
 
         currentBodySize = BodySize.Big;
+        currentAnimator = bodies[2].GetComponent<Animator>();
     }
 
     // 中型の時
@@ -452,6 +449,7 @@ public class MoveBehaviourScript : MonoBehaviour
         bodies[2].SetActive(false);
 
         currentBodySize = BodySize.Medium;
+        currentAnimator = bodies[1].GetComponent<Animator>();
     }
 
     // 小さい時
@@ -469,6 +467,7 @@ public class MoveBehaviourScript : MonoBehaviour
         bodies[2].SetActive(false);
 
         currentBodySize = BodySize.Small;
+        currentAnimator = bodies[0].GetComponent<Animator>();
     }
 
     public void BodyUp()

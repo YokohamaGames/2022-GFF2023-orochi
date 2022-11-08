@@ -270,7 +270,6 @@ GameObject:
   - component: {fileID: 4611616855408944639}
   - component: {fileID: 4611616855408944638}
   - component: {fileID: 8627753931573193861}
-  - component: {fileID: 8334987545102492479}
   - component: {fileID: 7552103752944929780}
   - component: {fileID: 8139101171561958033}
   m_Layer: 0
@@ -512,19 +511,7 @@ MonoBehaviour:
     m_ActionId: 7b959858-8407-484f-9e8e-423790f22963
     m_ActionName: Player Test/Fire[/Keyboard/k]
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8139101171561958033}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: OnInjury
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 6ce4cdab-c2cc-46d2-aef9-b0f4ba946b31
     m_ActionName: Player/Injury[/Keyboard/backspace]
   - m_PersistentCalls:
@@ -564,26 +551,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!95 &8334987545102492479
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3692574325790560158}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5ea9be4c08c7af44ca9172f1bf072082, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &7552103752944929780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -608,10 +575,6 @@ MonoBehaviour:
   - {fileID: 7852144332168849865}
   - {fileID: 5785240667310106849}
   - {fileID: 5681423962548556101}
-  animator: {fileID: 0}
-  big: 0
-  medium: 0
-  small: 0
   playerCamera: {fileID: 0}
   avatar: {fileID: 6481032131687275024}
   HealObject: {fileID: 5283776960068745542, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
