@@ -1656,6 +1656,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &877628073
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2059014068}
+    m_Modifications:
+    - target: {fileID: 4560698846368052444, guid: 6cee219b16fdd784f886d443aa70a649, type: 3}
+      propertyPath: m_Name
+      value: SwordEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560698846368052445, guid: 6cee219b16fdd784f886d443aa70a649, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560698846368052445, guid: 6cee219b16fdd784f886d443aa70a649, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560698846368052445, guid: 6cee219b16fdd784f886d443aa70a649, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560698846368052445, guid: 6cee219b16fdd784f886d443aa70a649, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560698846368052445, guid: 6cee219b16fdd784f886d443aa70a649, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560698846368052445, guid: 6cee219b16fdd784f886d443aa70a649, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560698846368052445, guid: 6cee219b16fdd784f886d443aa70a649, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560698846368052445, guid: 6cee219b16fdd784f886d443aa70a649, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560698846368052445, guid: 6cee219b16fdd784f886d443aa70a649, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560698846368052445, guid: 6cee219b16fdd784f886d443aa70a649, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560698846368052445, guid: 6cee219b16fdd784f886d443aa70a649, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560698846368052445, guid: 6cee219b16fdd784f886d443aa70a649, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4560698846368052445, guid: 6cee219b16fdd784f886d443aa70a649, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6cee219b16fdd784f886d443aa70a649, type: 3}
 --- !u!1001 &936890506
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3420,6 +3485,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Parent_Enemy: {fileID: 0}
   Transition_time: 0
+--- !u!1 &1875262489 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4560698846368052444, guid: 6cee219b16fdd784f886d443aa70a649, type: 3}
+  m_PrefabInstance: {fileID: 877628073}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1913152719
 GameObject:
   m_ObjectHideFlags: 0
@@ -3666,6 +3736,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1633171233238886715, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
+      propertyPath: SwordEffect
+      value: 
+      objectReference: {fileID: 1875262489}
     - target: {fileID: 1649014392824585118, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -7.016709e-15
@@ -3931,6 +4005,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealObject: {fileID: 6790358148406016604, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
   Move_Behaviour_Script: {fileID: 1849586531}
+--- !u!4 &2059014068 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4555423313433224067, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
+  m_PrefabInstance: {fileID: 2021191248}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2073905833 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2871229999654563450, guid: f2b44a072eb57fb4aaa1057a369b0c5b, type: 3}

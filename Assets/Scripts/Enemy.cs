@@ -52,6 +52,9 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     int EnemyHp = 2;
 
+    [SerializeField]
+    private GameObject SwordEffect;                        //剣のEffectを取得
+
     public bool SearchArea = false;
 
     public bool AttackArea = false;
@@ -97,6 +100,7 @@ public class Enemy : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();             
         timetoattack = TimetoAttack;                       //攻撃時間を指定した時間にリセットする変数に値を代入
         Weapon_Collider.enabled = false;                   //敵の武器の当たり判定をオフ
+        SwordEffect.SetActive(false);
     }
 
     // Update is called once per frame
@@ -219,12 +223,14 @@ public class Enemy : MonoBehaviour
     //当たり判定をONにする関数
     public void SetColliderOn(Collider collider)
     {
+        SwordEffect.SetActive(true);
         collider.enabled = true;
         Debug.Log("呼ばれた");
     }
     //当たり判定をOFFにする関数
     public void SetColliderOff(Collider collider)
     {
+        SwordEffect.SetActive(false);
         collider.enabled = false;
     }
 
