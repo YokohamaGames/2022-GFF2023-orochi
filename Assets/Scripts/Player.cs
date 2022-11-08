@@ -27,7 +27,6 @@ public class Player : MonoBehaviour
     
 
     MoveBehaviourScript moveBehaviour;
-    Rigidbody player_rigidbody;
 
     
     //Playerのアニメーターの取得
@@ -48,15 +47,14 @@ public class Player : MonoBehaviour
     private float _cinemachineTargetPitch;
     */
     // player
-    private float _speed;
-    private float _rotationVelocity;
-    private float _targetRotation = 0.0f;
-    private float _verticalVelocity;
+    private float speed;
+    private float rotationVelocity;
+    private float targetRotation = 0.0f;
+    private float verticalVelocity;
 
-    private GameObject _mainCamera;
-    private CharacterController _controller;
+    private GameObject mainCamera;
+    private CharacterController controller;
 
-    private const float _threshold = 0.01f;
 
     [Tooltip("キャラが移動方向に向く時の速さ")]
     [Range(0.0f, 0.3f)]
@@ -90,21 +88,21 @@ public class Player : MonoBehaviour
 
         if (moveInput != Vector2.zero)
         {
-            _targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
-                              _mainCamera.transform.eulerAngles.y;
+            targetRotation = Mathf.Atan2(inputDirection.x, inputDirection.z) * Mathf.Rad2Deg +
+                              mainCamera.transform.eulerAngles.y;
 
-            float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
+            float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref rotationVelocity,
                 RotationSmoothTime);
 
             // カメラ位置を基準に入力方向に回転
             avatar.transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
         }
 
-        Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+        Vector3 targetDirection = Quaternion.Euler(0.0f, targetRotation, 0.0f) * Vector3.forward;
 
 
-        _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-                         new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+        controller.Move(targetDirection.normalized * (speed * Time.deltaTime) +
+                         new Vector3(0.0f, verticalVelocity, 0.0f) * Time.deltaTime);
     }
 
     // ユーザーからのLookアクションに対して呼び出されます。
