@@ -30,7 +30,14 @@ public class MoveBehaviourScript : MonoBehaviour
     [SerializeField]
     Animator animator;
 
-    public bool big, medium, small;
+    enum BodySize
+    {
+        Small,
+        Medium,
+        Big,
+    }
+    BodySize currentBodySize = BodySize.Medium;
+
 
     // AnimatorのパラメーターID
     static readonly int isAttackId = Animator.StringToHash("isAttack");
@@ -102,7 +109,7 @@ public class MoveBehaviourScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
         Time.timeScale = 1;
         isGrounded = true;
         rigidbody = GetComponent<Rigidbody>();
@@ -114,9 +121,7 @@ public class MoveBehaviourScript : MonoBehaviour
         bodies[2].SetActive(false);
         currentAnimator = bodies[1].GetComponent<Animator>();
 
-        big = false;
-        medium = true;
-        small = false;
+        currentBodySize = BodySize.Medium;
     }
 
 
@@ -173,17 +178,19 @@ public class MoveBehaviourScript : MonoBehaviour
 
     void UpdateForWalkState()
     {
-        if (big)
+        switch (currentBodySize)
         {
-            speed = BIGspeed;
-        }
-        else if (medium)
-        {
-            speed = MEDIUMspeed;
-        }
-        else if (small)
-        {
-            speed = SMALLspeed;
+            case BodySize.Small:
+                speed = SMALLspeed;
+                break;
+            case BodySize.Medium:
+                speed = MEDIUMspeed;
+                break;
+            case BodySize.Big:
+                speed = BIGspeed;
+                break;
+            default:
+                break;
         }
     }
 
@@ -194,7 +201,7 @@ public class MoveBehaviourScript : MonoBehaviour
 
     void UpdateForJumpingState()
     {
-            speed = 5;
+        speed = 5;
         Debug.Log("ジャンプ");
     }
 
@@ -208,7 +215,7 @@ public class MoveBehaviourScript : MonoBehaviour
         StartCoroutine(DelayCoroutine());
     }
 
-    
+
     void UpdateForBigState()
     {
 
@@ -223,7 +230,7 @@ public class MoveBehaviourScript : MonoBehaviour
     {
 
     }
-    
+
 
     void UpdateForDeadState()
     {
@@ -361,8 +368,8 @@ public class MoveBehaviourScript : MonoBehaviour
                 SetInvincible();
             }
         }
-        else if(currentState == PlayerState.Attack)
-        { 
+        else if (currentState == PlayerState.Attack)
+        {
             if (collision.CompareTag("enemy"))
             {
                 collision.GetComponent<Enemy>().EnemyDamage();
@@ -379,9 +386,9 @@ public class MoveBehaviourScript : MonoBehaviour
             SetWalkState();
         }
     }
-       
 
-    
+
+
 
     public IEnumerator DelayCoroutine()
     {
@@ -398,7 +405,7 @@ public class MoveBehaviourScript : MonoBehaviour
 
         ButtonEnabled = true;
     }
-    
+
     public void Attack()
     {
         animator.SetTrigger(isAttackId);
@@ -423,12 +430,11 @@ public class MoveBehaviourScript : MonoBehaviour
 
         upForce = BIGup;
 
-            bodies[0].SetActive(false);
-            bodies[1].SetActive(false);
-            bodies[2].SetActive(true);
+        bodies[0].SetActive(false);
+        bodies[1].SetActive(false);
+        bodies[2].SetActive(true);
 
-        big = true;
-        medium = false;
+        currentBodySize = BodySize.Big;
     }
 
     // 中型の時
@@ -441,13 +447,11 @@ public class MoveBehaviourScript : MonoBehaviour
 
         upForce = MEDIUMup;
 
-            bodies[0].SetActive(false);
-            bodies[1].SetActive(true);
-            bodies[2].SetActive(false);
+        bodies[0].SetActive(false);
+        bodies[1].SetActive(true);
+        bodies[2].SetActive(false);
 
-        big = false;
-        medium = true;
-        small = false;
+        currentBodySize = BodySize.Medium;
     }
 
     // 小さい時
@@ -460,35 +464,42 @@ public class MoveBehaviourScript : MonoBehaviour
 
         upForce = SMALLup;
 
-            bodies[0].SetActive(true);
-            bodies[1].SetActive(false);
-            bodies[2].SetActive(false);
+        bodies[0].SetActive(true);
+        bodies[1].SetActive(false);
+        bodies[2].SetActive(false);
 
-        medium = false;
-        small = true;
+        currentBodySize = BodySize.Small;
     }
 
-    public void ChangeR()
+    public void BodyUp()
     {
-        if (small)
+        switch (currentBodySize)
         {
-            Medium();
-        }
-        else if (medium)
-        {
-            Big();
+            case BodySize.Small:
+                Medium();
+                break;
+            case BodySize.Medium:
+                Big();
+                break;
+            case BodySize.Big:
+            default:
+                break;
         }
     }
 
-    public void ChangeL()
+    public void BodyDown()
     {
-        if (big)
+        switch (currentBodySize)
         {
-            Medium();
-        }
-        else if(medium)
-        {
-            Small();
+            case BodySize.Medium:
+                Small();
+                break;
+            case BodySize.Big:
+                Medium();
+                break;
+            case BodySize.Small:
+            default:
+                break;
         }
     }
 
