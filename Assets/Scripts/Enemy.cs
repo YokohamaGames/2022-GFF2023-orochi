@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 //敵のAiとステータス設定
 
- //マジックナンバーをに名前を付けるクラス
+//マジックナンバーをに名前を付けるクラス
 public static class Define
 {
     public const float Number_of_Attack_Type = 4;          //攻撃種類数
@@ -50,7 +51,14 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private Transform Enemy_L_Hand;                        //敵の左手の座標を取得します
     [SerializeField]
-    int EnemyHp = 2;
+    int EnemyHp;
+    [SerializeField]
+    public Slider EnemyHpBar;                             //敵のHpBarを参照
+
+    [SerializeField]
+    private GameObject SwordEffect;                        //剣のEffectを取得
+
+
 
     public bool SearchArea = false;
 
@@ -97,6 +105,9 @@ public class Enemy : MonoBehaviour
         rigidbody = GetComponent<Rigidbody>();             
         timetoattack = TimetoAttack;                       //攻撃時間を指定した時間にリセットする変数に値を代入
         Weapon_Collider.enabled = false;                   //敵の武器の当たり判定をオフ
+        SwordEffect.SetActive(false);
+
+        EnemyHpBar.value = EnemyHp;                        // Sliderの初期状態を設定
     }
 
     // Update is called once per frame
@@ -219,12 +230,14 @@ public class Enemy : MonoBehaviour
     //当たり判定をONにする関数
     public void SetColliderOn(Collider collider)
     {
+        SwordEffect.SetActive(true);
         collider.enabled = true;
         Debug.Log("呼ばれた");
     }
     //当たり判定をOFFにする関数
     public void SetColliderOff(Collider collider)
     {
+        SwordEffect.SetActive(false);
         collider.enabled = false;
     }
 
@@ -343,6 +356,7 @@ public class Enemy : MonoBehaviour
     public void EnemyDamage()
     {
         EnemyHp--;
+        EnemyHpBar.value = EnemyHp;
 
         if (EnemyHp <= 0)
         {
