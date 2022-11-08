@@ -34,8 +34,8 @@ public class Player : MonoBehaviour
     Animator animator;
 
     // AnimatorのパラメーターID
-    static readonly int isAttackId = Animator.StringToHash("isAttack");
-    static readonly int isJumpId = Animator.StringToHash("isJump");
+    //static readonly int isAttackId = Animator.StringToHash("isAttack");
+    //static readonly int isJumpId = Animator.StringToHash("isJump");
 
 
     // ユーザーからの入力
@@ -66,7 +66,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         moveBehaviour = GetComponent<MoveBehaviourScript>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
 
 
@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            animator.SetTrigger(isAttackId);
+            animator.SetTrigger("isAttack");
             moveBehaviour.Fire();
         }
     }
@@ -131,13 +131,14 @@ public class Player : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            animator.SetTrigger(isJumpId);
+            animator.SetTrigger("isJump");
             moveBehaviour.Jump();
         }
     }
     public void OnControlPauseUI(InputAction.CallbackContext context)
     {
         StageScene.Instance.ControlPauseUI();
+        //this.tag = "Untagged";
     }
 
     // Injuryボタンを押したら呼び出されます
