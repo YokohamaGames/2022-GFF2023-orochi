@@ -8,11 +8,11 @@ public class MoveBehaviourScript : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("大・中・小の動くスピードを指定")]
-    private float BIGspeed, MEDIUMspeed, SMALLspeed;
+    private float LARGEspeed, MEDIUMspeed, SMALLspeed;
 
     [SerializeField]
     [Tooltip("大・中・小のジャンプ力を指定")]
-    private float BIGup, MEDIUMup, SMALLup;
+    private float LARGEup, MEDIUMup, SMALLup;
 
     [SerializeField]
     [Tooltip("回避の幅を指定")]
@@ -21,16 +21,24 @@ public class MoveBehaviourScript : MonoBehaviour
     [SerializeField]
     private Vector3 com;
 
-    [SerializeField]
-    [Tooltip("大中小のそれぞれのオブジェクトを指定します。")]
-    private GameObject[] bodies = null;
-
-
     //Playerのアニメーターの取得
     [SerializeField]
     Animator animator;
 
-    public bool big, medium, small;
+    enum BodySize
+    {
+        Small,
+        Medium,
+        Large,
+    }
+
+    // 現在のキャラクターサイズ
+    BodySize currentBodySize = BodySize.Medium;
+
+    [SerializeField]
+    [Tooltip("大中小のそれぞれのオブジェクトを指定します。")]
+    private GameObject[] bodies = null;
+
 
     // AnimatorのパラメーターID
     static readonly int isAttackId = Animator.StringToHash("isAttack");
@@ -113,10 +121,8 @@ public class MoveBehaviourScript : MonoBehaviour
         bodies[1].SetActive(true);
         bodies[2].SetActive(false);
         currentAnimator = bodies[1].GetComponent<Animator>();
+        currentBodySize = BodySize.Medium;
 
-        big = false;
-        medium = true;
-        small = false;
     }
 
 
@@ -173,17 +179,19 @@ public class MoveBehaviourScript : MonoBehaviour
 
     void UpdateForWalkState()
     {
-        if (big)
+        switch (currentBodySize)
         {
-            speed = BIGspeed;
-        }
-        else if (medium)
-        {
-            speed = MEDIUMspeed;
-        }
-        else if (small)
-        {
-            speed = SMALLspeed;
+            case BodySize.Small:
+                speed = SMALLspeed;
+                break;
+            case BodySize.Medium:
+                speed = MEDIUMspeed;
+                break;
+            case BodySize.Large:
+                speed = LARGEspeed;
+                break;
+            default:
+                break;
         }
     }
 
@@ -414,21 +422,20 @@ public class MoveBehaviourScript : MonoBehaviour
         }
     }
     // 大きい時
-    public void Big()
+    public void Large()
     {
         //変身エフェクト
         Instantiate(ChangeEffect, this.transform.position, EffectAngle); //パーティクル用ゲームオブジェクト生成
 
         Debug.Log("大型");
 
-        upForce = BIGup;
+        upForce = LARGEup;
 
             bodies[0].SetActive(false);
             bodies[1].SetActive(false);
             bodies[2].SetActive(true);
 
-        big = true;
-        medium = false;
+        currentBodySize = BodySize.Large;
     }
 
     // 中型の時
@@ -445,9 +452,7 @@ public class MoveBehaviourScript : MonoBehaviour
             bodies[1].SetActive(true);
             bodies[2].SetActive(false);
 
-        big = false;
-        medium = true;
-        small = false;
+        currentBodySize = BodySize.Medium;
     }
 
     // 小さい時
@@ -464,31 +469,38 @@ public class MoveBehaviourScript : MonoBehaviour
             bodies[1].SetActive(false);
             bodies[2].SetActive(false);
 
-        medium = false;
-        small = true;
+        currentBodySize = BodySize.Small;
     }
 
-    public void ChangeR()
+    public void BodyUp()
     {
-        if (small)
-        {
-            Medium();
-        }
-        else if (medium)
-        {
-            Big();
+        switch (currentBodySize)
+            {
+            case BodySize.Small:
+                Medium();
+                break;
+            case BodySize.Medium:
+                Large();
+                break;
+            case BodySize.Large:
+            default:
+                break;
         }
     }
 
-    public void ChangeL()
+    public void BodyDown()
     {
-        if (big)
+        switch (currentBodySize)
         {
-            Medium();
-        }
-        else if(medium)
-        {
-            Small();
+            case BodySize.Large:
+                Medium();
+                break;
+            case BodySize.Medium:
+                Small();
+                break;
+            case BodySize.Small:
+            default:
+                break;
         }
     }
 

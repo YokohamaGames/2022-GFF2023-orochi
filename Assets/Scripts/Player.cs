@@ -153,14 +153,14 @@ public class Player : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            moveBehaviour.ChangeR();
+            moveBehaviour.BodyUp();
         }
     }
     public void OnChangeSmall(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)
         {
-            moveBehaviour.ChangeL();
+            moveBehaviour.BodyDown();
         }
     }
 
