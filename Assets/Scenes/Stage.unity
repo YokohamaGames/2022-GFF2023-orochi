@@ -579,6 +579,34 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: c69b28b762188f447b1393a7a2163e7e, type: 2}
+    - target: {fileID: 8627753931573193861, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627753931573193861, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627753931573193861, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1535833644}
+    - target: {fileID: 8627753931573193861, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627753931573193861, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Onlook
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627753931573193861, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: CameraSample, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627753931573193861, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
 --- !u!4 &399600062 stripped
@@ -2802,6 +2830,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 638173d08d1cb0c4b9a9434cff5a8a2c, type: 3}
+--- !u!114 &1535833644 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 651223865, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+  m_PrefabInstance: {fileID: 381900692}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 542a4bf4911d4a646af8ccd4fefba9ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1568794773
 GameObject:
   m_ObjectHideFlags: 0
