@@ -68,6 +68,13 @@ public class MoveBehaviourScript : MonoBehaviour
 
     Quaternion EffectAngle = Quaternion.Euler(-90f, 0f, 0f);
 
+    //変身のクールタイムの設定
+    [SerializeField]
+    float ChangeCoolTime = 10;
+
+    float CoolTime;
+
+    public bool isChange = false;
     // プレイヤーの状態を表します
     enum PlayerState
     {
@@ -123,6 +130,7 @@ public class MoveBehaviourScript : MonoBehaviour
         currentAnimator = bodies[1].GetComponent<Animator>();
         currentBodySize = BodySize.Medium;
 
+        CoolTime = ChangeCoolTime;
     }
 
 
@@ -163,6 +171,12 @@ public class MoveBehaviourScript : MonoBehaviour
                 UpdateForInvincible();
                 break;
         }
+        //クールタイム-経過時間
+        CoolTime -= Time.deltaTime;
+
+        //クールタイムが0いかになれば変身可能
+        if (CoolTime < 0)
+            isChange = true;
 
         // HPが0の時
         if (StageScene.Instance.playerhp == 0)
@@ -436,6 +450,9 @@ public class MoveBehaviourScript : MonoBehaviour
             bodies[2].SetActive(true);
 
         currentBodySize = BodySize.Large;
+
+        ResetCoolTime();
+
     }
 
     // 中型の時
@@ -453,6 +470,9 @@ public class MoveBehaviourScript : MonoBehaviour
             bodies[2].SetActive(false);
 
         currentBodySize = BodySize.Medium;
+
+        ResetCoolTime();
+
     }
 
     // 小さい時
@@ -470,6 +490,8 @@ public class MoveBehaviourScript : MonoBehaviour
             bodies[2].SetActive(false);
 
         currentBodySize = BodySize.Small;
+
+        ResetCoolTime();
     }
 
     public void BodyUp()
@@ -511,5 +533,13 @@ public class MoveBehaviourScript : MonoBehaviour
         Instantiate(HealObject, this.transform.position, Quaternion.identity); //パーティクル用ゲームオブジェクト生成
         //playerhp += 1;
     }
+    
+    //変身のクールタイムのリセット
+    public void ResetCoolTime()
+    {
+        CoolTime = ChangeCoolTime;
+        isChange = false;
+    }
+
 }
 
