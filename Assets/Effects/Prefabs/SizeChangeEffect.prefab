@@ -170,7 +170,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 4
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -287,7 +287,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 25
-      minScalar: 15
+      minScalar: 40
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -662,9 +662,9 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 8
+    type: 4
     angle: 20
-    length: 5
+    length: 3
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 0
     donutRadius: 0.2
@@ -749,7 +749,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 2
+      value: 1.5
       mode: 0
       spread: 0
       speed:
@@ -1305,7 +1305,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 0.17453292
-      minScalar: 0.7853982
+      minScalar: 1.0471976
       maxCurve:
         serializedVersion: 2
         m_Curve:
