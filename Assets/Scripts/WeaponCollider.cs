@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponCollider : MonoBehaviour
 {
     // Start is called before the first frame update
-    Collider collider;
+    //Collider collider;
     void Start()
     {
         
