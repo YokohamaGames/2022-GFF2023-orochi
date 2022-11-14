@@ -14,7 +14,7 @@ public class CheckAnimator : StateMachineBehaviour
         if(stateInfo.IsName("Attack") || stateInfo.IsName("Attack2") || stateInfo.IsName("Attack3"))
         {
             UnityEvent.Invoke();
-            Debug.Log("Ç†Ç†Ç†Ç†Ç†Ç†Ç†Ç†Ç†Ç†Ç†Ç†");
+            Debug.Log("çUåÇÅI");
         }
     }
 }
