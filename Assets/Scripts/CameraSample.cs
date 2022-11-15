@@ -11,11 +11,6 @@ public class CameraSample : MonoBehaviour
     // 1秒間で180度
     public Vector2 rotationSpeed = new Vector2(180, 180);
 
-    // x軸回転の下限
-    public float minCameraAngle = -45;
-    // x軸回転の上限
-    public float maxCameraAngle = 75;
-
     [SerializeField]
     CinemachineVirtualCamera vCam = null;
     [SerializeField]
@@ -42,19 +37,6 @@ public class CameraSample : MonoBehaviour
 
                 // y軸の回転を変える
                 targetEulerAngles.y += cameraRotationInput.x * rotationSpeed.y * Time.fixedDeltaTime;
-
-                // y軸と同様にx軸の回転を変える
-                //targetEulerAngles.x -= cameraRotationInput.y * rotationSpeed.x * Time.fixedDeltaTime;
-
-                // target.rotation.eulerAnglesは0～360の角度を返すから、-180～180に変える
-                //if (targetEulerAngles.x > 180f)
-                //{
-                //    targetEulerAngles.x -= 360f;
-                //}
-
-                // この状態で値を制限する
-                //targetEulerAngles.x = Mathf.Clamp(targetEulerAngles.x, minCameraAngle, maxCameraAngle);
-               
                 // オイラー角度をクオータニオンに変換して追跡ターゲットの回転を変える
                 target.transform.rotation = Quaternion.Euler(targetEulerAngles);
 

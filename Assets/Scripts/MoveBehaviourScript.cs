@@ -125,6 +125,7 @@ public class MoveBehaviourScript : MonoBehaviour
         
         Time.timeScale = 1;
         isGrounded = true;
+        isChange = true;
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.centerOfMass = com;
 
@@ -443,9 +444,9 @@ public class MoveBehaviourScript : MonoBehaviour
         {
             rigidbody.velocity = Vector3.zero;
             rigidbody.AddForce(avatar.transform.forward * avo, ForceMode.Impulse);
+            SetInvincible();
 
             currentAnimator.SetTrigger(isAvoidId);
-            SetInvincible();
         }
     }
     // ‘å‚«‚¢Žž
