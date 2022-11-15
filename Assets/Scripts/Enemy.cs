@@ -319,6 +319,14 @@ public class Enemy : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    void OnTriggerEnter(Collider collision)
+    {
+        if (collision.CompareTag("Attack"))
+        {
+            EnemyDamage();
+        }
+    }
 }
 
 

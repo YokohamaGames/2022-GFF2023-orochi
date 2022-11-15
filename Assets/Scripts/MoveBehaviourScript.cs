@@ -42,6 +42,8 @@ public class MoveBehaviourScript : MonoBehaviour
     [SerializeField]
     [Tooltip("大中小のそれぞれのオブジェクトを指定します。")]
     private GameObject[] bodies = null;
+    [SerializeField]
+    private GameObject[] attackareas = null;
 
     [SerializeField]
     [Tooltip("変身のクールタイム")]
@@ -133,6 +135,9 @@ public class MoveBehaviourScript : MonoBehaviour
         bodies[0].SetActive(false);
         bodies[1].SetActive(true);
         bodies[2].SetActive(false);
+        attackareas[0].SetActive(false);
+        attackareas[1].SetActive(false);
+        attackareas[2].SetActive(false);
         currentAnimator = bodies[1].GetComponent<Animator>();
         currentBodySize = BodySize.Medium;
 
@@ -272,6 +277,10 @@ public class MoveBehaviourScript : MonoBehaviour
     // Walkステートに遷移させます。
     void SetWalkState()
     {
+        attackareas[0].SetActive(false);
+        attackareas[1].SetActive(false);
+        attackareas[2].SetActive(false);
+
         currentState = PlayerState.Walk;
     }
 
@@ -362,7 +371,25 @@ public class MoveBehaviourScript : MonoBehaviour
             {
                 SetAttackState();
 
-                //rigidbody.AddForce(transform.forward * 10, ForceMode.VelocityChange);
+                if(currentBodySize == BodySize.Large)
+                {
+                    attackareas[0].SetActive(false);
+                    attackareas[1].SetActive(false);
+                    attackareas[2].SetActive(true);
+                }
+                else if (currentBodySize == BodySize.Medium)
+                {
+                    attackareas[0].SetActive(false);
+                    attackareas[1].SetActive(true);
+                    attackareas[2].SetActive(false);
+                }
+                else if (currentBodySize == BodySize.Small)
+                {
+                    attackareas[0].SetActive(true);
+                    attackareas[1].SetActive(false);
+                    attackareas[2].SetActive(false);
+                }
+
 
                 ButtonEnabled = false;
 
@@ -395,13 +422,13 @@ public class MoveBehaviourScript : MonoBehaviour
             }
         }
 
-        if(currentState == PlayerState.Attack)
+        /* if(currentState == PlayerState.Attack)
         { 
             if (collision.CompareTag("enemy"))
             {
                 collision.GetComponent<Enemy>().EnemyDamage();
             }
-        }
+        } */
     }
 
     private void OnCollisionEnter(Collision collision)

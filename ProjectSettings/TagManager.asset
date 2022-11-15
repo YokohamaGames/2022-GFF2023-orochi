@@ -12,6 +12,7 @@ TagManager:
   - Stage
   - Bone
   - Enemy_Weapon
+  - Attack
   layers:
   - Default
   - TransparentFX
