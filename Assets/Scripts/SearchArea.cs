@@ -2,27 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//プレイヤーが敵の索敵範囲内範囲に侵入、脱出時の処理
 public class SearchArea : MonoBehaviour
 {   
-    //親のスクリプトの取得
+    //親のEnemyスクリプトの取得
     [SerializeField]
     Enemy Parent_Enemy = null;
 
-    private void Start()
-    {
-
-    }
     //ターゲットの索敵範囲内の侵入判定
     private void OnTriggerEnter(Collider colision)
     {
         
         if (colision.CompareTag("Player"))
         {
-            //Debug.Log("索敵範囲内");
             Parent_Enemy.SearchArea = true;
-
             Parent_Enemy.SetDiscoverState();
-            
         }
     }
     //ターゲットの索敵範囲外の脱出判定
@@ -30,12 +24,8 @@ public class SearchArea : MonoBehaviour
     {
         if (colision.CompareTag("Player"))
         {
-            //Debug.Log("索敵範囲外");
             Parent_Enemy.SearchArea = false;
-
-            Parent_Enemy.SetStayState();
+            Parent_Enemy.SetIdleState();
         }
     }
-
-    
 }
