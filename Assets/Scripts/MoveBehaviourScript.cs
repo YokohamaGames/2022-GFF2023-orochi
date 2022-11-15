@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 // 移動するキャラクターを制御します。
 public class MoveBehaviourScript : MonoBehaviour
@@ -18,12 +19,15 @@ public class MoveBehaviourScript : MonoBehaviour
     [Tooltip("回避の幅を指定")]
     private float avo;
 
-    [SerializeField]
     private Vector3 com;
 
     //Playerのアニメーターの取得
     [SerializeField]
     Animator animator;
+
+    [SerializeField]
+    [Tooltip("カメラの切り替え")]
+    private CinemachineVirtualCamera[] VirtualCamera = null;
 
     enum BodySize
     {
@@ -39,9 +43,17 @@ public class MoveBehaviourScript : MonoBehaviour
     [Tooltip("大中小のそれぞれのオブジェクトを指定します。")]
     private GameObject[] bodies = null;
 
+    [SerializeField]
+    [Tooltip("変身のクールタイム")]
+    float ChangeCoolTime = 10;
+
+    float CoolTime;
+
+    public bool isChange = false;
 
     // AnimatorのパラメーターID
     static readonly int isAttackId = Animator.StringToHash("isAttack");
+    static readonly int isAvoidId = Animator.StringToHash("isAvoid");
 
     // 現在のAnimator(大中小のいずれか)
     Animator currentAnimator = null;
@@ -68,13 +80,6 @@ public class MoveBehaviourScript : MonoBehaviour
 
     Quaternion EffectAngle = Quaternion.Euler(-90f, 0f, 0f);
 
-    //変身のクールタイムの設定
-    [SerializeField]
-    float ChangeCoolTime = 10;
-
-    float CoolTime;
-
-    public bool isChange = false;
     // プレイヤーの状態を表します
     enum PlayerState
     {
@@ -130,6 +135,7 @@ public class MoveBehaviourScript : MonoBehaviour
         currentAnimator = bodies[1].GetComponent<Animator>();
         currentBodySize = BodySize.Medium;
 
+        VirtualCamera[1].Priority = 100;
         CoolTime = ChangeCoolTime;
     }
 
@@ -171,12 +177,16 @@ public class MoveBehaviourScript : MonoBehaviour
                 UpdateForInvincible();
                 break;
         }
-        //クールタイム-経過時間
-        CoolTime -= Time.deltaTime;
 
-        //クールタイムが0いかになれば変身可能
+        // クールタイムの経過時間
+        if (CoolTime >= 0)
+        {
+            CoolTime -= Time.deltaTime;
+        }
         if (CoolTime < 0)
+        {
             isChange = true;
+        }
 
         // HPが0の時
         if (StageScene.Instance.playerhp == 0)
@@ -375,7 +385,7 @@ public class MoveBehaviourScript : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        if (currentState == PlayerState.Walk || currentState == PlayerState.Jumping)
+        if (currentState == PlayerState.Walk || currentState == PlayerState.Jumping || currentState == PlayerState.Attack)
         {
             if (collision.CompareTag("Enemy_Weapon"))
             {
@@ -383,7 +393,8 @@ public class MoveBehaviourScript : MonoBehaviour
                 SetInvincible();
             }
         }
-        else if(currentState == PlayerState.Attack)
+
+        if(currentState == PlayerState.Attack)
         { 
             if (collision.CompareTag("enemy"))
             {
@@ -423,15 +434,17 @@ public class MoveBehaviourScript : MonoBehaviour
     
     public void Attack()
     {
-        animator.SetTrigger(isAttackId);
+        currentAnimator.SetTrigger(isAttackId);
     }
 
     public void Avoid()
     {
         if (currentState == PlayerState.Walk)
         {
-            rigidbody.AddForce(-transform.forward * avo, ForceMode.VelocityChange);
+            rigidbody.velocity = Vector3.zero;
+            rigidbody.AddForce(avatar.transform.forward * avo, ForceMode.Impulse);
 
+            currentAnimator.SetTrigger(isAvoidId);
             SetInvincible();
         }
     }
@@ -449,10 +462,13 @@ public class MoveBehaviourScript : MonoBehaviour
             bodies[1].SetActive(false);
             bodies[2].SetActive(true);
 
+        VirtualCamera[0].Priority = 10;
+        VirtualCamera[1].Priority = 10;
+        VirtualCamera[2].Priority = 100;
         currentBodySize = BodySize.Large;
+        currentAnimator = bodies[2].GetComponent <Animator>();
 
         ResetCoolTime();
-
     }
 
     // 中型の時
@@ -469,10 +485,13 @@ public class MoveBehaviourScript : MonoBehaviour
             bodies[1].SetActive(true);
             bodies[2].SetActive(false);
 
+        VirtualCamera[0].Priority = 10;
+        VirtualCamera[1].Priority = 100;
+        VirtualCamera[2].Priority = 10;
         currentBodySize = BodySize.Medium;
+        currentAnimator = bodies[1].GetComponent<Animator>();
 
         ResetCoolTime();
-
     }
 
     // 小さい時
@@ -489,7 +508,11 @@ public class MoveBehaviourScript : MonoBehaviour
             bodies[1].SetActive(false);
             bodies[2].SetActive(false);
 
+        VirtualCamera[0].Priority = 100;
+        VirtualCamera[1].Priority = 10;
+        VirtualCamera[2].Priority = 10;
         currentBodySize = BodySize.Small;
+        currentAnimator = bodies[0].GetComponent<Animator>();
 
         ResetCoolTime();
     }
@@ -533,13 +556,12 @@ public class MoveBehaviourScript : MonoBehaviour
         Instantiate(HealObject, this.transform.position, Quaternion.identity); //パーティクル用ゲームオブジェクト生成
         //playerhp += 1;
     }
-    
-    //変身のクールタイムのリセット
+
+    // 変身のクールタイムのリセット
     public void ResetCoolTime()
     {
         CoolTime = ChangeCoolTime;
         isChange = false;
     }
-
 }
 

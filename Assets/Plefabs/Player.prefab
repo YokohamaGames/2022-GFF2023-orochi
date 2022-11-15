@@ -384,6 +384,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 651223865}
+        m_TargetAssemblyTypeName: CameraSample, Assembly-CSharp
+        m_MethodName: Onlook
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: d682a95e-7319-4349-9b82-2fdc091eaca6
     m_ActionName: Player/Look[/Mouse/delta]
   - m_PersistentCalls:
@@ -539,14 +551,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3a4dde9c76c3142a36d1a0ec424404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LARGEspeed: 0
+  LARGEspeed: 10
   MEDIUMspeed: 14
   SMALLspeed: 17
-  LARGEup: 0
+  LARGEup: 100
   MEDIUMup: 120
   SMALLup: 150
   avo: 5
-  com: {x: 0, y: 0, z: 0}
   animator: {fileID: 0}
   bodies:
   - {fileID: 7852144332168849865}
@@ -554,7 +565,7 @@ MonoBehaviour:
   - {fileID: 5681423962548556101}
   playerCamera: {fileID: 0}
   avatar: {fileID: 6481032131687275024}
-  HealObject: {fileID: 5283776960068745542, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
+  HealObject: {fileID: 0}
   ChangeEffect: {fileID: 2468501518803022059, guid: d2756e6e38a470243be0b1ea634d4b04, type: 3}
   isGrounded: 0
 --- !u!114 &8139101171561958033
@@ -570,8 +581,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CinemachineCameraTarget: {fileID: 1925333846}
-  TopClamp: 70
-  BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
   avatar: {fileID: 6481032131687275024}
@@ -939,7 +948,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2, y: 4, z: 6.5}
+  m_Size: {x: 1.2, y: 4, z: 5}
   m_Center: {x: 0, y: 2, z: 0}
 --- !u!95 &5202731830057619661
 Animator:
