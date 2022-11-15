@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//プレイヤーが敵の索敵範囲内範囲に侵入、脱出時の処理
 public class SearchArea : MonoBehaviour
 {   
     //親のEnemyスクリプトの取得

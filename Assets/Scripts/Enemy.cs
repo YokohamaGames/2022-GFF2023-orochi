@@ -117,9 +117,9 @@ public class Enemy : MonoBehaviour
                 case EnemyState.Attack:
                 case EnemyState.Attack2:
                 case EnemyState.Attack3:
-                case EnemyState.LongAttack:
                     UpdateForAttack();
                     break;
+                case EnemyState.LongAttack:
                 case EnemyState.AttackReady:
                     UpdateForAttackReady();
                     break;
@@ -128,7 +128,7 @@ public class Enemy : MonoBehaviour
             }
 
         }
-        Debug.Log(currentState);
+        Debug.Log(speed);
 
     }
     //遠距離攻撃に切り替え
@@ -235,7 +235,6 @@ public class Enemy : MonoBehaviour
         // ターゲットの方向を向く
         // Quaternion(回転値)を取得
         Quaternion quaternion = Quaternion.LookRotation(vec);
-        //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(vec.x, 0, vec.z)), rotMax);
         rigidbody.velocity = new Vector3(0, 0, speed);  // 正面方向に移動
 
         // 算出した回転値をこのゲームオブジェクトのrotationに代入
