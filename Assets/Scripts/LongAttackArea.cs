@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//ƒvƒŒƒCƒ„[‚ª“G‚Ì‰“‹——£UŒ‚”ÍˆÍ‚ÉN“üA’Eo‚Ìˆ—
 public class LongAttackArea : MonoBehaviour
 {
     //e‚ÌƒXƒNƒŠƒvƒg‚ğæ“¾
@@ -10,31 +11,24 @@ public class LongAttackArea : MonoBehaviour
 
     [SerializeField]
     float Transition_time;
-    private void Start()
-    {
 
-    }
-    //ƒ^[ƒQƒbƒg‚ÌUŒ‚”ÍˆÍ‚Ö‚ÌN“ü”»’è
+    //“G‚ÌUŒ‚”ÍˆÍ‚Ö‚ÌN“ü”»’è
     private void OnTriggerEnter(Collider colision)
     {
+        //Player‚ª‰“‹——£UŒ‚”Í“à‚ÉN“ü
         if (colision.CompareTag("Player"))
         {
-            //Debug.Log("UŒ‚”ÍˆÍ“à");
             Parent_Enemy.LongAttackArea = true;
-
-            Parent_Enemy.SetLongAttack();
-
+            Parent_Enemy.SetLongAttack();                  //‰“‹——£UŒ‚ƒXƒe[ƒg‚É•ÏX
         }
     }
-    //ƒ^[ƒQƒbƒg‚ªUŒ‚”»’è‚©‚ç‚Ì’Eo‚Ì”»’è
+    //“G‚Ì‰“‹——£UŒ‚”»’è‚©‚ç‚Ì’Eo‚Ì”»’è
     private void OnTriggerExit(Collider colision)
     {
+        //Player‚ª‰“‹——£UŒ‚”ÍŠO‚É’Eo
         if (colision.CompareTag("Player"))
         {
-            //Debug.Log("UŒ‚”ÍˆÍŠO");
             Parent_Enemy.LongAttackArea = false;
-            // Parent_Enemy.SearchArea = true;
-
             Parent_Enemy.SetDiscoverState();
         }
     }

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//パーティクルを終了させるスクリプト
 public class ParticleManager : MonoBehaviour
 {
 
@@ -11,7 +12,6 @@ public class ParticleManager : MonoBehaviour
     GameObject Parent;
     private void OnParticleSystemStopped()
     {
-        Debug.Log("パーティクル終わったよ！");
         Destroy(Parent);
     }
 
