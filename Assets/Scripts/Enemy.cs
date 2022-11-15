@@ -75,9 +75,6 @@ public class Enemy : MonoBehaviour
     static readonly int isLongAttack = Animator.StringToHash("isLongAttack");
     static readonly int speedId = Animator.StringToHash("Speed");
 
-
-
-
     //敵のステートパターン
     enum EnemyState
     {
@@ -105,7 +102,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        {
+        
             // 状態ごとの分岐処理
             switch (currentState)
             {
@@ -130,8 +127,8 @@ public class Enemy : MonoBehaviour
                 default:
                     break;
             }
-
-        }
+        
+        animator.SetFloat("speedId", 1f, 0.1f, Time.deltaTime);
         Debug.Log(speed);
 
     }
@@ -150,7 +147,6 @@ public class Enemy : MonoBehaviour
     {
         currentState = EnemyState.Idle;
         animator.SetTrigger(isLost);
-        
     }
 
     //索敵範囲内に入った時の処理

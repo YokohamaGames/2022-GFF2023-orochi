@@ -19,7 +19,7 @@ public class LongAttackArea : MonoBehaviour
         if (colision.CompareTag("Player"))
         {
             Parent_Enemy.LongAttackArea = true;
-            Parent_Enemy.LongAttack();                  //遠距離攻撃ステートに変更
+            //Parent_Enemy.LongAttack();                  //遠距離攻撃ステートに変更
         }
     }
     //敵の遠距離攻撃判定からの脱出の判定
@@ -29,7 +29,7 @@ public class LongAttackArea : MonoBehaviour
         if (colision.CompareTag("Player"))
         {
             Parent_Enemy.LongAttackArea = false;
-            Parent_Enemy.SetDiscoverState();
+            //Parent_Enemy.SetDiscoverState();
         }
     }
 

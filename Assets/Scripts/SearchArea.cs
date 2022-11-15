@@ -16,7 +16,7 @@ public class SearchArea : MonoBehaviour
         if (colision.CompareTag("Player"))
         {
             Parent_Enemy.SearchArea = true;
-            Parent_Enemy.SetDiscoverState();
+            //Parent_Enemy.SetDiscoverState();
         }
     }
     //ターゲットの索敵範囲外の脱出判定
@@ -25,7 +25,7 @@ public class SearchArea : MonoBehaviour
         if (colision.CompareTag("Player"))
         {
             Parent_Enemy.SearchArea = false;
-            Parent_Enemy.SetIdleState();
+            //Parent_Enemy.SetIdleState();
         }
     }
 }
