@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-
+//アニメーション終了時に呼び出される処理
 public class CheckAnimator : StateMachineBehaviour
 {
-    // Start is called before the first frame update
+    //実行したい関数の設定
     [SerializeField]
     UnityEvent UnityEvent = null;
      override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
