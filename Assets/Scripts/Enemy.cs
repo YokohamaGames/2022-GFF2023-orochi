@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     int EnemyHp;
     [SerializeField]
-    public Slider EnemyHpBar;                             //敵のHpBarを参照
+    public Slider EnemyHpBar;                              //敵のHpBarを参照
 
     [SerializeField]
     private GameObject SwordEffect;                        //剣のEffectを取得
@@ -81,12 +81,13 @@ public class Enemy : MonoBehaviour
     static readonly int isAttack = Animator.StringToHash("isAttack");
     static readonly int isAttack2 = Animator.StringToHash("isAttack2");
     static readonly int isAttack3 = Animator.StringToHash("isAttack3");
+    static readonly int isLongAttack = Animator.StringToHash("isLongAttack");
 
 
 
 
 
-     enum EnemyState
+    enum EnemyState
     {
         Stay,                                              //  待機
         Discover,                                          //  発見
@@ -94,7 +95,8 @@ public class Enemy : MonoBehaviour
         AttackReady,                                       //  攻撃準備
         Attack,                                            ////攻撃////
         Attack2,                                           //    |
-        Attack3,                                           //  攻撃////
+        Attack3,                                           //    |
+        LongAttack,                                         //  攻撃////
         Escape,                                            //  回避
     }
 
@@ -129,6 +131,7 @@ public class Enemy : MonoBehaviour
                 case EnemyState.Attack:
                 case EnemyState.Attack2:
                 case EnemyState.Attack3:
+                case EnemyState.LongAttack:
                     UpdateForAttack();
                     break;
                 
@@ -165,6 +168,8 @@ public class Enemy : MonoBehaviour
     }
     public void SetLongAttack()
     {
+        animator.SetTrigger(isLongAttack);
+        currentState = EnemyState.LongAttack;
 
     }
     public void SetStayState()
@@ -190,7 +195,7 @@ public class Enemy : MonoBehaviour
         speed = 0;                                         //攻撃範囲に入ったら様子見で移動速度を小さくする
         animator.SetTrigger(isAttackReady);
         timetoattack = TimetoAttack;                       ////攻撃までの時間のカウントをリセット
-
+        //animator.SetFloat("float", timetoattack);
     }
     //Animatorのセットトリガーはしない
     public void SetAttackReady()

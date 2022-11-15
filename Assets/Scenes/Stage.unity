@@ -3623,6 +3623,10 @@ PrefabInstance:
       propertyPath: Parent_Enemy
       value: 
       objectReference: {fileID: 1079718039}
+    - target: {fileID: 1633171232906517875, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
+      propertyPath: m_Radius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1633171233238886715, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
       propertyPath: target
       value: 
@@ -3631,6 +3635,14 @@ PrefabInstance:
       propertyPath: EnemyHpBar
       value: 
       objectReference: {fileID: 1235252771}
+    - target: {fileID: 1633171233238886715, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
+      propertyPath: TimetoAttack
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633171233238886715, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
+      propertyPath: Transition_Time
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7035401418459900334, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
       propertyPath: m_Name
       value: Enemy (4)
