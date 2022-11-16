@@ -53,6 +53,8 @@ public class Enemy : MonoBehaviour
     private GameObject SwordEffect;
     //UŒ‚€”õ‚©‚çUŒ‚‚Ü‚Å‚ÌŠÔ‚Ìİ’è
     [SerializeField] private float TimetoAttack = 2;
+    //“GŒ‚”j‚Ì“G‚ÌÁ–Å‚Ü‚Å‚ÌŠÔ‚Ìİ’è
+    [SerializeField] private float DeleteEnemyTime;
     //UŒ‚‚Ü‚Å‚Ì‘Ò‹@ŠÔ‚ğİ’è‚µ‚½’l‚ÉƒŠƒZƒbƒg‚·‚é•Ï”
     float timetoattack;                                    
 
@@ -321,14 +323,22 @@ public class Enemy : MonoBehaviour
         if (EnemyHp <= 0)
         {
             GameObject defeat = Instantiate(defeateffect, this.transform.position, Quaternion.identity);
-            Destroy(this.gameObject,4);
+            Destroy(this.gameObject,DeleteEnemyTime);
             Destroy(defeat, 6.0f);
         }
     }
 
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.CompareTag("Attack"))
+        if (collision.CompareTag ("Attack"))
+        {
+            EnemyDamage();
+        }
+        else if(collision.CompareTag("Attack2"))
+        {
+            EnemyDamage();
+        }
+        else if(collision.CompareTag("Attack3"))
         {
             EnemyDamage();
         }
