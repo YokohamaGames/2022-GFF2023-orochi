@@ -37,6 +37,9 @@ public class Enemy : MonoBehaviour
     //火球のプレハブの取得
     [SerializeField]
     private GameObject shellPrefab;
+    //敵撃破エフェクト
+    [SerializeField]
+    private GameObject defeateffect;
     [SerializeField]
     private Transform Enemy_L_Hand;                        //敵の左手の座標を取得します
     //敵のHPを設定
@@ -314,9 +317,12 @@ public class Enemy : MonoBehaviour
         EnemyHp--;
         EnemyHpBar.value = EnemyHp;
 
+        //HP0のとき撃破エフェクトの生成と敵オブジェクトの削除
         if (EnemyHp <= 0)
         {
-            Destroy(this.gameObject);
+            GameObject defeat = Instantiate(defeateffect, this.transform.position, Quaternion.identity);
+            Destroy(this.gameObject,4);
+            Destroy(defeat, 6.0f);
         }
     }
 

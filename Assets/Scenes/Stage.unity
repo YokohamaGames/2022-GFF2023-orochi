@@ -2480,6 +2480,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6326434}
     - target: {fileID: 1633171233238886715, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
+      propertyPath: EnemyHp
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1633171233238886715, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
       propertyPath: ChaseSpeed
       value: 5
       objectReference: {fileID: 0}
