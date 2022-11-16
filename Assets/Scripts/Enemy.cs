@@ -93,7 +93,7 @@ public class Enemy : MonoBehaviour
         LongAttack,                                        //  攻撃////
     }
     EnemyState currentState = EnemyState.Idle;
-
+    float sp = 0;
     void Start()
     {
         baseLayerIndex = animator.GetLayerIndex("Base Layer");
@@ -132,7 +132,7 @@ public class Enemy : MonoBehaviour
                 default:
                     break;
             }
-        
+        //animator.SetFloat("Speed", 0.01f);
         
         Debug.Log(currentState);
 
@@ -210,8 +210,11 @@ public class Enemy : MonoBehaviour
                 break;
         }
         rigidbody.velocity = Vector3.zero;                       //立ち止まる
-        timetoattack = TimetoAttack;                      　　　 //攻撃までの時間のカウントをリセット
-        
+        timetoattack = TimetoAttack;                          //攻撃までの時間のカウントをリセット
+
+        sp += 0.01f;
+
+        animator.SetFloat(speedId, sp);
     }
     
     //当たり判定をONにする関数
@@ -322,21 +325,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider collision)
-    {
-        if (collision.CompareTag ("Attack"))
-        {
-            EnemyDamage();
-        }
-        else if(collision.CompareTag("Attack2"))
-        {
-            EnemyDamage();
-        }
-        else if(collision.CompareTag("Attack3"))
-        {
-            EnemyDamage();
-        }
-    }
+  
 }
 
 
