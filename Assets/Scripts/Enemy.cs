@@ -93,7 +93,7 @@ public class Enemy : MonoBehaviour
         LongAttack,                                        //  攻撃////
     }
     EnemyState currentState = EnemyState.Idle;
-
+    float sp = 0;
     void Start()
     {
         baseLayerIndex = animator.GetLayerIndex("Base Layer");
@@ -132,9 +132,9 @@ public class Enemy : MonoBehaviour
                 default:
                     break;
             }
+        //animator.SetFloat("Speed", 0.01f);
         
-        animator.SetFloat("speedId", 1f, 0.1f, Time.deltaTime);
-        Debug.Log(speed);
+        Debug.Log(currentState);
 
     }
     //遠距離攻撃に切り替え
@@ -158,7 +158,7 @@ public class Enemy : MonoBehaviour
     public void SetDiscoverState()
     {
         currentState = EnemyState.Discover;
-        animator.SetTrigger(isDiscover);
+        speed = ChaseSpeed;
     }
    
     //Moveステートに変更
@@ -210,8 +210,11 @@ public class Enemy : MonoBehaviour
                 break;
         }
         rigidbody.velocity = Vector3.zero;                       //立ち止まる
-        timetoattack = TimetoAttack;                      　　　 //攻撃までの時間のカウントをリセット
-        
+        timetoattack = TimetoAttack;                          //攻撃までの時間のカウントをリセット
+
+        sp += 0.01f;
+
+        animator.SetFloat(speedId, sp);
     }
     
     //当たり判定をONにする関数
@@ -241,14 +244,15 @@ public class Enemy : MonoBehaviour
     {
         //ターゲット方向のベクトルを求める
         Vector3 vec = target.position - transform.position;
-
+        vec.y = 0;
         // ターゲットの方向を向く
         // Quaternion(回転値)を取得
         Quaternion quaternion = Quaternion.LookRotation(vec);
-        rigidbody.velocity = new Vector3(0, 0, speed);  // 正面方向に移動
-
+        
         // 算出した回転値をこのゲームオブジェクトのrotationに代入
-        this.transform.rotation = quaternion;
+        transform.rotation = quaternion;
+        rigidbody.velocity = transform.forward * speed;// 正面方向に移動
+        
     }
    
     //攻撃範囲にとどまっている時間をカウントして一定時間を超えたらAttackStateに切り替える
@@ -287,14 +291,7 @@ public class Enemy : MonoBehaviour
         {
             SetAttackReady();
         }
-
-        //speed = 0;
-        //ターゲット方向のベクトルを求める
-        Vector3 vec = target.position - transform.position;
-        // Quaternion(回転値)を取得 回転する度数を取得
-        Quaternion quaternion = Quaternion.LookRotation(vec);
-        //取得した度数分オブジェクトを回転させる
-        transform.rotation = quaternion;
+        Rotate();
     }
     
     //ステート遷移を遅らせる関数　未使用
@@ -328,21 +325,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider collision)
-    {
-        if (collision.CompareTag ("Attack"))
-        {
-            EnemyDamage();
-        }
-        else if(collision.CompareTag("Attack2"))
-        {
-            EnemyDamage();
-        }
-        else if(collision.CompareTag("Attack3"))
-        {
-            EnemyDamage();
-        }
-    }
+  
 }
 
 
