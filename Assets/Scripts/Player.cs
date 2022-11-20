@@ -87,7 +87,6 @@ public class Player : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            animator.SetTrigger("isAttack");
             moveBehaviour.Fire();
         }
     }

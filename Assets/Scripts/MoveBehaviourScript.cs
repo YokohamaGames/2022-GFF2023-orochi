@@ -22,8 +22,8 @@ public class MoveBehaviourScript : MonoBehaviour
     private Vector3 com;
 
     //Playerのアニメーターの取得
-    [SerializeField]
-    Animator animator;
+    //[SerializeField]
+    //Animator animator;
 
     [SerializeField]
     [Tooltip("カメラの切り替え")]
@@ -390,6 +390,7 @@ public class MoveBehaviourScript : MonoBehaviour
                     attackareas[2].SetActive(false);
                 }
 
+                currentAnimator.SetTrigger("isAttack");
 
                 ButtonEnabled = false;
 
@@ -462,7 +463,7 @@ public class MoveBehaviourScript : MonoBehaviour
     
     public void Attack()
     {
-        currentAnimator.SetTrigger(isAttackId);
+        // currentAnimator.SetTrigger(isAttackId);
     }
 
     public void Avoid()
