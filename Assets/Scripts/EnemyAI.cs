@@ -22,7 +22,7 @@ public class EnemyAI : MonoBehaviour
     {
         enemy = GetComponent<Enemy>();
     }
-
+    
     void Update()
     {
         switch (currentthinking)

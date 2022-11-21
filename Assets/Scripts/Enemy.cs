@@ -91,9 +91,10 @@ public class Enemy : MonoBehaviour
         Attack2,                                           //    |
         Attack3,                                           //    |
         LongAttack,                                        //  攻撃////
+        Dead,                                              //  死亡
     }
     EnemyState currentState = EnemyState.Idle;
-    float sp = 0;
+    float sp = 1.0f;
     void Start()
     {
         baseLayerIndex = animator.GetLayerIndex("Base Layer");
@@ -165,7 +166,7 @@ public class Enemy : MonoBehaviour
     public void SetMoveState()
     {
         currentState = EnemyState.Move;
-        speed = ChaseSpeed;
+        //speed = ChaseSpeed;
     }
 
     //攻撃範囲内に入った時にステートを攻撃準備に切り替え
@@ -212,9 +213,6 @@ public class Enemy : MonoBehaviour
         rigidbody.velocity = Vector3.zero;                       //立ち止まる
         timetoattack = TimetoAttack;                          //攻撃までの時間のカウントをリセット
 
-        sp += 0.01f;
-
-        animator.SetFloat(speedId, sp);
     }
     
     //当たり判定をONにする関数
@@ -239,6 +237,7 @@ public class Enemy : MonoBehaviour
         //Debug.Log("待機中");
     }
 
+    float spd;
     //プレイやーに向かって動く処理
     void UpdateForMove()
     {
@@ -252,9 +251,21 @@ public class Enemy : MonoBehaviour
         // 算出した回転値をこのゲームオブジェクトのrotationに代入
         transform.rotation = quaternion;
         rigidbody.velocity = transform.forward * speed;// 正面方向に移動
-        
+
+        if (currentState == EnemyState.Discover && spd <= 2.00f)
+        {
+            spd += sp * Time.deltaTime;
+        }
+
+        if (speed <= ChaseSpeed)
+        {
+            speed += (ChaseSpeed * Time.deltaTime) /2;
+        }
+        animator.SetFloat(speedId, spd);
+
+
     }
-   
+
     //攻撃範囲にとどまっている時間をカウントして一定時間を超えたらAttackStateに切り替える
     void UpdateForAttackReady()
     {
@@ -311,9 +322,9 @@ public class Enemy : MonoBehaviour
     }
 
     //敵のHPバーの処理
-    public void EnemyDamage()
+    public void EnemyDamage(int playeratk)
     {
-        EnemyHp--;
+        EnemyHp -= playeratk;
         EnemyHpBar.value = EnemyHp;
 
         //HP0のとき撃破エフェクトの生成と敵オブジェクトの削除
