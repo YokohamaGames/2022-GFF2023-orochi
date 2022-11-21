@@ -21,6 +21,10 @@ public class MoveBehaviourScript : MonoBehaviour
 
     private Vector3 com;
 
+    //火球のプレハブの取得
+    [SerializeField]
+    private GameObject shellPrefab;
+
     //Playerのアニメーターの取得
     //[SerializeField]
     //Animator animator;
@@ -46,12 +50,21 @@ public class MoveBehaviourScript : MonoBehaviour
     private GameObject[] attackareas = null;
 
     [SerializeField]
+    private Transform Orochihead;
+    [SerializeField]
     [Tooltip("変身のクールタイム")]
     float ChangeCoolTime = 10;
 
     float CoolTime;
 
+    [SerializeField]
+    [Tooltip("火球のクールタイム")]
+    float shotCoolTime = 3;
+
+    float ShotCoolTime;
+
     public bool isChange = false;
+    public bool shot = false;
 
     // AnimatorのパラメーターID
     static readonly int isAttackId = Animator.StringToHash("isAttack");
@@ -128,6 +141,7 @@ public class MoveBehaviourScript : MonoBehaviour
         Time.timeScale = 1;
         isGrounded = true;
         isChange = true;
+        shot = true;
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.centerOfMass = com;
 
@@ -143,6 +157,7 @@ public class MoveBehaviourScript : MonoBehaviour
 
         VirtualCamera[1].Priority = 100;
         CoolTime = ChangeCoolTime;
+        ShotCoolTime = shotCoolTime;
     }
 
 
@@ -192,6 +207,16 @@ public class MoveBehaviourScript : MonoBehaviour
         if (CoolTime < 0)
         {
             isChange = true;
+        }
+
+        // 火球のクールタイムの経過時間
+        if (ShotCoolTime >= 0)
+        {
+            ShotCoolTime -= Time.deltaTime;
+        }
+        if (ShotCoolTime < 0)
+        {
+            shot = true;
         }
 
         // HPが0の時
@@ -396,6 +421,21 @@ public class MoveBehaviourScript : MonoBehaviour
 
                 StartCoroutine(ButtonCoroutine());
             }
+        }
+    }
+
+    public void ShotAttack()
+    {
+        if (shot == true)
+        {
+            GameObject shell = Instantiate(shellPrefab, Orochihead.transform.position, Quaternion.identity);
+            Rigidbody shellRb = shell.GetComponent<Rigidbody>();
+            // 弾速を設定
+            shellRb.AddForce(avatar.transform.forward * 1500);
+            Destroy(shell, 1.0f);
+
+            shot = false;
+            ShotCoolTime = shotCoolTime;
         }
     }
 

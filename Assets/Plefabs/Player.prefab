@@ -623,6 +623,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ea6efcb5-217c-4a80-b9ea-e0c01cecd82e
     m_ActionName: Player/ChangeB[/Keyboard/l]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8139101171561958033}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnFire2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 060e23a2-7858-4874-b5de-dec9129a6f2d
+    m_ActionName: Player/Fire2[/Keyboard/backspace]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -647,6 +663,7 @@ MonoBehaviour:
   MEDIUMup: 120
   SMALLup: 150
   avo: 5
+  shellPrefab: {fileID: 1124392955816901512, guid: 147407a5974bfc44a8ff3264fdf24f4f, type: 3}
   VirtualCamera: []
   bodies:
   - {fileID: 7852144332168849865}
@@ -656,8 +673,11 @@ MonoBehaviour:
   - {fileID: 8210925867982086141}
   - {fileID: 567444703930726367}
   - {fileID: 8664387876292679709}
+  Orochihead: {fileID: 4557718661995715735}
   ChangeCoolTime: 10
+  shotCoolTime: 3
   isChange: 0
+  shot: 0
   playerCamera: {fileID: 0}
   avatar: {fileID: 6481032131687275024}
   HealObject: {fileID: 0}
@@ -680,6 +700,37 @@ MonoBehaviour:
   LockCameraPosition: 0
   avatar: {fileID: 6481032131687275024}
   RotationSmoothTime: 0.12
+--- !u!1 &3916470263042072426
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4557718661995715735}
+  m_Layer: 0
+  m_Name: Orochihead
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4557718661995715735
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3916470263042072426}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 2.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6557976703100645979}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &6168842541218762599
 GameObject:
   m_ObjectHideFlags: 0

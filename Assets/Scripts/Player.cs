@@ -91,6 +91,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void OnFire2(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            moveBehaviour.ShotAttack();
+        }
+    }
+
     // Jumpƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚çŒÄ‚Ño‚³‚ê‚Ü‚·
     public void OnJump(InputAction.CallbackContext context)
     {
