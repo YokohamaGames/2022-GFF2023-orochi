@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 651223862}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.9, z: -5.199997}
+  m_LocalPosition: {x: 0, y: 2.0727894, z: -5.157524}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -276,6 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a4894c751c2b0441b57a9f8189e7204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playeratk: 2
 --- !u!1 &686039449317655453
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,7 +647,6 @@ MonoBehaviour:
   MEDIUMup: 120
   SMALLup: 150
   avo: 5
-  animator: {fileID: 0}
   VirtualCamera: []
   bodies:
   - {fileID: 7852144332168849865}
@@ -1015,6 +1015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a4894c751c2b0441b57a9f8189e7204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playeratk: 1
 --- !u!1 &8664387876292679709
 GameObject:
   m_ObjectHideFlags: 0
@@ -1073,6 +1074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a4894c751c2b0441b57a9f8189e7204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playeratk: 4
 --- !u!1001 &4762856978610678804
 PrefabInstance:
   m_ObjectHideFlags: 0
