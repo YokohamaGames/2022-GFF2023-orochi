@@ -322,9 +322,9 @@ public class Enemy : MonoBehaviour
     }
 
     //敵のHPバーの処理
-    public void EnemyDamage()
+    public void EnemyDamage(int playeratk)
     {
-        EnemyHp--;
+        EnemyHp -= playeratk;
         EnemyHpBar.value = EnemyHp;
 
         //HP0のとき撃破エフェクトの生成と敵オブジェクトの削除
