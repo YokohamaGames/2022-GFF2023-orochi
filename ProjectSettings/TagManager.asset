@@ -13,6 +13,7 @@ TagManager:
   - Bone
   - Enemy_Weapon
   - Attack
+  - Fire
   layers:
   - Default
   - TransparentFX

@@ -129,7 +129,8 @@ public class MoveBehaviourScript : MonoBehaviour
     /* [SerializeField]
      private LayerMask groudLayer;
     */
-
+    [SerializeField]
+    private GameObject damagefire;
 
     // コンポーネントを事前に参照しておく変数
     new Rigidbody rigidbody;
@@ -462,6 +463,19 @@ public class MoveBehaviourScript : MonoBehaviour
                 SetInvincible();
             }
         }
+
+        if (currentState == PlayerState.Walk || currentState == PlayerState.Jumping || currentState == PlayerState.Attack)
+        {
+            if (collision.CompareTag("Fire"))
+            {
+                StageScene.Instance.Damage();
+                GameObject fire = Instantiate(damagefire, this.transform.position, Quaternion.identity);
+                Destroy(fire, 2.0f);
+
+                SetInvincible();
+            }
+        }
+
 
         /* if(currentState == PlayerState.Attack)
         { 
