@@ -50,7 +50,7 @@ public class MoveBehaviourScript : MonoBehaviour
     private GameObject[] attackareas = null;
 
     [SerializeField]
-    private Transform Orochihead;
+    private Transform[] Orochihead = null;
     [SerializeField]
     [Tooltip("変身のクールタイム")]
     float ChangeCoolTime = 10;
@@ -76,6 +76,9 @@ public class MoveBehaviourScript : MonoBehaviour
     // 今のスピードとジャンプ力
     private float speed = 5.0f;
     private float upForce = 100f;
+
+    [Tooltip("火球の発射場所番号")]
+    private int i = 1;
 
     private bool ButtonEnabled = true;
 
@@ -228,6 +231,18 @@ public class MoveBehaviourScript : MonoBehaviour
             SetDeadState();
         }
 
+        if (currentBodySize == BodySize.Large)
+        {
+            i = 2;
+        }
+        else if (currentBodySize == BodySize.Medium)
+        {
+            i = 1;
+        }
+        else if (currentBodySize == BodySize.Small)
+        {
+            i = 0;
+        }
 
     }
 
@@ -437,10 +452,10 @@ public class MoveBehaviourScript : MonoBehaviour
     {
         if (shot == true)
         {
-            GameObject shell = Instantiate(shellPrefab, Orochihead.transform.position, Quaternion.identity);
+            GameObject shell = Instantiate(shellPrefab, Orochihead[i].transform.position, Quaternion.identity);
             Rigidbody shellRb = shell.GetComponent<Rigidbody>();
             // 弾速を設定
-            shellRb.AddForce(avatar.transform.forward * 1500);
+            shellRb.AddForce(Orochihead[i].transform.forward * 1500);
             Destroy(shell, 1.0f);
 
             shot = false;
