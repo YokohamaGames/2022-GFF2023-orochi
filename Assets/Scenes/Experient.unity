@@ -418,7 +418,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2451035040905579535, guid: 57d0c4bec3bf2e24888c61d7aa9e9a69, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3309731005822589423, guid: 57d0c4bec3bf2e24888c61d7aa9e9a69, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
@@ -13870,6 +13870,7 @@ MonoBehaviour:
   SwordEffect: {fileID: 2011107434532085417}
   TimetoAttack: 0.2
   DeleteEnemyTime: 4
+  ui: {fileID: 0}
   SearchArea: 0
   AttackArea: 0
   LongAttackArea: 0
