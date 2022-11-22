@@ -235,14 +235,17 @@ public class Enemy : MonoBehaviour
                 case 1:
                    currentState = EnemyState.Attack;
                    animator.SetTrigger(isAttack);
+                   SE.Instance.SowrdAttack();
                    break;
                 case 2:
                    currentState = EnemyState.Attack2;
                    animator.SetTrigger(isAttack2);
+                   SE.Instance.SowrdAttack2();
                    break;
                 case 3:
                    currentState = EnemyState.Attack3;
                    animator.SetTrigger(isAttack3);
+                   SE.Instance.Fire();
                    break;
                 default:
                 break;

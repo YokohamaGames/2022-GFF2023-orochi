@@ -1193,7 +1193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ui: {fileID: 1724907016}
-  playerhp: 1
+  playerhp: 6
   HealObject: {fileID: 6790358148406016604, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
 --- !u!95 &1440353449
 Animator:
@@ -1356,6 +1356,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OpenUi: {fileID: 8300000, guid: 80eb26a2c2927c942853074eb5c024c8, type: 3}
   CloseUi: {fileID: 8300000, guid: 3bc58c8af62c37d4083210909c106c36, type: 3}
+  swordattack: {fileID: 8300000, guid: 3bc58c8af62c37d4083210909c106c36, type: 3}
+  swordattack2: {fileID: 8300000, guid: 80eb26a2c2927c942853074eb5c024c8, type: 3}
+  fire: {fileID: 8300000, guid: 80eb26a2c2927c942853074eb5c024c8, type: 3}
   SeSoundValue: {fileID: 1136395108}
 --- !u!82 &1522733869
 AudioSource:
@@ -1930,7 +1933,7 @@ PrefabInstance:
       objectReference: {fileID: 1674486271}
     - target: {fileID: 1633171233238886715, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
       propertyPath: TimetoAttack
-      value: 0.2
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1633171233238886715, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
       propertyPath: DeleteEnemyTime
