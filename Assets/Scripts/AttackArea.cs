@@ -29,7 +29,7 @@ public class AttackArea : MonoBehaviour
         if (colision.CompareTag("Player"))
         {
             Parent_Enemy.AttackArea = false;
-            Parent_Enemy.SetDiscoverState();               //EnemyのステートをPlayerを見失うに変更
+            Parent_Enemy.SetMoveState();               //EnemyのステートをPlayerを見失うに変更
         }        
     }
 }

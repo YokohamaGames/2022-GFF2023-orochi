@@ -73,6 +73,7 @@ public class Enemy : MonoBehaviour
 
     // AnimatorのパラメーターID
     int baseLayerIndex = -1;
+    static readonly int LocomotionHash = Animator.StringToHash("Base Layer.Locomotion");
     static readonly int attackReadyHash = Animator.StringToHash("Base Layer.AttackReady");
     static readonly int isDiscover = Animator.StringToHash("isDiscover");
     static readonly int isLost = Animator.StringToHash("isLost");
@@ -198,7 +199,8 @@ public class Enemy : MonoBehaviour
     public void SetMoveState()
     {
         currentState = EnemyState.Move;
-        //speed = ChaseSpeed;
+        //animator.
+        speed = ChaseSpeed;
     }
 
     //攻撃範囲内に入った時にステートを攻撃準備に切り替え
@@ -262,11 +264,12 @@ public class Enemy : MonoBehaviour
         collider.enabled = false;
     }
 
-    float timefire = 1.0f;
+    float timefire = 1.5f;
     float timetoatk = 0;
     void UpdateForDiscover()
     {
-        UpdateForMove();
+        //UpdateForMove();
+        Rotate();
         timetoatk += Time.deltaTime;
         if (timetoatk > timefire)
         {
@@ -299,7 +302,7 @@ public class Enemy : MonoBehaviour
         transform.rotation = quaternion;
         rigidbody.velocity = transform.forward * speed;// 正面方向に移動
 
-        if (currentState == EnemyState.Discover && spd <= 2.00f)
+        if (currentState == EnemyState.Discover && spd <= 2.00f || currentState == EnemyState.Move && spd <= 2.00f)
         {
             spd += sp * Time.deltaTime;
         }
@@ -345,7 +348,7 @@ public class Enemy : MonoBehaviour
     void UpdateForAttack()
     {
         var stateInfo = animator.GetCurrentAnimatorStateInfo(baseLayerIndex);
-        if (stateInfo.fullPathHash == attackReadyHash)
+        if (stateInfo.fullPathHash == LocomotionHash)
         {
             SetAttackReady();
         }
