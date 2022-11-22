@@ -418,6 +418,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2451035040905579535, guid: 57d0c4bec3bf2e24888c61d7aa9e9a69, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3309731005822589423, guid: 57d0c4bec3bf2e24888c61d7aa9e9a69, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3309731005822589423, guid: 57d0c4bec3bf2e24888c61d7aa9e9a69, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3309731005822589423, guid: 57d0c4bec3bf2e24888c61d7aa9e9a69, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4791300580135182695, guid: 57d0c4bec3bf2e24888c61d7aa9e9a69, type: 3}
+      propertyPath: InitialModule.startSizeY.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644191794283638725, guid: 57d0c4bec3bf2e24888c61d7aa9e9a69, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6573258611101481342, guid: 57d0c4bec3bf2e24888c61d7aa9e9a69, type: 3}
@@ -462,6 +482,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6573258611101481342, guid: 57d0c4bec3bf2e24888c61d7aa9e9a69, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8025248167942035296, guid: 57d0c4bec3bf2e24888c61d7aa9e9a69, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -19980,7 +20004,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3189518951252779321, guid: 881d60d5f32792c459b3f4e6eed5f4df, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 881d60d5f32792c459b3f4e6eed5f4df, type: 3}
@@ -36990,6 +37014,7 @@ MonoBehaviour:
   HealObject: {fileID: 6790358148751291195}
   ChangeEffect: {fileID: 2468501518803022059, guid: d2756e6e38a470243be0b1ea634d4b04, type: 3}
   isGrounded: 0
+  damagefire: {fileID: 0}
 --- !u!114 &7555264046597630110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42441,6 +42466,7 @@ MonoBehaviour:
   CameraAngleOverride: 0
   LockCameraPosition: 0
   avatar: {fileID: 6481032132002024836}
+  animator: {fileID: 0}
   RotationSmoothTime: 0.12
 --- !u!222 &8198088724722468623
 CanvasRenderer:
