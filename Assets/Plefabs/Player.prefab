@@ -801,6 +801,7 @@ MonoBehaviour:
   HealObject: {fileID: 0}
   ChangeEffect: {fileID: 2468501518803022059, guid: d2756e6e38a470243be0b1ea634d4b04, type: 3}
   isGrounded: 0
+  damagefire: {fileID: 3189518951252779321, guid: 881d60d5f32792c459b3f4e6eed5f4df, type: 3}
 --- !u!114 &8139101171561958033
 MonoBehaviour:
   m_ObjectHideFlags: 0

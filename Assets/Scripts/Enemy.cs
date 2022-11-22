@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
 
     public bool LongAttackArea = false;
     //現在の敵の歩行スピード
-    float speed = 5;                                       
+    float speed = 0;                                       
     // コンポーネントを事前に参照しておく変数
     new Rigidbody rigidbody;
 
@@ -124,7 +124,7 @@ public class Enemy : MonoBehaviour
                     UpdateForMove();
                     break;
                 case EnemyState.Discover:
-                    UpdateForMove();
+                    UpdateForDiscover();
                     break;
                 case EnemyState.Attack:
                 case EnemyState.Attack2:
@@ -132,11 +132,13 @@ public class Enemy : MonoBehaviour
                     UpdateForAttack();
                     break;
                 case EnemyState.LongAttack:
+                UpdateForLongAttack();
+                break;
                 case EnemyState.AttackReady:
                     UpdateForAttackReady();
                 break;
                 case EnemyState.Dead:
-                    UpdateForIdle();
+                    UpdateForDead();
                     break;
                 default:
                     break;
@@ -146,6 +148,27 @@ public class Enemy : MonoBehaviour
         Debug.Log(currentState);
 
     }
+
+    IEnumerator Wait()
+    {
+        yield return null;
+    }
+    void UpdateForDead()
+    {
+        StartCoroutine(Wait());
+    }
+    void UpdateForLongAttack()
+    {
+
+    }
+
+    void SetLongAttackState()
+    {
+        currentState = EnemyState.LongAttack;
+
+    }
+
+
     //遠距離攻撃に切り替え
     public void LongAttack()
     {
@@ -159,6 +182,7 @@ public class Enemy : MonoBehaviour
     //索敵範囲外にでたときの処理
     public void SetIdleState()
     {
+        speed = 0;
         currentState = EnemyState.Idle;
         animator.SetTrigger(isLost);
     }
@@ -238,11 +262,26 @@ public class Enemy : MonoBehaviour
         collider.enabled = false;
     }
 
-   
+    float timefire = 1.0f;
+    float timetoatk = 0;
+    void UpdateForDiscover()
+    {
+        UpdateForMove();
+        timetoatk += Time.deltaTime;
+        if (timetoatk > timefire)
+        {
+
+            timetoatk = 0;
+            animator.SetTrigger(isLongAttack);
+
+        }
+    }    
+    
     //待機状態の処理
     void UpdateForIdle()
     {
         Vector3 vec = Vector3.zero;
+        rigidbody.velocity = transform.forward * speed;
     }
 
     float spd;
@@ -348,22 +387,22 @@ public class Enemy : MonoBehaviour
             SetDeadState();
             GameObject defeat = Instantiate(defeateffect, this.transform.position, Quaternion.identity);
             Destroy(this.gameObject,DeleteEnemyTime);
-            Destroy(defeat, 6.0f);
+            Destroy(defeat, 8.0f);
         }
     }
 
-    
-        //当たり判定メソッド
-        private void OnCollisionEnter(Collision collision)
+
+    //当たり判定メソッド
+    private void OnCollisionEnter(Collision collision)
+    {
+        //衝突したオブジェクトがBullet(大砲の弾)だったとき
+        if (collision.gameObject.CompareTag("Player"))
         {
-            //衝突したオブジェクトがBullet(大砲の弾)だったとき
-            if (collision.gameObject.CompareTag("Player"))
-            {
-                Debug.Log("敵と弾が衝突しました！！！");
-                GameObject damege = Instantiate(damageeffect, this.transform.position, Quaternion.identity);
-                Destroy(damege, 1.5f);
+            Debug.Log("敵と弾が衝突しました！！！");
+            GameObject damege = Instantiate(damageeffect, this.transform.position, Quaternion.identity);
+            Destroy(damege, 1.5f);
         }
-        }
+    }
 }
 
 

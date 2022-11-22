@@ -275,7 +275,7 @@ MonoBehaviour:
   EnemyHpBar: {fileID: 0}
   SwordEffect: {fileID: 4322176617235163267, guid: 5b8a2349ad443714b8425b2ad29c99ba, type: 3}
   TimetoAttack: 2
-  DeleteEnemyTime: 4
+  DeleteEnemyTime: 5
   SearchArea: 0
   AttackArea: 0
   LongAttackArea: 0
