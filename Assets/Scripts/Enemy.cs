@@ -59,8 +59,10 @@ public class Enemy : MonoBehaviour
     //“GŒ‚”j‚Ì“G‚ÌÁ–Å‚Ü‚Å‚ÌŠÔ‚Ìİ’è
     [SerializeField] private float DeleteEnemyTime;
     //UŒ‚‚Ü‚Å‚Ì‘Ò‹@ŠÔ‚ğİ’è‚µ‚½’l‚ÉƒŠƒZƒbƒg‚·‚é•Ï”
-    float timetoattack;                                    
+    float timetoattack;
 
+    [SerializeField]
+    UI ui;
     public bool SearchArea = false;
 
     public bool AttackArea = false;
@@ -392,6 +394,8 @@ public class Enemy : MonoBehaviour
             GameObject defeat = Instantiate(defeateffect, this.transform.position, Quaternion.identity);
             Destroy(this.gameObject,DeleteEnemyTime);
             Destroy(defeat, 8.0f);
+            ui.StageClear();
+
         }
     }
 

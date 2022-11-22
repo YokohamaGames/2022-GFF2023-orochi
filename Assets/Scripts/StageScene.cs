@@ -37,7 +37,7 @@ public class StageScene : MonoBehaviour
         if (playerhp == 0)
         {
             Ui.GameOver();
-        } 
+        }
     }
 
     public void Heal(Vector3 EffectTransform)

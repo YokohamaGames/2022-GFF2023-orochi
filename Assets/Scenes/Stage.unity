@@ -1992,6 +1992,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1440353447}
   - component: {fileID: 1440353448}
+  - component: {fileID: 1440353449}
   m_Layer: 0
   m_Name: Sceneroot
   m_TagString: Untagged
@@ -2038,6 +2039,26 @@ MonoBehaviour:
   Ui: {fileID: 613446905}
   playerhp: 6
   HealObject: {fileID: 6790358148406016604, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
+--- !u!95 &1440353449
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440353446}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 085aa9061fc0fce4780b9f6e5dbb9036, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1515118164
 GameObject:
   m_ObjectHideFlags: 0
@@ -2837,6 +2858,10 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 1633171233238886715, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
+      propertyPath: ui
+      value: 
+      objectReference: {fileID: 613446905}
     - target: {fileID: 1633171233238886715, guid: 8db2dd2a8b9d1c34689dfa4219c84425, type: 3}
       propertyPath: target
       value: 

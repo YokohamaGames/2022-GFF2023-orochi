@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 public class UI : MonoBehaviour
 {
 	// ポーズを参照
@@ -48,6 +49,8 @@ public class UI : MonoBehaviour
 	private Selectable StageClearButton = null;
 
 	Animator animator;
+
+
 
 	// 開始時にUIを非表示
 	void Start()
@@ -143,14 +146,21 @@ public class UI : MonoBehaviour
 	{
 		if (!GameOverUI.activeSelf)
 		{
+			StartCoroutine(DelayClear());
 			GameOverUI.SetActive(true);
 			GameOverButton.Select();
 
 		}
 	}
 
+	IEnumerator DelayClear()
+    {
+		yield return new WaitForSeconds(8);
+    }
+
 	public void StageClear()
     {
+
 		StageClearUI.SetActive(true);
 		StageClearButton.Select();
     }
