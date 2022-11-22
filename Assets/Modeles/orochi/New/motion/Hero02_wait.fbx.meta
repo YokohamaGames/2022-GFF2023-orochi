@@ -6,12 +6,7 @@ ModelImporter:
   - first:
       74: 1827226128182048838
     second: Idle
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: oroti3_lambert1
-    second: {fileID: -7797167464846557102, guid: 523c6b009a9080e458c17f1114be79c8, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
