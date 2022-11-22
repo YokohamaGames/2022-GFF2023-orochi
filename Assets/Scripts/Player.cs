@@ -19,11 +19,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     public GameObject avatar = null;
 
-
     MoveBehaviourScript moveBehaviour;
 
 
     //Playerのアニメーターの取得
+    [SerializeField]
     Animator animator;
 
     // AnimatorのパラメーターID
@@ -69,6 +69,15 @@ public class Player : MonoBehaviour
     // ユーザーからのMoveアクションに対して呼び出されます。
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (context.performed)
+        {
+            animator.SetBool("isWalk", true);
+        }
+        else if (context.canceled)
+        {
+            animator.SetBool("isWalk", false);
+        }
+
         moveInput = context.ReadValue<Vector2>();
 
     }
