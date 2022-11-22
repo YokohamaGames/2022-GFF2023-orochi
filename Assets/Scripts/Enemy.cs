@@ -186,6 +186,7 @@ public class Enemy : MonoBehaviour
         speed = 0;
         currentState = EnemyState.Idle;
         animator.SetTrigger(isLost);
+        animator.SetFloat(speedId, 0.0f);
     }
 
     //õ“G”ÍˆÍ“à‚É“ü‚Á‚½‚Ìˆ—
