@@ -352,18 +352,18 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    
-        //当たり判定メソッド
-        private void OnCollisionEnter(Collision collision)
+
+    //当たり判定メソッド
+    private void OnCollisionEnter(Collision collision)
+    {
+        //衝突したオブジェクトがBullet(大砲の弾)だったとき
+        if (collision.gameObject.CompareTag("Player"))
         {
-            //衝突したオブジェクトがBullet(大砲の弾)だったとき
-            if (collision.gameObject.CompareTag("Player"))
-            {
-                Debug.Log("敵と弾が衝突しました！！！");
-                GameObject damege = Instantiate(damageeffect, this.transform.position, Quaternion.identity);
-                Destroy(damege, 1.5f);
+            Debug.Log("敵と弾が衝突しました！！！");
+            GameObject damege = Instantiate(damageeffect, this.transform.position, Quaternion.identity);
+            Destroy(damege, 1.5f);
         }
-        }
+    }
 }
 
 
