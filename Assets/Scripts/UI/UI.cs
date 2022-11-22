@@ -147,7 +147,7 @@ public class UI : MonoBehaviour
 		if (!GameOverUI.activeSelf)
 		{
 			StartCoroutine(DelayClear());
-			GameOverUI.SetActive(true);
+			animator.SetTrigger("GameOver");
 			GameOverButton.Select();
 
 		}
@@ -167,6 +167,7 @@ public class UI : MonoBehaviour
 
 	public void Retry()
     {
+		animator.SetTrigger("Transition");
 		SceneManager.LoadScene("Stage");
     }
 
