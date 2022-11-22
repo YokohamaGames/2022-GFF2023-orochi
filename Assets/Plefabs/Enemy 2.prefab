@@ -269,11 +269,13 @@ MonoBehaviour:
   Transition_Time: 2
   shellPrefab: {fileID: 1861180931737820419, guid: dab3c90c1a6268145b07a73ece0b59a1, type: 3}
   defeateffect: {fileID: 7667812074817528645, guid: be1c3a3697037ea4f9c764f21bec2c90, type: 3}
+  damageeffect: {fileID: 5699511037023820722, guid: 9f2d6143b48ddfd44ae17dfc85fabb31, type: 3}
   Enemy_L_Hand: {fileID: 8734296870527284895}
   EnemyHp: 100
   EnemyHpBar: {fileID: 0}
   SwordEffect: {fileID: 4322176617235163267, guid: 5b8a2349ad443714b8425b2ad29c99ba, type: 3}
   TimetoAttack: 2
+  DeleteEnemyTime: 4
   SearchArea: 0
   AttackArea: 0
   LongAttackArea: 0

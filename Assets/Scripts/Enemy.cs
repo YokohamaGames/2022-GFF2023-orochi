@@ -40,6 +40,9 @@ public class Enemy : MonoBehaviour
     //敵撃破エフェクト
     [SerializeField]
     private GameObject defeateffect;
+    //ダメージエフェクト
+    [SerializeField]
+    private GameObject damageeffect;
     [SerializeField]
     private Transform Enemy_L_Hand;                        //敵の左手の座標を取得します
     //敵のHPを設定
@@ -79,6 +82,8 @@ public class Enemy : MonoBehaviour
     static readonly int isAttack3 = Animator.StringToHash("isAttack3");
     static readonly int isLongAttack = Animator.StringToHash("isLongAttack");
     static readonly int speedId = Animator.StringToHash("Speed");
+    static readonly int DeadId = Animator.StringToHash("Dead");
+
 
     //敵のステートパターン
     enum EnemyState
@@ -129,6 +134,9 @@ public class Enemy : MonoBehaviour
                 case EnemyState.LongAttack:
                 case EnemyState.AttackReady:
                     UpdateForAttackReady();
+                break;
+                case EnemyState.Dead:
+                    UpdateForIdle();
                     break;
                 default:
                     break;
@@ -234,7 +242,7 @@ public class Enemy : MonoBehaviour
     //待機状態の処理
     void UpdateForIdle()
     {
-        //Debug.Log("待機中");
+        Vector3 vec = Vector3.zero;
     }
 
     float spd;
@@ -305,6 +313,13 @@ public class Enemy : MonoBehaviour
         Rotate();
     }
     
+    void SetDeadState()
+    {
+        currentState = EnemyState.Dead;
+        speed = 0;
+        animator.SetTrigger(DeadId);
+
+    }
     //ステート遷移を遅らせる関数　未使用
     IEnumerator DelayState()
     {
@@ -330,13 +345,25 @@ public class Enemy : MonoBehaviour
         //HP0のとき撃破エフェクトの生成と敵オブジェクトの削除
         if (EnemyHp <= 0)
         {
+            SetDeadState();
             GameObject defeat = Instantiate(defeateffect, this.transform.position, Quaternion.identity);
             Destroy(this.gameObject,DeleteEnemyTime);
             Destroy(defeat, 6.0f);
         }
     }
 
-  
+    
+        //当たり判定メソッド
+        private void OnCollisionEnter(Collision collision)
+        {
+            //衝突したオブジェクトがBullet(大砲の弾)だったとき
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                Debug.Log("敵と弾が衝突しました！！！");
+                GameObject damege = Instantiate(damageeffect, this.transform.position, Quaternion.identity);
+                Destroy(damege, 1.5f);
+        }
+        }
 }
 
 
