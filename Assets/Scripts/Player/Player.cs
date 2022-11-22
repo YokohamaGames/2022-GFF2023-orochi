@@ -69,17 +69,7 @@ public class Player : MonoBehaviour
     // ユーザーからのMoveアクションに対して呼び出されます。
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (context.performed)
-        {
-            animator.SetBool("isWalk", true);
-        }
-        else if (context.canceled)
-        {
-            animator.SetBool("isWalk", false);
-        }
-
         moveInput = context.ReadValue<Vector2>();
-
     }
 
     // ユーザーからのLookアクションに対して呼び出されます。

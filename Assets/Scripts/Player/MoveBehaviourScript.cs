@@ -159,6 +159,8 @@ public class MoveBehaviourScript : MonoBehaviour
         VirtualCamera[1].Priority = 100;
         CoolTime = ChangeCoolTime;
         ShotCoolTime = shotCoolTime;
+
+        currentAnimator.SetBool("isWalk", false);
     }
 
 
@@ -225,6 +227,7 @@ public class MoveBehaviourScript : MonoBehaviour
         {
             SetDeadState();
         }
+
 
     }
 
@@ -377,6 +380,11 @@ public class MoveBehaviourScript : MonoBehaviour
                 avatar.transform.LookAt(transform.position + velocity.normalized, Vector3.up);
                 velocity *= speed;
 
+                currentAnimator.SetBool("isWalk", true);
+            }
+            else if(velocity.sqrMagnitude <= 0)
+            {
+                currentAnimator.SetBool("isWalk", false);
             }
             velocity.y = rigidbody.velocity.y;
             rigidbody.velocity = velocity;
@@ -448,6 +456,8 @@ public class MoveBehaviourScript : MonoBehaviour
             // space‚ª‰Ÿ‚³‚ê‚½‚çƒWƒƒƒ“ƒv
             rigidbody.AddForce(transform.up * upForce / 20f, ForceMode.Impulse);
             isGrounded = false;
+
+            currentAnimator.SetTrigger("isJump");
 
             SetJumpingState();
         }
