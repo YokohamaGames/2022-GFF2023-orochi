@@ -19978,6 +19978,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireDamageEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 3189518951252779321, guid: 881d60d5f32792c459b3f4e6eed5f4df, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 881d60d5f32792c459b3f4e6eed5f4df, type: 3}
 --- !u!224 &3198111798787659295
