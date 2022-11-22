@@ -769,7 +769,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &740542719
 GameObject:
@@ -961,7 +961,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 35, y: 180, z: 0}
 --- !u!114 &791748153
 MonoBehaviour:
@@ -975,8 +975,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 542a4bf4911d4a646af8ccd4fefba9ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 7703711711734608844}
-  offset: {x: 0, y: 8, z: 4}
+  rotationSpeed: {x: 180, y: 180}
+  vCam: {fileID: 0}
+  follow: {fileID: 0}
 --- !u!114 &795643801 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2590261799597503367, guid: 913ddcdd1b8a78245aef4fb7711c2a02, type: 3}
@@ -1155,7 +1156,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
 --- !u!114 &888958284
 MonoBehaviour:
@@ -1169,8 +1170,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 542a4bf4911d4a646af8ccd4fefba9ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 4068290217516786248}
-  offset: {x: 0, y: 5, z: -9}
+  rotationSpeed: {x: 180, y: 180}
+  vCam: {fileID: 0}
+  follow: {fileID: 0}
 --- !u!4 &889647569 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6517848141191641701, guid: d7eed1bc32b6aac42840d4ecf94196ff, type: 3}
@@ -1812,7 +1814,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1565911822 stripped
 GameObject:
@@ -2786,11 +2788,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50f5babe5e6eba144b112cef0de7e97f, type: 3}
---- !u!4 &7703711711734608844 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 939825154165104189, guid: 50f5babe5e6eba144b112cef0de7e97f, type: 3}
-  m_PrefabInstance: {fileID: 7486100800340094449}
-  m_PrefabAsset: {fileID: 0}
 --- !u!23 &7986696457228755378
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2845,6 +2842,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09c179e35e39df841831e85f2529fa1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CinemachineCameraTarget: {fileID: 0}
+  CameraAngleOverride: 0
+  LockCameraPosition: 0
+  avatar: {fileID: 0}
+  animator: {fileID: 0}
+  RotationSmoothTime: 0.12
 --- !u!4 &8350357400031037317
 Transform:
   m_ObjectHideFlags: 0
@@ -3053,12 +3056,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3a4dde9c76c3142a36d1a0ec424404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  upForce: 100
-  com: {x: 0, y: 0, z: 0}
+  LARGEspeed: 0
+  MEDIUMspeed: 0
+  SMALLspeed: 0
+  LARGEup: 0
+  MEDIUMup: 0
+  SMALLup: 0
+  avo: 0
+  shellPrefab: {fileID: 0}
+  VirtualCamera: []
   bodies: []
-  animator: {fileID: 0}
+  attackareas: []
+  Orochihead: {fileID: 0}
+  ChangeCoolTime: 10
+  shotCoolTime: 3
+  isChange: 0
+  shot: 0
+  playerCamera: {fileID: 0}
+  avatar: {fileID: 0}
+  HealObject: {fileID: 0}
+  ChangeEffect: {fileID: 0}
   isGrounded: 0
+  damagefire: {fileID: 0}
 --- !u!95 &8627753932420520939
 Animator:
   serializedVersion: 4
@@ -3407,7 +3426,7 @@ Transform:
   - {fileID: 1346812072}
   - {fileID: 216185753}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8972154777004026890
 GameObject:
