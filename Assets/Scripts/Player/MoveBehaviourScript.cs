@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Cinemachine;
-
+using System.Threading.Tasks;
 // 移動するキャラクターを制御します。
 public class MoveBehaviourScript : MonoBehaviour
 {
@@ -408,7 +406,7 @@ public class MoveBehaviourScript : MonoBehaviour
 
 
     // 攻撃します
-    public void Fire()
+    public async void Fire()
     {
         if (isGrounded == true)
         {
@@ -420,11 +418,16 @@ public class MoveBehaviourScript : MonoBehaviour
             {
                 SetAttackState();
 
-                if(currentBodySize == BodySize.Large)
+                currentAnimator.SetTrigger("isAttack");
+
+                ButtonEnabled = false;
+
+                await Task.Delay(500);
+                if (currentBodySize == BodySize.Large)
                 {
-                    attackareas[0].SetActive(false);
-                    attackareas[1].SetActive(false);
-                    attackareas[2].SetActive(true);
+                   attackareas[0].SetActive(false);
+                   attackareas[1].SetActive(false);
+                   attackareas[2].SetActive(true);
                 }
                 else if (currentBodySize == BodySize.Medium)
                 {
@@ -438,10 +441,6 @@ public class MoveBehaviourScript : MonoBehaviour
                     attackareas[1].SetActive(false);
                     attackareas[2].SetActive(false);
                 }
-
-                currentAnimator.SetTrigger("isAttack");
-
-                ButtonEnabled = false;
 
                 StartCoroutine(ButtonCoroutine());
             }
