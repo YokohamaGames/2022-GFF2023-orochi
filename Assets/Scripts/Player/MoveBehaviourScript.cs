@@ -23,10 +23,6 @@ public class MoveBehaviourScript : MonoBehaviour
     [SerializeField]
     private GameObject shellPrefab;
 
-    //Playerのアニメーターの取得
-    //[SerializeField]
-    //Animator animator;
-
     [SerializeField]
     [Tooltip("カメラの切り替え")]
     private CinemachineVirtualCamera[] VirtualCamera = null;
@@ -423,6 +419,7 @@ public class MoveBehaviourScript : MonoBehaviour
                 ButtonEnabled = false;
 
                 await Task.Delay(500);
+                rigidbody.AddForce(avatar.transform.forward * 10, ForceMode.Impulse);
                 if (currentBodySize == BodySize.Large)
                 {
                    attackareas[0].SetActive(false);

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using System.Threading.Tasks;
 
 //敵のAIとステータス設定
 public class Enemy : MonoBehaviour
@@ -385,7 +386,7 @@ public class Enemy : MonoBehaviour
     }
 
     //敵のHPバーの処理
-    public void EnemyDamage(int n)
+    public async void EnemyDamage(int n)
     {
         EnemyHp -= n;
         EnemyHpBar.value = EnemyHp;
@@ -397,6 +398,7 @@ public class Enemy : MonoBehaviour
             GameObject defeat = Instantiate(defeateffect, this.transform.position, Quaternion.identity);
             Destroy(this.gameObject,DeleteEnemyTime);
             Destroy(defeat, 8.0f);
+            await Task.Delay(1000);
             ui.StageClear();
 
         }
