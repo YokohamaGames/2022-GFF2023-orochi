@@ -8,31 +8,31 @@ public class TitleScene : MonoBehaviour
     [SerializeField]
     private GameObject Title = null;
 
-    // StageSelectを参照
-    [SerializeField]
-    private GameObject StageSelect = null;
-
     // Titleボタンを参照
     [SerializeField]
     private Selectable TitleButton = null;
 
-    // selectボタンを参照
+    /* StageSelectを参照
+    [SerializeField]
+    private GameObject StageSelect = null;
+       selectボタンを参照
     [SerializeField]
     private Selectable SelectButton = null;
+    */
 
     private void Start()
     {
         Title.SetActive(true);
-        StageSelect.SetActive(false);
+        // StageSelect.SetActive(false);
         TitleButton.Select();
     }
 
     // Titleを非表示、StageSelectを表示
     public void Stageselect()
     {
-        SelectButton.Select();
+        // SelectButton.Select();
         Title.SetActive(false);
-        StageSelect.SetActive(true);
+        // StageSelect.SetActive(true);
     }
 
     // ゲームを終了する
