@@ -24,6 +24,10 @@ public class UI : MonoBehaviour
 	[SerializeField]
 	private GameObject StageClearUI = null;
 
+	// HpBarを参照
+	[SerializeField]
+	private GameObject HpBar = null;
+
 	// SEを参照
 	[SerializeField]
 	private SE Se = null;
@@ -74,6 +78,8 @@ public class UI : MonoBehaviour
         {
 			// ポーズの表示
 			PauseUI.SetActive(true);
+			// HpBarの非表示
+			HpBar.SetActive(false);
 			// UIが開かれた音声を再生
 			Se.OpenUI();
 			// 停止
@@ -84,6 +90,8 @@ public class UI : MonoBehaviour
         {
 			// ポーズの非表示
 			PauseUI.SetActive(false);
+			// HpBarの表示
+			HpBar.SetActive(true);
 			// UIが閉じられた音声を再生
 			Se.CloseUI();
 			// 再開
