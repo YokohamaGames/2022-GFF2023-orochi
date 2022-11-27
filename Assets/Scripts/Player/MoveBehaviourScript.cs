@@ -448,14 +448,17 @@ public class MoveBehaviourScript : MonoBehaviour
     {
         if (shot == true)
         {
-            GameObject shell = Instantiate(shellPrefab, Orochihead[i].transform.position, Quaternion.identity);
-            Rigidbody shellRb = shell.GetComponent<Rigidbody>();
-            // íeë¨Çê›íË
-            shellRb.AddForce(Orochihead[i].transform.forward * 1500);
-            Destroy(shell, 1.0f);
+            if(currentBodySize == BodySize.Large)
+            {
+                GameObject shell = Instantiate(shellPrefab, Orochihead[i].transform.position, Quaternion.identity);
+                Rigidbody shellRb = shell.GetComponent<Rigidbody>();
+                // íeë¨Çê›íË
+                shellRb.AddForce(Orochihead[i].transform.forward * 1500);
+                Destroy(shell, 1.0f);
 
-            shot = false;
-            ShotCoolTime = shotCoolTime;
+                shot = false;
+                ShotCoolTime = shotCoolTime;
+            }
         }
     }
 
