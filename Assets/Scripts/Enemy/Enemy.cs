@@ -230,17 +230,17 @@ public class Enemy : MonoBehaviour
                 case 1:
                    currentState = EnemyState.Attack;
                    animator.SetTrigger(isAttack);
-                   SE.Instance.SowrdAttack();
+                   //SE.Instance.SowrdAttack();
                    break;
                 case 2:
                    currentState = EnemyState.Attack2;
                    animator.SetTrigger(isAttack2);
-                   SE.Instance.SowrdAttack2();
+                   //SE.Instance.SowrdAttack2();
                    break;
                 case 3:
                    currentState = EnemyState.Attack3;
                    animator.SetTrigger(isAttack3);
-                   SE.Instance.Fire();
+                   //SE.Instance.Fire();
                    break;
                 default:
                 break;
@@ -253,6 +253,7 @@ public class Enemy : MonoBehaviour
     //当たり判定をONにする関数
     public void SetColliderOn(Collider collider)
     {
+        SE.Instance.SwordSwing();
         SwordEffect.SetActive(true);
         collider.enabled = true;
         Debug.Log("呼ばれた");
@@ -372,6 +373,7 @@ public class Enemy : MonoBehaviour
     //敵の遠距離攻撃のプレハブの生成
     public void EnemyShotAttack()
     {
+        SE.Instance.Fire();
         GameObject shell = Instantiate(shellPrefab, Enemy_L_Hand.transform.position, Quaternion.identity);
         Rigidbody shellRb = shell.GetComponent<Rigidbody>();
         // 弾速を設定
@@ -392,19 +394,6 @@ public class Enemy : MonoBehaviour
             GameObject defeat = Instantiate(defeateffect, this.transform.position, Quaternion.identity);
             Destroy(this.gameObject,DeleteEnemyTime);
             Destroy(defeat, 8.0f);
-        }
-    }
-
-
-    //当たり判定メソッド
-    private void OnCollisionEnter(Collision collision)
-    {
-        //衝突したオブジェクトがBullet(大砲の弾)だったとき
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Debug.Log("敵と弾が衝突しました！！！");
-            GameObject damege = Instantiate(damageeffect, this.transform.position, Quaternion.identity);
-            Destroy(damege, 1.5f);
         }
     }
 }
