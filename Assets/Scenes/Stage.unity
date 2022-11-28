@@ -1610,7 +1610,9 @@ MonoBehaviour:
   CloseUi: {fileID: 8300000, guid: 3bc58c8af62c37d4083210909c106c36, type: 3}
   swordattack: {fileID: 8300000, guid: 3bc58c8af62c37d4083210909c106c36, type: 3}
   swordattack2: {fileID: 8300000, guid: 80eb26a2c2927c942853074eb5c024c8, type: 3}
-  fire: {fileID: 8300000, guid: 80eb26a2c2927c942853074eb5c024c8, type: 3}
+  fire: {fileID: 8300000, guid: 0dc6cbe8c8fc17c4bbde30a2359bedb8, type: 3}
+  damage: {fileID: 8300000, guid: eee1dcb5c46b6714bb96adb306f4992f, type: 3}
+  swordswing: {fileID: 8300000, guid: a23c0ce18cc05ee49a8c129ea9bc45be, type: 3}
   SeSoundValue: {fileID: 1136395108}
 --- !u!82 &1522733869
 AudioSource:
@@ -2164,6 +2166,24 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!1 &1927638706 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8141677924268495619, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
+  m_PrefabInstance: {fileID: 1278718073932363348}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1927638709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927638706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 769abec5c95e3f443b260e70132d0faf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageeffect: {fileID: 2451035040905579535, guid: 57d0c4bec3bf2e24888c61d7aa9e9a69, type: 3}
 --- !u!1001 &1980042594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2317,9 +2337,49 @@ PrefabInstance:
       propertyPath: EnemyHpBar
       value: 
       objectReference: {fileID: 464335242}
+    - target: {fileID: 744792539108911357, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1278718073765495365, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
+      propertyPath: edit.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1278718073765495365, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
+      propertyPath: edit.Array.data[4].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1278718073765495365, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
+      propertyPath: edit.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1278718073765495365, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
+      propertyPath: edit.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1522733868}
+    - target: {fileID: 1278718073765495365, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
+      propertyPath: edit.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1278718073765495365, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
+      propertyPath: edit.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Fire
+      objectReference: {fileID: 0}
+    - target: {fileID: 1278718073765495365, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
+      propertyPath: edit.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SE, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1278718073765495365, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
+      propertyPath: edit.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8078383512189677994, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
       propertyPath: m_Name
       value: Susano
+      objectReference: {fileID: 0}
+    - target: {fileID: 8141677924268495628, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8887853505075768080, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
       propertyPath: m_RootOrder
