@@ -58,11 +58,17 @@ public class Enemy : MonoBehaviour
     //攻撃までの待機時間を設定した値にリセットする変数
     float timetoattack;
 
+    [SerializeField]
+    float timefire = 1.5f;
+    float timetoatk = 0;
+
     public bool SearchArea = false;
 
     public bool AttackArea = false;
 
     public bool LongAttackArea = false;
+
+    public bool Dead = false;
     //現在の敵の歩行スピード
     float speed = 0;                                       
     // コンポーネントを事前に参照しておく変数
@@ -146,6 +152,11 @@ public class Enemy : MonoBehaviour
         Debug.Log(currentState);
 
     }
+    private void FixedUpdate()
+    {
+
+    }
+
 
     IEnumerator Wait()
     {
@@ -157,7 +168,15 @@ public class Enemy : MonoBehaviour
     }
     void UpdateForLongAttack()
     {
+        Rotate();
+        timetoatk += Time.deltaTime;
+        if (timetoatk > timefire)
+        {
 
+            timetoatk = 0;
+            animator.SetTrigger(isLongAttack);
+
+        }
     }
 
     void SetLongAttackState()
@@ -170,7 +189,7 @@ public class Enemy : MonoBehaviour
     //遠距離攻撃に切り替え
     public void LongAttack()
     {
-        if (currentState == EnemyState.Move)
+        if (currentState == EnemyState.Discover)
         {
             animator.SetTrigger(isLongAttack);
             currentState = EnemyState.LongAttack;
@@ -204,10 +223,13 @@ public class Enemy : MonoBehaviour
     //攻撃範囲内に入った時にステートを攻撃準備に切り替え
     public void SetAttackReadyState()
     {
-        currentState = EnemyState.AttackReady;
-        speed = AttackReadySpeed;                          //攻撃範囲に入ったら様子見で移動速度を小さくする
-        animator.SetTrigger(isAttackReady);
-        timetoattack = TimetoAttack;                       ////攻撃までの時間のカウントをリセット
+        if (!Dead)
+        {
+            currentState = EnemyState.AttackReady;
+            speed = AttackReadySpeed;                          //攻撃範囲に入ったら様子見で移動速度を小さくする
+            animator.SetTrigger(isAttackReady);
+            timetoattack = TimetoAttack;                       ////攻撃までの時間のカウントをリセット
+        }
     }
     
     public void SetAttackReady()
@@ -225,25 +247,28 @@ public class Enemy : MonoBehaviour
         int random = (int)tmp;                             //float型の乱数をint型にキャスト
         //SetColliderOn(Weapon_Collider);
         //Debug.Log(random);
-        switch (random)
+        if (!Dead)
         {
+            switch (random)
+            {
                 case 1:
-                   currentState = EnemyState.Attack;
-                   animator.SetTrigger(isAttack);
-                   //SE.Instance.SowrdAttack();
-                   break;
+                    currentState = EnemyState.Attack;
+                    animator.SetTrigger(isAttack);
+                    //SE.Instance.SowrdAttack();
+                    break;
                 case 2:
-                   currentState = EnemyState.Attack2;
-                   animator.SetTrigger(isAttack2);
-                   //SE.Instance.SowrdAttack2();
-                   break;
+                    currentState = EnemyState.Attack2;
+                    animator.SetTrigger(isAttack2);
+                    //SE.Instance.SowrdAttack2();
+                    break;
                 case 3:
-                   currentState = EnemyState.Attack3;
-                   animator.SetTrigger(isAttack3);
-                   //SE.Instance.Fire();
-                   break;
+                    currentState = EnemyState.Attack3;
+                    animator.SetTrigger(isAttack3);
+                    //SE.Instance.Fire();
+                    break;
                 default:
-                break;
+                    break;
+            }
         }
         rigidbody.velocity = Vector3.zero;                       //立ち止まる
         timetoattack = TimetoAttack;                          //攻撃までの時間のカウントをリセット
@@ -265,21 +290,11 @@ public class Enemy : MonoBehaviour
         SwordEffect.SetActive(false);
         collider.enabled = false;
     }
-
-    float timefire = 1.5f;
-    float timetoatk = 0;
+    
     void UpdateForDiscover()
     {
-        //UpdateForMove();
-        Rotate();
-        timetoatk += Time.deltaTime;
-        if (timetoatk > timefire)
-        {
-
-            timetoatk = 0;
-            animator.SetTrigger(isLongAttack);
-
-        }
+        UpdateForMove();
+        
     }    
     
     //待機状態の処理
@@ -290,32 +305,45 @@ public class Enemy : MonoBehaviour
     }
 
     float spd;
+    float cnt = 0;
     //プレイやーに向かって動く処理
     void UpdateForMove()
     {
-        //ターゲット方向のベクトルを求める
-        Vector3 vec = target.position - transform.position;
-        vec.y = 0;
-        // ターゲットの方向を向く
-        // Quaternion(回転値)を取得
-        Quaternion quaternion = Quaternion.LookRotation(vec);
-        
-        // 算出した回転値をこのゲームオブジェクトのrotationに代入
-        transform.rotation = quaternion;
-        rigidbody.velocity = transform.forward * speed;// 正面方向に移動
-
-        if (currentState == EnemyState.Discover && spd <= 2.00f || currentState == EnemyState.Move && spd <= 2.00f)
+        Debug.Log(cnt);
+        if (!Dead)
         {
-            spd += sp * Time.deltaTime;
+            //ターゲット方向のベクトルを求める
+            Vector3 vec = target.position - transform.position;
+            vec.y = 0;
+            // ターゲットの方向を向く
+            // Quaternion(回転値)を取得
+            Quaternion quaternion = Quaternion.LookRotation(vec);
+
+            // 算出した回転値をこのゲームオブジェクトのrotationに代入
+            transform.rotation = quaternion;
+            rigidbody.velocity = transform.forward * speed;// 正面方向に移動
+
+            if (currentState == EnemyState.Discover && spd <= 2.00f || currentState == EnemyState.Move && spd <= 2.00f)
+            {
+                spd += sp * Time.deltaTime;
+            }
+
+            if (speed <= ChaseSpeed)
+            {
+                speed += (ChaseSpeed * Time.deltaTime) / 2;
+            }
+            animator.SetFloat(speedId, spd);
+
+            if (!AttackArea && LongAttackArea)
+            {
+                cnt += Time.deltaTime;
+                if (cnt > 3)
+                {
+                    cnt = 0;
+                    LongAttack();
+                }
+            }
         }
-
-        if (speed <= ChaseSpeed)
-        {
-            speed += (ChaseSpeed * Time.deltaTime) /2;
-        }
-        animator.SetFloat(speedId, spd);
-
-
     }
 
     //攻撃範囲にとどまっている時間をカウントして一定時間を超えたらAttackStateに切り替える
@@ -326,7 +354,7 @@ public class Enemy : MonoBehaviour
         Rotate();
         timetoattack -= Time.deltaTime;
         
-        if(0 > timetoattack)                               //攻撃までの時間が0になればステート遷移。カウントをリセットする。
+        if(0 > timetoattack && AttackArea)                               //攻撃までの時間が0になればステート遷移。カウントをリセットする。
         {
             //ランダムな攻撃
             Attacks();  
@@ -390,6 +418,7 @@ public class Enemy : MonoBehaviour
         //HP0のとき撃破エフェクトの生成と敵オブジェクトの削除
         if (StageScene.Instance.EnemyHp <= 0)
         {
+            Dead = true;
             SetDeadState();
             GameObject defeat = Instantiate(defeateffect, this.transform.position, Quaternion.identity);
             Destroy(this.gameObject,DeleteEnemyTime);
