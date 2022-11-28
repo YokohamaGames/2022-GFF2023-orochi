@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shell : MonoBehaviour
+public class FireBall : MonoBehaviour
 {
     private Vector3 latestPos;  //ëOâÒÇÃPosition
 
+    public GameObject enemy;
     // Update is called once per frame
     void Update()
     {
@@ -21,6 +22,13 @@ public class Shell : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.tag == "enemy")
+        {
+            Debug.Log("ê⁄êG");
+            enemy.GetComponent<Enemy>().EnemyDamage(5);
+        }
+
         Destroy(this.gameObject);
+
     }
 }

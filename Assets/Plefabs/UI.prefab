@@ -5381,12 +5381,14 @@ MonoBehaviour:
   GuideUI: {fileID: 2037322936327689345}
   GameOverUI: {fileID: 7376900902712969941}
   StageClearUI: {fileID: 1923531164701142525}
+  HpBar: {fileID: 0}
   Se: {fileID: 0}
   FastButton: {fileID: 4760786889188479667}
   OptionButton: {fileID: 7376900902576598476}
   GuideButton: {fileID: 7555264046612516368}
   GameOverButton: {fileID: 7376900902073861056}
   StageClearButton: {fileID: 7442259904086419542}
+  Player: {fileID: 0}
 --- !u!95 &7376900902647188691
 Animator:
   serializedVersion: 4

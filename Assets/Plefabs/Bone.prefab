@@ -4840,7 +4840,7 @@ GameObject:
   - component: {fileID: 9073659351683542598}
   - component: {fileID: 582128595}
   m_Layer: 0
-  m_Name: Born
+  m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

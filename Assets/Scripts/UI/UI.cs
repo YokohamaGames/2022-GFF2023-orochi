@@ -54,6 +54,7 @@ public class UI : MonoBehaviour
 
 	Animator animator;
 
+	public GameObject Player;
 
 
 	// 開始時にUIを非表示
@@ -88,6 +89,8 @@ public class UI : MonoBehaviour
 		}
 		else if (PauseUI.activeSelf && !OptionUI.activeSelf && !GuideUI.activeSelf)
         {
+			Player.SetActive(false);
+
 			// ポーズの非表示
 			PauseUI.SetActive(false);
 			// HpBarの表示
@@ -99,6 +102,8 @@ public class UI : MonoBehaviour
 		}
         else if (PauseUI.activeSelf && OptionUI.activeSelf)
 		{
+			Player.SetActive(true);
+
 			// optionの非表示
 			OptionUI.SetActive(false);
 			// UIが閉じられた音声を再生

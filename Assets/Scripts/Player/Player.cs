@@ -22,10 +22,6 @@ public class Player : MonoBehaviour
     MoveBehaviourScript moveBehaviour;
 
 
-    //Playerのアニメーターの取得
-    [SerializeField]
-    Animator animator;
-
     // AnimatorのパラメーターID
     //static readonly int isAttackId = Animator.StringToHash("isAttack");
     //static readonly int isJumpId = Animator.StringToHash("isJump");
@@ -49,7 +45,6 @@ public class Player : MonoBehaviour
     void Start()
     {
         moveBehaviour = GetComponent<MoveBehaviourScript>();
-        animator = GetComponentInChildren<Animator>();
 
         // mainCamera = Camera.main;
     }
