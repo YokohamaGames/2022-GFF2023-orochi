@@ -326,7 +326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 651223863, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.157527
+      value: -6.157526
       objectReference: {fileID: 0}
     - target: {fileID: 651223864, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: m_Follow
@@ -426,7 +426,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4068290216166233380, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 4068290216166233380, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -775,7 +775,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 501126239}
   m_LocalRotation: {x: 0.08715578, y: -0, z: -0, w: 0.9961947}
-  m_LocalPosition: {x: 0, y: 2.2412195, z: -6.400156}
+  m_LocalPosition: {x: 0, y: 2.2412195, z: -16.400156}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -885,6 +885,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78ff916e578b94640911be979f019931, type: 3}
+--- !u!1 &642605094 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8957912580650228549, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+  m_PrefabInstance: {fileID: 381900692}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &642605098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642605094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec0389833a51b44090b7fa03b56d75d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  edit:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1522733868}
+        m_TargetAssemblyTypeName: SE, Assembly-CSharp
+        m_MethodName: Charge
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &672900302 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f706a347cf9f1f144858d8718f1240bb, type: 3}
@@ -990,6 +1022,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &911689224 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1197323515756863889, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+  m_PrefabInstance: {fileID: 381900692}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &911689228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911689224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec0389833a51b44090b7fa03b56d75d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  edit:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1522733868}
+        m_TargetAssemblyTypeName: SE, Assembly-CSharp
+        m_MethodName: Charge
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1067763860 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5434906922644592561, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
@@ -1440,7 +1504,7 @@ MonoBehaviour:
   Ui: {fileID: 1724907016}
   playerhp: 6
   HealObject: {fileID: 6790358148406016604, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
-  EnemyHp: 10
+  EnemyHp: 20
   Player: {fileID: 1750103307}
 --- !u!95 &1440353449
 Animator:
@@ -1561,6 +1625,38 @@ Transform:
   m_Father: {fileID: 1440353447}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1519339217 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2354542052430221377, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+  m_PrefabInstance: {fileID: 381900692}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1519339221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1519339217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec0389833a51b44090b7fa03b56d75d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  edit:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1522733868}
+        m_TargetAssemblyTypeName: SE, Assembly-CSharp
+        m_MethodName: Charge
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1522733866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1616,6 +1712,8 @@ MonoBehaviour:
   chargehit: {fileID: 8300000, guid: 151603933caa94944b68734497a0ed27, type: 3}
   damaged: {fileID: 8300000, guid: eee1dcb5c46b6714bb96adb306f4992f, type: 3}
   fireattack: {fileID: 8300000, guid: ec394b155a5e4bd408a87c5f00574508, type: 3}
+  firedamaged: {fileID: 8300000, guid: 295fb50b8229a534f952ca25b74657be, type: 3}
+  charge: {fileID: 8300000, guid: 83aa055df59807e48b3294cee6016ea6, type: 3}
   SeSoundValue: {fileID: 1136395108}
 --- !u!82 &1522733869
 AudioSource:
@@ -2314,6 +2412,10 @@ PrefabInstance:
       propertyPath: m_text
       value: "\u3042\u304D\u3089\u3081\u308B"
       objectReference: {fileID: 0}
+    - target: {fileID: 8554205544815542140, guid: 43fa36726561e7443a887d841ff8c77d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43fa36726561e7443a887d841ff8c77d, type: 3}
 --- !u!4 &2089305098 stripped
@@ -2374,7 +2476,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 744792539108911357, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1278718073765495365, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
       propertyPath: edit.Array.size
@@ -2407,6 +2509,10 @@ PrefabInstance:
     - target: {fileID: 1278718073765495365, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
       propertyPath: edit.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2125561042064411015, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 7279805134744296160, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
       propertyPath: m_IsActive
@@ -2443,6 +2549,10 @@ PrefabInstance:
     - target: {fileID: 8078383512189677994, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
       propertyPath: m_Name
       value: Susano
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078383512189677994, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
+      propertyPath: m_TagString
+      value: enemy
       objectReference: {fileID: 0}
     - target: {fileID: 8141677924268495628, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
       propertyPath: m_IsTrigger

@@ -416,7 +416,7 @@ public class Enemy : MonoBehaviour
     {
         StageScene.Instance.EnemyHp -= n;
         EnemyHpBar.value = StageScene.Instance.EnemyHp;
-        SE.Instance.Charge();
+        SE.Instance.ChargeHit();
         GameObject Hit = Instantiate(HitEffect, this.transform.position, Quaternion.identity);
         Destroy(Hit, 1.5f);
 
@@ -429,7 +429,16 @@ public class Enemy : MonoBehaviour
             Destroy(this.gameObject,DeleteEnemyTime);
             Destroy(defeat, 8.0f);
         }
-    }    
+    }
+
+    /*private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("OrochiFire"))
+        {
+            Destroy(other);
+            EnemyDamage(2);
+        }
+    }*/
 }
 
 

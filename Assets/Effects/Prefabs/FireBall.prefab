@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -6508974844261889126}
   m_Layer: 0
   m_Name: FireBall
-  m_TagString: Attack
+  m_TagString: OrochiFire
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

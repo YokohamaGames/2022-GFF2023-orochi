@@ -22,5 +22,6 @@ public class Shell : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         Destroy(this.gameObject);
+        SE.Instance.FireDamaged();
     }
 }
