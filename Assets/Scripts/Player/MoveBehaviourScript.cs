@@ -430,6 +430,7 @@ public class MoveBehaviourScript : MonoBehaviour
         {
             if(currentBodySize == BodySize.Large)
             {
+                SE.Instance.FireSE();
                 GameObject shell = Instantiate(shellPrefab, Orochihead.transform.position, Quaternion.identity);
                 Rigidbody shellRb = shell.GetComponent<Rigidbody>();
                 // íeë¨Çê›íË
@@ -463,6 +464,7 @@ public class MoveBehaviourScript : MonoBehaviour
         {
             if (collision.CompareTag("Enemy_Weapon"))
             {
+                SE.Instance.Damaged();
                 StageScene.Instance.Damage();
                 SetInvincible();
             }

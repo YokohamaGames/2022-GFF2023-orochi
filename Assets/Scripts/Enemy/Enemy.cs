@@ -433,7 +433,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.CompareTag("Attack"))
         {
-            Debug.Log("HIt");
+            SE.Instance.Charge();
             GameObject Hit = Instantiate(HitEffect, this.transform.position, Quaternion.identity);
             Destroy(Hit, 1.5f);
         }

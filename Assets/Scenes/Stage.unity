@@ -1613,6 +1613,9 @@ MonoBehaviour:
   fire: {fileID: 8300000, guid: 0dc6cbe8c8fc17c4bbde30a2359bedb8, type: 3}
   damage: {fileID: 8300000, guid: eee1dcb5c46b6714bb96adb306f4992f, type: 3}
   swordswing: {fileID: 8300000, guid: a23c0ce18cc05ee49a8c129ea9bc45be, type: 3}
+  chargehit: {fileID: 8300000, guid: 151603933caa94944b68734497a0ed27, type: 3}
+  damaged: {fileID: 8300000, guid: eee1dcb5c46b6714bb96adb306f4992f, type: 3}
+  fireattack: {fileID: 8300000, guid: ec394b155a5e4bd408a87c5f00574508, type: 3}
   SeSoundValue: {fileID: 1136395108}
 --- !u!82 &1522733869
 AudioSource:
