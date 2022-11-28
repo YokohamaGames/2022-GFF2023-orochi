@@ -2346,6 +2346,10 @@ PrefabInstance:
       value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 510274297532772671, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
+      propertyPath: HitEffect
+      value: 
+      objectReference: {fileID: 5699511037023820722, guid: 9f2d6143b48ddfd44ae17dfc85fabb31, type: 3}
+    - target: {fileID: 510274297532772671, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
       propertyPath: ChaseSpeed
       value: 4
       objectReference: {fileID: 0}
