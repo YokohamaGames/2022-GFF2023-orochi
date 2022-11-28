@@ -2373,6 +2373,22 @@ PrefabInstance:
       propertyPath: edit.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7279805134744296160, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693767611418379388, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c82b77814606a7b429bff97883ee5d8f, type: 2}
+    - target: {fileID: 7693767611418379388, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 8368722655750445499, guid: 3faff9d58555f564bb928b749b6b4d75, type: 3}
+    - target: {fileID: 7693767611418379388, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 37c3e4e651b23f449bb1de532cd57b1a, type: 2}
     - target: {fileID: 8078383512189677994, guid: fad432189ae4f984ba0117db5ebf46b6, type: 3}
       propertyPath: m_Name
       value: Susano
