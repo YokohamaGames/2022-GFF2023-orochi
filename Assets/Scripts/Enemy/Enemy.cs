@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using System.Threading.Tasks;
 
 //敵のAIとステータス設定
 public class Enemy : MonoBehaviour
@@ -46,9 +45,6 @@ public class Enemy : MonoBehaviour
     private GameObject damageeffect;
     [SerializeField]
     private Transform Enemy_L_Hand;                        //敵の左手の座標を取得します
-    //敵のHPを設定
-    [SerializeField]
-    int EnemyHp;
     //敵のHpBarを参照
     [SerializeField]
     public Slider EnemyHpBar;                              
@@ -62,10 +58,6 @@ public class Enemy : MonoBehaviour
     //攻撃までの待機時間を設定した値にリセットする変数
     float timetoattack;
 
-    [SerializeField]
-    UI ui;
-
-    SE se;
     public bool SearchArea = false;
 
     public bool AttackArea = false;
@@ -113,9 +105,7 @@ public class Enemy : MonoBehaviour
         timetoattack = TimetoAttack;                       //攻撃時間を指定した時間にリセットする変数に値を代入
         Weapon_Collider.enabled = false;                   //敵の武器の当たり判定をオフ
         SwordEffect.SetActive(false);
-        EnemyHpBar.value = EnemyHp;                        // Sliderの初期状態を設定 
-        se = GetComponent<SE>();
-
+        EnemyHpBar.value = StageScene.Instance.EnemyHp;                        // Sliderの初期状態を設定 
     }
 
     // Update is called once per frame
@@ -240,17 +230,17 @@ public class Enemy : MonoBehaviour
                 case 1:
                    currentState = EnemyState.Attack;
                    animator.SetTrigger(isAttack);
-                   //SE.Instance.SowrdAttack();
+                   SE.Instance.SowrdAttack();
                    break;
                 case 2:
                    currentState = EnemyState.Attack2;
                    animator.SetTrigger(isAttack2);
-                   //SE.Instance.SowrdAttack2();
+                   SE.Instance.SowrdAttack2();
                    break;
                 case 3:
                    currentState = EnemyState.Attack3;
                    animator.SetTrigger(isAttack3);
-                   //SE.Instance.Fire();
+                   SE.Instance.Fire();
                    break;
                 default:
                 break;
@@ -263,7 +253,6 @@ public class Enemy : MonoBehaviour
     //当たり判定をONにする関数
     public void SetColliderOn(Collider collider)
     {
-        SE.Instance.SwordSwing();
         SwordEffect.SetActive(true);
         collider.enabled = true;
         Debug.Log("呼ばれた");
@@ -383,7 +372,6 @@ public class Enemy : MonoBehaviour
     //敵の遠距離攻撃のプレハブの生成
     public void EnemyShotAttack()
     {
-        SE.Instance.Fire();
         GameObject shell = Instantiate(shellPrefab, Enemy_L_Hand.transform.position, Quaternion.identity);
         Rigidbody shellRb = shell.GetComponent<Rigidbody>();
         // 弾速を設定
@@ -394,19 +382,16 @@ public class Enemy : MonoBehaviour
     //敵のHPバーの処理
     public async void EnemyDamage(int n)
     {
-        EnemyHp -= n;
-        EnemyHpBar.value = EnemyHp;
+        StageScene.Instance.EnemyHp -= n;
+        EnemyHpBar.value = StageScene.Instance.EnemyHp;
 
         //HP0のとき撃破エフェクトの生成と敵オブジェクトの削除
-        if (EnemyHp <= 0)
+        if (StageScene.Instance.EnemyHp <= 0)
         {
             SetDeadState();
             GameObject defeat = Instantiate(defeateffect, this.transform.position, Quaternion.identity);
             Destroy(this.gameObject,DeleteEnemyTime);
             Destroy(defeat, 8.0f);
-            await Task.Delay(1000);
-            ui.StageClear();
-
         }
     }
 

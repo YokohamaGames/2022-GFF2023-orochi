@@ -115,8 +115,8 @@ public class MoveBehaviourScript : MonoBehaviour
         Dead,
         // 無敵
         Invincible,
-        // ギミック系
-        G1, G2, G3,
+        // クリア後
+        Clear,
     }
     // 現在のプレイヤーの状態
     PlayerState currentState = PlayerState.Walk;
@@ -171,28 +171,26 @@ public class MoveBehaviourScript : MonoBehaviour
                 UpdateForWalkState();
                 break;
             case PlayerState.JumpReady:
-                UpdateForJumpReadyState();
                 break;
             case PlayerState.Jumping:
                 UpdateForJumpingState();
                 break;
             case PlayerState.Avoid:
-                UpdateForAvoidState();
                 break;
             case PlayerState.Attack:
                 UpdateForAttackState();
                 break;
             case PlayerState.Big:
-                UpdateForBigState();
                 break;
             case PlayerState.Medium:
-                UpdateForMediumState();
                 break;
             case PlayerState.Small:
-                UpdateForSmallState();
                 break;
             case PlayerState.Dead:
                 UpdateForDeadState();
+                break;
+            case PlayerState.Clear:
+                UpdateForClearState();
                 break;
             case PlayerState.Invincible:
                 UpdateForInvincible();
@@ -263,20 +261,10 @@ public class MoveBehaviourScript : MonoBehaviour
         }
     }
 
-    void UpdateForJumpReadyState()
-    {
-
-    }
-
     void UpdateForJumpingState()
     {
             speed = 5;
         Debug.Log("ジャンプ");
-    }
-
-    void UpdateForAvoidState()
-    {
-
     }
 
     void UpdateForAttackState()
@@ -284,26 +272,14 @@ public class MoveBehaviourScript : MonoBehaviour
         StartCoroutine(DelayCoroutine());
     }
 
-    
-    void UpdateForBigState()
-    {
-
-    }
-
-    void UpdateForMediumState()
-    {
-
-    }
-
-    void UpdateForSmallState()
-    {
-
-    }
-    
-
     void UpdateForDeadState()
     {
         Debug.Log("死んだ");
+        Time.timeScale = 0;
+    }
+
+    void UpdateForClearState()
+    {
         Time.timeScale = 0;
     }
 
@@ -412,34 +388,38 @@ public class MoveBehaviourScript : MonoBehaviour
             }
             else
             {
-                SetAttackState();
-
-                currentAnimator.SetTrigger("isAttack");
-
-                ButtonEnabled = false;
-
-                await Task.Delay(500);
-                rigidbody.AddForce(avatar.transform.forward * 10, ForceMode.Impulse);
-                if (currentBodySize == BodySize.Large)
+                if(currentState != PlayerState.Clear)
                 {
-                   attackareas[0].SetActive(false);
-                   attackareas[1].SetActive(false);
-                   attackareas[2].SetActive(true);
-                }
-                else if (currentBodySize == BodySize.Medium)
-                {
-                    attackareas[0].SetActive(false);
-                    attackareas[1].SetActive(true);
-                    attackareas[2].SetActive(false);
-                }
-                else if (currentBodySize == BodySize.Small)
-                {
-                    attackareas[0].SetActive(true);
-                    attackareas[1].SetActive(false);
-                    attackareas[2].SetActive(false);
-                }
 
-                StartCoroutine(ButtonCoroutine());
+                    SetAttackState();
+
+                    currentAnimator.SetTrigger("isAttack");
+
+                    ButtonEnabled = false;
+
+                    await Task.Delay(500);
+                    rigidbody.AddForce(avatar.transform.forward * 10, ForceMode.Impulse);
+                    if (currentBodySize == BodySize.Large)
+                    {
+                        attackareas[0].SetActive(false);
+                        attackareas[1].SetActive(false);
+                        attackareas[2].SetActive(true);
+                    }
+                    else if (currentBodySize == BodySize.Medium)
+                    {
+                        attackareas[0].SetActive(false);
+                        attackareas[1].SetActive(true);
+                        attackareas[2].SetActive(false);
+                    }
+                    else if (currentBodySize == BodySize.Small)
+                    {
+                        attackareas[0].SetActive(true);
+                        attackareas[1].SetActive(false);
+                        attackareas[2].SetActive(false);
+                    }
+
+                    StartCoroutine(ButtonCoroutine());
+                }
             }
         }
     }
@@ -673,7 +653,8 @@ public class MoveBehaviourScript : MonoBehaviour
 
     public void ClearState()
     {
-        currentState = PlayerState.Dead;
+        Debug.Log("クリア");
+        currentState = PlayerState.Clear;
     }
 }
 
