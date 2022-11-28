@@ -173,7 +173,7 @@ public class UI : MonoBehaviour
 
 	public void StageClear()
     {
-
+		HpBar.SetActive(false);
 		StageClearUI.SetActive(true);
 		StageClearButton.Select();
     }
