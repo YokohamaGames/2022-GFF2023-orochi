@@ -64,6 +64,8 @@ public class Enemy : MonoBehaviour
 
     [SerializeField]
     UI ui;
+
+    SE se;
     public bool SearchArea = false;
 
     public bool AttackArea = false;
@@ -112,6 +114,8 @@ public class Enemy : MonoBehaviour
         Weapon_Collider.enabled = false;                   //“G‚Ì•Ší‚Ì“–‚½‚è”»’è‚ğƒIƒt
         SwordEffect.SetActive(false);
         EnemyHpBar.value = EnemyHp;                        // Slider‚Ì‰Šúó‘Ô‚ğİ’è 
+        se = GetComponent<SE>();
+
     }
 
     // Update is called once per frame
@@ -236,17 +240,17 @@ public class Enemy : MonoBehaviour
                 case 1:
                    currentState = EnemyState.Attack;
                    animator.SetTrigger(isAttack);
-                   SE.Instance.SowrdAttack();
+                   //SE.Instance.SowrdAttack();
                    break;
                 case 2:
                    currentState = EnemyState.Attack2;
                    animator.SetTrigger(isAttack2);
-                   SE.Instance.SowrdAttack2();
+                   //SE.Instance.SowrdAttack2();
                    break;
                 case 3:
                    currentState = EnemyState.Attack3;
                    animator.SetTrigger(isAttack3);
-                   SE.Instance.Fire();
+                   //SE.Instance.Fire();
                    break;
                 default:
                 break;
@@ -259,6 +263,7 @@ public class Enemy : MonoBehaviour
     //“–‚½‚è”»’è‚ğON‚É‚·‚éŠÖ”
     public void SetColliderOn(Collider collider)
     {
+        SE.Instance.SwordSwing();
         SwordEffect.SetActive(true);
         collider.enabled = true;
         Debug.Log("ŒÄ‚Î‚ê‚½");
@@ -378,6 +383,7 @@ public class Enemy : MonoBehaviour
     //“G‚Ì‰“‹——£UŒ‚‚ÌƒvƒŒƒnƒu‚Ì¶¬
     public void EnemyShotAttack()
     {
+        SE.Instance.Fire();
         GameObject shell = Instantiate(shellPrefab, Enemy_L_Hand.transform.position, Quaternion.identity);
         Rigidbody shellRb = shell.GetComponent<Rigidbody>();
         // ’e‘¬‚ğİ’è
