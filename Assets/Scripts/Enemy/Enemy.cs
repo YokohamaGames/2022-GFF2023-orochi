@@ -416,6 +416,9 @@ public class Enemy : MonoBehaviour
     {
         StageScene.Instance.EnemyHp -= n;
         EnemyHpBar.value = StageScene.Instance.EnemyHp;
+        SE.Instance.Charge();
+        GameObject Hit = Instantiate(HitEffect, this.transform.position, Quaternion.identity);
+        Destroy(Hit, 1.5f);
 
         //HP0のとき撃破エフェクトの生成と敵オブジェクトの削除
         if (StageScene.Instance.EnemyHp <= 0)
@@ -426,18 +429,7 @@ public class Enemy : MonoBehaviour
             Destroy(this.gameObject,DeleteEnemyTime);
             Destroy(defeat, 8.0f);
         }
-    }
-
-    //プレイヤーとの接触判定
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Attack"))
-        {
-            SE.Instance.Charge();
-            GameObject Hit = Instantiate(HitEffect, this.transform.position, Quaternion.identity);
-            Destroy(Hit, 1.5f);
-        }
-    }
+    }    
 }
 
 
