@@ -24,10 +24,6 @@ public class UI : MonoBehaviour
 	[SerializeField]
 	private GameObject StageClearUI = null;
 
-	// HpBarを参照
-	[SerializeField]
-	private GameObject HpBar = null;
-
 	// SEを参照
 	[SerializeField]
 	private SE Se = null;
@@ -167,14 +163,16 @@ public class UI : MonoBehaviour
 
 	public void Retry()
     {
+		animator.SetTrigger("Transition");
 		SceneManager.LoadScene("Stage");
     }
 
 	// Homeが押されたらsceneをTitleへ移行する
 	public void Home()
 	{
-        SceneManager.LoadScene("Title");
+		 animator.SetTrigger("Transition");
+		 SceneManager.LoadScene("Title");
         // 再開
-        Time.timeScale = 1f;
+         Time.timeScale = 1f;
 	}
 }
