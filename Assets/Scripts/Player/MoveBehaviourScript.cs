@@ -280,7 +280,7 @@ public class MoveBehaviourScript : MonoBehaviour
 
     void UpdateForClearState()
     {
-        Time.timeScale = 0;
+        currentAnimator.SetBool("isWalk", false);
     }
 
     void UpdateForInvincible()
@@ -448,13 +448,16 @@ public class MoveBehaviourScript : MonoBehaviour
     {
         if (isGrounded == true)
         {
-            // spaceが押されたらジャンプ
-            rigidbody.AddForce(transform.up * upForce / 20f, ForceMode.Impulse);
-            isGrounded = false;
+            if (currentState != PlayerState.Clear)
+            {
+                // spaceが押されたらジャンプ
+                rigidbody.AddForce(transform.up * upForce / 20f, ForceMode.Impulse);
+                isGrounded = false;
 
-            currentAnimator.SetTrigger("isJump");
+                currentAnimator.SetTrigger("isJump");
 
-            SetJumpingState();
+                SetJumpingState();
+            }
         }
     }
 

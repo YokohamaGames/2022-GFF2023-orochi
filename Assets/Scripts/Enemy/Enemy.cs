@@ -156,7 +156,7 @@ public class Enemy : MonoBehaviour
     }
     private void FixedUpdate()
     {
-
+        
     }
 
 
@@ -321,6 +321,7 @@ public class Enemy : MonoBehaviour
             // Quaternion(回転値)を取得
             Quaternion quaternion = Quaternion.LookRotation(vec);
 
+            //Debug.Log(quaternion.y);
             // 算出した回転値をこのゲームオブジェクトのrotationに代入
             transform.rotation = quaternion;
             rigidbody.velocity = transform.forward * speed;// 正面方向に移動
@@ -412,7 +413,7 @@ public class Enemy : MonoBehaviour
     }
 
     //敵のHPバーの処理
-    public async void EnemyDamage(int n)
+    public void EnemyDamage(int n)
     {
         StageScene.Instance.EnemyHp -= n;
         EnemyHpBar.value = StageScene.Instance.EnemyHp;
@@ -431,11 +432,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    /*private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider collision)
     {
-        if (other.CompareTag("OrochiFire"))
+        if (collision.CompareTag("OrochiFire"))
         {
-            Destroy(other);
+            Debug.Log("火球");
             EnemyDamage(2);
         }
     }*/

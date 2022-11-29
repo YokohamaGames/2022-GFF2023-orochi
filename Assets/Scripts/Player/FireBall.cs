@@ -1,12 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.VisualScripting;
 
 public class FireBall : MonoBehaviour
 {
     private Vector3 latestPos;  //ëOâÒÇÃPosition
 
-    public GameObject enemy;
+    //public GameObject enemy;
+
+    public Enemy enemyscript;
+
+    private void Start()
+    {
+        enemyscript = GameObject.Find("Susano").GetComponent<Enemy>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -22,13 +31,7 @@ public class FireBall : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "enemy")
-        {
-            Debug.Log("ê⁄êG");
-            enemy.GetComponent<Enemy>().EnemyDamage(5);
-        }
-
+        enemyscript.EnemyDamage(5);
         Destroy(this.gameObject);
-
     }
 }
