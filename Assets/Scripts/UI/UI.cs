@@ -173,14 +173,14 @@ public class UI : MonoBehaviour
 
 	public void StageClear()
     {
-		HpBar.SetActive(false);
-		StageClearUI.SetActive(true);
+		animator.SetTrigger("StageClear");
+		// HpBar.SetActive(false);
+		// StageClearUI.SetActive(true);
 		StageClearButton.Select();
     }
 
 	public void Retry()
     {
-		animator.SetTrigger("Transition");
 		SceneManager.LoadScene("Stage");
     }
 
