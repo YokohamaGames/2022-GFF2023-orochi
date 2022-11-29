@@ -5,9 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerHPbar : MonoBehaviour
 {
-    [SerializeField]
-    private UI Ui = null;
-
     public static PlayerHPbar Instance { get; private set; }
 
     public GameObject[] heartArray = null;
