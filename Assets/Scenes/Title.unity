@@ -672,10 +672,10 @@ MonoBehaviour:
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
-    m_HighlightedTrigger: 
-    m_PressedTrigger: 
+    m_HighlightedTrigger: Normal
+    m_PressedTrigger: Normal
     m_SelectedTrigger: Selected
-    m_DisabledTrigger: 
+    m_DisabledTrigger: Normal
   m_Interactable: 1
   m_TargetGraphic: {fileID: 570548808}
   m_OnClick:
@@ -1370,10 +1370,10 @@ MonoBehaviour:
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
-    m_HighlightedTrigger: 
-    m_PressedTrigger: 
+    m_HighlightedTrigger: Normal
+    m_PressedTrigger: Normal
     m_SelectedTrigger: Selected
-    m_DisabledTrigger: 
+    m_DisabledTrigger: Normal
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1301883830}
   m_OnClick:

@@ -239,11 +239,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 37061e8ea4b62cf4e8baf0a407549411, type: 3}
---- !u!1 &299056001 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8554205544815542140, guid: 43fa36726561e7443a887d841ff8c77d, type: 3}
-  m_PrefabInstance: {fileID: 1980042594}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &332977475
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1512,7 +1507,7 @@ MonoBehaviour:
   Ui: {fileID: 1724907016}
   playerhp: 6
   HealObject: {fileID: 6790358148406016604, guid: 11ff5af59f313114baab9ec09288fe8e, type: 3}
-  EnemyHp: 100
+  EnemyHp: 1
   Player: {fileID: 1750103307}
 --- !u!95 &1440353449
 Animator:
@@ -1526,7 +1521,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 085aa9061fc0fce4780b9f6e5dbb9036, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -2097,7 +2092,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 82e69beb31710f744ac15d8af70acfc1, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 3305fc95b61cf8e4996c17f99c79b65f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2300,34 +2295,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1440353447}
     m_Modifications:
-    - target: {fileID: 1923531164701142525, guid: 43fa36726561e7443a887d841ff8c77d, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3179472105403719849, guid: 43fa36726561e7443a887d841ff8c77d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6166192170150422232, guid: 43fa36726561e7443a887d841ff8c77d, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6166192170150422232, guid: 43fa36726561e7443a887d841ff8c77d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7376900902121245095, guid: 43fa36726561e7443a887d841ff8c77d, type: 3}
       propertyPath: m_fontColor32.rgba
-      value: 255
+      value: 2147483903
+      objectReference: {fileID: 0}
+    - target: {fileID: 7376900902563189849, guid: 43fa36726561e7443a887d841ff8c77d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7376900902647188688, guid: 43fa36726561e7443a887d841ff8c77d, type: 3}
       propertyPath: Se
       value: 
       objectReference: {fileID: 1522733868}
-    - target: {fileID: 7376900902647188688, guid: 43fa36726561e7443a887d841ff8c77d, type: 3}
-      propertyPath: HpBar
-      value: 
-      objectReference: {fileID: 299056001}
     - target: {fileID: 7376900902647188688, guid: 43fa36726561e7443a887d841ff8c77d, type: 3}
       propertyPath: Player
       value: 
@@ -2420,9 +2399,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 7376900903299714429, guid: 43fa36726561e7443a887d841ff8c77d, type: 3}
-      propertyPath: m_text
-      value: "\u3042\u304D\u3089\u3081\u308B"
+    - target: {fileID: 7376900902692267266, guid: 43fa36726561e7443a887d841ff8c77d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8554205544815542140, guid: 43fa36726561e7443a887d841ff8c77d, type: 3}
       propertyPath: m_IsActive

@@ -24,10 +24,6 @@ public class UI : MonoBehaviour
 	[SerializeField]
 	private GameObject StageClearUI = null;
 
-	// HpBarを参照
-	[SerializeField]
-	private GameObject HpBar = null;
-
 	// SEを参照
 	[SerializeField]
 	private SE Se = null;
@@ -56,7 +52,6 @@ public class UI : MonoBehaviour
 
 	public GameObject Player;
 
-
 	// 開始時にUIを非表示
 	void Start()
 	{
@@ -77,10 +72,9 @@ public class UI : MonoBehaviour
 	{
 		if (!PauseUI.activeSelf)
         {
+			animator.SetTrigger("PauseIn");
 			// ポーズの表示
 			PauseUI.SetActive(true);
-			// HpBarの非表示
-			HpBar.SetActive(false);
 			// UIが開かれた音声を再生
 			Se.OpenUI();
 			// 停止
@@ -89,12 +83,10 @@ public class UI : MonoBehaviour
 		}
 		else if (PauseUI.activeSelf && !OptionUI.activeSelf && !GuideUI.activeSelf)
         {
-			Player.SetActive(false);
-
 			// ポーズの非表示
 			PauseUI.SetActive(false);
-			// HpBarの表示
-			HpBar.SetActive(true);
+
+			animator.SetTrigger("PauseOut");
 			// UIが閉じられた音声を再生
 			Se.CloseUI();
 			// 再開
@@ -102,8 +94,6 @@ public class UI : MonoBehaviour
 		}
         else if (PauseUI.activeSelf && OptionUI.activeSelf)
 		{
-			Player.SetActive(true);
-
 			// optionの非表示
 			OptionUI.SetActive(false);
 			// UIが閉じられた音声を再生
@@ -159,22 +149,15 @@ public class UI : MonoBehaviour
 	{
 		if (!GameOverUI.activeSelf)
 		{
-			StartCoroutine(DelayClear());
 			animator.SetTrigger("GameOver");
 			GameOverButton.Select();
 
 		}
 	}
 
-	IEnumerator DelayClear()
-    {
-		yield return new WaitForSeconds(8);
-    }
-
 	public void StageClear()
     {
-		HpBar.SetActive(false);
-		StageClearUI.SetActive(true);
+		animator.SetTrigger("StageClear");
 		StageClearButton.Select();
     }
 
@@ -187,8 +170,9 @@ public class UI : MonoBehaviour
 	// Homeが押されたらsceneをTitleへ移行する
 	public void Home()
 	{
-        SceneManager.LoadScene("Title");
+		 animator.SetTrigger("Transition");
+		 SceneManager.LoadScene("Title");
         // 再開
-        Time.timeScale = 1f;
+         Time.timeScale = 1f;
 	}
 }
