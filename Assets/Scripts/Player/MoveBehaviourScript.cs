@@ -86,6 +86,10 @@ public class MoveBehaviourScript : MonoBehaviour
     [SerializeField]
     public GameObject HealObject;
 
+    // 砂埃エフェクトの指定
+    [SerializeField]
+    public GameObject RunEffect;
+
     //サイズ変更エフェクトの指定
     [SerializeField]
     public GameObject ChangeEffect;
@@ -259,12 +263,14 @@ public class MoveBehaviourScript : MonoBehaviour
             default:
                 break;
         }
+        RunEffect.SetActive(true);
     }
 
     void UpdateForJumpingState()
     {
             speed = 5;
         Debug.Log("ジャンプ");
+        RunEffect.SetActive(false);
     }
 
     void UpdateForAttackState()
