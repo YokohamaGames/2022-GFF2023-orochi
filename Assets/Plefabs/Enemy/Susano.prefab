@@ -206,8 +206,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 744792539108911357}
-  m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.4435088, y: 0.4846111, z: -0.5438084, w: 0.5222304}
+  m_LocalPosition: {x: -0.042145267, y: 0.27260768, z: 1.5924107}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -215,7 +215,7 @@ Transform:
   - {fileID: 8331117211789829217}
   m_Father: {fileID: 4899205373034480448}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 82.013, y: 9.858, z: -83.743}
 --- !u!1 &1552772765174155673
 GameObject:
   m_ObjectHideFlags: 0
@@ -10886,11 +10886,14 @@ MonoBehaviour:
   Enemy_L_Hand: {fileID: 3692158330596714780}
   EnemyHpBar: {fileID: 0}
   SwordEffect: {fileID: 4322176617235163267, guid: 5b8a2349ad443714b8425b2ad29c99ba, type: 3}
+  HitEffect: {fileID: 0}
   TimetoAttack: 2
   DeleteEnemyTime: 5
+  timefire: 1.5
   SearchArea: 0
   AttackArea: 0
   LongAttackArea: 0
+  Dead: 0
 --- !u!1 &8141677924268495619
 GameObject:
   m_ObjectHideFlags: 0
