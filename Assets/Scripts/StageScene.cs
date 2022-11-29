@@ -45,9 +45,8 @@ public class StageScene : MonoBehaviour
         }
 
         if (EnemyHp <= 0)
-        {
-            
-            await Task.Delay(7000);
+        {  
+            await Task.Delay(5000);
             Ui.StageClear();
             Player.GetComponent<MoveBehaviourScript>().ClearState();
         }
