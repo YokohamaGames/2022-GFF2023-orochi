@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Cinemachine;
-
+using System.Threading.Tasks;
 // 移動するキャラクターを制御します。
 public class MoveBehaviourScript : MonoBehaviour
 {
@@ -24,10 +22,6 @@ public class MoveBehaviourScript : MonoBehaviour
     //火球のプレハブの取得
     [SerializeField]
     private GameObject shellPrefab;
-
-    //Playerのアニメーターの取得
-    //[SerializeField]
-    //Animator animator;
 
     [SerializeField]
     [Tooltip("カメラの切り替え")]
@@ -50,7 +44,7 @@ public class MoveBehaviourScript : MonoBehaviour
     private GameObject[] attackareas = null;
 
     [SerializeField]
-    private Transform Orochihead;
+    private Transform Orochihead = null;
     [SerializeField]
     [Tooltip("変身のクールタイム")]
     float ChangeCoolTime = 10;
@@ -76,6 +70,9 @@ public class MoveBehaviourScript : MonoBehaviour
     // 今のスピードとジャンプ力
     private float speed = 5.0f;
     private float upForce = 100f;
+
+    [Tooltip("火球の発射場所番号")]
+    private int i = 1;
 
     private bool ButtonEnabled = true;
 
@@ -118,8 +115,8 @@ public class MoveBehaviourScript : MonoBehaviour
         Dead,
         // 無敵
         Invincible,
-        // ギミック系
-        G1, G2, G3,
+        // クリア後
+        Clear,
     }
     // 現在のプレイヤーの状態
     PlayerState currentState = PlayerState.Walk;
@@ -174,28 +171,26 @@ public class MoveBehaviourScript : MonoBehaviour
                 UpdateForWalkState();
                 break;
             case PlayerState.JumpReady:
-                UpdateForJumpReadyState();
                 break;
             case PlayerState.Jumping:
                 UpdateForJumpingState();
                 break;
             case PlayerState.Avoid:
-                UpdateForAvoidState();
                 break;
             case PlayerState.Attack:
                 UpdateForAttackState();
                 break;
             case PlayerState.Big:
-                UpdateForBigState();
                 break;
             case PlayerState.Medium:
-                UpdateForMediumState();
                 break;
             case PlayerState.Small:
-                UpdateForSmallState();
                 break;
             case PlayerState.Dead:
                 UpdateForDeadState();
+                break;
+            case PlayerState.Clear:
+                UpdateForClearState();
                 break;
             case PlayerState.Invincible:
                 UpdateForInvincible();
@@ -228,6 +223,18 @@ public class MoveBehaviourScript : MonoBehaviour
             SetDeadState();
         }
 
+        if (currentBodySize == BodySize.Large)
+        {
+            i = 2;
+        }
+        else if (currentBodySize == BodySize.Medium)
+        {
+            i = 1;
+        }
+        else if (currentBodySize == BodySize.Small)
+        {
+            i = 0;
+        }
 
     }
 
@@ -254,20 +261,10 @@ public class MoveBehaviourScript : MonoBehaviour
         }
     }
 
-    void UpdateForJumpReadyState()
-    {
-
-    }
-
     void UpdateForJumpingState()
     {
             speed = 5;
         Debug.Log("ジャンプ");
-    }
-
-    void UpdateForAvoidState()
-    {
-
     }
 
     void UpdateForAttackState()
@@ -275,26 +272,14 @@ public class MoveBehaviourScript : MonoBehaviour
         StartCoroutine(DelayCoroutine());
     }
 
-    
-    void UpdateForBigState()
-    {
-
-    }
-
-    void UpdateForMediumState()
-    {
-
-    }
-
-    void UpdateForSmallState()
-    {
-
-    }
-    
-
     void UpdateForDeadState()
     {
         Debug.Log("死んだ");
+        Time.timeScale = 0;
+    }
+
+    void UpdateForClearState()
+    {
         Time.timeScale = 0;
     }
 
@@ -393,7 +378,7 @@ public class MoveBehaviourScript : MonoBehaviour
 
 
     // 攻撃します
-    public void Fire()
+    public async void Fire()
     {
         if (isGrounded == true)
         {
@@ -403,32 +388,38 @@ public class MoveBehaviourScript : MonoBehaviour
             }
             else
             {
-                SetAttackState();
-
-                if(currentBodySize == BodySize.Large)
+                if(currentState != PlayerState.Clear)
                 {
-                    attackareas[0].SetActive(false);
-                    attackareas[1].SetActive(false);
-                    attackareas[2].SetActive(true);
-                }
-                else if (currentBodySize == BodySize.Medium)
-                {
-                    attackareas[0].SetActive(false);
-                    attackareas[1].SetActive(true);
-                    attackareas[2].SetActive(false);
-                }
-                else if (currentBodySize == BodySize.Small)
-                {
-                    attackareas[0].SetActive(true);
-                    attackareas[1].SetActive(false);
-                    attackareas[2].SetActive(false);
-                }
 
-                currentAnimator.SetTrigger("isAttack");
+                    SetAttackState();
 
-                ButtonEnabled = false;
+                    currentAnimator.SetTrigger("isAttack");
 
-                StartCoroutine(ButtonCoroutine());
+                    ButtonEnabled = false;
+
+                    await Task.Delay(500);
+                    rigidbody.AddForce(avatar.transform.forward * 10, ForceMode.Impulse);
+                    if (currentBodySize == BodySize.Large)
+                    {
+                        attackareas[0].SetActive(false);
+                        attackareas[1].SetActive(false);
+                        attackareas[2].SetActive(true);
+                    }
+                    else if (currentBodySize == BodySize.Medium)
+                    {
+                        attackareas[0].SetActive(false);
+                        attackareas[1].SetActive(true);
+                        attackareas[2].SetActive(false);
+                    }
+                    else if (currentBodySize == BodySize.Small)
+                    {
+                        attackareas[0].SetActive(true);
+                        attackareas[1].SetActive(false);
+                        attackareas[2].SetActive(false);
+                    }
+
+                    StartCoroutine(ButtonCoroutine());
+                }
             }
         }
     }
@@ -437,14 +428,18 @@ public class MoveBehaviourScript : MonoBehaviour
     {
         if (shot == true)
         {
-            GameObject shell = Instantiate(shellPrefab, Orochihead.transform.position, Quaternion.identity);
-            Rigidbody shellRb = shell.GetComponent<Rigidbody>();
-            // 弾速を設定
-            shellRb.AddForce(avatar.transform.forward * 1500);
-            Destroy(shell, 1.0f);
+            if(currentBodySize == BodySize.Large)
+            {
+                SE.Instance.FireSE();
+                GameObject shell = Instantiate(shellPrefab, Orochihead.transform.position, Quaternion.identity);
+                Rigidbody shellRb = shell.GetComponent<Rigidbody>();
+                // 弾速を設定
+                shellRb.AddForce(Orochihead.transform.forward * 1500);
+                Destroy(shell, 1.0f);
 
-            shot = false;
-            ShotCoolTime = shotCoolTime;
+                shot = false;
+                ShotCoolTime = shotCoolTime;
+            }
         }
     }
 
@@ -469,6 +464,7 @@ public class MoveBehaviourScript : MonoBehaviour
         {
             if (collision.CompareTag("Enemy_Weapon"))
             {
+                SE.Instance.Damaged();
                 StageScene.Instance.Damage();
                 SetInvincible();
             }
@@ -655,6 +651,12 @@ public class MoveBehaviourScript : MonoBehaviour
     {
         CoolTime = ChangeCoolTime;
         isChange = false;
+    }
+
+    public void ClearState()
+    {
+        Debug.Log("クリア");
+        currentState = PlayerState.Clear;
     }
 }
 

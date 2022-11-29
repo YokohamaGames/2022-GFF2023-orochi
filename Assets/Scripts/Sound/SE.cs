@@ -9,6 +9,19 @@ public class SE : MonoBehaviour
     public AudioClip swordattack = null;
     public AudioClip swordattack2 = null;
     public AudioClip fire = null;
+    public AudioClip damage = null;
+    public AudioClip swordswing = null;
+    public AudioClip chargehit = null;
+    public AudioClip damaged = null;
+    public AudioClip fireattack = null;
+    public AudioClip firedamaged = null;
+    public AudioClip charge = null;
+
+
+
+
+
+
 
 
     AudioSource Se = null;
@@ -54,4 +67,38 @@ public class SE : MonoBehaviour
         Se.PlayOneShot(fire);
     }
 
+    public void Damage()
+    {
+        Se.PlayOneShot(damage);
+    }
+
+    public void SwordSwing()
+    {
+        Se.PlayOneShot(swordswing);
+    }
+
+    public void ChargeHit()
+    {
+        Se.PlayOneShot(chargehit);
+    }
+
+    public void Damaged()
+    {
+        Se.PlayOneShot(damaged);
+    }
+
+    public void FireSE()
+    {
+        Se.PlayOneShot(fireattack);
+    } 
+
+    public void FireDamaged()
+    {
+        Se.PlayOneShot(firedamaged);
+    }
+
+    public void Charge()
+    {
+        Se.PlayOneShot(charge);
+    }
 }

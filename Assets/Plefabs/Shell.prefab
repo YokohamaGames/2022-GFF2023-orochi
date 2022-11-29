@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7563215245104818957}
   m_Layer: 7
   m_Name: Shell
-  m_TagString: Enemy_Weapon
+  m_TagString: Attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

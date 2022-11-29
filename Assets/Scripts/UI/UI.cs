@@ -24,6 +24,10 @@ public class UI : MonoBehaviour
 	[SerializeField]
 	private GameObject StageClearUI = null;
 
+	// HpBarを参照
+	[SerializeField]
+	private GameObject HpBar = null;
+
 	// SEを参照
 	[SerializeField]
 	private SE Se = null;
@@ -50,6 +54,7 @@ public class UI : MonoBehaviour
 
 	Animator animator;
 
+	public GameObject Player;
 
 
 	// 開始時にUIを非表示
@@ -74,6 +79,8 @@ public class UI : MonoBehaviour
         {
 			// ポーズの表示
 			PauseUI.SetActive(true);
+			// HpBarの非表示
+			HpBar.SetActive(false);
 			// UIが開かれた音声を再生
 			Se.OpenUI();
 			// 停止
@@ -82,8 +89,12 @@ public class UI : MonoBehaviour
 		}
 		else if (PauseUI.activeSelf && !OptionUI.activeSelf && !GuideUI.activeSelf)
         {
+			Player.SetActive(false);
+
 			// ポーズの非表示
 			PauseUI.SetActive(false);
+			// HpBarの表示
+			HpBar.SetActive(true);
 			// UIが閉じられた音声を再生
 			Se.CloseUI();
 			// 再開
@@ -91,6 +102,8 @@ public class UI : MonoBehaviour
 		}
         else if (PauseUI.activeSelf && OptionUI.activeSelf)
 		{
+			Player.SetActive(true);
+
 			// optionの非表示
 			OptionUI.SetActive(false);
 			// UIが閉じられた音声を再生
@@ -160,7 +173,7 @@ public class UI : MonoBehaviour
 
 	public void StageClear()
     {
-
+		HpBar.SetActive(false);
 		StageClearUI.SetActive(true);
 		StageClearButton.Select();
     }

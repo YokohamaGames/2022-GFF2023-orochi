@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Threading.Tasks;
 
 public class StageScene : MonoBehaviour
 {   
@@ -17,7 +18,11 @@ public class StageScene : MonoBehaviour
     [SerializeField]
     public GameObject HealObject;
 
+    //ìGÇÃHPÇê›íË
+    [SerializeField]
+    public int EnemyHp;
 
+    public GameObject Player;
 
     private void Awake()
     {
@@ -32,11 +37,19 @@ public class StageScene : MonoBehaviour
         }
     }
 
-    public void Update()
+    public async Task Update()
     {
         if (playerhp == 0)
         {
             Ui.GameOver();
+        }
+
+        if (EnemyHp <= 0)
+        {
+            
+            await Task.Delay(7000);
+            Ui.StageClear();
+            Player.GetComponent<MoveBehaviourScript>().ClearState();
         }
     }
 
@@ -55,6 +68,5 @@ public class StageScene : MonoBehaviour
             playerhp--;
         }
     }
-
     
 }

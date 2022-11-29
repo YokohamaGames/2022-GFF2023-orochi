@@ -6,12 +6,6 @@ public class Shell : MonoBehaviour
 {
     private Vector3 latestPos;  //ëOâÒÇÃPosition
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -27,9 +21,7 @@ public class Shell : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("ê⁄êG");
-
         Destroy(this.gameObject);
-
+        SE.Instance.FireDamaged();
     }
 }
