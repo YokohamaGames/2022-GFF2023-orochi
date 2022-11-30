@@ -94,6 +94,9 @@ public class MoveBehaviourScript : MonoBehaviour
     [SerializeField]
     public GameObject ChangeEffect;
 
+    [SerializeField]
+    private Effect effect = null;
+
     Quaternion EffectAngle = Quaternion.Euler(-90f, 0f, 0f);
 
     // プレイヤーの状態を表します
@@ -132,6 +135,9 @@ public class MoveBehaviourScript : MonoBehaviour
     */
     [SerializeField]
     private GameObject damagefire;
+
+    [SerializeField]
+    private GameObject damaged;
 
     // コンポーネントを事前に参照しておく変数
     new Rigidbody rigidbody;
@@ -472,6 +478,8 @@ public class MoveBehaviourScript : MonoBehaviour
             if (collision.CompareTag("Enemy_Weapon"))
             {
                 SE.Instance.Damaged();
+                GameObject effectplay = Instantiate(damaged, this.transform.position, Quaternion.identity);
+                Destroy(effectplay, 1.0f);
                 StageScene.Instance.Damage();
                 SetInvincible();
             }

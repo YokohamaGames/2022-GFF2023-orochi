@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 462319fa59c5eb44eadbd6b29a9aad09
+guid: 23e29c26aa64bcf45ba0c944efea498c
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: Tate
+    second: Beam
   externalObjects: {}
   materials:
     materialImportMode: 0
@@ -22,8 +22,7 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: Event ReceiveAnimationEvent has a time (1.145184) outside
-      the clip's valid range (0.000000..1.000000). It will never be fired
+    animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -37,7 +36,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Tate
+      name: Beam
       takeName: Take 001
       internalID: 0
       firstFrame: 0
@@ -50,9 +49,9 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 1
-      loopBlendPositionY: 1
-      loopBlendPositionXZ: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
@@ -61,19 +60,12 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.3493761
+      - time: 0.78968436
         functionName: ReceiveAnimationEvent
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
-        intParameter: 1
-        messageOptions: 0
-      - time: 0.85888773
-        functionName: ReceiveAnimationEvent
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 2
+        intParameter: 3
         messageOptions: 0
       transformMask: []
       maskType: 3

@@ -283,7 +283,7 @@ public class Enemy : MonoBehaviour
         SE.Instance.SwordSwing();
         SwordEffect.SetActive(true);
         collider.enabled = true;
-        Debug.Log("ŒÄ‚Î‚ê‚½");
+        Debug.Log(collider.enabled);
     }
    
     //“–‚½‚è”»’è‚ğOFF‚É‚·‚éŠÖ”
@@ -291,6 +291,7 @@ public class Enemy : MonoBehaviour
     {
         SwordEffect.SetActive(false);
         collider.enabled = false;
+        Debug.Log(collider.enabled);
     }
     
     void UpdateForDiscover()
