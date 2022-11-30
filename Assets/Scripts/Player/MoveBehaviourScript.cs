@@ -269,7 +269,6 @@ public class MoveBehaviourScript : MonoBehaviour
     void UpdateForJumpingState()
     {
             speed = 5;
-        Debug.Log("ジャンプ");
         RunEffect.SetActive(false);
     }
 
@@ -280,7 +279,6 @@ public class MoveBehaviourScript : MonoBehaviour
 
     void UpdateForDeadState()
     {
-        Debug.Log("死んだ");
         Time.timeScale = 0;
     }
 
@@ -552,8 +550,6 @@ public class MoveBehaviourScript : MonoBehaviour
         //変身エフェクト
         Instantiate(ChangeEffect, this.transform.position, EffectAngle); //パーティクル用ゲームオブジェクト生成
 
-        Debug.Log("大型");
-
         upForce = LARGEup;
 
             bodies[0].SetActive(false);
@@ -664,7 +660,6 @@ public class MoveBehaviourScript : MonoBehaviour
 
     public void ClearState()
     {
-        Debug.Log("クリア");
         currentState = PlayerState.Clear;
     }
 }
