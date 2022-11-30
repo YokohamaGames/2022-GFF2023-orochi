@@ -2731,7 +2731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChaseSpeed: 4
-  AttackReadySpeed: 2
+  AttackReadySpeed: 4
   target: {fileID: 6326434}
   animator: {fileID: 1201586139}
   rotMax: 0
@@ -2970,5 +2970,5 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
