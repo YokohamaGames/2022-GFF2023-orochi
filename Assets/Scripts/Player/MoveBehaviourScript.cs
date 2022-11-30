@@ -480,7 +480,6 @@ public class MoveBehaviourScript : MonoBehaviour
             {
                 SE.Instance.Damaged();
                 GameObject effectplay = Instantiate(damaged, this.transform.position, Quaternion.identity);
-                Destroy(effectplay, 1.0f);
                 StageScene.Instance.Damage();
                 SetInvincible();
             }

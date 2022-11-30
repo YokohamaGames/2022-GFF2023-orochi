@@ -429,7 +429,6 @@ public class Enemy : MonoBehaviour
             SetDeadState();
             GameObject defeat = Instantiate(defeateffect, this.transform.position, Quaternion.identity);
             Destroy(this.gameObject,DeleteEnemyTime);
-            Destroy(defeat, 8.0f);
         }
     }
 
