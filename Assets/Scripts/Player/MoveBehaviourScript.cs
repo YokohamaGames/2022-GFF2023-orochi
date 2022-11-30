@@ -272,9 +272,10 @@ public class MoveBehaviourScript : MonoBehaviour
         RunEffect.SetActive(true);
     }
 
-    void UpdateForJumpingState()
+    async void UpdateForJumpingState()
     {
             speed = 5;
+        await Task.Delay(200);
         RunEffect.SetActive(false);
     }
 
