@@ -31,7 +31,10 @@ public class FireBall : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        enemyscript.EnemyDamage(5);
+        if (collision.gameObject.tag == "enemy")
+        {
+            enemyscript.EnemyDamage(5);
+        }
         Destroy(this.gameObject);
     }
 }
