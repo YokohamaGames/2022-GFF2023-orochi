@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEditor;
 
 //敵のAIとステータス設定
 public class Enemy : MonoBehaviour
