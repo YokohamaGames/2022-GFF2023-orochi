@@ -12,7 +12,17 @@ ModelImporter:
   - first:
       74: -998496362607748373
     second: Avoid
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: oroti3_eye
+    second: {fileID: 2100000, guid: 198f8ebca588fc847b69c395111e02e2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: oroti3_lambert1
+    second: {fileID: 2100000, guid: 2d78b4dc33f813e4cb375ef22e232521, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
