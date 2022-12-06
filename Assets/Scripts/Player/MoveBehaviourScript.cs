@@ -486,7 +486,7 @@ public class MoveBehaviourScript : MonoBehaviour
             if (collision.CompareTag("Enemy_Weapon"))
             {
                 SE.Instance.Damaged();
-                GameObject effectplay = Instantiate(damaged, this.transform.position, Quaternion.identity);
+                //GameObject effectplay = Instantiate(damaged, this.transform.position, Quaternion.identity);
                 StageScene.Instance.Damage();
                 SetInvincible();
             }
