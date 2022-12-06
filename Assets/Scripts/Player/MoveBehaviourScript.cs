@@ -82,6 +82,9 @@ public class MoveBehaviourScript : MonoBehaviour
     // Avatarオブジェクトへの参照
     public GameObject avatar = null;
 
+    // Rigidbodyの参照
+    public BoxCollider boxCol;
+
     //回復エフェクトの指定
     [SerializeField]
     public GameObject HealObject;
@@ -152,6 +155,7 @@ public class MoveBehaviourScript : MonoBehaviour
         shot = true;
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.centerOfMass = com;
+        boxCol = GetComponent<BoxCollider>();
 
         // 初めは普通の状態
         bodies[0].SetActive(false);
@@ -302,6 +306,8 @@ public class MoveBehaviourScript : MonoBehaviour
     // Walkステートに遷移させます。
     void SetWalkState()
     {
+        boxCol.size = new Vector3(1.5f, 4.3f, 5.1f);
+
         attackareas[0].SetActive(false);
         attackareas[1].SetActive(false);
         attackareas[2].SetActive(false);
@@ -358,6 +364,7 @@ public class MoveBehaviourScript : MonoBehaviour
 
     public void SetInvincible()
     {
+        boxCol.size = new Vector3(0.1f, 0.1f, 0.1f);
         currentState = PlayerState.Invincible;
     }
 
