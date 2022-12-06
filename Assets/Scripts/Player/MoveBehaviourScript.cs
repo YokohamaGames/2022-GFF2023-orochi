@@ -306,7 +306,7 @@ public class MoveBehaviourScript : MonoBehaviour
     // Walkステートに遷移させます。
     void SetWalkState()
     {
-        boxCol.size = new Vector3(1.5f, 4.3f, 5.1f);
+        //boxCol.size = new Vector3(1.5f, 4.3f, 5.1f);
 
         attackareas[0].SetActive(false);
         attackareas[1].SetActive(false);

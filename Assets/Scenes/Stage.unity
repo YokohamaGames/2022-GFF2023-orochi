@@ -368,9 +368,25 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1204086077434623065, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1204086077434623065, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+      propertyPath: m_Size.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2166579221792581724, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: ShoulderOffset.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3224736646060018117, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3224736646060018117, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+      propertyPath: m_Size.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3230433422930574985, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: m_IsActive
@@ -494,11 +510,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4611616855408944638, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: m_Size.y
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4611616855408944638, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: m_Size.z
-      value: 4
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 4611616855408944638, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: m_Enabled
@@ -506,7 +522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4611616855408944638, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: m_Center.y
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4611616855408944638, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: m_IsTrigger
