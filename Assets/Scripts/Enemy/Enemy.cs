@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEditor;
 
 //敵のAIとステータス設定
 public class Enemy : MonoBehaviour
@@ -76,6 +77,15 @@ public class Enemy : MonoBehaviour
     // コンポーネントを事前に参照しておく変数
     new Rigidbody rigidbody;
 
+    [Header("SE")]
+    [SerializeField] private AudioClip fire;
+    [SerializeField] private AudioClip swing;
+    [SerializeField] private AudioClip chargedamaged;
+
+
+    private AudioSource se;
+    
+
     // AnimatorのパラメーターID
     int baseLayerIndex = -1;
     static readonly int LocomotionHash = Animator.StringToHash("Base Layer.Locomotion");
@@ -114,6 +124,7 @@ public class Enemy : MonoBehaviour
         Weapon_Collider.enabled = false;                   //敵の武器の当たり判定をオフ
         SwordEffect.SetActive(false);
         EnemyHpBar.value = StageScene.Instance.EnemyHp;                        // Sliderの初期状態を設定 
+        se = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -256,17 +267,14 @@ public class Enemy : MonoBehaviour
                 case 1:
                     currentState = EnemyState.Attack;
                     animator.SetTrigger(isAttack);
-                    //SE.Instance.SowrdAttack();
                     break;
                 case 2:
                     currentState = EnemyState.Attack2;
                     animator.SetTrigger(isAttack2);
-                    //SE.Instance.SowrdAttack2();
                     break;
                 case 3:
                     currentState = EnemyState.Attack3;
                     animator.SetTrigger(isAttack3);
-                    //SE.Instance.Fire();
                     break;
                 default:
                     break;
@@ -280,10 +288,9 @@ public class Enemy : MonoBehaviour
     //当たり判定をONにする関数
     public void SetColliderOn(Collider collider)
     {
-        SE.Instance.SwordSwing();
+        SE.Instance.PlaySound(swing);
         SwordEffect.SetActive(true);
         collider.enabled = true;
-        Debug.Log(collider.enabled);
     }
    
     //当たり判定をOFFにする関数
@@ -291,7 +298,6 @@ public class Enemy : MonoBehaviour
     {
         SwordEffect.SetActive(false);
         collider.enabled = false;
-        Debug.Log(collider.enabled);
     }
     
     void UpdateForDiscover()
@@ -312,7 +318,6 @@ public class Enemy : MonoBehaviour
     //プレイやーに向かって動く処理
     void UpdateForMove()
     {
-        Debug.Log(cnt);
         if (!Dead)
         {
             //ターゲット方向のベクトルを求める
@@ -405,7 +410,7 @@ public class Enemy : MonoBehaviour
     //敵の遠距離攻撃のプレハブの生成
     public void EnemyShotAttack()
     {
-        SE.Instance.Fire();
+        SE.Instance.PlaySound(fire);
         GameObject shell = Instantiate(shellPrefab, Enemy_L_Hand.transform.position, Quaternion.identity);
         Rigidbody shellRb = shell.GetComponent<Rigidbody>();
         // 弾速を設定
@@ -418,7 +423,7 @@ public class Enemy : MonoBehaviour
     {
         StageScene.Instance.EnemyHp -= n;
         EnemyHpBar.value = StageScene.Instance.EnemyHp;
-        SE.Instance.ChargeHit();
+        SE.Instance.PlaySound(chargedamaged);
         GameObject Hit = Instantiate(HitEffect, this.transform.position, Quaternion.identity);
         Destroy(Hit, 1.5f);
 

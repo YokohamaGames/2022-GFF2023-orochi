@@ -101,4 +101,9 @@ public class SE : MonoBehaviour
     {
         Se.PlayOneShot(charge);
     }
+
+    public void PlaySound(AudioClip sound)
+    {
+        Se.PlayOneShot(sound);
+    }
 }
