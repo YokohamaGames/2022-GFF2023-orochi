@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 public class TitleScene : MonoBehaviour
 {
@@ -11,6 +12,12 @@ public class TitleScene : MonoBehaviour
     // Titleボタンを参照
     [SerializeField]
     private Selectable TitleButton = null;
+
+    // 次のシーンを読み込み可能な場合はtrue、それ以外はfalse
+    bool isLoadable = false;
+
+    Animator animator;
+    static readonly int FadeOutId = Animator.StringToHash("FadeOut");
 
     /* StageSelectを参照
     [SerializeField]
@@ -25,6 +32,7 @@ public class TitleScene : MonoBehaviour
         Title.SetActive(true);
         // StageSelect.SetActive(false);
         TitleButton.Select();
+        animator = GetComponent<Animator>();
     }
 
     // Titleを非表示、StageSelectを表示
@@ -38,12 +46,25 @@ public class TitleScene : MonoBehaviour
     // ゲームを終了する
     public void Exit()
     {
+        StartCoroutine(OnStart());
         Application.Quit();
     }
 
     // Stageを読み込む
-    public void Stage1()
+
+
+    public void LoadStage()
     {
+        StartCoroutine(OnStart());
         SceneManager.LoadScene("Stage");
+
     }
+
+    IEnumerator OnStart()
+    {
+        animator.SetTrigger(FadeOutId);
+        yield return new WaitForSeconds(2);
+        isLoadable = true;
+    }
+
 }
