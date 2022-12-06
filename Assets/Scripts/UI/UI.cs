@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System.Collections;
+using System.Threading.Tasks;
 public class UI : MonoBehaviour
 {
 	// ポーズを参照

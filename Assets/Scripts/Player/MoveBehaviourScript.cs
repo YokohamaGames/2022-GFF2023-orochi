@@ -290,7 +290,7 @@ public class MoveBehaviourScript : MonoBehaviour
 
     void UpdateForDeadState()
     {
-        Time.timeScale = 0;
+        
     }
 
     void UpdateForClearState()
@@ -360,11 +360,13 @@ public class MoveBehaviourScript : MonoBehaviour
     public void SetDeadState()
     {
         currentState = PlayerState.Dead;
+        //await Task.Delay(300);
+        Time.timeScale = 0;
     }
 
     public void SetInvincible()
     {
-        boxCol.size = new Vector3(0.1f, 0.1f, 0.1f);
+        //boxCol.size = new Vector3(0.1f, 0.1f, 0.1f);
         currentState = PlayerState.Invincible;
     }
 
