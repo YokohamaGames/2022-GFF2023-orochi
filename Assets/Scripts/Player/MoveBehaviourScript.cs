@@ -444,12 +444,14 @@ public class MoveBehaviourScript : MonoBehaviour
         }
     }
 
-    public void ShotAttack()
+    public async void ShotAttack()
     {
         if (shot == true)
         {
             if(currentBodySize == BodySize.Large)
             {
+                currentAnimator.SetTrigger("isBeam");
+                await Task.Delay(800);
                 SE.Instance.FireSE();
                 GameObject shell = Instantiate(shellPrefab, Orochihead.transform.position, Quaternion.identity);
                 Rigidbody shellRb = shell.GetComponent<Rigidbody>();
@@ -551,15 +553,16 @@ public class MoveBehaviourScript : MonoBehaviour
         // currentAnimator.SetTrigger(isAttackId);
     }
 
-    public void Avoid()
+    public async void Avoid()
     {
         if (currentState == PlayerState.Walk)
         {
-            rigidbody.velocity = Vector3.zero;
-            rigidbody.AddForce(avatar.transform.forward * avo, ForceMode.Impulse);
+            currentAnimator.SetTrigger(isAvoidId);
             SetInvincible();
 
-            currentAnimator.SetTrigger(isAvoidId);
+            rigidbody.velocity = Vector3.zero;
+            await Task.Delay(400);
+            rigidbody.AddForce(avatar.transform.forward * avo, ForceMode.Impulse);
         }
     }
     // ‘å‚«‚¢Žž
