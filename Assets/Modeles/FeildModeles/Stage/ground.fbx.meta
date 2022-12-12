@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 8019cd41143a1a04b94eeeaf14bc91a9
+guid: b03596067ccf8314f96d264796d27bdc
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: zimenn
+    second: {fileID: 2100000, guid: c1c025ed52fe0c547b752ad45e30fdc7, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -88,7 +93,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.12
+    globalScale: 12
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

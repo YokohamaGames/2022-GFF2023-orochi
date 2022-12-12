@@ -172,6 +172,9 @@ public class MoveBehaviourScript : MonoBehaviour
         ShotCoolTime = shotCoolTime;
 
         currentAnimator.SetBool("isWalk", false);
+
+        boxCol.center = new Vector3(0f, 1f, 0f);
+        boxCol.size = new Vector3(1.5f, 2f, 3f);
     }
 
 
@@ -497,17 +500,6 @@ public class MoveBehaviourScript : MonoBehaviour
             }
         }
 
-        if (currentState == PlayerState.Walk || currentState == PlayerState.Jumping || currentState == PlayerState.Attack)
-        {
-            if (collision.CompareTag("Fire"))
-            {
-                StageScene.Instance.Damage();
-                GameObject fire = Instantiate(damagefire, this.transform.position, Quaternion.identity);
-                Destroy(fire, 2.0f);
-
-                SetInvincible();
-            }
-        }
 
 
         /* if(currentState == PlayerState.Attack)
@@ -527,10 +519,22 @@ public class MoveBehaviourScript : MonoBehaviour
             isGrounded = true;
             SetWalkState();
         }
-    }
-       
 
-    
+        if (currentState == PlayerState.Walk || currentState == PlayerState.Jumping || currentState == PlayerState.Attack)
+        {
+            if (collision.gameObject.tag == "Fire")
+            {
+                StageScene.Instance.Damage();
+                GameObject fire = Instantiate(damagefire, this.transform.position, Quaternion.identity);
+                Destroy(fire, 2.0f);
+
+                SetInvincible();
+            }
+        }
+    }
+
+
+
 
     public IEnumerator DelayCoroutine()
     {
@@ -570,7 +574,8 @@ public class MoveBehaviourScript : MonoBehaviour
     {
         //変身エフェクト
         Instantiate(ChangeEffect, this.transform.position, EffectAngle); //パーティクル用ゲームオブジェクト生成
-
+        boxCol.center = new Vector3(0f, 1.8f, 0f);
+        boxCol.size = new Vector3(2f, 3.6f, 4.5f);
         upForce = LARGEup;
 
             bodies[0].SetActive(false);
@@ -593,7 +598,8 @@ public class MoveBehaviourScript : MonoBehaviour
 
         //変身エフェクト
         Instantiate(ChangeEffect, this.transform.position, EffectAngle); //パーティクル用ゲームオブジェクト生成
-
+        boxCol.center = new Vector3(0f, 1f, 0f);
+        boxCol.size = new Vector3(1.5f, 2f, 3f);
         upForce = MEDIUMup;
 
             bodies[0].SetActive(false);
@@ -616,7 +622,8 @@ public class MoveBehaviourScript : MonoBehaviour
 
         //変身エフェクト
         Instantiate(ChangeEffect, this.transform.position, EffectAngle); //パーティクル用ゲームオブジェクト生成
-
+        boxCol.center = new Vector3(0f, 1f, 0f);
+        boxCol.size = new Vector3(1f, 2f, 1.5f);
         upForce = SMALLup;
 
             bodies[0].SetActive(true);
