@@ -420,7 +420,7 @@ public class MoveBehaviourScript : MonoBehaviour
 
                     ButtonEnabled = false;
 
-                    await Task.Delay(500);
+                    await Task.Delay(170);
                     rigidbody.AddForce(avatar.transform.forward * 10, ForceMode.Impulse);
                     if (currentBodySize == BodySize.Large)
                     {
@@ -546,8 +546,10 @@ public class MoveBehaviourScript : MonoBehaviour
 
     public IEnumerator ButtonCoroutine()
     {
+        //AttackCoolTime
+        float act = 0.7f;
         // 2•b‘Ò‚Â
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(act);
 
         ButtonEnabled = true;
     }
