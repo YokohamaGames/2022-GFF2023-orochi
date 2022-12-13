@@ -315,7 +315,21 @@ public class MoveBehaviourScript : MonoBehaviour
     // Walkステートに遷移させます。
     void SetWalkState()
     {
-        //boxCol.size = new Vector3(1.5f, 4.3f, 5.1f);
+        if (currentBodySize == BodySize.Small)
+        {
+            boxCol.center = new Vector3(0f, 1f, 0f);
+            boxCol.size = new Vector3(1f, 2f, 1.5f);
+        }
+        else if (currentBodySize == BodySize.Medium)
+        {
+            boxCol.center = new Vector3(0f, 1f, 0f);
+            boxCol.size = new Vector3(1.5f, 2f, 3f);
+        }
+        else if (currentBodySize == BodySize.Large)
+        {
+            boxCol.center = new Vector3(0f, 1.8f, 0f);
+            boxCol.size = new Vector3(2f, 3.6f, 4.5f);
+        }
 
         attackareas[0].SetActive(false);
         attackareas[1].SetActive(false);
@@ -375,7 +389,6 @@ public class MoveBehaviourScript : MonoBehaviour
 
     public void SetInvincible()
     {
-        //boxCol.size = new Vector3(0.1f, 0.1f, 0.1f);
         currentState = PlayerState.Invincible;
     }
 
@@ -565,7 +578,7 @@ public class MoveBehaviourScript : MonoBehaviour
         // currentAnimator.SetTrigger(isAttackId);
     }
 
-    public async void Avoid()
+    public void Avoid()
     {
         if (currentState == PlayerState.Walk)
         {
@@ -573,7 +586,9 @@ public class MoveBehaviourScript : MonoBehaviour
             SetInvincible();
 
             rigidbody.velocity = Vector3.zero;
-            await Task.Delay(400);
+            boxCol.center = new Vector3(0, 0.25f, 0);
+            boxCol.size = new Vector3(1f, 0.5f, 1f);
+            //await Task.Delay(400);
             rigidbody.AddForce(avatar.transform.forward * avo, ForceMode.Impulse);
         }
     }
