@@ -3414,6 +3414,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1440353447}
     m_Modifications:
+    - target: {fileID: 735567816873375438, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750153462691960194, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750153462691960194, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2750153462691960194, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+      propertyPath: m_FillMethod
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4632662818328615602, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
       propertyPath: m_Name
       value: UI
@@ -3510,6 +3526,42 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 1750103307}
+    - target: {fileID: 5808560081414940955, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8107518139787796998, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8107518139787796998, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: edc7a2fa92b458f4f8857420b092c789, type: 3}
+    - target: {fileID: 8107518139787796998, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8107518139787796998, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8107518139787796998, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8107518139787796998, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+      propertyPath: m_FillMethod
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8338473101661843647, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8338473101661843647, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
 --- !u!1 &1722135227 stripped
