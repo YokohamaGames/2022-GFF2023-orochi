@@ -20,7 +20,7 @@ public class StageScene : MonoBehaviour
 
     //“G‚ÌHP‚ğİ’è
     [SerializeField]
-    public int EnemyHp;
+    public float EnemyHp;
 
     public GameObject Player;
 

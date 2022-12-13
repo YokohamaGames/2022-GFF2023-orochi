@@ -60,7 +60,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float DeleteEnemyTime;
     //攻撃までの待機時間を設定した値にリセットする変数
     float timetoattack;
-
+    //HpBarの取得
+    [SerializeField]
+    private Image hp;
     [SerializeField]
     float timefire = 1.5f;
     float timetoatk = 0;
@@ -419,10 +421,11 @@ public class Enemy : MonoBehaviour
     }
 
     //敵のHPバーの処理
-    public void EnemyDamage(int n)
+    public void EnemyDamage(float n)
     {
         StageScene.Instance.EnemyHp -= n;
-        EnemyHpBar.value = StageScene.Instance.EnemyHp;
+        n /= 100.0f;
+        hp.fillAmount += n;
         SE.Instance.PlaySound(chargedamaged);
         GameObject Hit = Instantiate(HitEffect, this.transform.position, Quaternion.identity);
         Destroy(Hit, 1.5f);
