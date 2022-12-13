@@ -396,7 +396,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3692574325790560158}
   serializedVersion: 2
-  m_Mass: 100
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -658,9 +658,9 @@ MonoBehaviour:
   LARGEspeed: 10
   MEDIUMspeed: 14
   SMALLspeed: 17
-  LARGEup: 100
-  MEDIUMup: 120
-  SMALLup: 150
+  LARGEup: 10
+  MEDIUMup: 12
+  SMALLup: 15
   avo: 5
   shellPrefab: {fileID: 1124392955816901512, guid: 147407a5974bfc44a8ff3264fdf24f4f, type: 3}
   VirtualCamera: []

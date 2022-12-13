@@ -145,6 +145,10 @@ public class MoveBehaviourScript : MonoBehaviour
     // コンポーネントを事前に参照しておく変数
     new Rigidbody rigidbody;
 
+    [SerializeField]
+    [Tooltip("大・中・小の質量")]
+    public float[] mass = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -155,6 +159,7 @@ public class MoveBehaviourScript : MonoBehaviour
         shot = true;
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.centerOfMass = com;
+        rigidbody.mass = 10;
         boxCol = GetComponent<BoxCollider>();
 
         // 初めは普通の状態
@@ -253,6 +258,7 @@ public class MoveBehaviourScript : MonoBehaviour
             i = 0;
         }
 
+        Debug.Log(upForce);
     }
 
     private void FixedUpdate()
@@ -476,7 +482,7 @@ public class MoveBehaviourScript : MonoBehaviour
             if (currentState != PlayerState.Clear)
             {
                 // spaceが押されたらジャンプ
-                rigidbody.AddForce(transform.up * upForce / 20f, ForceMode.Impulse);
+                rigidbody.AddForce(transform.up * upForce / 2, ForceMode.Impulse);
                 isGrounded = false;
 
                 currentAnimator.SetTrigger("isJump");
@@ -579,6 +585,7 @@ public class MoveBehaviourScript : MonoBehaviour
         boxCol.center = new Vector3(0f, 1.8f, 0f);
         boxCol.size = new Vector3(2f, 3.6f, 4.5f);
         upForce = LARGEup;
+        rigidbody.mass = mass[0];
 
             bodies[0].SetActive(false);
             bodies[1].SetActive(false);
@@ -603,8 +610,9 @@ public class MoveBehaviourScript : MonoBehaviour
         boxCol.center = new Vector3(0f, 1f, 0f);
         boxCol.size = new Vector3(1.5f, 2f, 3f);
         upForce = MEDIUMup;
+        rigidbody.mass = mass[1];
 
-            bodies[0].SetActive(false);
+        bodies[0].SetActive(false);
             bodies[1].SetActive(true);
             bodies[2].SetActive(false);
 
@@ -627,8 +635,9 @@ public class MoveBehaviourScript : MonoBehaviour
         boxCol.center = new Vector3(0f, 1f, 0f);
         boxCol.size = new Vector3(1f, 2f, 1.5f);
         upForce = SMALLup;
+        rigidbody.mass = mass[2];
 
-            bodies[0].SetActive(true);
+        bodies[0].SetActive(true);
             bodies[1].SetActive(false);
             bodies[2].SetActive(false);
 
