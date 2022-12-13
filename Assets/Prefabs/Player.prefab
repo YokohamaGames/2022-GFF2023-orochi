@@ -687,6 +687,10 @@ MonoBehaviour:
   isGrounded: 0
   damagefire: {fileID: 3189518951252779321, guid: 881d60d5f32792c459b3f4e6eed5f4df, type: 3}
   damaged: {fileID: 0}
+  mass:
+  - 50
+  - 10
+  - 1
 --- !u!114 &8139101171561958033
 MonoBehaviour:
   m_ObjectHideFlags: 0
