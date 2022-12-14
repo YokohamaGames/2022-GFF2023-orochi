@@ -5138,6 +5138,10 @@ MonoBehaviour:
   GuideButton: {fileID: 1270594897452481610}
   GameOverButton: {fileID: 4632662817822430631}
   StageClearButton: {fileID: 4711528216305368625}
+  Size:
+  - {fileID: 6130759731933956429}
+  - {fileID: 4206298240106476398}
+  - {fileID: 7191197939302994053}
   Player: {fileID: 0}
 --- !u!95 &4632662818328615604
 Animator:

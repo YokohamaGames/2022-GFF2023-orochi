@@ -48,6 +48,10 @@ public class UI : MonoBehaviour
 	[SerializeField]
 	private Selectable StageClearButton = null;
 
+	// HPバーのサイズ別数字
+	[SerializeField]
+	private GameObject[] Size = null;
+
 	Animator animator;
 
 	public GameObject Player;
@@ -174,5 +178,28 @@ public class UI : MonoBehaviour
 		 SceneManager.LoadScene("Title");
         // 再開
          Time.timeScale = 1f;
+	}
+
+	public void ChangeNumber(int n)
+    {
+		if (n == 0)
+        {
+			Size[0].SetActive(true);
+			Size[1].SetActive(false);
+			Size[2].SetActive(false);
+
+		}
+		else if (n == 1)
+        {
+			Size[0].SetActive(false);
+			Size[1].SetActive(true);
+			Size[2].SetActive(false);
+		}
+		else if (n == 2)
+        {
+			Size[0].SetActive(false);
+			Size[1].SetActive(false);
+			Size[2].SetActive(true);
+		}
 	}
 }

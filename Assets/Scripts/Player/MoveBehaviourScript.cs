@@ -76,6 +76,9 @@ public class MoveBehaviourScript : MonoBehaviour
 
     private bool ButtonEnabled = true;
 
+    [SerializeField]
+    public UI ui = null;
+
     // プレイヤーのカメラ
     public Camera playerCamera = null;
 
@@ -612,6 +615,8 @@ public class MoveBehaviourScript : MonoBehaviour
         currentBodySize = BodySize.Large;
         currentAnimator = bodies[2].GetComponent <Animator>();
 
+        ui.ChangeNumber(2);
+
         ResetCoolTime();
     }
 
@@ -637,6 +642,8 @@ public class MoveBehaviourScript : MonoBehaviour
         currentBodySize = BodySize.Medium;
         currentAnimator = bodies[1].GetComponent<Animator>();
 
+        ui.ChangeNumber(1);
+
         ResetCoolTime();
     }
 
@@ -661,6 +668,8 @@ public class MoveBehaviourScript : MonoBehaviour
         VirtualCamera[2].Priority = 10;
         currentBodySize = BodySize.Small;
         currentAnimator = bodies[0].GetComponent<Animator>();
+
+        ui.ChangeNumber(0);
 
         ResetCoolTime();
     }
