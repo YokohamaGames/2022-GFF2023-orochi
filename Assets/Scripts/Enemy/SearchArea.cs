@@ -16,7 +16,7 @@ public class SearchArea : MonoBehaviour
         if (colision.CompareTag("Player"))
         {
             Debug.Log("õ“G”ÍˆÍN“ü");
-            Parent_Enemy.SearchArea = true;
+            Parent_Enemy.isSearch = true;
             Parent_Enemy.SetDiscoverState();
         }
     }
@@ -25,7 +25,7 @@ public class SearchArea : MonoBehaviour
     {
         if (colision.CompareTag("Player"))
         {
-            Parent_Enemy.SearchArea = false;
+            Parent_Enemy.isSearch = false;
             Parent_Enemy.SetIdleState();
         }
     }

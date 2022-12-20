@@ -18,7 +18,7 @@ public class LongAttackArea : MonoBehaviour
         //Player‚ª‰“‹——£UŒ‚”Í“à‚ÉN“ü
         if (colision.CompareTag("Player"))
         {
-            Parent_Enemy.LongAttackArea = true;
+            Parent_Enemy.isLongAttacks = true;
             Parent_Enemy.LongAttack();                  //‰“‹——£UŒ‚ƒXƒe[ƒg‚É•ÏX
         }
     }
@@ -28,7 +28,7 @@ public class LongAttackArea : MonoBehaviour
         //Player‚ª‰“‹——£UŒ‚”ÍŠO‚É’Eo
         if (colision.CompareTag("Player"))
         {
-            Parent_Enemy.LongAttackArea = false;
+            Parent_Enemy.isLongAttacks = false;
             Parent_Enemy.SetDiscoverState();
         }
     }

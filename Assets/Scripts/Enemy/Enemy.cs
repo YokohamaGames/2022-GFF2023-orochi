@@ -12,9 +12,9 @@ public class Enemy : MonoBehaviour
     //敵のステータスに関する数値設定
 
     //敵の追跡時歩行スピードを設定
-    [SerializeField] private float ChaseSpeed;
+    [SerializeField] private float chasespeed;
     //攻撃準備時の歩行スピードを設定
-    [SerializeField] private float AttackReadySpeed =1;
+    [SerializeField] private float attackreadyspeed =1;
     //追跡目標の設定
     [SerializeField]
     private Transform target = null;
@@ -22,44 +22,45 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Animator animator = null;
     //敵の回転速度を設定します
     [SerializeField]
-    private float rotMax;
+    private float rotmax;
     //子オブジェクトを取得
     [SerializeField]
-    private SearchArea searchArea;
+    private SearchArea searcharea;
     //子オブジェクトを取得
     [SerializeField]
     private AttackArea attackArea;
     //敵の持つ武器の当たり判定を取得
     [SerializeField]
-    private Collider Weapon_Collider;
+    private Collider weaponcollider;
     //ステート遷移を遅らせる時間
     [SerializeField]
-    private float Transition_Time;                         
+    private float transition_time;                         
     //火球のプレハブの取得
     [SerializeField]
-    private GameObject shellPrefab;
+    private GameObject shellprefab;
     //敵撃破エフェクト
     [SerializeField]
     private GameObject defeateffect;
     //ダメージエフェクト
     [SerializeField]
     private GameObject damageeffect;
+    //敵の左手の座標を取得します
     [SerializeField]
-    private Transform Enemy_L_Hand;                        //敵の左手の座標を取得します
+    private Transform enemy_l_hand;
     //敵のHpBarを参照
     [SerializeField]
-    public Slider EnemyHpBar;                              
+    public Slider enemyhpbar;                              
     //剣のEffectを取得
     [SerializeField]
-    private GameObject SwordEffect;
+    private GameObject swordeffect;
     [SerializeField]
     private GameObject HitEffect;
     //攻撃準備から攻撃までの時間の設定
-    [SerializeField] private float TimetoAttack = 2;
+    [SerializeField] private float timetoattack = 2;
     //敵撃破時の敵の消滅までの時間の設定
-    [SerializeField] private float DeleteEnemyTime;
+    [SerializeField] private float deleteenemytime;
     //攻撃までの待機時間を設定した値にリセットする変数
-    float timetoattack;
+    float timetoattackreset;
     //HpBarの取得
     [SerializeField]
     private Image hp;
@@ -67,13 +68,13 @@ public class Enemy : MonoBehaviour
     float timefire = 1.5f;
     float timetoatk = 0;
 
-    public bool SearchArea = false;
+    public bool isSearch = false;
 
-    public bool AttackArea = false;
+    public bool isAttacks = false;
 
-    public bool LongAttackArea = false;
+    public bool isLongAttacks = false;
 
-    public bool Dead = false;
+    public bool isDead = false;
     //現在の敵の歩行スピード
     float speed = 0;                                       
     // コンポーネントを事前に参照しておく変数
@@ -102,7 +103,6 @@ public class Enemy : MonoBehaviour
     static readonly int speedId = Animator.StringToHash("Speed");
     static readonly int DeadId = Animator.StringToHash("Dead");
 
-
     //敵のステートパターン
     enum EnemyState
     {
@@ -116,16 +116,17 @@ public class Enemy : MonoBehaviour
         LongAttack,                                        //  攻撃////
         Dead,                                              //  死亡
     }
+   
     EnemyState currentState = EnemyState.Idle;
     float sp = 1.0f;
     void Start()
     {
         baseLayerIndex = animator.GetLayerIndex("Base Layer");
         rigidbody = GetComponent<Rigidbody>();             
-        timetoattack = TimetoAttack;                       //攻撃時間を指定した時間にリセットする変数に値を代入
-        Weapon_Collider.enabled = false;                   //敵の武器の当たり判定をオフ
-        SwordEffect.SetActive(false);
-        EnemyHpBar.value = StageScene.Instance.EnemyHp;                        // Sliderの初期状態を設定 
+        timetoattackreset = timetoattack;                  //攻撃時間を指定した時間にリセットする変数に値を代入
+        weaponcollider.enabled = false;                    //敵の武器の当たり判定をオフ
+        swordeffect.SetActive(false);
+        enemyhpbar.value = StageScene.Instance.EnemyHp;    // Sliderの初期状態を設定 
         se = GetComponent<AudioSource>();
     }
 
@@ -161,17 +162,9 @@ public class Enemy : MonoBehaviour
                     break;
                 default:
                     break;
-            }
-        //animator.SetFloat("Speed", 0.01f);
-        
+            }       
         Debug.Log(currentState);
-
     }
-    private void FixedUpdate()
-    {
-        
-    }
-
 
     IEnumerator Wait()
     {
@@ -187,10 +180,8 @@ public class Enemy : MonoBehaviour
         timetoatk += Time.deltaTime;
         if (timetoatk > timefire)
         {
-
             timetoatk = 0;
             animator.SetTrigger(isLongAttack);
-
         }
     }
 
@@ -199,7 +190,6 @@ public class Enemy : MonoBehaviour
         currentState = EnemyState.LongAttack;
 
     }
-
 
     //遠距離攻撃に切り替え
     public void LongAttack()
@@ -224,36 +214,29 @@ public class Enemy : MonoBehaviour
     public void SetDiscoverState()
     {
         currentState = EnemyState.Discover;
-        speed = ChaseSpeed;
+        speed = chasespeed;
     }
    
     //Moveステートに変更
     public void SetMoveState()
     {
         currentState = EnemyState.Move;
-        //animator.
-        speed = ChaseSpeed;
+        speed = chasespeed;
     }
 
     //攻撃範囲内に入った時にステートを攻撃準備に切り替え
     public void SetAttackReadyState()
     {
-        if (!Dead)
+        if (!isDead)
         {
             currentState = EnemyState.AttackReady;
-            speed = AttackReadySpeed;                          //攻撃範囲に入ったら様子見で移動速度を小さくする
+            speed = attackreadyspeed;                          //攻撃範囲に入ったら様子見で移動速度を小さくする
             animator.SetTrigger(isAttackReady);
-            timetoattack = TimetoAttack;                       ////攻撃までの時間のカウントをリセット
+            timetoattackreset = timetoattack;                       ////攻撃までの時間のカウントをリセット
         }
     }
     
-    public void SetAttackReady()
-    {
-        currentState = EnemyState.AttackReady;
-        speed = AttackReadySpeed;                          //攻撃範囲に入ったら様子見で移動速度を小さくする
-        timetoattack = TimetoAttack;                       //攻撃までの時間のカウントをリセット
-        
-    }
+   
    
     //ランダムに攻撃する。攻撃時は移動速度を0に設定
     public void Attacks()
@@ -262,7 +245,7 @@ public class Enemy : MonoBehaviour
         int random = (int)tmp;                             //float型の乱数をint型にキャスト
         //SetColliderOn(Weapon_Collider);
         //Debug.Log(random);
-        if (!Dead)
+        if (!isDead)
         {
             switch (random)
             {
@@ -283,7 +266,7 @@ public class Enemy : MonoBehaviour
             }
         }
         rigidbody.velocity = Vector3.zero;                       //立ち止まる
-        timetoattack = TimetoAttack;                          //攻撃までの時間のカウントをリセット
+        timetoattackreset = timetoattack;                          //攻撃までの時間のカウントをリセット
 
     }
     
@@ -291,14 +274,14 @@ public class Enemy : MonoBehaviour
     public void SetColliderOn(Collider collider)
     {
         SE.Instance.PlaySound(swing);
-        SwordEffect.SetActive(true);
+        swordeffect.SetActive(true);
         collider.enabled = true;
     }
    
     //当たり判定をOFFにする関数
     public void SetColliderOff(Collider collider)
     {
-        SwordEffect.SetActive(false);
+        swordeffect.SetActive(false);
         collider.enabled = false;
     }
     
@@ -320,7 +303,7 @@ public class Enemy : MonoBehaviour
     //プレイやーに向かって動く処理
     void UpdateForMove()
     {
-        if (!Dead)
+        if (!isDead)
         {
             //ターゲット方向のベクトルを求める
             Vector3 vec = target.position - transform.position;
@@ -339,13 +322,13 @@ public class Enemy : MonoBehaviour
                 spd += sp * Time.deltaTime;
             }
 
-            if (speed <= ChaseSpeed)
+            if (speed <= chasespeed)
             {
-                speed += (ChaseSpeed * Time.deltaTime) / 2;
+                speed += (chasespeed * Time.deltaTime) / 2;
             }
             animator.SetFloat(speedId, spd);
 
-            if (!AttackArea && LongAttackArea)
+            if (!isAttacks && isLongAttacks)
             {
                 cnt += Time.deltaTime;
                 if (cnt > 3)
@@ -363,9 +346,9 @@ public class Enemy : MonoBehaviour
         //移動速度を0にしプレイヤーの向きに回転する。
         //rigidbody.velocity = Vector3.zero;
         Rotate();
-        timetoattack -= Time.deltaTime;
+        timetoattackreset -= Time.deltaTime;
         
-        if(0 > timetoattack && AttackArea)                               //攻撃までの時間が0になればステート遷移。カウントをリセットする。
+        if(0 > timetoattackreset && isAttacks)                               //攻撃までの時間が0になればステート遷移。カウントをリセットする。
         {
             //ランダムな攻撃
             Attacks();  
@@ -391,7 +374,7 @@ public class Enemy : MonoBehaviour
         var stateInfo = animator.GetCurrentAnimatorStateInfo(baseLayerIndex);
         if (stateInfo.fullPathHash == LocomotionHash)
         {
-            SetAttackReady();
+             SetAttackReadyState();
         }
         Rotate();
     }
@@ -401,19 +384,13 @@ public class Enemy : MonoBehaviour
         currentState = EnemyState.Dead;
         speed = 0;
         animator.SetTrigger(DeadId);
-
     }
-    //ステート遷移を遅らせる関数　未使用
-    IEnumerator DelayState()
-    {
-        yield return new WaitForSeconds(Transition_Time);
-    }
-
+   
     //敵の遠距離攻撃のプレハブの生成
     public void EnemyShotAttack()
     {
         SE.Instance.PlaySound(fire);
-        GameObject shell = Instantiate(shellPrefab, Enemy_L_Hand.transform.position, Quaternion.identity);
+        GameObject shell = Instantiate(shellprefab, enemy_l_hand.transform.position, Quaternion.identity);
         Rigidbody shellRb = shell.GetComponent<Rigidbody>();
         // 弾速を設定
         shellRb.AddForce(transform.forward * 1500);
@@ -433,21 +410,12 @@ public class Enemy : MonoBehaviour
         //HP0のとき撃破エフェクトの生成と敵オブジェクトの削除
         if (StageScene.Instance.EnemyHp <= 0)
         {
-            Dead = true;
+            isDead = true;
             SetDeadState();
             GameObject defeat = Instantiate(defeateffect, this.transform.position, Quaternion.identity);
-            Destroy(this.gameObject,DeleteEnemyTime);
+            Destroy(this.gameObject,deleteenemytime);
         }
     }
-
-    /*private void OnTriggerEnter(Collider collision)
-    {
-        if (collision.CompareTag("OrochiFire"))
-        {
-            Debug.Log("火球");
-            EnemyDamage(2);
-        }
-    }*/
 }
 
 
