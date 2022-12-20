@@ -7,10 +7,10 @@ public class AttackArea : MonoBehaviour
 {
     //親のスクリプトを取得
     [SerializeField]
-    Enemy Parent_Enemy = null;
+    Enemy parentenemy = null;
 
     [SerializeField]
-    float Transition_time;
+    float transitiontime;
     
     //ターゲットの攻撃範囲への侵入判定
     private void OnTriggerEnter(Collider colision)
@@ -18,8 +18,8 @@ public class AttackArea : MonoBehaviour
         //Playerが攻撃範囲内に侵入
         if (colision.CompareTag("Player"))
         {
-            Parent_Enemy.isAttacks = true;
-            Parent_Enemy.SetAttackReadyState();            //Enemyのステートを攻撃準備に変更
+            parentenemy.isAttacks = true;
+            parentenemy.SetAttackReadyState();            //Enemyのステートを攻撃準備に変更
         }
     }
     //ターゲットが攻撃判定からの脱出の判定
@@ -28,8 +28,8 @@ public class AttackArea : MonoBehaviour
         //Playerが攻撃範囲外に脱出
         if (colision.CompareTag("Player"))
         {
-            Parent_Enemy.isAttacks = false;
-            Parent_Enemy.SetMoveState();               //EnemyのステートをPlayerを見失うに変更
+            parentenemy.isAttacks = false;
+            parentenemy.SetMoveState();               //EnemyのステートをPlayerを見失うに変更
         }        
     }
 }

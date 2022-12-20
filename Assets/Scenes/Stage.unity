@@ -870,6 +870,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -120.99923
       objectReference: {fileID: 0}
+    - target: {fileID: 1936265506793942764, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2130309649023510096, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -1.974046
@@ -1137,6 +1141,10 @@ PrefabInstance:
     - target: {fileID: 4696205593011322898, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -51.245842
+      objectReference: {fileID: 0}
+    - target: {fileID: 4727906965139479468, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5258364501993855249, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: playeratk
@@ -4657,8 +4665,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66f6210e0c6d7124aa866a02e9d0ce49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Parent_Enemy: {fileID: 1633171231768299371}
-  Transition_time: 2
+  parentenemy: {fileID: 1633171231768299371}
+  transitiontime: 0
 --- !u!4 &1633171231966458661
 Transform:
   m_ObjectHideFlags: 0
