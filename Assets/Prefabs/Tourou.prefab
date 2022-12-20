@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 116446266568367440}
   - component: {fileID: -775006075547752435}
   m_Layer: 0
-  m_Name: tourou2
+  m_Name: Tourou
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
