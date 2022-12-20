@@ -71,12 +71,10 @@ namespace OROCHI
         float timetoatk = 0;
 
         public bool isSearch = false;
-
         public bool isAttacks = false;
-
         public bool isLongAttacks = false;
-
         public bool isDead = false;
+
         //現在の敵の歩行スピード
         float speed = 0;
         // コンポーネントを事前に参照しておく変数
@@ -135,7 +133,6 @@ namespace OROCHI
         // Update is called once per frame
         void Update()
         {
-
             // 状態ごとの分岐処理
             switch (currentState)
             {
@@ -190,7 +187,6 @@ namespace OROCHI
         void SetLongAttackState()
         {
             currentState = EnemyState.LongAttack;
-
         }
 
         //遠距離攻撃に切り替え
@@ -238,15 +234,12 @@ namespace OROCHI
             }
         }
 
-
-
         //ランダムに攻撃する。攻撃時は移動速度を0に設定
         public void Attacks()
         {
             float tmp = Random.Range(1.0f, 4.0f);              //1～攻撃種類数の乱数を取得
             int random = (int)tmp;                             //float型の乱数をint型にキャスト
-                                                               //SetColliderOn(Weapon_Collider);
-                                                               //Debug.Log(random);
+                                                               
             if (!isDead)
             {
                 switch (random)
@@ -290,7 +283,6 @@ namespace OROCHI
         void UpdateForDiscover()
         {
             UpdateForMove();
-
         }
 
         //待機状態の処理

@@ -24,6 +24,7 @@ namespace OROCHI
                 Parent_Enemy.LongAttack();                  //遠距離攻撃ステートに変更
             }
         }
+
         //敵の遠距離攻撃判定からの脱出の判定
         private void OnTriggerExit(Collider colision)
         {
