@@ -3480,6 +3480,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2055718328}
     m_Modifications:
+    - target: {fileID: 389926002163389908, guid: 3088036f92393684c9f3ac663605027d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1480cbb903fe92a42a52e87dbd688333, type: 2}
     - target: {fileID: 389926003548809920, guid: 3088036f92393684c9f3ac663605027d, type: 3}
       propertyPath: m_Name
       value: RunEffect
