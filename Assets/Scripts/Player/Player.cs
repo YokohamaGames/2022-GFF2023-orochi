@@ -16,11 +16,7 @@ public class Player : MonoBehaviour
     [Tooltip("For locking the camera position on all axis")]
     public bool LockCameraPosition = false;
 
-    [SerializeField]
-    public GameObject Avatar = null;
-
-    MoveBehaviourScript moveBehaviour;
-
+    MoveBehaviourScript MoveBehaviour;
 
     // ユーザーからの入力
     Vector2 moveInput = Vector2.zero;
@@ -34,7 +30,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        moveBehaviour = GetComponent<MoveBehaviourScript>();
+        MoveBehaviour = GetComponent<MoveBehaviourScript>();
     }
 
 
@@ -43,7 +39,7 @@ public class Player : MonoBehaviour
         // カメラを基準に移動できるようにする
         var motion = Camera.main.transform.forward * moveInput.y;
         motion += Camera.main.transform.right * moveInput.x;
-        moveBehaviour.Move(motion);
+        MoveBehaviour.Move(motion);
     }
 
     #region ユーザーのアクションに対して呼び出される
@@ -66,7 +62,7 @@ public class Player : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            moveBehaviour.Fire();
+            MoveBehaviour.Fire();
         }
     }
 
@@ -75,7 +71,7 @@ public class Player : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            moveBehaviour.ShotAttack();
+            MoveBehaviour.ShotAttack();
         }
     }
 
@@ -84,7 +80,7 @@ public class Player : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            moveBehaviour.Jump();
+            MoveBehaviour.Jump();
         }
     }
 
@@ -99,25 +95,25 @@ public class Player : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started)
         {
-            moveBehaviour.Avoid();
+            MoveBehaviour.Avoid();
         }
     }
 
     // ChangeBボタンを押したら呼び出されます
     public void OnChangeBig(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started && moveBehaviour.isChange)
+        if (context.phase == InputActionPhase.Started && MoveBehaviour.isChange)
         {
-            moveBehaviour.BodyUp();
+            MoveBehaviour.BodyUp();
         }
     }
 
     // ChangeSボタンを押したら呼び出されます
     public void OnChangeSmall(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started && moveBehaviour.isChange)
+        if (context.phase == InputActionPhase.Started && MoveBehaviour.isChange)
         {
-            moveBehaviour.BodyDown();
+            MoveBehaviour.BodyDown();
         }
     }
 
