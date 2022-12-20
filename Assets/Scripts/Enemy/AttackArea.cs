@@ -18,7 +18,7 @@ public class AttackArea : MonoBehaviour
         //Playerが攻撃範囲内に侵入
         if (colision.CompareTag("Player"))
         {
-            Parent_Enemy.AttackArea = true;
+            Parent_Enemy.isAttacks = true;
             Parent_Enemy.SetAttackReadyState();            //Enemyのステートを攻撃準備に変更
         }
     }
@@ -28,7 +28,7 @@ public class AttackArea : MonoBehaviour
         //Playerが攻撃範囲外に脱出
         if (colision.CompareTag("Player"))
         {
-            Parent_Enemy.AttackArea = false;
+            Parent_Enemy.isAttacks = false;
             Parent_Enemy.SetMoveState();               //EnemyのステートをPlayerを見失うに変更
         }        
     }
