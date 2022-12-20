@@ -17,24 +17,14 @@ public class Player : MonoBehaviour
     public bool LockCameraPosition = false;
 
     [SerializeField]
-    public GameObject avatar = null;
+    public GameObject Avatar = null;
 
     MoveBehaviourScript moveBehaviour;
-
-
-    // AnimatorのパラメーターID
-    //static readonly int isAttackId = Animator.StringToHash("isAttack");
-    //static readonly int isJumpId = Animator.StringToHash("isJump");
 
 
     // ユーザーからの入力
     Vector2 moveInput = Vector2.zero;
     Vector2 lookInput = Vector2.zero;
-
-
-    //[SerializeField]
-    //private GameObject mainCamera;
-
 
 
     [Tooltip("キャラが移動方向に向く時の速さ")]
@@ -45,34 +35,29 @@ public class Player : MonoBehaviour
     void Start()
     {
         moveBehaviour = GetComponent<MoveBehaviourScript>();
-
-        // mainCamera = Camera.main;
     }
 
 
     void Update()
     {
+        // カメラを基準に移動できるようにする
         var motion = Camera.main.transform.forward * moveInput.y;
         motion += Camera.main.transform.right * moveInput.x;
         moveBehaviour.Move(motion);
     }
-    private void FixedUpdate()
-    {
 
-    }
+    #region ユーザーのアクションに対して呼び出される
 
-    // ユーザーからのMoveアクションに対して呼び出されます。
+    // Moveアクションに対して呼び出されます。
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
     }
 
-    // ユーザーからのLookアクションに対して呼び出されます。
+    // Lookアクションに対して呼び出されます。
     public void OnLook(InputAction.CallbackContext context)
     {
         lookInput = context.ReadValue<Vector2>();
-
-
     }
 
 
@@ -85,6 +70,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // Fire2ボタンを押したら呼び出されます
     public void OnFire2(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)
@@ -101,14 +87,14 @@ public class Player : MonoBehaviour
             moveBehaviour.Jump();
         }
     }
+
+    // Pauseボタンを押したら呼び出されます
     public void OnControlPauseUI(InputAction.CallbackContext context)
     {
         StageScene.Instance.ControlPauseUI();
-        //this.tag = "Untagged";
     }
 
-    // Injuryボタンを押したら呼び出されます
-
+    // Avoidボタンを押したら呼び出されます
     public void OnAvoid(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)
@@ -117,6 +103,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    // ChangeBボタンを押したら呼び出されます
     public void OnChangeBig(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started && moveBehaviour.isChange)
@@ -124,6 +111,8 @@ public class Player : MonoBehaviour
             moveBehaviour.BodyUp();
         }
     }
+
+    // ChangeSボタンを押したら呼び出されます
     public void OnChangeSmall(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started && moveBehaviour.isChange)
@@ -134,4 +123,4 @@ public class Player : MonoBehaviour
 
 }
 
-
+#endregion
