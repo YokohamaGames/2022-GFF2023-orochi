@@ -18,9 +18,9 @@ namespace OROCHI
 
         [SerializeField]
         [Tooltip("回避の幅を指定")]
-        private float avo;
+        private float Avo;
 
-        private Vector3 com;
+        private Vector3 Com;
 
         //火球のプレハブの取得
         [SerializeField]
@@ -30,6 +30,7 @@ namespace OROCHI
         [Tooltip("カメラの切り替え")]
         private CinemachineVirtualCamera[] VirtualCamera = null;
 
+        // プレイヤーの大きさステート
         enum BodySize
         {
             Small,
@@ -64,7 +65,6 @@ namespace OROCHI
         public bool shot = false;
 
         // AnimatorのパラメーターID
-        static readonly int isAttackId = Animator.StringToHash("isAttack");
         static readonly int isAvoidId = Animator.StringToHash("isAvoid");
 
         // 現在のAnimator(大中小のいずれか)
@@ -72,10 +72,7 @@ namespace OROCHI
 
         // 今のスピードとジャンプ力
         private float speed = 5.0f;
-        private float upForce = 100f;
-
-        [Tooltip("火球の発射場所番号")]
-        private int i = 1;
+        private float upforce = 100f;
 
         private bool ButtonEnabled = true;
 
@@ -108,6 +105,7 @@ namespace OROCHI
 
         Quaternion EffectAngle = Quaternion.Euler(-90f, 0f, 0f);
 
+
         // プレイヤーの状態を表します
         enum PlayerState
         {
@@ -121,12 +119,6 @@ namespace OROCHI
             Avoid,
             // 攻撃
             Attack,
-            // 大
-            Big,
-            // 中
-            Medium,
-            // 小
-            Small,
             // ゲームオーバー
             Dead,
             // 無敵
@@ -137,11 +129,10 @@ namespace OROCHI
         // 現在のプレイヤーの状態
         PlayerState currentState = PlayerState.Walk;
 
+
         [SerializeField]
         private bool isGrounded = false;
-        /* [SerializeField]
-         private LayerMask groudLayer;
-        */
+
         [SerializeField]
         private GameObject damagefire;
 
@@ -158,13 +149,12 @@ namespace OROCHI
         // Start is called before the first frame update
         void Start()
         {
-
             Time.timeScale = 1;
             isGrounded = true;
             isChange = true;
             shot = true;
             rigidbody = GetComponent<Rigidbody>();
-            rigidbody.centerOfMass = com;
+            rigidbody.centerOfMass = Com;
             rigidbody.mass = 10;
             boxCol = GetComponent<BoxCollider>();
 
@@ -208,15 +198,6 @@ namespace OROCHI
                 case PlayerState.Attack:
                     UpdateForAttackState();
                     break;
-                case PlayerState.Big:
-                    break;
-                case PlayerState.Medium:
-                    break;
-                case PlayerState.Small:
-                    break;
-                case PlayerState.Dead:
-                    UpdateForDeadState();
-                    break;
                 case PlayerState.Clear:
                     UpdateForClearState();
                     break;
@@ -250,26 +231,6 @@ namespace OROCHI
             {
                 SetDeadState();
             }
-
-            if (currentBodySize == BodySize.Large)
-            {
-                i = 2;
-            }
-            else if (currentBodySize == BodySize.Medium)
-            {
-                i = 1;
-            }
-            else if (currentBodySize == BodySize.Small)
-            {
-                i = 0;
-            }
-
-            Debug.Log(upForce);
-        }
-
-        private void FixedUpdate()
-        {
-
         }
 
         void UpdateForWalkState()
@@ -301,11 +262,6 @@ namespace OROCHI
         void UpdateForAttackState()
         {
             StartCoroutine(DelayCoroutine());
-        }
-
-        void UpdateForDeadState()
-        {
-
         }
 
         void UpdateForClearState()
@@ -344,46 +300,17 @@ namespace OROCHI
             currentState = PlayerState.Walk;
         }
 
-        // JumpReadyステートに遷移させます。
-        void SetJumpReadyState()
-        {
-            currentState = PlayerState.JumpReady;
-        }
-
+        #region ステート毎に遷移させる
         // Jumpingステートに遷移させます。
         void SetJumpingState()
         {
             currentState = PlayerState.Jumping;
         }
 
-        // Avoidステートに遷移させます。
-        void SetAvoidState()
-        {
-            currentState = PlayerState.Avoid;
-        }
-
         // Attackステートに遷移させます。
         void SetAttackState()
         {
             currentState = PlayerState.Attack;
-        }
-
-        // Bigステートに遷移させます。
-        public void SetBigState()
-        {
-            currentState = PlayerState.Big;
-        }
-
-        // Mediumステートに遷移させます。
-        public void SetMediumState()
-        {
-            currentState = PlayerState.Medium;
-        }
-
-        // Smallステートに遷移させます。
-        public void SetSmallState()
-        {
-            currentState = PlayerState.Small;
         }
 
         public void SetDeadState()
@@ -397,6 +324,7 @@ namespace OROCHI
         {
             currentState = PlayerState.Invincible;
         }
+        #endregion
 
         // 指定した方向へ移動します。
         public void Move(Vector3 motion)
@@ -434,40 +362,37 @@ namespace OROCHI
                 {
                     return;
                 }
-                else
+
+                if (currentState != PlayerState.Clear)
                 {
-                    if (currentState != PlayerState.Clear)
+                    SetAttackState();
+
+                    currentAnimator.SetTrigger("isAttack");
+
+                    ButtonEnabled = false;
+
+                    await Task.Delay(170);
+                    rigidbody.AddForce(avatar.transform.forward * 10, ForceMode.Impulse);
+                    if (currentBodySize == BodySize.Large)
                     {
-
-                        SetAttackState();
-
-                        currentAnimator.SetTrigger("isAttack");
-
-                        ButtonEnabled = false;
-
-                        await Task.Delay(170);
-                        rigidbody.AddForce(avatar.transform.forward * 10, ForceMode.Impulse);
-                        if (currentBodySize == BodySize.Large)
-                        {
-                            attackareas[0].SetActive(false);
-                            attackareas[1].SetActive(false);
-                            attackareas[2].SetActive(true);
-                        }
-                        else if (currentBodySize == BodySize.Medium)
-                        {
-                            attackareas[0].SetActive(false);
-                            attackareas[1].SetActive(true);
-                            attackareas[2].SetActive(false);
-                        }
-                        else if (currentBodySize == BodySize.Small)
-                        {
-                            attackareas[0].SetActive(true);
-                            attackareas[1].SetActive(false);
-                            attackareas[2].SetActive(false);
-                        }
-
-                        StartCoroutine(ButtonCoroutine());
+                        attackareas[0].SetActive(false);
+                        attackareas[1].SetActive(false);
+                        attackareas[2].SetActive(true);
                     }
+                    else if (currentBodySize == BodySize.Medium)
+                    {
+                        attackareas[0].SetActive(false);
+                        attackareas[1].SetActive(true);
+                        attackareas[2].SetActive(false);
+                    }
+                    else if (currentBodySize == BodySize.Small)
+                    {
+                        attackareas[0].SetActive(true);
+                        attackareas[1].SetActive(false);
+                        attackareas[2].SetActive(false);
+                    }
+
+                    StartCoroutine(ButtonCoroutine());
                 }
             }
         }
@@ -501,7 +426,7 @@ namespace OROCHI
                 if (currentState != PlayerState.Clear)
                 {
                     // spaceが押されたらジャンプ
-                    rigidbody.AddForce(transform.up * upForce / 2, ForceMode.Impulse);
+                    rigidbody.AddForce(transform.up * upforce / 2, ForceMode.Impulse);
                     isGrounded = false;
 
                     currentAnimator.SetTrigger("isJump");
@@ -524,16 +449,6 @@ namespace OROCHI
                     SetInvincible();
                 }
             }
-
-
-
-            /* if(currentState == PlayerState.Attack)
-            { 
-                if (collision.CompareTag("enemy"))
-                {
-                    collision.GetComponent<Enemy>().EnemyDamage();
-                }
-            } */
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -579,11 +494,6 @@ namespace OROCHI
             ButtonEnabled = true;
         }
 
-        public void Attack()
-        {
-            // currentAnimator.SetTrigger(isAttackId);
-        }
-
         public void Avoid()
         {
             if (currentState == PlayerState.Walk)
@@ -595,9 +505,11 @@ namespace OROCHI
                 boxCol.center = new Vector3(0, 0.25f, 0);
                 boxCol.size = new Vector3(1f, 0.5f, 1f);
                 //await Task.Delay(400);
-                rigidbody.AddForce(avatar.transform.forward * avo, ForceMode.Impulse);
+                rigidbody.AddForce(avatar.transform.forward * Avo, ForceMode.Impulse);
             }
         }
+
+        #region プレイヤーの大きさを変形
         // 大きい時
         public void Large()
         {
@@ -605,7 +517,7 @@ namespace OROCHI
             Instantiate(ChangeEffect, this.transform.position, EffectAngle); //パーティクル用ゲームオブジェクト生成
             boxCol.center = new Vector3(0f, 1.8f, 0f);
             boxCol.size = new Vector3(2f, 3.6f, 4.5f);
-            upForce = LARGEup;
+            upforce = LARGEup;
             rigidbody.mass = mass[0];
 
             bodies[0].SetActive(false);
@@ -632,7 +544,7 @@ namespace OROCHI
             Instantiate(ChangeEffect, this.transform.position, EffectAngle); //パーティクル用ゲームオブジェクト生成
             boxCol.center = new Vector3(0f, 1f, 0f);
             boxCol.size = new Vector3(1.5f, 2f, 3f);
-            upForce = MEDIUMup;
+            upforce = MEDIUMup;
             rigidbody.mass = mass[1];
 
             bodies[0].SetActive(false);
@@ -659,7 +571,7 @@ namespace OROCHI
             Instantiate(ChangeEffect, this.transform.position, EffectAngle); //パーティクル用ゲームオブジェクト生成
             boxCol.center = new Vector3(0f, 1f, 0f);
             boxCol.size = new Vector3(1f, 2f, 1.5f);
-            upForce = SMALLup;
+            upforce = SMALLup;
             rigidbody.mass = mass[2];
 
             bodies[0].SetActive(true);
@@ -676,6 +588,7 @@ namespace OROCHI
 
             ResetCoolTime();
         }
+        #endregion
 
         public void BodyUp()
         {
