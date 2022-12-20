@@ -2,36 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//ƒvƒŒƒCƒ„[‚ª“G‚Ì‰“‹——£UŒ‚”ÍˆÍ‚ÉN“üA’Eo‚Ìˆ—
-public class LongAttackArea : MonoBehaviour
+namespace OROCHI
 {
-    //e‚ÌƒXƒNƒŠƒvƒg‚ğæ“¾
-    [SerializeField]
-    Enemy Parent_Enemy = null;
-
-    [SerializeField]
-    float Transition_time;
-
-    //“G‚ÌUŒ‚”ÍˆÍ‚Ö‚ÌN“ü”»’è
-    private void OnTriggerEnter(Collider colision)
+    //ƒvƒŒƒCƒ„[‚ª“G‚Ì‰“‹——£UŒ‚”ÍˆÍ‚ÉN“üA’Eo‚Ìˆ—
+    public class LongAttackArea : MonoBehaviour
     {
-        //Player‚ª‰“‹——£UŒ‚”Í“à‚ÉN“ü
-        if (colision.CompareTag("Player"))
+        //e‚ÌƒXƒNƒŠƒvƒg‚ğæ“¾
+        [SerializeField]
+        Enemy Parent_Enemy = null;
+
+        [SerializeField]
+        float Transition_time;
+
+        //“G‚ÌUŒ‚”ÍˆÍ‚Ö‚ÌN“ü”»’è
+        private void OnTriggerEnter(Collider colision)
         {
-            Parent_Enemy.isLongAttacks = true;
-            Parent_Enemy.LongAttack();                  //‰“‹——£UŒ‚ƒXƒe[ƒg‚É•ÏX
+            //Player‚ª‰“‹——£UŒ‚”Í“à‚ÉN“ü
+            if (colision.CompareTag("Player"))
+            {
+                Parent_Enemy.isLongAttacks = true;
+                Parent_Enemy.LongAttack();                  //‰“‹——£UŒ‚ƒXƒe[ƒg‚É•ÏX
+            }
+        }
+        //“G‚Ì‰“‹——£UŒ‚”»’è‚©‚ç‚Ì’Eo‚Ì”»’è
+        private void OnTriggerExit(Collider colision)
+        {
+            //Player‚ª‰“‹——£UŒ‚”ÍŠO‚É’Eo
+            if (colision.CompareTag("Player"))
+            {
+                Parent_Enemy.isLongAttacks = false;
+                Parent_Enemy.SetDiscoverState();
+            }
         }
     }
-    //“G‚Ì‰“‹——£UŒ‚”»’è‚©‚ç‚Ì’Eo‚Ì”»’è
-    private void OnTriggerExit(Collider colision)
-    {
-        //Player‚ª‰“‹——£UŒ‚”ÍŠO‚É’Eo
-        if (colision.CompareTag("Player"))
-        {
-            Parent_Enemy.isLongAttacks = false;
-            Parent_Enemy.SetDiscoverState();
-        }
-    }
-
-
 }
