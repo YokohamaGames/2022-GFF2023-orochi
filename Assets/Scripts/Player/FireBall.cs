@@ -3,40 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.VisualScripting;
 
-public class FireBall : MonoBehaviour
+namespace OROCHI
 {
-    private Vector3 latestPos;  //前回のPosition
-
-    //public GameObject enemy;
-
-    public Enemy enemyscript;
-
-    private void Start()
+    public class FireBall : MonoBehaviour
     {
-        enemyscript = GameObject.Find("Susano").GetComponent<Enemy>();
-    }
+        private Vector3 latestPos;  //前回のPosition
 
-    // Update is called once per frame
-    void Update()
-    {
-        Vector3 diff = transform.position - latestPos;   //前回からどこに進んだかをベクトルで取得
-        latestPos = transform.position;  //前回のPositionの更新
+        //public GameObject enemy;
 
-        //ベクトルの大きさが0.01以上の時に向きを変える処理をする
-        if (diff.magnitude > 0.01f)
+        public Enemy enemyscript;
+
+        private void Start()
         {
-            transform.rotation = Quaternion.LookRotation(diff); //向きを変更する
+            enemyscript = GameObject.Find("Susano").GetComponent<Enemy>();
         }
-    }
 
-    // 敵との衝突判定
-    // 当たったらダメージを発生して消滅
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "enemy")
+        // Update is called once per frame
+        void Update()
         {
-            enemyscript.EnemyDamage(5);
+            Vector3 diff = transform.position - latestPos;   //前回からどこに進んだかをベクトルで取得
+            latestPos = transform.position;  //前回のPositionの更新
+
+            //ベクトルの大きさが0.01以上の時に向きを変える処理をする
+            if (diff.magnitude > 0.01f)
+            {
+                transform.rotation = Quaternion.LookRotation(diff); //向きを変更する
+            }
         }
-        Destroy(this.gameObject);
+
+        // 敵との衝突判定
+        // 当たったらダメージを発生して消滅
+        void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.tag == "enemy")
+            {
+                enemyscript.EnemyDamage(5);
+            }
+            Destroy(this.gameObject);
+        }
     }
 }

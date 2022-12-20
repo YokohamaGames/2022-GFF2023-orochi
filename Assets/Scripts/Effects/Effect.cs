@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Effect : MonoBehaviour
+namespace OROCHI
 {
-    [Header("Effects")]
-    [SerializeField]
-    [Tooltip("プレイヤーが敵の剣攻撃を受けた時のダメージエフェクト")]
-    GameObject playerdamageeffect = null;
-
-
-    public void EffectPlay(GameObject effect)
+    public class Effect : MonoBehaviour
     {
-        GameObject effectplay = Instantiate(effect, this.transform.position, Quaternion.identity);
+        [Header("Effects")]
+        [SerializeField]
+        [Tooltip("プレイヤーが敵の剣攻撃を受けた時のダメージエフェクト")]
+        GameObject playerdamageeffect = null;
 
-        Destroy(effectplay, 1.5f);
+
+        public void EffectPlay(GameObject effect)
+        {
+            GameObject effectplay = Instantiate(effect, this.transform.position, Quaternion.identity);
+
+            Destroy(effectplay, 1.5f);
+        }
+
     }
-
 }

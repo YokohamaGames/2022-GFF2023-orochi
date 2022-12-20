@@ -2,18 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//アニメーションの時間を管理する
-public class AnimationTimeManager : MonoBehaviour
+namespace OROCHI
 {
-    private Animator animator;
-    // Start is called before the first frame update
-    void Start()
+    //アニメーションの時間を管理する
+    public class AnimationTimeManager : MonoBehaviour
     {
-        animator = GetComponent<Animator>();
-    }
+        private Animator animator;
+        // Start is called before the first frame update
+        void Start()
+        {
+            animator = GetComponent<Animator>();
+        }
 
-    public void SetAnimationSpeed(float speed)
-    {
-        animator.SetFloat("AttackSpeed", speed);
+        public void SetAnimationSpeed(float speed)
+        {
+            animator.SetFloat("AttackSpeed", speed);
+        }
     }
 }

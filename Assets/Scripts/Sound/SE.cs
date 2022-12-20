@@ -1,109 +1,109 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SE : MonoBehaviour
+namespace OROCHI
 {
-    // ÇªÇÍÇºÇÍÇÃâπê∫ÇéQè∆
-    public AudioClip OpenUi = null;
-    public AudioClip CloseUi = null;
-    public AudioClip swordattack = null;
-    public AudioClip swordattack2 = null;
-    public AudioClip fire = null;
-    public AudioClip damage = null;
-    public AudioClip swordswing = null;
-    public AudioClip chargehit = null;
-    public AudioClip damaged = null;
-    public AudioClip fireattack = null;
-    public AudioClip firedamaged = null;
-    public AudioClip charge = null;
-
-
-
-
-
-
-
-
-    AudioSource Se = null;
-
-    [SerializeField]
-    private Slider SeSoundValue = null;
-
-    public static SE Instance { get; private set; }
-    // Start is called before the first frame update
-
-    private void Awake()
+    public class SE : MonoBehaviour
     {
-        Instance = this;
-    }
+        // ÇªÇÍÇºÇÍÇÃâπê∫ÇéQè∆
+        public AudioClip OpenUi = null;
+        public AudioClip CloseUi = null;
+        public AudioClip swordattack = null;
+        public AudioClip swordattack2 = null;
+        public AudioClip fire = null;
+        public AudioClip damage = null;
+        public AudioClip swordswing = null;
+        public AudioClip chargehit = null;
+        public AudioClip damaged = null;
+        public AudioClip fireattack = null;
+        public AudioClip firedamaged = null;
+        public AudioClip charge = null;
 
-    void Start()
-    {
-        Se = GetComponent<AudioSource>();
-        SeSoundValue.onValueChanged.AddListener(value => Se.volume = value / 10);
-    }
 
-    public void OpenUI()
-    {
-        Se.PlayOneShot(OpenUi);
-    }
-    public void CloseUI()
-    {
-        Se.PlayOneShot(CloseUi);
-    }
 
-    public void SowrdAttack()
-    {
-        Se.PlayOneShot(swordattack);
-    }
+        AudioSource Se = null;
 
-    public void SowrdAttack2()
-    {
-        Se.PlayOneShot(swordattack2);
-    }
+        [SerializeField]
+        private Slider SeSoundValue = null;
 
-    public void Fire()
-    {
-        Se.PlayOneShot(fire);
-    }
+        public static SE Instance { get; private set; }
+        // Start is called before the first frame update
 
-    public void Damage()
-    {
-        Se.PlayOneShot(damage);
-    }
+        private void Awake()
+        {
+            Instance = this;
+        }
 
-    public void SwordSwing()
-    {
-        Se.PlayOneShot(swordswing);
-    }
+        void Start()
+        {
+            Se = GetComponent<AudioSource>();
+            SeSoundValue.onValueChanged.AddListener(value => Se.volume = value / 10);
+        }
 
-    public void ChargeHit()
-    {
-        Se.PlayOneShot(chargehit);
-    }
+        #region ÇªÇÍÇºÇÍÇÃSE
+        public void OpenUI()
+        {
+            Se.PlayOneShot(OpenUi);
+        }
+        public void CloseUI()
+        {
+            Se.PlayOneShot(CloseUi);
+        }
 
-    public void Damaged()
-    {
-        Se.PlayOneShot(damaged);
-    }
+        public void SowrdAttack()
+        {
+            Se.PlayOneShot(swordattack);
+        }
 
-    public void FireSE()
-    {
-        Se.PlayOneShot(fireattack);
-    } 
+        public void SowrdAttack2()
+        {
+            Se.PlayOneShot(swordattack2);
+        }
 
-    public void FireDamaged()
-    {
-        Se.PlayOneShot(firedamaged);
-    }
+        public void Fire()
+        {
+            Se.PlayOneShot(fire);
+        }
 
-    public void Charge()
-    {
-        Se.PlayOneShot(charge);
-    }
+        public void Damage()
+        {
+            Se.PlayOneShot(damage);
+        }
 
-    public void PlaySound(AudioClip sound)
-    {
-        Se.PlayOneShot(sound);
+        public void SwordSwing()
+        {
+            Se.PlayOneShot(swordswing);
+        }
+
+        public void ChargeHit()
+        {
+            Se.PlayOneShot(chargehit);
+        }
+
+        public void Damaged()
+        {
+            Se.PlayOneShot(damaged);
+        }
+
+        public void FireSE()
+        {
+            Se.PlayOneShot(fireattack);
+        }
+
+        public void FireDamaged()
+        {
+            Se.PlayOneShot(firedamaged);
+        }
+
+        public void Charge()
+        {
+            Se.PlayOneShot(charge);
+        }
+
+        public void PlaySound(AudioClip sound)
+        {
+            Se.PlayOneShot(sound);
+        }
+        #endregion
     }
 }

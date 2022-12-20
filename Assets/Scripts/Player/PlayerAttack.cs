@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttack : MonoBehaviour
+namespace OROCHI
 {
-    [SerializeField]
-    int playeratk;
-
-    private void OnTriggerEnter(Collider collision)
+    public class PlayerAttack : MonoBehaviour
     {
-        if (collision.CompareTag("enemy"))
+        [SerializeField]
+        int playeratk;
+
+        private void OnTriggerEnter(Collider collision)
         {
-            collision.GetComponent<Enemy>().EnemyDamage(playeratk);
+            if (collision.CompareTag("enemy"))
+            {
+                collision.GetComponent<Enemy>().EnemyDamage(playeratk);
+            }
         }
     }
 }
