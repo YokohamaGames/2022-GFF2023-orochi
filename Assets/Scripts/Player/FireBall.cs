@@ -29,6 +29,8 @@ public class FireBall : MonoBehaviour
         }
     }
 
+    // “G‚Æ‚ÌÕ“Ë”»’è
+    // “–‚½‚Á‚½‚çƒ_ƒ[ƒW‚ğ”­¶‚µ‚ÄÁ–Å
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "enemy")
