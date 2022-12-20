@@ -4605,30 +4605,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dafbec853b050674895451d2a308810f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChaseSpeed: 4
-  AttackReadySpeed: 4
+  chasespeed: 0
+  attackreadyspeed: 1
   target: {fileID: 6326434}
   animator: {fileID: 1201586139}
-  rotMax: 0
-  searchArea: {fileID: 1633171232196757754}
+  rotmax: 0
+  searcharea: {fileID: 1633171232196757754}
   attackArea: {fileID: 1633171231966458660}
-  Weapon_Collider: {fileID: 1132686078}
-  Transition_Time: 2
-  shellPrefab: {fileID: 1861180931737820419, guid: dab3c90c1a6268145b07a73ece0b59a1, type: 3}
+  weaponcollider: {fileID: 1132686078}
+  transition_time: 0
+  shellprefab: {fileID: 1861180931737820419, guid: dab3c90c1a6268145b07a73ece0b59a1, type: 3}
   defeateffect: {fileID: 7667812074817528645, guid: be1c3a3697037ea4f9c764f21bec2c90, type: 3}
   damageeffect: {fileID: 2451035040905579535, guid: 57d0c4bec3bf2e24888c61d7aa9e9a69, type: 3}
-  Enemy_L_Hand: {fileID: 1787320343}
-  EnemyHpBar: {fileID: 8237574576973562154}
-  SwordEffect: {fileID: 4322176617235163267, guid: 5b8a2349ad443714b8425b2ad29c99ba, type: 3}
+  enemy_l_hand: {fileID: 1787320343}
+  enemyhpbar: {fileID: 8237574576973562154}
+  swordeffect: {fileID: 4322176617235163267, guid: 5b8a2349ad443714b8425b2ad29c99ba, type: 3}
   HitEffect: {fileID: 5699511037023820722, guid: 9f2d6143b48ddfd44ae17dfc85fabb31, type: 3}
-  TimetoAttack: 1.3
-  DeleteEnemyTime: 5
+  timetoattack: 2
+  deleteenemytime: 0
   hp: {fileID: 2100245931}
   timefire: 2.5
-  SearchArea: 0
-  AttackArea: 0
-  LongAttackArea: 0
-  Dead: 0
+  isSearch: 0
+  isAttacks: 0
+  isLongAttacks: 0
+  isDead: 0
   fire: {fileID: 8300000, guid: ec394b155a5e4bd408a87c5f00574508, type: 3}
   swing: {fileID: 8300000, guid: a23c0ce18cc05ee49a8c129ea9bc45be, type: 3}
   chargedamaged: {fileID: 8300000, guid: 151603933caa94944b68734497a0ed27, type: 3}
