@@ -19,7 +19,7 @@ namespace OROCHI
             {
                 Debug.Log("“G‚Æ’e‚ªÕ“Ë‚µ‚Ü‚µ‚½III");
                 GameObject damege = Instantiate(damageeffect, this.transform.position, Quaternion.identity);
-                Destroy(damege, 1.5f);
+                Destroy(damege, 0.5f);
             }
         }
     }

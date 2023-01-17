@@ -271,7 +271,7 @@ namespace OROCHI
 
         void UpdateForInvincible()
         {
-            StartCoroutine(DelayCoroutine());
+            SetWalkState();
         }
 
         // WalkÉXÉeÅ[ÉgÇ…ëJà⁄Ç≥ÇπÇ‹Ç∑ÅB
@@ -354,7 +354,7 @@ namespace OROCHI
 
         private bool Avoiding = true;
         // âÒî
-        async public void Avoid(Vector2 moveinput)
+        public void Avoid(Vector2 moveinput)
         {
             if (Avoiding)
             {
@@ -362,14 +362,15 @@ namespace OROCHI
                 {
                     Avoiding = false;
                     currentAnimator.SetTrigger(isAvoidId);
+                    StartCoroutine(DelayCoroutine());
                 }
                 SetInvincible();
 
                 boxCol.center = new Vector3(0, 0.25f, 0);
                 boxCol.size = new Vector3(1f, 0.5f, 1f);
                 rigidbody.AddForce(Vector3.forward * Avo, ForceMode.Impulse);
-                await Task.Delay(2000);
-                Avoiding = true;
+                //await Task.Delay(2000);
+                //Avoiding = true;
             }
         }
 
@@ -501,8 +502,9 @@ namespace OROCHI
         public IEnumerator DelayCoroutine()
         {
             // 1ïbä‘ë“Ç¬
-            yield return new WaitForSeconds(1);
-            //Avoiding = true;
+            yield return new WaitForSeconds(2);
+            Debug.Log("2ïbÇΩÇ¡ÇΩ");
+            Avoiding = true;
             SetWalkState();
         }
 
