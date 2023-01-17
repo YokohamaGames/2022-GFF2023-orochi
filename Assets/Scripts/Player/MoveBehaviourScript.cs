@@ -352,6 +352,46 @@ namespace OROCHI
             }
         }
 
+        private bool Avoiding = true;
+        // 回避
+        async public void Avoid(Vector2 moveinput)
+        {
+            if (Avoiding)
+            {
+                if (moveinput.x != 0 || moveinput.y != 0)
+                {
+                    Avoiding = false;
+                    currentAnimator.SetTrigger(isAvoidId);
+                }
+                SetInvincible();
+
+                boxCol.center = new Vector3(0, 0.25f, 0);
+                boxCol.size = new Vector3(1f, 0.5f, 1f);
+                rigidbody.AddForce(Vector3.forward * Avo, ForceMode.Impulse);
+                await Task.Delay(2000);
+                Avoiding = true;
+            }
+        }
+
+
+        // ジャンプします。
+        public void Jump()
+        {
+            if (isGrounded == true)
+            {
+                if (currentState != PlayerState.Clear)
+                {
+                    // spaceが押されたらジャンプ
+                    rigidbody.AddForce(transform.up * upforce / 2, ForceMode.Impulse);
+                    isGrounded = false;
+
+                    currentAnimator.SetTrigger("isJump");
+
+                    SetJumpingState();
+                }
+            }
+        }
+
 
         // 攻撃します
         public async void Fire()
@@ -397,6 +437,7 @@ namespace OROCHI
             }
         }
 
+        // 火球
         public async void ShotAttack()
         {
             if (shot == true)
@@ -418,24 +459,7 @@ namespace OROCHI
             }
         }
 
-        // ジャンプします。
-        public void Jump()
-        {
-            if (isGrounded == true)
-            {
-                if (currentState != PlayerState.Clear)
-                {
-                    // spaceが押されたらジャンプ
-                    rigidbody.AddForce(transform.up * upforce / 2, ForceMode.Impulse);
-                    isGrounded = false;
-
-                    currentAnimator.SetTrigger("isJump");
-
-                    SetJumpingState();
-                }
-            }
-        }
-
+        // 衝突判定
         void OnTriggerEnter(Collider collision)
         {
             if (currentState == PlayerState.Walk || currentState == PlayerState.Jumping || currentState == PlayerState.Attack)
@@ -474,13 +498,11 @@ namespace OROCHI
         }
 
 
-
-
         public IEnumerator DelayCoroutine()
         {
             // 1秒間待つ
             yield return new WaitForSeconds(1);
-
+            //Avoiding = true;
             SetWalkState();
         }
 
@@ -494,20 +516,6 @@ namespace OROCHI
             ButtonEnabled = true;
         }
 
-        public void Avoid()
-        {
-            if (currentState == PlayerState.Walk)
-            {
-                currentAnimator.SetTrigger(isAvoidId);
-                SetInvincible();
-
-                rigidbody.velocity = Vector3.zero;
-                boxCol.center = new Vector3(0, 0.25f, 0);
-                boxCol.size = new Vector3(1f, 0.5f, 1f);
-                //await Task.Delay(400);
-                rigidbody.AddForce(avatar.transform.forward * Avo, ForceMode.Impulse);
-            }
-        }
 
         #region プレイヤーの大きさを変形
         // 大きい時
