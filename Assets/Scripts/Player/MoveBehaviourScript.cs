@@ -57,7 +57,7 @@ namespace OROCHI
 
         [SerializeField]
         [Tooltip("âŒãÖÇÃÉNÅ[ÉãÉ^ÉCÉÄ")]
-        float shotCoolTime = 3;
+        float shotCoolTime = 0;
 
         float ShotCoolTime;
 
@@ -196,13 +196,11 @@ namespace OROCHI
                 case PlayerState.Avoid:
                     break;
                 case PlayerState.Attack:
-                    UpdateForAttackState();
                     break;
                 case PlayerState.Clear:
                     UpdateForClearState();
                     break;
                 case PlayerState.Invincible:
-                    UpdateForInvincible();
                     break;
             }
 
@@ -259,19 +257,9 @@ namespace OROCHI
             RunEffect.SetActive(false);
         }
 
-        void UpdateForAttackState()
-        {
-            StartCoroutine(DelayCoroutine());
-        }
-
         void UpdateForClearState()
         {
             currentAnimator.SetBool("isWalk", false);
-        }
-
-        void UpdateForInvincible()
-        {
-            SetWalkState();
         }
 
         // WalkÉXÉeÅ[ÉgÇ…ëJà⁄Ç≥ÇπÇ‹Ç∑ÅB
@@ -354,18 +342,15 @@ namespace OROCHI
 
         private bool Avoiding = true;
         // âÒî
-        public void Avoid(Vector2 moveinput)
+        public void Avoid()
         {
             if (Avoiding)
             {
-                if (moveinput.x != 0 || moveinput.y != 0)
-                {
-                    Avoiding = false;
-                    currentAnimator.SetTrigger(isAvoidId);
-                    StartCoroutine(DelayCoroutine());
-                }
+                Avoiding = false;
+                currentAnimator.SetTrigger(isAvoidId);
                 SetInvincible();
-
+                StartCoroutine(DelayCoroutine());
+               
                 boxCol.center = new Vector3(0, 0.25f, 0);
                 boxCol.size = new Vector3(1f, 0.5f, 1f);
                 rigidbody.AddForce(Vector3.forward * Avo, ForceMode.Impulse);
@@ -395,45 +380,43 @@ namespace OROCHI
 
 
         // çUåÇÇµÇ‹Ç∑
-        public async void Fire()
+        public void Fire()
         {
             if (isGrounded == true)
             {
-                if (ButtonEnabled == false)
+                if(ButtonEnabled == true)
                 {
-                    return;
-                }
-
-                if (currentState != PlayerState.Clear)
-                {
-                    SetAttackState();
-
-                    currentAnimator.SetTrigger("isAttack");
-
-                    ButtonEnabled = false;
-
-                    await Task.Delay(170);
-                    rigidbody.AddForce(avatar.transform.forward * 10, ForceMode.Impulse);
-                    if (currentBodySize == BodySize.Large)
+                    if (currentState != PlayerState.Clear)
                     {
-                        attackareas[0].SetActive(false);
-                        attackareas[1].SetActive(false);
-                        attackareas[2].SetActive(true);
-                    }
-                    else if (currentBodySize == BodySize.Medium)
-                    {
-                        attackareas[0].SetActive(false);
-                        attackareas[1].SetActive(true);
-                        attackareas[2].SetActive(false);
-                    }
-                    else if (currentBodySize == BodySize.Small)
-                    {
-                        attackareas[0].SetActive(true);
-                        attackareas[1].SetActive(false);
-                        attackareas[2].SetActive(false);
+                        SetAttackState();
+
+                        currentAnimator.SetTrigger("isAttack");
+
+                        ButtonEnabled = false;
+
+                        rigidbody.AddForce(avatar.transform.forward * 10, ForceMode.Impulse);
+                        if (currentBodySize == BodySize.Large)
+                        {
+                            attackareas[0].SetActive(false);
+                            attackareas[1].SetActive(false);
+                            attackareas[2].SetActive(true);
+                        }
+                        else if (currentBodySize == BodySize.Medium)
+                        {
+                            attackareas[0].SetActive(false);
+                            attackareas[1].SetActive(true);
+                            attackareas[2].SetActive(false);
+                        }
+                        else if (currentBodySize == BodySize.Small)
+                        {
+                            attackareas[0].SetActive(true);
+                            attackareas[1].SetActive(false);
+                            attackareas[2].SetActive(false);
+                        }
+
+                        StartCoroutine(ButtonCoroutine());
                     }
 
-                    StartCoroutine(ButtonCoroutine());
                 }
             }
         }
@@ -446,6 +429,8 @@ namespace OROCHI
                 if (currentBodySize == BodySize.Large)
                 {
                     currentAnimator.SetTrigger("isBeam");
+                    shot = false;
+                    ShotCoolTime = shotCoolTime;
                     await Task.Delay(800);
                     SE.Instance.FireSE();
                     GameObject shell = Instantiate(shellPrefab, Orochihead.transform.position, Quaternion.identity);
@@ -453,9 +438,6 @@ namespace OROCHI
                     // íeë¨Çê›íË
                     shellRb.AddForce(Orochihead.transform.forward * 1500);
                     Destroy(shell, 1.0f);
-
-                    shot = false;
-                    ShotCoolTime = shotCoolTime;
                 }
             }
         }
@@ -502,19 +484,17 @@ namespace OROCHI
         public IEnumerator DelayCoroutine()
         {
             // 1ïbä‘ë“Ç¬
-            yield return new WaitForSeconds(2);
-            Debug.Log("2ïbÇΩÇ¡ÇΩ");
+            yield return new WaitForSeconds(1);
             Avoiding = true;
             SetWalkState();
         }
 
         public IEnumerator ButtonCoroutine()
         {
-            //AttackCoolTime
-            float act = 0.7f;
             // 2ïbë“Ç¬
-            yield return new WaitForSeconds(act);
-
+            yield return new WaitForSeconds(1);
+            Debug.Log("çUåÇ");
+            SetWalkState();
             ButtonEnabled = true;
         }
 

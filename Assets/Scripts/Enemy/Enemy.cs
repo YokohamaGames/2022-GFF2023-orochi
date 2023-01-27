@@ -184,11 +184,6 @@ namespace OROCHI
             }
         }
 
-        void SetLongAttackState()
-        {
-            currentState = EnemyState.LongAttack;
-        }
-
         //遠距離攻撃に切り替え
         public void LongAttack()
         {
@@ -377,6 +372,7 @@ namespace OROCHI
         {
             currentState = EnemyState.Dead;
             speed = 0;
+            rigidbody.mass = 100;
             animator.SetTrigger(DeadId);
         }
 
@@ -402,7 +398,7 @@ namespace OROCHI
             Destroy(Hit, 1.5f);
 
             //HP0のとき撃破エフェクトの生成と敵オブジェクトの削除
-            if (StageScene.Instance.EnemyHp <= 0)
+            if (StageScene.Instance.EnemyHp == 0)
             {
                 isDead = true;
                 SetDeadState();

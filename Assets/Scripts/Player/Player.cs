@@ -97,7 +97,7 @@ namespace OROCHI
         {
             if (context.phase == InputActionPhase.Started)
             {
-                MoveBehaviour.Avoid(moveInput);
+                MoveBehaviour.Avoid();
             }
         }
 
