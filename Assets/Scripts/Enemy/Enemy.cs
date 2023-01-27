@@ -296,12 +296,10 @@ namespace OROCHI
             {
                 //ターゲット方向のベクトルを求める
                 Vector3 vec = target.position - transform.position;
-                vec.y = 0;
+                
                 // ターゲットの方向を向く
                 // Quaternion(回転値)を取得
                 Quaternion quaternion = Quaternion.LookRotation(vec);
-
-                //Debug.Log(quaternion.y);
                 // 算出した回転値をこのゲームオブジェクトのrotationに代入
                 transform.rotation = quaternion;
                 rigidbody.velocity = transform.forward * speed;// 正面方向に移動
@@ -347,14 +345,15 @@ namespace OROCHI
         //プレイヤーの方向に回転する関数
         void Rotate()
         {
+            Quaternion rot = this.transform.rotation;
             //ターゲット方向のベクトルを求める
             Vector3 vec = target.position - transform.position;
-
             // ターゲットの方向を向く
             // Quaternion(回転値)を取得
             Quaternion quaternion = Quaternion.LookRotation(vec);
             // 算出した回転値をこのゲームオブジェクトのrotationに代入
-            this.transform.rotation = quaternion;
+            rot = quaternion;
+            rot.x = 0;
         }
 
         //Attackステート時の処理
