@@ -397,7 +397,7 @@ namespace OROCHI
             Destroy(Hit, 1.5f);
 
             //HP0のとき撃破エフェクトの生成と敵オブジェクトの削除
-            if (StageScene.Instance.EnemyHp == 0)
+            if (StageScene.Instance.EnemyHp <= 0)
             {
                 isDead = true;
                 SetDeadState();

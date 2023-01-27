@@ -1416,7 +1416,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5303548066190079963, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: playeratk
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5333411187776607687, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1488,7 +1488,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6107647431472890740, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: playeratk
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6168842541218762599, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: m_Name

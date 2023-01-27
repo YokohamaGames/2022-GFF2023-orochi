@@ -13,7 +13,10 @@ namespace OROCHI
         {
             if (collision.CompareTag("enemy"))
             {
-                collision.GetComponent<Enemy>().EnemyDamage(playeratk);
+                if(StageScene.Instance.EnemyHp != 0)
+                {
+                    collision.GetComponent<Enemy>().EnemyDamage(playeratk);
+                }
             }
         }
     }
