@@ -8,14 +8,12 @@ namespace OROCHI
     {
         public GameObject fireball;
 
-        public void EnemyShotAttack()
+        public void OnCollisionEnter(Collision collision)
         {
-            GameObject fire = Instantiate(fireball, transform.position, Quaternion.identity);
-            Rigidbody firespeed = fire.GetComponent<Rigidbody>();
-            Debug.Log("î≠éÀ");
-            // íeë¨Çê›íË
-            firespeed.AddForce(transform.forward * 1500);
-            Destroy(fire, 1.0f);
+            if (collision.gameObject.tag == "Player")
+            {
+                Destroy(fireball);
+            }
         }
     }
 }

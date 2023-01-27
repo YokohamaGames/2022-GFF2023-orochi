@@ -453,7 +453,6 @@ namespace OROCHI
                     GameObject effectplay = Instantiate(damaged, this.transform.position, Quaternion.identity);
                     Destroy(effectplay, 1.5f);
                     StageScene.Instance.Damage();
-                    SetInvincible();
                 }
             }
         }
@@ -474,8 +473,6 @@ namespace OROCHI
                     StageScene.Instance.Damage();
                     GameObject fire = Instantiate(damagefire, this.transform.position, Quaternion.identity);
                     Destroy(fire, 2.0f);
-
-                    SetInvincible();
                 }
             }
         }
