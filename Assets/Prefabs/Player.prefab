@@ -661,7 +661,7 @@ MonoBehaviour:
   LARGEup: 10
   MEDIUMup: 12
   SMALLup: 15
-  avo: 5
+  AvoidSpeed: 0
   shellPrefab: {fileID: 1124392955816901512, guid: 147407a5974bfc44a8ff3264fdf24f4f, type: 3}
   VirtualCamera: []
   bodies:
@@ -677,6 +677,7 @@ MonoBehaviour:
   shotCoolTime: 3
   isChange: 0
   shot: 0
+  ui: {fileID: 0}
   playerCamera: {fileID: 0}
   avatar: {fileID: 6481032131687275024}
   boxCol: {fileID: 0}
@@ -686,7 +687,7 @@ MonoBehaviour:
   effect: {fileID: 0}
   isGrounded: 0
   damagefire: {fileID: 3189518951252779321, guid: 881d60d5f32792c459b3f4e6eed5f4df, type: 3}
-  damaged: {fileID: 0}
+  damaged: {fileID: 2468501518803022059, guid: d2756e6e38a470243be0b1ea634d4b04, type: 3}
   mass:
   - 50
   - 10
@@ -704,9 +705,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CinemachineCameraTarget: {fileID: 1925333846}
-  CameraAngleOverride: 0
-  LockCameraPosition: 0
-  avatar: {fileID: 6481032131687275024}
   RotationSmoothTime: 0.12
 --- !u!1 &4727906965139479468
 GameObject:

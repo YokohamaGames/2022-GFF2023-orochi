@@ -399,10 +399,13 @@ namespace OROCHI
             //HP0のとき撃破エフェクトの生成と敵オブジェクトの削除
             if (StageScene.Instance.EnemyHp <= 0)
             {
-                isDead = true;
-                SetDeadState();
-                GameObject defeat = Instantiate(defeateffect, this.transform.position, Quaternion.identity);
-                Destroy(this.gameObject, deleteenemytime);
+                if (currentState != EnemyState.Dead)
+                {
+                    isDead = true;
+                    SetDeadState();
+                    GameObject defeat = Instantiate(defeateffect, this.transform.position, Quaternion.identity);
+                    Destroy(this.gameObject, deleteenemytime);
+                }
             }
         }
     }

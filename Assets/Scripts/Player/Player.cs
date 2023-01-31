@@ -8,15 +8,8 @@ namespace OROCHI
 
 
         [Header("Cinemachine")]
-        [Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
+        [Tooltip("Vertual Cameraが追跡するターゲットを指定")]
         public GameObject CinemachineCameraTarget;
-        // public GameObject CinemachineCameraTarget;
-
-        [Tooltip("Additional degress to override the camera. Useful for fine tuning camera position when locked")]
-        public float CameraAngleOverride = 0.0f;
-
-        [Tooltip("For locking the camera position on all axis")]
-        public bool LockCameraPosition = false;
 
         MoveBehaviourScript MoveBehaviour;
 

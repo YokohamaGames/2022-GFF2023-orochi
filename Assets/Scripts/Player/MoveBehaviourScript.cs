@@ -17,18 +17,14 @@ namespace OROCHI
         private float LARGEup, MEDIUMup, SMALLup;
 
         [SerializeField]
-        [Tooltip("回避の幅を指定")]
-        private float Avo;
-
-        private Vector3 Com;
-
-        //火球のプレハブの取得
+        [Tooltip("大中小のそれぞれのオブジェクトを指定します。")]
+        private GameObject[] bodies = null;
         [SerializeField]
-        private GameObject shellPrefab;
+        private GameObject[] attackareas = null;
 
         [SerializeField]
-        [Tooltip("カメラの切り替え")]
-        private CinemachineVirtualCamera[] VirtualCamera = null;
+        [Tooltip("大・中・小の質量")]
+        public float[] mass = null;
 
         // プレイヤーの大きさステート
         enum BodySize
@@ -42,26 +38,38 @@ namespace OROCHI
         BodySize currentBodySize = BodySize.Medium;
 
         [SerializeField]
-        [Tooltip("大中小のそれぞれのオブジェクトを指定します。")]
-        private GameObject[] bodies = null;
+        [Tooltip("回避の幅を指定")]
+        private float AvoidSpeed;
+
+        private bool Avoiding = true;
+
+        //private Vector3 Com;
+
+        //火球のプレハブの取得
         [SerializeField]
-        private GameObject[] attackareas = null;
+        private GameObject shellPrefab;
+
+        [SerializeField]
+        [Tooltip("カメラの切り替え")]
+        private CinemachineVirtualCamera[] VirtualCamera = null;
 
         [SerializeField]
         private Transform Orochihead = null;
         [SerializeField]
-        [Tooltip("変身のクールタイム")]
+        [Tooltip("変身のクールタイムを指定")]
         float ChangeCoolTime = 10;
 
+        // 実際のクールタイム
         float CoolTime;
 
         [SerializeField]
         [Tooltip("火球のクールタイム")]
         float shotCoolTime = 0;
-
         float ShotCoolTime;
 
+        // チェンジを可能にするトリガー
         public bool isChange = false;
+        // 火球を発射できるトリガー
         public bool shot = false;
 
         // AnimatorのパラメーターID
@@ -70,17 +78,11 @@ namespace OROCHI
         // 現在のAnimator(大中小のいずれか)
         Animator currentAnimator = null;
 
-        // 今のスピードとジャンプ力
-        private float speed = 5.0f;
-        private float upforce = 100f;
-
         private bool ButtonEnabled = true;
 
+        // UIの指定
         [SerializeField]
         public UI ui = null;
-
-        // プレイヤーのカメラ
-        public Camera playerCamera = null;
 
         // Avatarオブジェクトへの参照
         public GameObject avatar = null;
@@ -100,19 +102,14 @@ namespace OROCHI
         [SerializeField]
         public GameObject ChangeEffect;
 
-        [SerializeField]
-        private Effect effect = null;
-
+        // 変身エフェクトの向き
         Quaternion EffectAngle = Quaternion.Euler(-90f, 0f, 0f);
-
 
         // プレイヤーの状態を表します
         enum PlayerState
         {
             // 歩き
             Walk,
-            // ジャンプの予備動作
-            JumpReady,
             // ジャンプ中
             Jumping,
             // 回避中
@@ -142,9 +139,9 @@ namespace OROCHI
         // コンポーネントを事前に参照しておく変数
         new Rigidbody rigidbody;
 
-        [SerializeField]
-        [Tooltip("大・中・小の質量")]
-        public float[] mass = null;
+        // 今のスピードとジャンプ力
+        private float speed = 5.0f;
+        private float upforce = 100f;
 
         // Start is called before the first frame update
         void Start()
@@ -154,7 +151,7 @@ namespace OROCHI
             isChange = true;
             shot = true;
             rigidbody = GetComponent<Rigidbody>();
-            rigidbody.centerOfMass = Com;
+            //rigidbody.centerOfMass = Com;
             rigidbody.mass = 10;
             boxCol = GetComponent<BoxCollider>();
 
@@ -187,8 +184,6 @@ namespace OROCHI
             {
                 case PlayerState.Walk:
                     UpdateForWalkState();
-                    break;
-                case PlayerState.JumpReady:
                     break;
                 case PlayerState.Jumping:
                     UpdateForJumpingState();
@@ -250,10 +245,9 @@ namespace OROCHI
             RunEffect.SetActive(true);
         }
 
-        async void UpdateForJumpingState()
+        void UpdateForJumpingState()
         {
             speed = 5;
-            await Task.Delay(200);
             RunEffect.SetActive(false);
         }
 
@@ -263,7 +257,7 @@ namespace OROCHI
         }
 
         // Walkステートに遷移させます。
-        void SetWalkState()
+        public void SetWalkState()
         {
             if (currentBodySize == BodySize.Small)
             {
@@ -290,13 +284,13 @@ namespace OROCHI
 
         #region ステート毎に遷移させる
         // Jumpingステートに遷移させます。
-        void SetJumpingState()
+        public void SetJumpingState()
         {
             currentState = PlayerState.Jumping;
         }
 
         // Attackステートに遷移させます。
-        void SetAttackState()
+        public void SetAttackState()
         {
             currentState = PlayerState.Attack;
         }
@@ -311,6 +305,11 @@ namespace OROCHI
         public void SetInvincible()
         {
             currentState = PlayerState.Invincible;
+        }
+
+        public void ClearState()
+        {
+            currentState = PlayerState.Clear;
         }
         #endregion
 
@@ -340,7 +339,6 @@ namespace OROCHI
             }
         }
 
-        private bool Avoiding = true;
         // 回避
         public void Avoid()
         {
@@ -353,7 +351,7 @@ namespace OROCHI
                
                 boxCol.center = new Vector3(0, 0.25f, 0);
                 boxCol.size = new Vector3(1f, 0.5f, 1f);
-                rigidbody.AddForce(Vector3.forward * Avo, ForceMode.Impulse);
+                rigidbody.AddForce(avatar.transform.forward * AvoidSpeed, ForceMode.Impulse);
                 //await Task.Delay(2000);
                 //Avoiding = true;
             }
@@ -363,6 +361,7 @@ namespace OROCHI
         // ジャンプします。
         public void Jump()
         {
+            Debug.Log(upforce);
             if (isGrounded == true)
             {
                 if (currentState != PlayerState.Clear)
@@ -624,9 +623,5 @@ namespace OROCHI
             isChange = false;
         }
 
-        public void ClearState()
-        {
-            currentState = PlayerState.Clear;
-        }
     }
 }
