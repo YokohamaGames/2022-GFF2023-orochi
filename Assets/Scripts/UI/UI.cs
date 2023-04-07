@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 namespace OROCHI
 {
@@ -58,6 +59,16 @@ namespace OROCHI
 
 		public GameObject Player;
 
+        [Tooltip("クールタイム用のUI")]
+		public Image Formicon;
+
+        [Tooltip("変身が可能か判定するフラグ")]
+		public bool Changeable;
+
+        [SerializeField]
+        [Tooltip("変身のクールタイム")]
+		public float CountTime = 5.0f;
+
 		// 開始時にUIを非表示
 		void Start()
 		{
@@ -67,11 +78,13 @@ namespace OROCHI
 			GameOverUI.SetActive(false);
 			StageClearUI.SetActive(false);
 			FastButton.Select();
+			Changeable = true;
 
 			animator = GetComponent<Animator>();
 
 			animator.SetTrigger("Start");
 		}
+
 
 		#region ポーズ画面を表示
 		public void Control()
@@ -212,5 +225,30 @@ namespace OROCHI
 			}
 		}
 		#endregion
+
+		public void ChangeCooltime()
+		{
+			if (Changeable)
+			{
+				Formicon.fillAmount = 0;
+				StartCoroutine(loop());
+
+				/*
+				Formicon.fillAmount = 0;
+				Formicon.fillAmount += 1.0f / CountTime * Time.deltaTime;
+				Changeable = false;
+				*/
+			}
+		}
+
+		private IEnumerator loop()
+        {
+			while(Formicon.fillAmount < 1)
+            {
+				yield return null;
+				Formicon.fillAmount += 1.0f / CountTime * Time.deltaTime;
+			}
+
+		}
 	}
 }

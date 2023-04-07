@@ -43,7 +43,7 @@ namespace OROCHI
 
         private bool Avoiding = true;
 
-        //private Vector3 Com;
+        private float walkspeed;
 
         //火球のプレハブの取得
         [SerializeField]
@@ -57,7 +57,7 @@ namespace OROCHI
         private Transform Orochihead = null;
         [SerializeField]
         [Tooltip("変身のクールタイムを指定")]
-        float ChangeCoolTime = 10;
+        float ChangeCoolTime = 5;
 
         // 実際のクールタイム
         float CoolTime;
@@ -98,9 +98,19 @@ namespace OROCHI
         [SerializeField]
         public GameObject RunEffect;
 
+        // ひっかきエフェクトの指定
+        [SerializeField]
+        public GameObject ClawEffect;
+
+        // 見えない壁に当たっている時のエフェクトの指定
+        [SerializeField]
+        public GameObject WallEffect;
+
         //サイズ変更エフェクトの指定
         [SerializeField]
         public GameObject ChangeEffect;
+
+        GameObject claw;
 
         // 変身エフェクトの向き
         Quaternion EffectAngle = Quaternion.Euler(-90f, 0f, 0f);
@@ -323,17 +333,22 @@ namespace OROCHI
                 var velocity = motion;
                 // 地上歩行キャラクターを標準とするのでy座標移動は無視
                 velocity.y = 0;
+
+                walkspeed = Mathf.Max(Mathf.Abs(velocity.x),Mathf.Abs(velocity.z));
+
                 if (velocity.sqrMagnitude >= 0.0001f)
                 {
                     avatar.transform.LookAt(transform.position + velocity.normalized, Vector3.up);
                     velocity *= speed;
-
                     currentAnimator.SetBool("isWalk", true);
                 }
                 else if (velocity.sqrMagnitude <= 0)
                 {
                     currentAnimator.SetBool("isWalk", false);
                 }
+
+                currentAnimator.SetFloat("WalkSpeed", walkspeed);
+
                 velocity.y = rigidbody.velocity.y;
                 rigidbody.velocity = velocity;
             }
@@ -379,7 +394,7 @@ namespace OROCHI
 
 
         // 攻撃します
-        public void Fire()
+        public async void Fire()
         {
             if (isGrounded == true)
             {
@@ -396,18 +411,31 @@ namespace OROCHI
                         rigidbody.AddForce(avatar.transform.forward * 10, ForceMode.Impulse);
                         if (currentBodySize == BodySize.Large)
                         {
+                            await Task.Delay(700);
+
+                            claw = Instantiate(ClawEffect, attackareas[2].transform.position, attackareas[2].transform.rotation);
+                            claw.transform.localScale = new Vector3(2.5f, 1f, 1f);
+
                             attackareas[0].SetActive(false);
                             attackareas[1].SetActive(false);
                             attackareas[2].SetActive(true);
                         }
                         else if (currentBodySize == BodySize.Medium)
                         {
+                            await Task.Delay(700);
+
+                            claw = Instantiate(ClawEffect, attackareas[1].transform.position, attackareas[1].transform.rotation); 
+
                             attackareas[0].SetActive(false);
                             attackareas[1].SetActive(true);
                             attackareas[2].SetActive(false);
                         }
                         else if (currentBodySize == BodySize.Small)
                         {
+                            await Task.Delay(300);
+
+                            claw = Instantiate(ClawEffect, attackareas[0].transform.position, attackareas[0].transform.rotation);
+
                             attackareas[0].SetActive(true);
                             attackareas[1].SetActive(false);
                             attackareas[2].SetActive(false);
@@ -474,8 +502,43 @@ namespace OROCHI
                     Destroy(fire, 2.0f);
                 }
             }
+
+            if (collision.gameObject.tag == "Wall")
+            {
+                Vector3 hitPos = collision.contacts[0].point;
+                Vector3 effectVec = this.transform.position - hitPos;
+                //Quaternion hitVec = Quaternion.Euler(effectVec);
+                Vector3 rotation = Vector3.zero - hitPos;
+                Quaternion quaternion = Quaternion.LookRotation(rotation);
+                wallEffect = Instantiate(WallEffect, hitPos, quaternion);
+                Destroy(wallEffect, 2.0f);
+            }
         }
 
+
+
+        GameObject wallEffect;
+
+        /*
+        private void OnCollisionStay(Collision collision)
+        {
+
+            if (collision.gameObject.tag == "Wall")
+            {
+                Vector3 hitPos = collision.contacts[0].point;
+                wallEffect  = Instantiate(WallEffect, hitPos, attackareas[1].transform.rotation);
+            }
+        }
+        private void OnCollisionExit(Collision collision)
+        {
+
+            if (collision.gameObject.tag == "Wall")
+            {
+                Destroy(wallEffect,0f);
+            }
+        }
+        */
+        
 
         public IEnumerator DelayCoroutine()
         {
@@ -487,11 +550,12 @@ namespace OROCHI
 
         public IEnumerator ButtonCoroutine()
         {
-            // 2秒待つ
-            yield return new WaitForSeconds(1);
+            // 0.4秒待つ
+            yield return new WaitForSeconds(0.4f);
             Debug.Log("攻撃");
             SetWalkState();
             ButtonEnabled = true;
+            Destroy(claw, 2f);
         }
 
 
@@ -581,9 +645,11 @@ namespace OROCHI
             switch (currentBodySize)
             {
                 case BodySize.Small:
+                    StageScene.Instance.Change();
                     Medium();
                     break;
                 case BodySize.Medium:
+                    StageScene.Instance.Change();
                     Large();
                     break;
                 case BodySize.Large:
@@ -597,9 +663,11 @@ namespace OROCHI
             switch (currentBodySize)
             {
                 case BodySize.Large:
+                    StageScene.Instance.Change();
                     Medium();
                     break;
                 case BodySize.Medium:
+                    StageScene.Instance.Change();
                     Small();
                     break;
                 case BodySize.Small:

@@ -70,5 +70,11 @@ namespace OROCHI
             }
         }
 
+        public void Change()
+        {
+            Ui.ChangeCooltime();
+        }
+
     }
+
 }

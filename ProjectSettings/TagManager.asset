@@ -15,6 +15,7 @@ TagManager:
   - Attack
   - Fire
   - OrochiFire
+  - Wall
   layers:
   - Default
   - TransparentFX

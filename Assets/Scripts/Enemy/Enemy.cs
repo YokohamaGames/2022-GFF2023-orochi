@@ -175,7 +175,15 @@ namespace OROCHI
         }
         void UpdateForLongAttack()
         {
-            Rotate();
+            Debug.Log("ローテーション");
+            //ターゲット方向のベクトルを求める
+            Vector3 vec = target.position - transform.position;
+
+            // ターゲットの方向を向く
+            // Quaternion(回転値)を取得
+            Quaternion quaternion = Quaternion.LookRotation(vec);
+            transform.rotation = quaternion;
+
             timetoatk += Time.deltaTime;
             if (timetoatk > timefire)
             {
@@ -303,6 +311,7 @@ namespace OROCHI
                 // 算出した回転値をこのゲームオブジェクトのrotationに代入
                 transform.rotation = quaternion;
                 rigidbody.velocity = transform.forward * speed;// 正面方向に移動
+                Debug.Log(speed);
 
                 if (currentState == EnemyState.Discover && spd <= 2.00f || currentState == EnemyState.Move && spd <= 2.00f)
                 {
