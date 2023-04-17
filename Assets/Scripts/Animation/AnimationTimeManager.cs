@@ -16,7 +16,7 @@ namespace OROCHI
 
         public void SetAnimationSpeed(float speed)
         {
-            animator.SetFloat("AttackSpeed", speed);
+            animator.SetFloat("WalkSpeed", speed);
         }
     }
 }
