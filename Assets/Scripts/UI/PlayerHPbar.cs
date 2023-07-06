@@ -10,7 +10,7 @@ namespace OROCHI
     {
         public static PlayerHPbar Instance { get; private set; }
 
-        public RawImage hpbar;
+        private RawImage hpbar;
 
         private Rect uvRect;
 
@@ -22,9 +22,7 @@ namespace OROCHI
 
             rectTransform = gameObject.GetComponent<RectTransform>();
 
-            rectTransform.sizeDelta = new Vector2(390.0f, 31.0f);
-
-
+            //rectTransform.sizeDelta = new Vector2(390.0f, 31.0f);
         }
 
         private void Awake()
@@ -49,7 +47,7 @@ namespace OROCHI
             {
                 uvRect.x = 1.0f;
                 uvRect.width = 1.0f;
-                hpbar.uvRect = uvRect;
+                //hpbar.uvRect = uvRect;
 
                 rectTransform.sizeDelta = new Vector2(390, 31);
             }
@@ -58,52 +56,52 @@ namespace OROCHI
             {
                 uvRect.x = 0.2f;
                 uvRect.width = 0.8f;
-                hpbar.uvRect = uvRect;
+                //hpbar.uvRect = uvRect;
 
-                rectTransform.sizeDelta = new Vector2(312, 31);
+                rectTransform.sizeDelta = new Vector2(345, 31);
             }
             // プレイヤーの体力が4の時
             else if (StageScene.Instance.playerhp == 4)
             {
                 uvRect.x = 0.4f;
                 uvRect.width = 0.6f;
-                hpbar.uvRect = uvRect;
+                //hpbar.uvRect = uvRect;
 
-                rectTransform.sizeDelta = new Vector2(282, 31);
+                rectTransform.sizeDelta = new Vector2(280, 31);
             }
             // プレイヤーの体力が3の時
             else if (StageScene.Instance.playerhp == 3)
             {
                 uvRect.x = 0.6f;
                 uvRect.width = 0.4f;
-                hpbar.uvRect = uvRect;
+                //hpbar.uvRect = uvRect;
 
-                rectTransform.sizeDelta = new Vector2(192, 31);
+                rectTransform.sizeDelta = new Vector2(220, 31);
             }
             // プレイヤーの体力が2の時
             else if (StageScene.Instance.playerhp == 2)
             {
                 uvRect.x = 0.8f;
                 uvRect.width = 0.2f;
-                hpbar.uvRect = uvRect;
+                //hpbar.uvRect = uvRect;
 
-                rectTransform.sizeDelta = new Vector2(114, 31);
+                rectTransform.sizeDelta = new Vector2(145, 31);
             }
             // プレイヤーの体力が1の時
             else if (StageScene.Instance.playerhp == 1)
             {
                 uvRect.x = 0.9f;
                 uvRect.width = 0.1f;
-                hpbar.uvRect = uvRect;
+                //hpbar.uvRect = uvRect;
 
-                rectTransform.sizeDelta = new Vector2(36, 31);
+                rectTransform.sizeDelta = new Vector2(80, 31);
             }
             // プレイヤーの体力が0の時
             else if (StageScene.Instance.playerhp == 0)
             {
                 uvRect.x = 0.0f;
                 uvRect.width = 0.0f;
-                hpbar.uvRect = uvRect;
+                //hpbar.uvRect = uvRect;
 
                 rectTransform.sizeDelta = new Vector2(0, 31);
             }

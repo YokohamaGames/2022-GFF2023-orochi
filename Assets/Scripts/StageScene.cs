@@ -26,6 +26,10 @@ namespace OROCHI
 
         public GameObject Player;
 
+        [SerializeField]
+        [Tooltip("チュートリアルステージならオン")]
+        private bool tutorial;
+
         private void Awake()
         {
             Instance = this;
@@ -56,7 +60,6 @@ namespace OROCHI
 
         public void Heal(Vector3 EffectTransform)
         {
-            Debug.Log("回復");
             Instantiate(HealObject, EffectTransform, Quaternion.identity); //パーティクル用ゲームオブジェクト生成
             playerhp += 1;
         }
@@ -64,9 +67,12 @@ namespace OROCHI
         // Damageが呼び出されたらHPが1減る
         public void Damage()
         {
-            if (playerhp > 0)
+            if(tutorial)
             {
-                playerhp--;
+                if (playerhp > 0)
+                {
+                    playerhp--;
+                }
             }
         }
 

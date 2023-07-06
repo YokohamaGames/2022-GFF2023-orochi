@@ -2640,6 +2640,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &980933908 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8269170968768671608, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+  m_PrefabInstance: {fileID: 6868338861024767833}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1002839972
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3538,8 +3549,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1440353447}
-  - component: {fileID: 1440353448}
   - component: {fileID: 1440353449}
+  - component: {fileID: 1440353448}
   m_Layer: 0
   m_Name: Sceneroot
   m_TagString: Untagged
@@ -5073,6 +5084,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3283338406919080776, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 390
+      objectReference: {fileID: 0}
     - target: {fileID: 3283338406919080779, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -5249,6 +5264,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8269170968768671608, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+      propertyPath: m_UVRect.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8269170968768671608, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+      propertyPath: m_UVRect.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8269170968768671608, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+      propertyPath: m_UVRect.width
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8269170968768671608, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+      propertyPath: m_UVRect.height
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8269170968768671609, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+      propertyPath: hpbar
+      value: 
+      objectReference: {fileID: 980933908}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
 --- !u!1 &7013259250979596637 stripped
@@ -5335,12 +5370,16 @@ PrefabInstance:
       objectReference: {fileID: 6326434}
     - target: {fileID: 7269922895585770671, guid: 32603945b793e8d40bd700bc391316be, type: 3}
       propertyPath: chasespeed
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7269922895585770671, guid: 32603945b793e8d40bd700bc391316be, type: 3}
       propertyPath: enemyhpbar
       value: 
       objectReference: {fileID: 8237574576973562154}
+    - target: {fileID: 7269922895585770671, guid: 32603945b793e8d40bd700bc391316be, type: 3}
+      propertyPath: timetoattack
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7269922895585770671, guid: 32603945b793e8d40bd700bc391316be, type: 3}
       propertyPath: deleteenemytime
       value: 5

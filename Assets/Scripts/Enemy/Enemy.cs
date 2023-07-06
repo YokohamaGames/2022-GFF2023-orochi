@@ -75,7 +75,8 @@ namespace OROCHI
         public bool isLongAttacks = false;
         public bool isDead = false;
 
-        //現在の敵の歩行スピード
+        //[SerializeField]
+        //[Tooltip("スサノオのスピード")]
         float speed = 0;
         // コンポーネントを事前に参照しておく変数
         new Rigidbody rigidbody;
@@ -162,7 +163,6 @@ namespace OROCHI
                 default:
                     break;
             }
-            Debug.Log(currentState);
         }
 
         IEnumerator Wait()
@@ -175,7 +175,6 @@ namespace OROCHI
         }
         void UpdateForLongAttack()
         {
-            Debug.Log("ローテーション");
             //ターゲット方向のベクトルを求める
             Vector3 vec = target.position - transform.position;
 
@@ -240,6 +239,7 @@ namespace OROCHI
         //ランダムに攻撃する。攻撃時は移動速度を0に設定
         public void Attacks()
         {
+            Debug.Log("攻撃");
             float tmp = Random.Range(1.0f, 4.0f);              //1～攻撃種類数の乱数を取得
             int random = (int)tmp;                             //float型の乱数をint型にキャスト
                                                                
@@ -265,7 +265,11 @@ namespace OROCHI
             }
             rigidbody.velocity = Vector3.zero;                       //立ち止まる
             timetoattackreset = timetoattack;                          //攻撃までの時間のカウントをリセット
+        }
 
+        public void AfterAttack()
+        {
+            SetMoveState();
         }
 
         //当たり判定をONにする関数
@@ -311,7 +315,6 @@ namespace OROCHI
                 // 算出した回転値をこのゲームオブジェクトのrotationに代入
                 transform.rotation = quaternion;
                 rigidbody.velocity = transform.forward * speed;// 正面方向に移動
-                Debug.Log(speed);
 
                 if (currentState == EnemyState.Discover && spd <= 2.00f || currentState == EnemyState.Move && spd <= 2.00f)
                 {
@@ -363,6 +366,7 @@ namespace OROCHI
             // 算出した回転値をこのゲームオブジェクトのrotationに代入
             rot = quaternion;
             rot.x = 0;
+            this.transform.rotation = rot;
         }
 
         //Attackステート時の処理

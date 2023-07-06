@@ -17,7 +17,6 @@ namespace OROCHI
 
             if (colision.CompareTag("Player"))
             {
-                Debug.Log("õ“G”ÍˆÍN“ü");
                 parent_enemy.isSearch = true;
                 parent_enemy.SetDiscoverState();
             }

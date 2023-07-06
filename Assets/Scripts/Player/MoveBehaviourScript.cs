@@ -376,7 +376,6 @@ namespace OROCHI
         // ジャンプします。
         public void Jump()
         {
-            Debug.Log(upforce);
             if (isGrounded == true)
             {
                 if (currentState != PlayerState.Clear)
@@ -552,7 +551,6 @@ namespace OROCHI
         {
             // 0.4秒待つ
             yield return new WaitForSeconds(0.4f);
-            Debug.Log("攻撃");
             SetWalkState();
             ButtonEnabled = true;
             Destroy(claw, 2f);
@@ -588,8 +586,6 @@ namespace OROCHI
         // 中型の時
         public void Medium()
         {
-            Debug.Log("中型");
-
             //変身エフェクト
             Instantiate(ChangeEffect, this.transform.position, EffectAngle); //パーティクル用ゲームオブジェクト生成
             boxCol.center = new Vector3(0f, 1f, 0f);
