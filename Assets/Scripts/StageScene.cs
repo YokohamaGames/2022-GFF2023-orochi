@@ -10,7 +10,7 @@ namespace OROCHI
 
         // UIを指定します。
         [SerializeField]
-        private UI Ui = null;
+        private UI ui = null;
 
         // プレイヤーのHPを指定
         [SerializeField]
@@ -18,13 +18,19 @@ namespace OROCHI
 
         //回復エフェクトの指定
         [SerializeField]
-        public GameObject HealObject;
+        public GameObject healObject;
 
         //敵のHPを設定
         [SerializeField]
-        public float EnemyHp;
+        public float enemyHp;
 
-        public GameObject Player;
+        public GameObject player;
+
+        // アニメーター
+        private Animator animator;
+
+        // プロローグ中はオン
+        public bool prologue = true;
 
         [SerializeField]
         [Tooltip("チュートリアルステージならオン")]
@@ -35,11 +41,16 @@ namespace OROCHI
             Instance = this;
         }
 
+        private void Start()
+        {
+            animator = GetComponent<Animator>();
+        }
+
         public void ControlPauseUI()
         {
             if (Time.timeScale > 0)
             {
-                Ui.Control();
+                ui.Control();
             }
         }
 
@@ -47,20 +58,20 @@ namespace OROCHI
         {
             if (playerhp == 0)
             {
-                Ui.GameOver();
+                ui.GameOver();
             }
 
-            if (EnemyHp <= 0)
+            if (enemyHp <= 0)
             {
                 await Task.Delay(5000);
-                Ui.StageClear();
-                Player.GetComponent<MoveBehaviourScript>().ClearState();
+                ui.StageClear();
+                player.GetComponent<MoveBehaviourScript>().ClearState();
             }
         }
 
         public void Heal(Vector3 EffectTransform)
         {
-            Instantiate(HealObject, EffectTransform, Quaternion.identity); //パーティクル用ゲームオブジェクト生成
+            Instantiate(healObject, EffectTransform, Quaternion.identity); //パーティクル用ゲームオブジェクト生成
             playerhp += 1;
         }
 
@@ -78,9 +89,21 @@ namespace OROCHI
 
         public void Change()
         {
-            Ui.ChangeCooltime();
+            ui.ChangeCooltime();
         }
 
-    }
+        int page = 0;
 
+        public void NextPage()
+        {
+            animator.SetTrigger("Next");
+
+            if(page == 1)
+            {
+                prologue = false;
+                ui.ClosePrologue();
+            }
+            page++;
+        }
+    }
 }

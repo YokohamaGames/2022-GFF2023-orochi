@@ -127,7 +127,7 @@ namespace OROCHI
             timetoattackreset = timetoattack;                  //攻撃時間を指定した時間にリセットする変数に値を代入
             weaponcollider.enabled = false;                    //敵の武器の当たり判定をオフ
             swordeffect.SetActive(false);
-            enemyhpbar.value = StageScene.Instance.EnemyHp;    // Sliderの初期状態を設定 
+            enemyhpbar.value = StageScene.Instance.enemyHp;    // Sliderの初期状態を設定 
             se = GetComponent<AudioSource>();
         }
 
@@ -402,7 +402,7 @@ namespace OROCHI
         //敵のHPバーの処理
         public void EnemyDamage(float n)
         {
-            StageScene.Instance.EnemyHp -= n;
+            StageScene.Instance.enemyHp -= n;
             n /= 100.0f;
             hp.fillAmount += n;
             SE.Instance.PlaySound(chargedamaged);
@@ -410,7 +410,7 @@ namespace OROCHI
             Destroy(Hit, 1.5f);
 
             //HP0のとき撃破エフェクトの生成と敵オブジェクトの削除
-            if (StageScene.Instance.EnemyHp <= 0)
+            if (StageScene.Instance.enemyHp <= 0)
             {
                 if (currentState != EnemyState.Dead)
                 {

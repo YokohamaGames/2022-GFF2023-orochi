@@ -31,6 +31,14 @@ namespace OROCHI
 		[SerializeField]
 		private SE Se = null;
 
+		[SerializeField]
+		[Tooltip("プロローグUIを参照")]
+		private GameObject PrologueUI = null;
+
+		[SerializeField]
+		[Tooltip("プロローグで選択されるボタンを指定")]
+		private Selectable NextButton = null;
+
 		// pause時の初期選択状態に設定するボタンを指定
 		[SerializeField]
 		private Selectable FastButton = null;
@@ -77,7 +85,7 @@ namespace OROCHI
 			GuideUI.SetActive(false);
 			GameOverUI.SetActive(false);
 			StageClearUI.SetActive(false);
-			FastButton.Select();
+			NextButton.Select();
 			Changeable = true;
 
 			animator = GetComponent<Animator>();
@@ -201,6 +209,11 @@ namespace OROCHI
 			Time.timeScale = 1f;
 		}
 
+		public void ClosePrologue()
+        {
+			PrologueUI.SetActive(false);
+        }
+
         #region プレイヤーの大きさ別に表示
         public void ChangeNumber(int n)
 		{
@@ -232,12 +245,6 @@ namespace OROCHI
 			{
 				Formicon.fillAmount = 0;
 				StartCoroutine(loop());
-
-				/*
-				Formicon.fillAmount = 0;
-				Formicon.fillAmount += 1.0f / CountTime * Time.deltaTime;
-				Changeable = false;
-				*/
 			}
 		}
 
@@ -248,7 +255,6 @@ namespace OROCHI
 				yield return null;
 				Formicon.fillAmount += 1.0f / CountTime * Time.deltaTime;
 			}
-
 		}
 	}
 }
