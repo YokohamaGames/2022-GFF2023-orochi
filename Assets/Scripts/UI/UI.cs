@@ -122,6 +122,8 @@ namespace OROCHI
 				animator.SetTrigger("PauseIn");
 				// ポーズの表示
 				PauseUI.SetActive(true);
+				// 戻るボタンを選択
+				FastButton.Select();
 				// UIが開かれた音声を再生
 				Se.OpenUI();
 				// 停止

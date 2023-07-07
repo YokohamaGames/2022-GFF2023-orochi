@@ -32,9 +32,7 @@ namespace OROCHI
         // プロローグ中はオン
         public bool prologue = true;
 
-        [SerializeField]
-        [Tooltip("チュートリアルステージならオン")]
-        private bool tutorial;
+        private bool clear = false;
 
         private void Awake()
         {
@@ -54,7 +52,7 @@ namespace OROCHI
             }
         }
 
-        public async Task Update()
+        public void Update()
         {
             if (playerhp == 0)
             {
@@ -63,27 +61,25 @@ namespace OROCHI
 
             if (enemyHp <= 0)
             {
-                await Task.Delay(5000);
-                ui.StageClear();
-                player.GetComponent<MoveBehaviourScript>().ClearState();
+                Clear();
             }
         }
 
         public void Heal(Vector3 EffectTransform)
         {
             Instantiate(healObject, EffectTransform, Quaternion.identity); //パーティクル用ゲームオブジェクト生成
-            playerhp += 1;
+            if(playerhp < 6)
+            {
+                playerhp += 1;
+            }
         }
 
         // Damageが呼び出されたらHPが1減る
         public void Damage()
         {
-            if(tutorial)
+            if (playerhp > 0)
             {
-                if (playerhp > 0)
-                {
-                    playerhp--;
-                }
+                playerhp--;
             }
         }
 
@@ -103,6 +99,18 @@ namespace OROCHI
                 ui.ClosePrologue();
             }
             page++;
+        }
+
+        public async void Clear()
+        {
+            if(!clear)
+            {
+                clear = true;
+                await Task.Delay(5000);
+                ui.StageClear();
+                player.GetComponent<MoveBehaviourScript>().SetClearState();
+                Debug.Log("クリア");
+            }
         }
     }
 }

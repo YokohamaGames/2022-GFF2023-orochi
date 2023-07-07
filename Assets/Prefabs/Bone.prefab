@@ -4890,8 +4890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d0b45b8142218140ba1df87f2d35c9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealObject: {fileID: 0}
-  Move_Behaviour_Script: {fileID: 0}
+  HealObject: {fileID: 4819983486457855076, guid: 4de2aecc891f33444b7688e2c76d96d9, type: 3}
 --- !u!95 &582128595
 Animator:
   serializedVersion: 4

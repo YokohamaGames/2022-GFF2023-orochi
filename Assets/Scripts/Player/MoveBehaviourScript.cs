@@ -317,7 +317,7 @@ namespace OROCHI
             currentState = PlayerState.Invincible;
         }
 
-        public void ClearState()
+        public void SetClearState()
         {
             currentState = PlayerState.Clear;
         }

@@ -3595,11 +3595,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c42358b0b5e9f14fa081fb70fcabadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ui: {fileID: 4632662817804489171}
+  ui: {fileID: 4632662817804489171}
   playerhp: 6
-  HealObject: {fileID: 4819983486457855076, guid: 4de2aecc891f33444b7688e2c76d96d9, type: 3}
-  EnemyHp: 100
-  Player: {fileID: 1750103307}
+  healObject: {fileID: 4819983486457855076, guid: 4de2aecc891f33444b7688e2c76d96d9, type: 3}
+  enemyHp: 100
+  player: {fileID: 1750103307}
+  prologue: 0
 --- !u!95 &1440353449
 Animator:
   serializedVersion: 4
