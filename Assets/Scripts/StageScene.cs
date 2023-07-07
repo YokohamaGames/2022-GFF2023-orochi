@@ -100,7 +100,6 @@ namespace OROCHI
 
             if(page == 1)
             {
-                prologue = false;
                 ui.ClosePrologue();
             }
             page++;

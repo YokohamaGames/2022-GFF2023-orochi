@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
+using System.Threading.Tasks;
 
 namespace OROCHI
 {
@@ -59,9 +60,21 @@ namespace OROCHI
 		[SerializeField]
 		private Selectable StageClearButton = null;
 
+		[SerializeField]
+		[Tooltip("チュートリアルのコントローラーが表示されたときに選択されるボタン")]
+		private Selectable backTutorialButton = null;
+
 		// HPバーのサイズ別数字
 		[SerializeField]
 		private GameObject[] Size = null;
+
+		[SerializeField]
+		[Tooltip("チュートリアルのコントローラーimageを指定")]
+		private GameObject controller = null;
+
+		[SerializeField]
+		[Tooltip("チュートリアルの戻るボタンのオブジェクトを指定")]
+		private GameObject backButton = null;
 
 		Animator animator;
 
@@ -85,12 +98,19 @@ namespace OROCHI
 			GuideUI.SetActive(false);
 			GameOverUI.SetActive(false);
 			StageClearUI.SetActive(false);
-			NextButton.Select();
+
+			if(NextButton != null)
+            {
+				NextButton.Select();
+			}
+
+			if(controller != null)
+            {
+				HiddenController();
+            }
+
 			Changeable = true;
-
 			animator = GetComponent<Animator>();
-
-			animator.SetTrigger("Start");
 		}
 
 
@@ -209,13 +229,17 @@ namespace OROCHI
 			Time.timeScale = 1f;
 		}
 
-		public void ClosePrologue()
+		public async void ClosePrologue()
         {
 			PrologueUI.SetActive(false);
+
+			// 2秒後に実行
+			await Task.Delay(2000);
+			DisplayController();
         }
 
-        #region プレイヤーの大きさ別に表示
-        public void ChangeNumber(int n)
+		#region プレイヤーの大きさ別に表示
+		public void ChangeNumber(int n)
 		{
 			if (n == 0)
 			{
@@ -255,6 +279,25 @@ namespace OROCHI
 				yield return null;
 				Formicon.fillAmount += 1.0f / CountTime * Time.deltaTime;
 			}
+		}
+
+		private void DisplayController()
+        {
+			backTutorialButton.Select();
+			controller.SetActive(true);
+			backButton.SetActive(true);
+        }
+
+		private void HiddenController()
+        {
+			controller.SetActive(false);
+			backButton.SetActive(false);
+		}
+
+		public void FinishTutorial()
+        {
+			HiddenController();
+			StageScene.Instance.prologue = false;
 		}
 	}
 }
