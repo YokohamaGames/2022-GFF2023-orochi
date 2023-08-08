@@ -9,13 +9,14 @@ namespace OROCHI
     {
         private Vector3 latestPos;  //‘O‰ñ‚ÌPosition
 
-        //public GameObject enemy;
-
-        public Enemy enemyscript;
+        private Enemy enemyScript;
 
         private void Start()
         {
-            enemyscript = GameObject.Find("Susano").GetComponent<Enemy>();
+            //if(enemyScript != null)
+            {
+                enemyScript = GameObject.Find("Susano").GetComponent<Enemy>();
+            }
         }
 
         // Update is called once per frame
@@ -37,7 +38,7 @@ namespace OROCHI
         {
             if (collision.gameObject.tag == "enemy")
             {
-                enemyscript.EnemyDamage(5);
+                enemyScript.EnemyDamage(5);
             }
             Destroy(this.gameObject);
         }

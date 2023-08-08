@@ -24,7 +24,19 @@ namespace OROCHI
         [SerializeField]
         public float enemyHp;
 
+        [SerializeField]
+        [Tooltip("プレイヤーオブジェクトを指定")]
         public GameObject player;
+
+        // プレイヤーのポジション
+        private Vector3 playerPosition;
+
+        [SerializeField]
+        [Tooltip("スサノオオブジェクトを指定")]
+        public GameObject enemy;
+
+        // スサノオのポジション
+        private Vector3 enemyPosition;
 
         // アニメーター
         private Animator animator;
@@ -52,7 +64,7 @@ namespace OROCHI
             }
         }
 
-        public void Update()
+        private void Update()
         {
             if (playerhp == 0)
             {
@@ -63,6 +75,23 @@ namespace OROCHI
             {
                 Clear();
             }
+        }
+
+        private void FixedUpdate()
+        {
+            /*
+            if(enemy != null)
+            {
+                playerPosition = player.GetComponent<Transform>().position;
+                enemyPosition = enemy.GetComponent<Transform>().position;
+
+                Vector3 difference = playerPosition - enemyPosition;
+                float differenceX = difference.x;
+                float differenceY = difference.y;
+
+                //if(Mathf.Abs(differenceX) = )
+            }
+            */
         }
 
         public void Heal(Vector3 EffectTransform)
@@ -99,6 +128,14 @@ namespace OROCHI
                 ui.ClosePrologue();
             }
             page++;
+        }
+
+        /// <summary>
+        /// 回復の説明用UIを表示
+        /// </summary>
+        public void OnHealExplanation()
+        {
+            ui.DisplayHealExplanation();
         }
 
         public async void Clear()

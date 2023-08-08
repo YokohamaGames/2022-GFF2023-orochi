@@ -309,6 +309,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.4221869, y: 3.057817, z: 1.4221869}
   m_Center: {x: 0, y: 1.5238798, z: 0}
+--- !u!1 &109891601 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4632662817555373150, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+  m_PrefabInstance: {fileID: 6868338861024767833}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &176737027
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1744,7 +1749,7 @@ PrefabInstance:
       objectReference: {fileID: 1066948944}
     - target: {fileID: 7552103752944929780, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: AvoidSpeed
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7552103752944929780, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: ClawEffect
@@ -1793,6 +1798,18 @@ PrefabInstance:
     - target: {fileID: 7552103752944929780, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: attackareas.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7552103752944929780, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+      propertyPath: AvoidPower.Array.data[0]
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7552103752944929780, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+      propertyPath: AvoidPower.Array.data[1]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7552103752944929780, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
+      propertyPath: AvoidPower.Array.data[2]
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 7552103752944929780, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
       propertyPath: VirtualCamera.Array.size
@@ -2603,10 +2620,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8056677346099663216, guid: 48b2464548e10de4ca452e8cc6e74be3, type: 3}
   m_PrefabInstance: {fileID: 381900692}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &768578598 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4632662818412413502, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+  m_PrefabInstance: {fileID: 6868338861024767833}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &812887827 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9073659351683542593, guid: 477056c60e0040e479ae23bb56917907, type: 3}
   m_PrefabInstance: {fileID: 1411359009}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &851521350 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1435241588725759034, guid: 32603945b793e8d40bd700bc391316be, type: 3}
+  m_PrefabInstance: {fileID: 8235329782686006212}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &911689224 stripped
 GameObject:
@@ -3600,6 +3627,7 @@ MonoBehaviour:
   healObject: {fileID: 4819983486457855076, guid: 4de2aecc891f33444b7688e2c76d96d9, type: 3}
   enemyHp: 100
   player: {fileID: 1750103307}
+  enemy: {fileID: 851521350}
   prologue: 0
 --- !u!95 &1440353449
 Animator:
@@ -3897,6 +3925,7 @@ MonoBehaviour:
   fireattack: {fileID: 8300000, guid: ec394b155a5e4bd408a87c5f00574508, type: 3}
   firedamaged: {fileID: 8300000, guid: 295fb50b8229a534f952ca25b74657be, type: 3}
   charge: {fileID: 8300000, guid: 83aa055df59807e48b3294cee6016ea6, type: 3}
+  changeSmoke: {fileID: 8300000, guid: 4d5636c838c342047829989219116238, type: 3}
   SeSoundValue: {fileID: 4632662818092078082}
 --- !u!82 &1522733869
 AudioSource:
@@ -5242,9 +5271,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1750103307}
     - target: {fileID: 4632662818328615607, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+      propertyPath: pauseUI
+      value: 
+      objectReference: {fileID: 768578598}
+    - target: {fileID: 4632662818328615607, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
       propertyPath: Formicon
       value: 
       objectReference: {fileID: 1180514431}
+    - target: {fileID: 4632662818328615607, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
+      propertyPath: optionUI
+      value: 
+      objectReference: {fileID: 109891601}
     - target: {fileID: 5808560081414940955, guid: ddf0a354e3efd7e4eb6392b30989c6ff, type: 3}
       propertyPath: m_IsActive
       value: 0

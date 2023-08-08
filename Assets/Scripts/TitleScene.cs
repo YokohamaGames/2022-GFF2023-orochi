@@ -21,14 +21,6 @@ namespace OROCHI
         Animator animator;
         static readonly int FadeOutId = Animator.StringToHash("FadeOut");
 
-        /* StageSelectを参照
-        [SerializeField]
-        private GameObject StageSelect = null;
-           selectボタンを参照
-        [SerializeField]
-        private Selectable SelectButton = null;
-        */
-
         private void Start()
         {
             Title.SetActive(true);
@@ -53,12 +45,10 @@ namespace OROCHI
         }
 
         // Stageを読み込む
-
-
         public void LoadStage()
         {
             StartCoroutine(OnStart());
-            SceneManager.LoadScene("Stage");
+            SceneManager.LoadScene("Tutorial");
 
         }
 

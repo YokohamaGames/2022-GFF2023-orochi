@@ -38,15 +38,23 @@ namespace OROCHI
         BodySize currentBodySize = BodySize.Medium;
 
         [SerializeField]
-        [Tooltip("回避の幅を指定")]
+        [Tooltip("回避の幅を指定(上から小・中・大)")]
+        private float[] AvoidPower = new float[3];
+
+        // avoidPowerをもとに実際に回避に働く力
         private float AvoidSpeed;
 
-        private bool Avoiding = true;
+        // 回避中かどうかのフラグ
+        private bool Avoiding = false;
 
-        private float walkspeed;
+        // 回避時間
+        private float avoidTime;
 
-        //火球のプレハブの取得
+        // アニメーション用の移動入力値
+        private float walkSpeed;
+
         [SerializeField]
+        [Tooltip("火球のプレハブの取得")]
         private GameObject shellPrefab;
 
         [SerializeField]
@@ -54,7 +62,9 @@ namespace OROCHI
         private CinemachineVirtualCamera[] VirtualCamera = null;
 
         [SerializeField]
+        [Tooltip("オロチモデルの頭部")]
         private Transform Orochihead = null;
+
         [SerializeField]
         [Tooltip("変身のクールタイムを指定")]
         float ChangeCoolTime = 5;
@@ -63,8 +73,10 @@ namespace OROCHI
         float CoolTime;
 
         [SerializeField]
-        [Tooltip("火球のクールタイム")]
+        [Tooltip("火球のクールタイムを指定")]
         float shotCoolTime = 0;
+
+        // 実際のクールタイム
         float ShotCoolTime;
 
         // チェンジを可能にするトリガー
@@ -78,38 +90,40 @@ namespace OROCHI
         // 現在のAnimator(大中小のいずれか)
         Animator currentAnimator = null;
 
+        // 攻撃ボタンを押しているかどうかのフラグ
         private bool ButtonEnabled = true;
 
-        // UIの指定
         [SerializeField]
+        [Tooltip("UIの指定")]
         public UI ui = null;
 
-        // Avatarオブジェクトへの参照
+        [Tooltip("Avatarオブジェクトへの参照")]
         public GameObject avatar = null;
 
-        // Rigidbodyの参照
+        [Tooltip("Rigidbodyの参照")]
         public BoxCollider boxCol;
 
-        //回復エフェクトの指定
         [SerializeField]
+        [Tooltip("回復エフェクトの指定")]
         public GameObject HealObject;
 
-        // 砂埃エフェクトの指定
         [SerializeField]
+        [Tooltip("砂埃エフェクトの指定")]
         public GameObject RunEffect;
 
-        // ひっかきエフェクトの指定
         [SerializeField]
+        [Tooltip("ひっかきエフェクトの指定")]
         public GameObject ClawEffect;
 
-        // 見えない壁に当たっている時のエフェクトの指定
         [SerializeField]
+        [Tooltip("見えない壁に当たっている時のエフェクトの指定")]
         public GameObject WallEffect;
 
-        //サイズ変更エフェクトの指定
         [SerializeField]
+        [Tooltip("サイズ変更エフェクトの指定")]
         public GameObject ChangeEffect;
 
+        // ひっかきエフェクトのオブジェクト
         GameObject claw;
 
         // 変身エフェクトの向き
@@ -138,12 +152,15 @@ namespace OROCHI
 
 
         [SerializeField]
+        [Tooltip("接地判定")]
         private bool isGrounded = false;
 
         [SerializeField]
+        [Tooltip("被ダメージエフェクト（火花）")]
         private GameObject damagefire;
 
         [SerializeField]
+        [Tooltip("被ダメージエフェクト")]
         private GameObject damaged;
 
         // コンポーネントを事前に参照しておく変数
@@ -161,7 +178,6 @@ namespace OROCHI
             isChange = true;
             shot = true;
             rigidbody = GetComponent<Rigidbody>();
-            //rigidbody.centerOfMass = Com;
             rigidbody.mass = 10;
             boxCol = GetComponent<BoxCollider>();
 
@@ -255,12 +271,18 @@ namespace OROCHI
             RunEffect.SetActive(true);
         }
 
+        /// <summary>
+        /// ジャンプ準備の処理
+        /// </summary>
         void UpdateForJumpingState()
         {
             speed = 5;
             RunEffect.SetActive(false);
         }
 
+        /// <summary>
+        /// クリア時の処理
+        /// </summary>
         void UpdateForClearState()
         {
             currentAnimator.SetBool("isWalk", false);
@@ -334,46 +356,73 @@ namespace OROCHI
                 // 地上歩行キャラクターを標準とするのでy座標移動は無視
                 velocity.y = 0;
 
-                walkspeed = Mathf.Max(Mathf.Abs(velocity.x),Mathf.Abs(velocity.z));
+                // 入力値の大きい方をアニメーションのスピードに代入
+                walkSpeed = Mathf.Max(Mathf.Abs(velocity.x),Mathf.Abs(velocity.z));
 
                 if (velocity.sqrMagnitude >= 0.0001f)
                 {
+                    // プレイヤーの向きを回転
                     avatar.transform.LookAt(transform.position + velocity.normalized, Vector3.up);
                     velocity *= speed;
+                    // 歩きアニメーションを再生
                     currentAnimator.SetBool("isWalk", true);
                 }
                 else if (velocity.sqrMagnitude <= 0)
                 {
+                    // 歩きアニメーションの停止
                     currentAnimator.SetBool("isWalk", false);
                 }
 
-                currentAnimator.SetFloat("WalkSpeed", walkspeed);
+                currentAnimator.SetFloat("WalkSpeed", walkSpeed);
 
+                // velocityに移動量を代入
                 velocity.y = rigidbody.velocity.y;
                 rigidbody.velocity = velocity;
             }
         }
 
-        // 回避
+        /// <summary>
+        /// 回避行動
+        /// </summary>
         public void Avoid()
         {
-            if (Avoiding)
+            if (!Avoiding)
             {
-                Avoiding = false;
+                Avoiding = true;
                 currentAnimator.SetTrigger(isAvoidId);
+                // 無敵状態
                 SetInvincible();
-                StartCoroutine(DelayCoroutine());
                
+                // コライダーを小さくしてすり抜けを表現
                 boxCol.center = new Vector3(0, 0.25f, 0);
                 boxCol.size = new Vector3(1f, 0.5f, 1f);
+
+                if (currentBodySize == BodySize.Small)
+                {
+                    AvoidSpeed = AvoidPower[0];
+                    avoidTime = 0.3f;
+                }
+                else if(currentBodySize == BodySize.Medium)
+                {
+                    AvoidSpeed = AvoidPower[1];
+                    avoidTime = 0.5f;
+                }
+                else if(currentBodySize == BodySize.Large)
+                {
+                    AvoidSpeed = AvoidPower[2];
+                    avoidTime = 0.8f;
+                }
+
+                // 
+                StartCoroutine(DelayCoroutine(avoidTime));
                 rigidbody.AddForce(avatar.transform.forward * AvoidSpeed, ForceMode.Impulse);
-                //await Task.Delay(2000);
-                //Avoiding = true;
             }
         }
 
 
-        // ジャンプします。
+        /// <summary>
+        /// ジャンプする
+        /// </summary>
         public void Jump()
         {
             if (isGrounded == true)
@@ -392,54 +441,70 @@ namespace OROCHI
         }
 
 
-        // 攻撃します
+        /// <summary>
+        /// 攻撃する
+        /// </summary>
         public async void Fire()
         {
+            // 接地状態なら
             if (isGrounded == true)
             {
+                // 攻撃ボタンを押してなければ
                 if(ButtonEnabled == true)
                 {
                     if (currentState != PlayerState.Clear)
                     {
+                        // 攻撃状態に移行
                         SetAttackState();
 
                         currentAnimator.SetTrigger("isAttack");
 
                         ButtonEnabled = false;
 
+                        // 攻撃時に少し前進
                         rigidbody.AddForce(avatar.transform.forward * 10, ForceMode.Impulse);
                         if (currentBodySize == BodySize.Large)
                         {
+                            // 0.7秒後
                             await Task.Delay(700);
 
+                            // ひっかきエフェクトを生成
                             claw = Instantiate(ClawEffect, attackareas[2].transform.position, attackareas[2].transform.rotation);
                             claw.transform.localScale = new Vector3(2.5f, 1f, 1f);
 
+                            // 大きい時の攻撃範囲をアクティブ化
                             attackareas[0].SetActive(false);
                             attackareas[1].SetActive(false);
                             attackareas[2].SetActive(true);
                         }
                         else if (currentBodySize == BodySize.Medium)
                         {
+                            // 0.7秒後
                             await Task.Delay(700);
 
+                            // ひっかきエフェクトを生成
                             claw = Instantiate(ClawEffect, attackareas[1].transform.position, attackareas[1].transform.rotation); 
 
+                            // 通常時の攻撃範囲をアクティブ化
                             attackareas[0].SetActive(false);
                             attackareas[1].SetActive(true);
                             attackareas[2].SetActive(false);
                         }
                         else if (currentBodySize == BodySize.Small)
                         {
+                            // 0.3秒後
                             await Task.Delay(300);
 
+                            // ひっかきエフェクトを生成
                             claw = Instantiate(ClawEffect, attackareas[0].transform.position, attackareas[0].transform.rotation);
 
+                            // 小さい時の攻撃範囲をアクティブ化
                             attackareas[0].SetActive(true);
                             attackareas[1].SetActive(false);
                             attackareas[2].SetActive(false);
                         }
 
+                        // 攻撃の後処理
                         StartCoroutine(ButtonCoroutine());
                     }
 
@@ -447,22 +512,29 @@ namespace OROCHI
             }
         }
 
-        // 火球
+        /// <summary>
+        /// 火球攻撃
+        /// </summary>
         public async void ShotAttack()
         {
             if (shot == true)
             {
+                // 大きい状態のみ
                 if (currentBodySize == BodySize.Large)
                 {
                     currentAnimator.SetTrigger("isBeam");
                     shot = false;
+                    // 火球のクールタイムをリセット
                     ShotCoolTime = shotCoolTime;
                     await Task.Delay(800);
+                    // アニメーションに合わせて音を再生
                     SE.Instance.FireSE();
+                    // 火球オブジェクトを生成
                     GameObject shell = Instantiate(shellPrefab, Orochihead.transform.position, Quaternion.identity);
                     Rigidbody shellRb = shell.GetComponent<Rigidbody>();
                     // 弾速を設定
                     shellRb.AddForce(Orochihead.transform.forward * 1500);
+                    // 1秒後に破壊
                     Destroy(shell, 1.0f);
                 }
             }
@@ -473,9 +545,11 @@ namespace OROCHI
         {
             if (currentState == PlayerState.Walk || currentState == PlayerState.Jumping || currentState == PlayerState.Attack)
             {
+                // 敵の武器に当たったら
                 if (collision.CompareTag("Enemy_Weapon"))
                 {
                     SE.Instance.Damaged();
+                    // 被ダメエフェクトを生成
                     GameObject effectplay = Instantiate(damaged, this.transform.position, Quaternion.identity);
                     Destroy(effectplay, 1.5f);
                     StageScene.Instance.Damage();
@@ -494,148 +568,183 @@ namespace OROCHI
 
             if (currentState == PlayerState.Walk || currentState == PlayerState.Jumping || currentState == PlayerState.Attack)
             {
+                // 敵の火球に当たったら
                 if (collision.gameObject.tag == "Fire")
                 {
                     StageScene.Instance.Damage();
+                    // 被ダメエフェクトを生成
                     GameObject fire = Instantiate(damagefire, this.transform.position, Quaternion.identity);
                     Destroy(fire, 2.0f);
                 }
             }
 
+            // 透明の壁に当たったら
             if (collision.gameObject.tag == "Wall")
             {
+                // 衝突した座標を取得
                 Vector3 hitPos = collision.contacts[0].point;
                 Vector3 effectVec = this.transform.position - hitPos;
-                //Quaternion hitVec = Quaternion.Euler(effectVec);
                 Vector3 rotation = Vector3.zero - hitPos;
+                // プレイヤーと壁の間でエフェクトの向きを調整
                 Quaternion quaternion = Quaternion.LookRotation(rotation);
-                wallEffect = Instantiate(WallEffect, hitPos, quaternion);
+                // 壁とプレイヤーの間にエフェクトを生成
+                GameObject wallEffect = Instantiate(WallEffect, hitPos, quaternion);
+                // 2秒後に破壊
                 Destroy(wallEffect, 2.0f);
             }
         }
 
-
-
-        GameObject wallEffect;
-
-        /*
-        private void OnCollisionStay(Collision collision)
-        {
-
-            if (collision.gameObject.tag == "Wall")
-            {
-                Vector3 hitPos = collision.contacts[0].point;
-                wallEffect  = Instantiate(WallEffect, hitPos, attackareas[1].transform.rotation);
-            }
-        }
-        private void OnCollisionExit(Collision collision)
-        {
-
-            if (collision.gameObject.tag == "Wall")
-            {
-                Destroy(wallEffect,0f);
-            }
-        }
-        */
-        
-
-        public IEnumerator DelayCoroutine()
+        /// <summary>
+        /// 一定時間遅らせる
+        /// </summary>
+        /// <param name="time">遅らせたい時間</param>
+        /// <returns></returns>
+        public IEnumerator DelayCoroutine(float time)
         {
             // 1秒間待つ
-            yield return new WaitForSeconds(1);
-            Avoiding = true;
+            yield return new WaitForSeconds(time);
+            Avoiding = false;
             SetWalkState();
         }
 
+        /// <summary>
+        /// 攻撃の後処理
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator ButtonCoroutine()
         {
             // 0.4秒待つ
             yield return new WaitForSeconds(0.4f);
             SetWalkState();
+            // 攻撃ボタンを押せる状態に変更
             ButtonEnabled = true;
+            // ひっかきエフェクトを破壊
             Destroy(claw, 2f);
         }
 
 
         #region プレイヤーの大きさを変形
-        // 大きい時
+        /// <summary>
+        /// 大きい状態
+        /// </summary>
         public void Large()
         {
             //変身エフェクト
             Instantiate(ChangeEffect, this.transform.position, EffectAngle); //パーティクル用ゲームオブジェクト生成
+            SE.Instance.Change();
+            // 大きい状態のコライダーに変更
             boxCol.center = new Vector3(0f, 1.8f, 0f);
             boxCol.size = new Vector3(2f, 3.6f, 4.5f);
+            // ジャンプ力を変更
             upforce = LARGEup;
+            // 重量感を変更
             rigidbody.mass = mass[0];
 
+            // 大きい状態のモデルを表示
             bodies[0].SetActive(false);
             bodies[1].SetActive(false);
             bodies[2].SetActive(true);
 
+            // 大きい時用のカメラを使用
             VirtualCamera[0].Priority = 10;
             VirtualCamera[1].Priority = 10;
             VirtualCamera[2].Priority = 100;
+
+            // 大きい状態に変更
             currentBodySize = BodySize.Large;
             currentAnimator = bodies[2].GetComponent<Animator>();
 
+            // UIで大きい状態を表示
             ui.ChangeNumber(2);
 
+            // 変身用のクールタイムを初期の数値にリセット
             ResetCoolTime();
         }
 
-        // 中型の時
+        /// <summary>
+        /// 通常状態
+        /// </summary>
         public void Medium()
         {
             //変身エフェクト
             Instantiate(ChangeEffect, this.transform.position, EffectAngle); //パーティクル用ゲームオブジェクト生成
+            SE.Instance.Change();
+
+            // 通常状態のコライダーに変更
             boxCol.center = new Vector3(0f, 1f, 0f);
             boxCol.size = new Vector3(1.5f, 2f, 3f);
+
+            // ジャンプ力を変更
             upforce = MEDIUMup;
+            // 重量感を変更
             rigidbody.mass = mass[1];
 
+            // 通常状態のモデルを表示
             bodies[0].SetActive(false);
             bodies[1].SetActive(true);
             bodies[2].SetActive(false);
 
+            // 通常状態のカメラを使用
             VirtualCamera[0].Priority = 10;
             VirtualCamera[1].Priority = 100;
             VirtualCamera[2].Priority = 10;
+
+            // 通常状態に変更
             currentBodySize = BodySize.Medium;
             currentAnimator = bodies[1].GetComponent<Animator>();
 
+            // UIで通常状態を表示
             ui.ChangeNumber(1);
 
+            // 変身用のクールタイムを初期の数値にリセット
             ResetCoolTime();
         }
 
-        // 小さい時
+        /// <summary>
+        /// 小さい状態
+        /// </summary>
         public void Small()
         {
             Debug.Log("小型");
 
             //変身エフェクト
-            Instantiate(ChangeEffect, this.transform.position, EffectAngle); //パーティクル用ゲームオブジェクト生成
+            Instantiate(ChangeEffect, this.transform.position, EffectAngle);
+            SE.Instance.Change();
+
+            // 小さい状態のコライダーに変更
             boxCol.center = new Vector3(0f, 1f, 0f);
             boxCol.size = new Vector3(1f, 2f, 1.5f);
+
+            // ジャンプ力を変更
             upforce = SMALLup;
+            // 重量感を変更
             rigidbody.mass = mass[2];
 
+            // 小さい状態のモデルを表示
             bodies[0].SetActive(true);
             bodies[1].SetActive(false);
             bodies[2].SetActive(false);
 
+            // 小さい状態のカメラを使用
             VirtualCamera[0].Priority = 100;
             VirtualCamera[1].Priority = 10;
             VirtualCamera[2].Priority = 10;
+
+            // 小さい状態に変更
             currentBodySize = BodySize.Small;
             currentAnimator = bodies[0].GetComponent<Animator>();
 
+            // UIで小さい状態を表示
             ui.ChangeNumber(0);
 
+            // 変身用のクールタイムを初期の数値にリセット
             ResetCoolTime();
         }
         #endregion
 
+        /// <summary>
+        /// 一段階大きくなる処理
+        /// </summary>
         public void BodyUp()
         {
             switch (currentBodySize)
@@ -654,6 +763,9 @@ namespace OROCHI
             }
         }
 
+        /// <summary>
+        /// 一段階小さくなる処理
+        /// </summary>
         public void BodyDown()
         {
             switch (currentBodySize)
@@ -672,20 +784,22 @@ namespace OROCHI
             }
         }
 
-        //回復中のエフェクト処理
+        /// <summary>
+        /// 回復中のエフェクト処理
+        /// </summary>
         public void Heal()
         {
             Debug.Log("回復");
-            Instantiate(HealObject, this.transform.position, Quaternion.identity); //パーティクル用ゲームオブジェクト生成
-                                                                                   //playerhp += 1;
+            Instantiate(HealObject, this.transform.position, Quaternion.identity);
         }
 
-        // 変身のクールタイムのリセット
+        /// <summary>
+        /// 変身のクールタイムのリセット
+        /// </summary>
         public void ResetCoolTime()
         {
             CoolTime = ChangeCoolTime;
             isChange = false;
         }
-
     }
 }

@@ -229,6 +229,7 @@ namespace OROCHI
         {
             if (!isDead)
             {
+                Debug.Log("UŒ‚€”õ");
                 currentState = EnemyState.AttackReady;
                 speed = attackreadyspeed;                          //UŒ‚”ÍˆÍ‚É“ü‚Á‚½‚ç—lqŒ©‚ÅˆÚ“®‘¬“x‚ğ¬‚³‚­‚·‚é
                 animator.SetTrigger(isAttackReady);

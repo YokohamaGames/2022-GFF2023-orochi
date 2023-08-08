@@ -30,13 +30,15 @@ namespace OROCHI
 
         void Update()
         {
-            if(!StageScene.Instance.prologue)
+            // カメラを基準に移動できるようにする
+            var motion = Camera.main.transform.forward * moveInput.y;
+            motion += Camera.main.transform.right * moveInput.x;
+            if (StageScene.Instance.prologue)
             {
-                // カメラを基準に移動できるようにする
-                var motion = Camera.main.transform.forward * moveInput.y;
-                motion += Camera.main.transform.right * moveInput.x;
-                MoveBehaviour.Move(motion);
+                moveInput = Vector2.zero;
             }
+            MoveBehaviour.Move(motion);
+
         }
 
         #region ユーザーのアクションに対して呼び出される

@@ -10,11 +10,11 @@ namespace OROCHI
 	{
 		// ポーズを参照
 		[SerializeField]
-		private GameObject PauseUI = null;
+		private GameObject pauseUI = null;
 
 		// オプションを参照
 		[SerializeField]
-		private GameObject OptionUI = null;
+		private GameObject optionUI = null;
 
 		// ガイドを参照
 		[SerializeField]
@@ -39,6 +39,18 @@ namespace OROCHI
 		[SerializeField]
 		[Tooltip("プロローグで選択されるボタンを指定")]
 		private Selectable NextButton = null;
+
+		[SerializeField]
+		[Tooltip("回復の説明UIを参照")]
+		private GameObject healExplanation = null;
+
+		[SerializeField]
+		[Tooltip("回復説明の戻るボタンのオブジェクトを指定")]
+		private GameObject closeButton = null;
+
+		[SerializeField]
+		[Tooltip("回復説明が表示されたときに選択されるボタン")]
+		private Selectable closeTutorialButton = null;
 
 		// pause時の初期選択状態に設定するボタンを指定
 		[SerializeField]
@@ -93,8 +105,8 @@ namespace OROCHI
 		// 開始時にUIを非表示
 		void Start()
 		{
-			PauseUI.SetActive(false);
-			OptionUI.SetActive(false);
+			pauseUI.SetActive(false);
+			optionUI.SetActive(false);
 			GuideUI.SetActive(false);
 			GameOverUI.SetActive(false);
 			StageClearUI.SetActive(false);
@@ -109,19 +121,23 @@ namespace OROCHI
 				HiddenController();
             }
 
+			if(healExplanation != null)
+            {
+				HiddenHealExplanation();
+            }
+
 			Changeable = true;
 			animator = GetComponent<Animator>();
 		}
 
-
-		#region ポーズ画面を表示
-		public void Control()
+        #region ポーズ画面を表示
+        public void Control()
 		{
-			if (!PauseUI.activeSelf)
+			if (!pauseUI.activeSelf)
 			{
 				animator.SetTrigger("PauseIn");
 				// ポーズの表示
-				PauseUI.SetActive(true);
+				pauseUI.SetActive(true);
 				// 戻るボタンを選択
 				FastButton.Select();
 				// UIが開かれた音声を再生
@@ -130,10 +146,10 @@ namespace OROCHI
 				Time.timeScale = 0f;
 
 			}
-			else if (PauseUI.activeSelf && !OptionUI.activeSelf && !GuideUI.activeSelf)
+			else if (pauseUI.activeSelf && !optionUI.activeSelf && !GuideUI.activeSelf)
 			{
 				// ポーズの非表示
-				PauseUI.SetActive(false);
+				pauseUI.SetActive(false);
 
 				animator.SetTrigger("PauseOut");
 				// UIが閉じられた音声を再生
@@ -141,17 +157,17 @@ namespace OROCHI
 				// 再開
 				Time.timeScale = 1f;
 			}
-			else if (PauseUI.activeSelf && OptionUI.activeSelf)
+			else if (pauseUI.activeSelf && optionUI.activeSelf)
 			{
 				// optionの非表示
-				OptionUI.SetActive(false);
+				optionUI.SetActive(false);
 				// UIが閉じられた音声を再生
 				Se.CloseUI();
 				FastButton.Select();
 
 				animator.SetTrigger("Show");
 			}
-			else if (PauseUI.activeSelf && GuideUI.activeSelf)
+			else if (pauseUI.activeSelf && GuideUI.activeSelf)
 			{
 				// Guideの非表示
 				GuideUI.SetActive(false);
@@ -168,9 +184,9 @@ namespace OROCHI
         // Optionボタンが押された時のOption画面の表示
         public void Option()
 		{
-			if (PauseUI.activeInHierarchy)
+			if (pauseUI.activeInHierarchy)
 			{
-				OptionUI.SetActive(true);
+				optionUI.SetActive(true);
 				// UIが開かれた音声を再生
 				Se.OpenUI();
 				// Optionが選択された場合にこのボタンを選択状態にします
@@ -185,7 +201,7 @@ namespace OROCHI
         // 操作説明が押された時に操作説明画面を表示
         public void Guide()
 		{
-			if (PauseUI.activeInHierarchy)
+			if (pauseUI.activeInHierarchy)
 			{
 				GuideUI.SetActive(true);
 				// UIが開かれた音声を再生
@@ -296,9 +312,24 @@ namespace OROCHI
 			backButton.SetActive(false);
 		}
 
+		public void DisplayHealExplanation()
+        {
+			closeTutorialButton.Select();
+			healExplanation.SetActive(true);
+			closeButton.SetActive(true);
+			StageScene.Instance.prologue = true;
+        }
+
+		private void HiddenHealExplanation()
+        {
+			healExplanation.SetActive(false);
+			closeButton.SetActive(false);
+		}
+
 		public void FinishTutorial()
         {
 			HiddenController();
+			HiddenHealExplanation();
 			StageScene.Instance.prologue = false;
 		}
 	}

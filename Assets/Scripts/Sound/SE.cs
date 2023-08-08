@@ -18,7 +18,7 @@ namespace OROCHI
         public AudioClip fireattack = null;
         public AudioClip firedamaged = null;
         public AudioClip charge = null;
-
+        public AudioClip changeSmoke = null;
 
 
         AudioSource Se = null;
@@ -103,6 +103,11 @@ namespace OROCHI
         public void PlaySound(AudioClip sound)
         {
             Se.PlayOneShot(sound);
+        }
+
+        public void Change()
+        {
+            Se.PlayOneShot(changeSmoke);
         }
         #endregion
     }
