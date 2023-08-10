@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace OROCHI
 {
+    // メインステージに移動する
     public class StartPoint : MonoBehaviour
     {
         private void OnCollisionEnter(Collision collision)

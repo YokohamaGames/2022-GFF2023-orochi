@@ -11,72 +11,99 @@ namespace OROCHI
     //敵のAIとステータス設定
     public class Enemy : MonoBehaviour
     {
-        //敵のステータスに関する数値設定
+        [SerializeField]
+        [Tooltip("敵の追跡時歩行スピードを設定")]
+        private float chasespeed;
 
-        //敵の追跡時歩行スピードを設定
-        [SerializeField] private float chasespeed;
-        //攻撃準備時の歩行スピードを設定
-        [SerializeField] private float attackreadyspeed = 1;
-        //追跡目標の設定
         [SerializeField]
+        [Tooltip("攻撃準備時の歩行スピードを設定")]
+        private float attackreadyspeed = 1;
+
+        [SerializeField]
+        [Tooltip("追跡目標の設定")]
         private Transform target = null;
-        //アニメーターの設定
-        [SerializeField] private Animator animator = null;
-        //敵の回転速度を設定します
+
         [SerializeField]
+        [Tooltip("アニメーターの設定")] 
+        private Animator animator = null;
+
+        [SerializeField]
+        [Tooltip("敵の回転速度を設定します")]
         private float rotmax;
-        //子オブジェクトを取得
+
         [SerializeField]
+        [Tooltip("子オブジェクトを取得")]
         private SearchArea searcharea;
-        //子オブジェクトを取得
+
         [SerializeField]
+        [Tooltip("子オブジェクトを取得")]
         private AttackArea attackArea;
-        //敵の持つ武器の当たり判定を取得
+
         [SerializeField]
+        [Tooltip("敵の持つ武器の当たり判定を取得")]
         private Collider weaponcollider;
-        //ステート遷移を遅らせる時間
+
         [SerializeField]
+        [Tooltip("ステート遷移を遅らせる時間")]
         private float transition_time;
-        //火球のプレハブの取得
+
         [SerializeField]
+        [Tooltip("火球のプレハブの取得")]
         private GameObject shellprefab;
-        //敵撃破エフェクト
+
         [SerializeField]
+        [Tooltip("敵撃破エフェクト")]
         private GameObject defeateffect;
-        //ダメージエフェクト
+
         [SerializeField]
+        [Tooltip("ダメージエフェクト")]
         private GameObject damageeffect;
-        //敵の左手の座標を取得します
+
         [SerializeField]
+        [Tooltip("敵の左手の座標を取得します")]
         private Transform enemy_l_hand;
-        //敵のHpBarを参照
+
         [SerializeField]
+        [Tooltip("敵のHpBarを参照")]
         public Slider enemyhpbar;
-        //剣のEffectを取得
+
         [SerializeField]
+        [Tooltip("剣のEffectを取得")]
         private GameObject swordeffect;
+
         [SerializeField]
+        [Tooltip("被ダメエフェクト")]
         private GameObject HitEffect;
-        //攻撃準備から攻撃までの時間の設定
-        [SerializeField] private float timetoattack = 2;
-        //敵撃破時の敵の消滅までの時間の設定
-        [SerializeField] private float deleteenemytime;
+
+        [SerializeField]
+        [Tooltip("攻撃準備から攻撃までの時間の設定")]
+        private float timetoattack = 2;
+
+        [SerializeField]
+        [Tooltip("敵撃破時の敵の消滅までの時間の設定")]
+        private float deleteenemytime;
+
         //攻撃までの待機時間を設定した値にリセットする変数
         float timetoattackreset;
-        //HpBarの取得
+
         [SerializeField]
+        [Tooltip("HpBarの取得")]
         private Image hp;
+
         [SerializeField]
+        [Tooltip("火球のクールタイム")]
         float timefire = 1.5f;
         float timetoatk = 0;
 
+        // Search状態のフラグ
         public bool isSearch = false;
+        // 攻撃状態のフラグ
         public bool isAttacks = false;
+        // 遠距離攻撃状態のフラグ
         public bool isLongAttacks = false;
+        // 体力が0になった状態のフラグ
         public bool isDead = false;
-
-        //[SerializeField]
-        //[Tooltip("スサノオのスピード")]
+        // 移動速度用の変数
         float speed = 0;
         // コンポーネントを事前に参照しておく変数
         new Rigidbody rigidbody;
@@ -86,9 +113,7 @@ namespace OROCHI
         [SerializeField] private AudioClip swing;
         [SerializeField] private AudioClip chargedamaged;
 
-
-        private AudioSource se;
-
+        float sp = 1.0f;
 
         // AnimatorのパラメーターID
         int baseLayerIndex = -1;
@@ -107,19 +132,20 @@ namespace OROCHI
         //敵のステートパターン
         enum EnemyState
         {
-            Idle,                                              //  待機
-            Discover,                                          //  発見
-            Move,                                              //  移動
-            AttackReady,                                       //  攻撃準備
-            Attack,                                            ////攻撃////
-            Attack2,                                           //    |
-            Attack3,                                           //    |
-            LongAttack,                                        //  攻撃////
-            Dead,                                              //  死亡
+            Idle,                  //  待機
+            Discover,              //  発見
+            Move,                  //  移動
+            AttackReady,           //  攻撃準備
+            Attack,                //  攻撃1
+            Attack2,               //  攻撃2
+            Attack3,               //  攻撃3
+            LongAttack,            //  遠距離攻撃
+            Dead,                  //  死亡
         }
 
+        // アイドル状態をセットしておく
         EnemyState currentState = EnemyState.Idle;
-        float sp = 1.0f;
+
         void Start()
         {
             baseLayerIndex = animator.GetLayerIndex("Base Layer");
@@ -128,7 +154,6 @@ namespace OROCHI
             weaponcollider.enabled = false;                    //敵の武器の当たり判定をオフ
             swordeffect.SetActive(false);
             enemyhpbar.value = StageScene.Instance.enemyHp;    // Sliderの初期状態を設定 
-            se = GetComponent<AudioSource>();
         }
 
         // Update is called once per frame
@@ -158,21 +183,12 @@ namespace OROCHI
                     UpdateForAttackReady();
                     break;
                 case EnemyState.Dead:
-                    UpdateForDead();
                     break;
                 default:
                     break;
             }
         }
 
-        IEnumerator Wait()
-        {
-            yield return null;
-        }
-        void UpdateForDead()
-        {
-            StartCoroutine(Wait());
-        }
         void UpdateForLongAttack()
         {
             //ターゲット方向のベクトルを求める
@@ -403,17 +419,17 @@ namespace OROCHI
         //敵のHPバーの処理
         public void EnemyDamage(float n)
         {
-            StageScene.Instance.enemyHp -= n;
-            n /= 100.0f;
-            hp.fillAmount += n;
-            SE.Instance.PlaySound(chargedamaged);
-            GameObject Hit = Instantiate(HitEffect, this.transform.position, Quaternion.identity);
-            Destroy(Hit, 1.5f);
-
-            //HP0のとき撃破エフェクトの生成と敵オブジェクトの削除
-            if (StageScene.Instance.enemyHp <= 0)
+            if (currentState != EnemyState.Dead)
             {
-                if (currentState != EnemyState.Dead)
+                StageScene.Instance.enemyHp -= n;
+                n /= 100.0f;
+                hp.fillAmount += n;
+                SE.Instance.PlaySound(chargedamaged);
+                GameObject Hit = Instantiate(HitEffect, this.transform.position, Quaternion.identity);
+                Destroy(Hit, 1.5f);
+
+                //HP0のとき撃破エフェクトの生成と敵オブジェクトの削除
+                if (StageScene.Instance.enemyHp <= 0)
                 {
                     isDead = true;
                     SetDeadState();

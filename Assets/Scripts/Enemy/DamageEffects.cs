@@ -8,9 +8,10 @@ namespace OROCHI
     public class DamageEffects : MonoBehaviour
     {
         [SerializeField]
+        [Tooltip("被ダメエフェクトを指定")]
         GameObject damageeffect = null;
 
-        // Start is called before the first frame update
+        // プレイヤーの攻撃が当たったかの判定
         private void OnTriggerEnter(Collider collision)
         {
             if (collision.CompareTag("Player"))

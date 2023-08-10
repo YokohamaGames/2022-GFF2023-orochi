@@ -6,45 +6,44 @@ namespace OROCHI
 {
     public class StageScene : MonoBehaviour
     {
+        // インスタンス化
         public static StageScene Instance { get; private set; }
 
-        // UIを指定します。
         [SerializeField]
+        [Tooltip("UIスクリプトを指定")]
         private UI ui = null;
 
-        // プレイヤーのHPを指定
-        [SerializeField]
+        [Tooltip("プレイヤーのHPを指定")]
         public int playerhp;
 
-        //回復エフェクトの指定
-        [SerializeField]
+        // プレイヤーの体力最大値
+        private int MaxHP = 6;
+
+        [Tooltip("回復エフェクトの指定")]
         public GameObject healObject;
 
-        //敵のHPを設定
-        [SerializeField]
+        [Tooltip("敵のHPを設定")]
         public float enemyHp;
 
         [SerializeField]
         [Tooltip("プレイヤーオブジェクトを指定")]
         public GameObject player;
 
-        // プレイヤーのポジション
-        private Vector3 playerPosition;
-
         [SerializeField]
         [Tooltip("スサノオオブジェクトを指定")]
         public GameObject enemy;
 
-        // スサノオのポジション
-        private Vector3 enemyPosition;
-
         // アニメーター
         private Animator animator;
 
-        // プロローグ中はオン
+        [Tooltip("プロローグ中のフラグ")]
         public bool prologue = true;
 
+        // クリア時のフラグ
         private bool clear = false;
+
+        // プロローグ用の変数
+        int page = 0;
 
         private void Awake()
         {
@@ -56,6 +55,9 @@ namespace OROCHI
             animator = GetComponent<Animator>();
         }
 
+        /// <summary>
+        /// ポーズ画面を表示
+        /// </summary>
         public void ControlPauseUI()
         {
             if (Time.timeScale > 0)
@@ -66,44 +68,36 @@ namespace OROCHI
 
         private void Update()
         {
+            // プレイヤーの体力が0なら
             if (playerhp == 0)
             {
                 ui.GameOver();
             }
 
+            // 敵の体力が0なら
             if (enemyHp <= 0)
             {
                 Clear();
             }
         }
 
-        private void FixedUpdate()
-        {
-            /*
-            if(enemy != null)
-            {
-                playerPosition = player.GetComponent<Transform>().position;
-                enemyPosition = enemy.GetComponent<Transform>().position;
-
-                Vector3 difference = playerPosition - enemyPosition;
-                float differenceX = difference.x;
-                float differenceY = difference.y;
-
-                //if(Mathf.Abs(differenceX) = )
-            }
-            */
-        }
-
+        /// <summary>
+        /// プレイヤーの体力を回復させる処理
+        /// </summary>
+        /// <param name="EffectTransform">回復時のエフェクトの向き</param>
         public void Heal(Vector3 EffectTransform)
         {
+            // 回復エフェクトを生成
             Instantiate(healObject, EffectTransform, Quaternion.identity); //パーティクル用ゲームオブジェクト生成
-            if(playerhp < 6)
+            if(playerhp < MaxHP)
             {
                 playerhp += 1;
             }
         }
 
-        // Damageが呼び出されたらHPが1減る
+        /// <summary>
+        /// Damageが呼び出されたらプレイヤーのHPが1減る
+        /// </summary>
         public void Damage()
         {
             if (playerhp > 0)
@@ -112,19 +106,24 @@ namespace OROCHI
             }
         }
 
+        /// <summary>
+        /// プレイヤーの大きさを変化した時の処理
+        /// </summary>
         public void Change()
         {
             ui.ChangeCooltime();
         }
 
-        int page = 0;
-
+        /// <summary>
+        /// プロローグで次のページを表示する
+        /// </summary>
         public void NextPage()
         {
             animator.SetTrigger("Next");
 
             if(page == 1)
             {
+                // プロローグが終ったら閉じる
                 ui.ClosePrologue();
             }
             page++;
@@ -138,15 +137,18 @@ namespace OROCHI
             ui.DisplayHealExplanation();
         }
 
+        /// <summary>
+        /// 敵を倒した時の処理
+        /// </summary>
         public async void Clear()
         {
             if(!clear)
             {
                 clear = true;
+                // 5秒間のアニメーションの後
                 await Task.Delay(5000);
                 ui.StageClear();
                 player.GetComponent<MoveBehaviourScript>().SetClearState();
-                Debug.Log("クリア");
             }
         }
 

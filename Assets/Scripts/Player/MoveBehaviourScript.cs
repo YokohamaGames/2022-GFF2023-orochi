@@ -330,7 +330,6 @@ namespace OROCHI
         public void SetDeadState()
         {
             currentState = PlayerState.Dead;
-            //await Task.Delay(300);
             Time.timeScale = 0;
         }
 
@@ -341,6 +340,8 @@ namespace OROCHI
 
         public void SetClearState()
         {
+            // ÉNÉäÉAââèoå„Ç…ìÆÇ´Çé~ÇﬂÇÈ
+            currentAnimator.SetFloat("WalkSpeed", 0);
             currentState = PlayerState.Clear;
         }
         #endregion
@@ -563,7 +564,10 @@ namespace OROCHI
             if (collision.gameObject.tag == "ground")
             {
                 isGrounded = true;
-                SetWalkState();
+                if(currentState != PlayerState.Clear)
+                {
+                    SetWalkState();
+                }
             }
 
             if (currentState == PlayerState.Walk || currentState == PlayerState.Jumping || currentState == PlayerState.Attack)

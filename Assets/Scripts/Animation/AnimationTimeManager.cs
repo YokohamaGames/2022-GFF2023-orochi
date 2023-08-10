@@ -14,6 +14,10 @@ namespace OROCHI
             animator = GetComponent<Animator>();
         }
 
+        /// <summary>
+        /// BlendTreeのスピードを指定
+        /// </summary>
+        /// <param name="speed">アニメーションスピード</param>
         public void SetAnimationSpeed(float speed)
         {
             animator.SetFloat("WalkSpeed", speed);

@@ -10,27 +10,27 @@ namespace OROCHI
     // プレイヤー追従カメラ
     public class MainCamera : MonoBehaviour
     {
-        // 1秒間で180度
-        public Vector2 rotationSpeed = new Vector2(180, 180);
+        [SerializeField]
+        [Tooltip("一秒間で振り向ける角度")]
+        private Vector2 rotationSpeed = new Vector2(180, 180);
+
+        // カメラの振り向き入力値
+        private Vector2 cameraRotationInput = Vector2.zero;
 
         [SerializeField]
+        [Tooltip("バーチャルカメラを指定")]
         CinemachineVirtualCamera vCam = null;
-        [SerializeField]
-        Cinemachine3rdPersonFollow follow = null;
 
         private void Start()
         {
             vCam = GetComponent<CinemachineVirtualCamera>();
-            if (vCam != null)
-            {
-                follow = vCam.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
-            }
         }
 
         private void FixedUpdate()
         {
             if (vCam != null)
             {
+                // VirtualカメラのFollowをターゲットとして座標を獲得
                 Transform target = vCam.Follow;
                 if (target != null)
                 {
@@ -47,13 +47,19 @@ namespace OROCHI
 
         }
 
-        Vector2 cameraRotationInput = Vector2.zero;
-
+        /// <summary>
+        /// カメラの向きを調整
+        /// </summary>
+        /// <param name="input">プレイヤーの入力値</param>
         void Look(Vector2 input)
         {
+            // 入力値を代入
             cameraRotationInput = input;
         }
 
+        /// <summary>
+        /// プレイヤーの入力を受け取る
+        /// </summary>
         public void Onlook(InputAction.CallbackContext context)
         {
             Look(context.ReadValue<Vector2>());

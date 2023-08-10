@@ -5367,6 +5367,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1774647168438494848, guid: 32603945b793e8d40bd700bc391316be, type: 3}
   m_PrefabInstance: {fileID: 8235329782686006212}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7703711712261463367 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7269922895585770671, guid: 32603945b793e8d40bd700bc391316be, type: 3}
+  m_PrefabInstance: {fileID: 8235329782686006212}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 851521350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafbec853b050674895451d2a308810f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8235329782686006212
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5458,6 +5469,10 @@ PrefabInstance:
       propertyPath: deleteenemytime
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 7269922895781873888, guid: 32603945b793e8d40bd700bc391316be, type: 3}
+      propertyPath: parentEnemy
+      value: 
+      objectReference: {fileID: 7703711712261463367}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32603945b793e8d40bd700bc391316be, type: 3}
 --- !u!114 &8237574576973562154 stripped
