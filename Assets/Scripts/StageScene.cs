@@ -149,5 +149,17 @@ namespace OROCHI
                 Debug.Log("クリア");
             }
         }
+
+        /// <summary>
+        /// ヒットストップを表現
+        /// </summary>
+        /// <param name="f">ヒットストップ時の時間の速さ</param>
+        /// <param name="i">ヒットストップ時の時間の長さ</param>
+        public async void HitStop(float f, int i)
+        {
+            Time.timeScale = f;
+            await Task.Delay(i);
+            Time.timeScale = 1.0f;
+        }
     }
 }
