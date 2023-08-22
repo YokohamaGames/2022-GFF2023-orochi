@@ -7,12 +7,9 @@ namespace OROCHI
     //プレイヤーが敵の遠距離攻撃範囲に侵入、脱出時の処理
     public class LongAttackArea : MonoBehaviour
     {
-        //親のスクリプトを取得
         [SerializeField]
+        [Tooltip("親のスクリプトを取得")]
         Enemy Parent_Enemy = null;
-
-        [SerializeField]
-        float Transition_time;
 
         //敵の攻撃範囲への侵入判定
         private void OnTriggerEnter(Collider colision)
@@ -21,7 +18,8 @@ namespace OROCHI
             if (colision.CompareTag("Player"))
             {
                 Parent_Enemy.isLongAttacks = true;
-                Parent_Enemy.LongAttack();                  //遠距離攻撃ステートに変更
+                //遠距離攻撃ステートに変更
+                Parent_Enemy.LongAttack(); 
             }
         }
 

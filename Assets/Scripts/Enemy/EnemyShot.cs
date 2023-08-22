@@ -6,10 +6,13 @@ namespace OROCHI
 {
     public class EnemyShot : MonoBehaviour
     {
-        public GameObject fireball;
+        [SerializeField]
+        [Tooltip("火球を指定")]
+        private GameObject fireball;
 
         public void OnCollisionEnter(Collision collision)
         {
+            // プレイヤーに当たったらオブジェクトを破壊
             if (collision.gameObject.tag == "Player")
             {
                 Destroy(fireball);

@@ -13,10 +13,7 @@ namespace OROCHI
 
         private void Start()
         {
-            //if(enemyScript != null)
-            {
-                enemyScript = GameObject.Find("Susano").GetComponent<Enemy>();
-            }
+            enemyScript = GameObject.Find("Susano").GetComponent<Enemy>();
         }
 
         // Update is called once per frame
@@ -40,6 +37,7 @@ namespace OROCHI
             {
                 enemyScript.EnemyDamage(5);
             }
+
             Destroy(this.gameObject);
         }
     }

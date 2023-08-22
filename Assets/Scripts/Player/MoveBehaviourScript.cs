@@ -288,7 +288,9 @@ namespace OROCHI
             currentAnimator.SetBool("isWalk", false);
         }
 
-        // Walkステートに遷移させます。
+        /// <summary>
+        /// Walkステートに遷移させます。
+        /// </summary>
         public void SetWalkState()
         {
             if (currentBodySize == BodySize.Small)
@@ -315,29 +317,42 @@ namespace OROCHI
         }
 
         #region ステート毎に遷移させる
-        // Jumpingステートに遷移させます。
+        /// <summary>
+        /// Jumpingステートに遷移させます。
+        /// </summary>
         public void SetJumpingState()
         {
             currentState = PlayerState.Jumping;
         }
 
-        // Attackステートに遷移させます。
+        /// <summary>
+        /// Attackステートに遷移させます。
+        /// </summary>
         public void SetAttackState()
         {
             currentState = PlayerState.Attack;
         }
 
+        /// <summary>
+        /// Deadステートに遷移させます。
+        /// </summary>
         public void SetDeadState()
         {
             currentState = PlayerState.Dead;
             Time.timeScale = 0;
         }
 
+        /// <summary>
+        /// Invincibleステート(無敵状態)に遷移させます。
+        /// </summary>
         public void SetInvincible()
         {
             currentState = PlayerState.Invincible;
         }
 
+        /// <summary>
+        /// Clearステートに遷移させます。
+        /// </summary>
         public void SetClearState()
         {
             // クリア演出後に動きを止める
@@ -346,7 +361,10 @@ namespace OROCHI
         }
         #endregion
 
-        // 指定した方向へ移動します。
+        /// <summary>
+        /// 指定した方向へ移動します。
+        /// </summary>
+        /// <param name="motion">移動の入力値</param>
         public void Move(Vector3 motion)
         {
             // WalkとJumpingの時だけ

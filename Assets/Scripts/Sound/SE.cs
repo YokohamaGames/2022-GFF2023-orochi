@@ -24,10 +24,10 @@ namespace OROCHI
         AudioSource Se = null;
 
         [SerializeField]
+        [Tooltip("SEの音量スライダーを設定")]
         private Slider SeSoundValue = null;
 
         public static SE Instance { get; private set; }
-        // Start is called before the first frame update
 
         private void Awake()
         {

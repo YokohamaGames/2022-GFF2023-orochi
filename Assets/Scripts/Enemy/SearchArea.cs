@@ -7,21 +7,25 @@ namespace OROCHI
     //プレイヤーが敵の索敵範囲内範囲に侵入、脱出時の処理
     public class SearchArea : MonoBehaviour
     {
-        //親のEnemyスクリプトの取得
         [SerializeField]
+        [Tooltip("親のEnemyスクリプトの取得")]
         Enemy parent_enemy = null;
 
-        //ターゲットの索敵範囲内の侵入判定
+        /// <summary>
+        /// ターゲットの索敵範囲内の侵入判定
+        /// </summary>
         private void OnTriggerEnter(Collider colision)
         {
-
             if (colision.CompareTag("Player"))
             {
                 parent_enemy.isSearch = true;
                 parent_enemy.SetDiscoverState();
             }
         }
-        //ターゲットの索敵範囲外の脱出判定
+
+        /// <summary>
+        /// ターゲットの索敵範囲外の脱出判定
+        /// </summary>
         private void OnTriggerExit(Collider colision)
         {
             if (colision.CompareTag("Player"))

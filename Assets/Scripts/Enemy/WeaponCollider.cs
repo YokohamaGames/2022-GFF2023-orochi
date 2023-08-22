@@ -6,9 +6,8 @@ namespace OROCHI
 {
     public class WeaponCollider : MonoBehaviour
     {
-        // Start is called before the first frame update
-
         [SerializeField]
+        [Tooltip("武器が当たったときのエフェクトを指定")]
         private GameObject damageeffect;
 
         // Update is called once per frame
@@ -17,7 +16,6 @@ namespace OROCHI
             //衝突したオブジェクトがBullet(大砲の弾)だったとき
             if (collision.gameObject.CompareTag("Player"))
             {
-                Debug.Log("敵と弾が衝突しました！！！");
                 GameObject damege = Instantiate(damageeffect, this.transform.position, Quaternion.identity);
                 Destroy(damege, 0.5f);
             }

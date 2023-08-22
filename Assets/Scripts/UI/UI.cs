@@ -8,28 +8,28 @@ namespace OROCHI
 {
 	public class UI : MonoBehaviour
 	{
-		// ポーズを参照
 		[SerializeField]
+        [Tooltip("ポーズを参照")]
 		private GameObject pauseUI = null;
 
-		// オプションを参照
 		[SerializeField]
+		[Tooltip("オプションを参照")]
 		private GameObject optionUI = null;
 
-		// ガイドを参照
 		[SerializeField]
+		[Tooltip("ガイドを参照")]
 		private GameObject GuideUI = null;
 
-		// ゲームオーバーを参照
 		[SerializeField]
+		[Tooltip("ゲームオーバーを参照")]
 		private GameObject GameOverUI = null;
 
-		// ステージクリアを参照
 		[SerializeField]
+		[Tooltip("ステージクリアを参照")]
 		private GameObject StageClearUI = null;
 
-		// SEを参照
 		[SerializeField]
+		[Tooltip("SEを参照")]
 		private SE Se = null;
 
 		[SerializeField]
@@ -52,32 +52,32 @@ namespace OROCHI
 		[Tooltip("回復説明が表示されたときに選択されるボタン")]
 		private Selectable closeTutorialButton = null;
 
-		// pause時の初期選択状態に設定するボタンを指定
 		[SerializeField]
+		[Tooltip("pause時の初期選択状態に設定するボタンを指定")]
 		private Selectable FastButton = null;
 
-		// Optionが開かれた時に選択されるボタンを指定
 		[SerializeField]
+		[Tooltip("Optionが開かれた時に選択されるボタンを指定")]
 		private Selectable OptionButton = null;
 
-		// Guideが開かれた時に選択されるボタンを指定
 		[SerializeField]
+		[Tooltip("Guideが開かれた時に選択されるボタンを指定")]
 		private Selectable GuideButton = null;
 
-		// GameOverが開かれた時に選択されるボタン
 		[SerializeField]
+		[Tooltip("GameOverが開かれた時に選択されるボタン")]
 		private Selectable GameOverButton = null;
 
-		// StageClearが開かれた時に選択されるボタン
 		[SerializeField]
+		[Tooltip("StageClearが開かれた時に選択されるボタン")]
 		private Selectable StageClearButton = null;
 
 		[SerializeField]
 		[Tooltip("チュートリアルのコントローラーが表示されたときに選択されるボタン")]
 		private Selectable backTutorialButton = null;
 
-		// HPバーのサイズ別数字
 		[SerializeField]
+		[Tooltip("HPバーのサイズ別数字")]
 		private GameObject[] Size = null;
 
 		[SerializeField]
@@ -181,7 +181,9 @@ namespace OROCHI
         #endregion
 
         #region オプション画面の表示
-        // Optionボタンが押された時のOption画面の表示
+        /// <summary>
+		/// Optionボタンが押された時のOption画面の表示
+		/// </summary>
         public void Option()
 		{
 			if (pauseUI.activeInHierarchy)
@@ -198,7 +200,9 @@ namespace OROCHI
         #endregion
 
         #region 操作説明画面を表示
-        // 操作説明が押された時に操作説明画面を表示
+        /// <summary>
+		/// 操作説明が押された時に操作説明画面を表示
+		/// </summary>
         public void Guide()
 		{
 			if (pauseUI.activeInHierarchy)
@@ -215,7 +219,9 @@ namespace OROCHI
         #endregion
 
         #region ゲームオーバー画面を表示
-        // GmaeOverが呼び出されたら表示する
+        /// <summary>
+		/// GmaeOverが呼び出されたら表示する
+		/// </summary>
         public void GameOver()
 		{
 			if (!GameOverUI.activeSelf)
@@ -225,12 +231,18 @@ namespace OROCHI
 			}
 		}
 
+		/// <summary>
+		/// ステージクリア時の処理
+		/// </summary>
 		public void StageClear()
 		{
 			animator.SetTrigger("StageClear");
 			StageClearButton.Select();
 		}
 
+		/// <summary>
+		/// ステージリトライ時の処理
+		/// </summary>
 		public void Retry()
 		{
 			animator.SetTrigger("Transition");
@@ -238,7 +250,9 @@ namespace OROCHI
 		}
 		#endregion
 
-		// Homeが押されたらsceneをTitleへ移行する
+		/// <summary>
+		/// Homeが押されたらsceneをTitleへ移行する
+		/// </summary>
 		public void Home()
 		{
 			animator.SetTrigger("Transition");
@@ -247,6 +261,9 @@ namespace OROCHI
 			Time.timeScale = 1f;
 		}
 
+		/// <summary>
+		/// プロローグを終了する処理
+		/// </summary>
 		public async void ClosePrologue()
         {
 			PrologueUI.SetActive(false);
@@ -257,8 +274,13 @@ namespace OROCHI
         }
 
 		#region プレイヤーの大きさ別に表示
+		/// <summary>
+		/// プレイヤーの大きさに該当する数字を表示
+		/// </summary>
+		/// <param name="n">表示したい大きさに該当する数字</param>
 		public void ChangeNumber(int n)
 		{
+			// 小さい状態
 			if (n == 0)
 			{
 				Size[0].SetActive(true);
@@ -266,12 +288,14 @@ namespace OROCHI
 				Size[2].SetActive(false);
 
 			}
+			// 通常時の状態
 			else if (n == 1)
 			{
 				Size[0].SetActive(false);
 				Size[1].SetActive(true);
 				Size[2].SetActive(false);
 			}
+			// 大きい時の状態
 			else if (n == 2)
 			{
 				Size[0].SetActive(false);
@@ -281,6 +305,9 @@ namespace OROCHI
 		}
 		#endregion
 
+		/// <summary>
+		/// クールタイムを切り替え
+		/// </summary>
 		public void ChangeCooltime()
 		{
 			if (Changeable)
@@ -299,6 +326,9 @@ namespace OROCHI
 			}
 		}
 
+		/// <summary>
+		/// 操作説明画面の表示
+		/// </summary>
 		private void DisplayController()
         {
 			backTutorialButton.Select();
@@ -306,12 +336,18 @@ namespace OROCHI
 			backButton.SetActive(true);
         }
 
+		/// <summary>
+		/// 操作説明画面の非表示
+		/// </summary>
 		private void HiddenController()
         {
 			controller.SetActive(false);
 			backButton.SetActive(false);
 		}
 
+		/// <summary>
+		/// 回復説明の表示
+		/// </summary>
 		public void DisplayHealExplanation()
         {
 			closeTutorialButton.Select();
@@ -320,12 +356,18 @@ namespace OROCHI
 			StageScene.Instance.prologue = true;
         }
 
+		/// <summary>
+		/// 回復説明の非表示
+		/// </summary>
 		private void HiddenHealExplanation()
         {
 			healExplanation.SetActive(false);
 			closeButton.SetActive(false);
 		}
 
+		/// <summary>
+		/// チュートリアル終了の処理
+		/// </summary>
 		public void FinishTutorial()
         {
 			HiddenController();

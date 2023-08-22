@@ -10,19 +10,13 @@ namespace OROCHI
     {
         public static PlayerHPbar Instance { get; private set; }
 
-        private RawImage hpbar;
-
         private Rect uvRect;
 
         RectTransform rectTransform;
         void Start()
         {
-            hpbar = GetComponent<RawImage>();
             uvRect = new Rect(1.0f, 0.0f, 1.0f, 0.0f);
-
             rectTransform = gameObject.GetComponent<RectTransform>();
-
-            //rectTransform.sizeDelta = new Vector2(390.0f, 31.0f);
         }
 
         private void Awake()
@@ -31,7 +25,9 @@ namespace OROCHI
         }
 
 
-        // Heal‚ªŒÄ‚Ño‚³‚ê‚½‚çHP‚ª1‘‚¦‚é
+        /// <summary>
+        /// Heal‚ªŒÄ‚Ño‚³‚ê‚½‚çHP‚ª1‘‚¦‚é
+        /// </summary>
         public void Heel()
         {
             if (StageScene.Instance.playerhp < 6)
@@ -47,7 +43,6 @@ namespace OROCHI
             {
                 uvRect.x = 1.0f;
                 uvRect.width = 1.0f;
-                //hpbar.uvRect = uvRect;
 
                 rectTransform.sizeDelta = new Vector2(390, 31);
             }
@@ -56,7 +51,6 @@ namespace OROCHI
             {
                 uvRect.x = 0.2f;
                 uvRect.width = 0.8f;
-                //hpbar.uvRect = uvRect;
 
                 rectTransform.sizeDelta = new Vector2(345, 31);
             }
@@ -65,7 +59,6 @@ namespace OROCHI
             {
                 uvRect.x = 0.4f;
                 uvRect.width = 0.6f;
-                //hpbar.uvRect = uvRect;
 
                 rectTransform.sizeDelta = new Vector2(280, 31);
             }
@@ -74,7 +67,6 @@ namespace OROCHI
             {
                 uvRect.x = 0.6f;
                 uvRect.width = 0.4f;
-                //hpbar.uvRect = uvRect;
 
                 rectTransform.sizeDelta = new Vector2(220, 31);
             }
@@ -83,7 +75,6 @@ namespace OROCHI
             {
                 uvRect.x = 0.8f;
                 uvRect.width = 0.2f;
-                //hpbar.uvRect = uvRect;
 
                 rectTransform.sizeDelta = new Vector2(145, 31);
             }
@@ -92,7 +83,6 @@ namespace OROCHI
             {
                 uvRect.x = 0.9f;
                 uvRect.width = 0.1f;
-                //hpbar.uvRect = uvRect;
 
                 rectTransform.sizeDelta = new Vector2(80, 31);
             }
@@ -101,7 +91,6 @@ namespace OROCHI
             {
                 uvRect.x = 0.0f;
                 uvRect.width = 0.0f;
-                //hpbar.uvRect = uvRect;
 
                 rectTransform.sizeDelta = new Vector2(0, 31);
             }

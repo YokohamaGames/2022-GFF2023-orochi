@@ -16,17 +16,14 @@ namespace OROCHI
         Vector2 moveInput = Vector2.zero;
         Vector2 lookInput = Vector2.zero;
 
-
         [Tooltip("キャラが移動方向に向く時の速さ")]
         [Range(0.0f, 0.3f)]
         public float RotationSmoothTime = 0.12f;
-
 
         void Start()
         {
             MoveBehaviour = GetComponent<MoveBehaviourScript>();
         }
-
 
         void Update()
         {
@@ -38,11 +35,9 @@ namespace OROCHI
                 moveInput = Vector2.zero;
             }
             MoveBehaviour.Move(motion);
-
         }
 
         #region ユーザーのアクションに対して呼び出される
-
         // Moveアクションに対して呼び出されます。
         public void OnMove(InputAction.CallbackContext context)
         {
@@ -60,7 +55,6 @@ namespace OROCHI
                 lookInput = context.ReadValue<Vector2>();
             }
         }
-
 
         // Fireボタンを押したら呼び出されます
         public void OnFire(InputAction.CallbackContext context)
@@ -142,8 +136,6 @@ namespace OROCHI
                 }
             }
         }
-
     }
-
     #endregion
 }

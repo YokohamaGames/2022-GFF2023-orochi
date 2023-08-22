@@ -20,6 +20,7 @@ namespace OROCHI
 
         private void OnTriggerEnter(Collider collision)
         {
+            // 敵に当たったらヒットストップ
             if (collision.CompareTag("enemy"))
             {
                 StageScene.Instance.HitStop(hitTimeScale, hitStopTime);

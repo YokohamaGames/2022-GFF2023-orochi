@@ -114,6 +114,8 @@ namespace OROCHI
         [SerializeField] private AudioClip chargedamaged;
 
         float sp = 1.0f;
+        float spd;
+        float cnt = 0;
 
         // AnimatorのパラメーターID
         int baseLayerIndex = -1;
@@ -200,6 +202,7 @@ namespace OROCHI
             transform.rotation = quaternion;
 
             timetoatk += Time.deltaTime;
+            // 火球のクールタイムを経過していたら
             if (timetoatk > timefire)
             {
                 timetoatk = 0;
@@ -207,7 +210,9 @@ namespace OROCHI
             }
         }
 
-        //遠距離攻撃に切り替え
+        /// <summary>
+        /// 遠距離攻撃に切り替え
+        /// </summary>
         public void LongAttack()
         {
             if (currentState == EnemyState.Discover)
@@ -217,7 +222,9 @@ namespace OROCHI
             }
         }
 
-        //索敵範囲外にでたときの処理
+        /// <summary>
+        /// 索敵範囲外にでたときの処理
+        /// </summary>
         public void SetIdleState()
         {
             speed = 0;
@@ -226,26 +233,31 @@ namespace OROCHI
             animator.SetFloat(speedId, 0.0f);
         }
 
-        //索敵範囲内に入った時の処理
+        /// <summary>
+        /// 索敵範囲内に入った時の処理
+        /// </summary>
         public void SetDiscoverState()
         {
             currentState = EnemyState.Discover;
             speed = chasespeed;
         }
 
-        //Moveステートに変更
+        /// <summary>
+        /// Moveステートに変更
+        /// </summary>
         public void SetMoveState()
         {
             currentState = EnemyState.Move;
             speed = chasespeed;
         }
 
-        //攻撃範囲内に入った時にステートを攻撃準備に切り替え
+        /// <summary>
+        /// 攻撃範囲内に入った時にステートを攻撃準備に切り替え
+        /// </summary>
         public void SetAttackReadyState()
         {
             if (!isDead)
             {
-                Debug.Log("攻撃準備");
                 currentState = EnemyState.AttackReady;
                 speed = attackreadyspeed;                          //攻撃範囲に入ったら様子見で移動速度を小さくする
                 animator.SetTrigger(isAttackReady);
@@ -253,10 +265,11 @@ namespace OROCHI
             }
         }
 
-        //ランダムに攻撃する。攻撃時は移動速度を0に設定
+        /// <summary>
+        /// ランダムに攻撃する。攻撃時は移動速度を0に設定
+        /// </summary>
         public void Attacks()
         {
-            Debug.Log("攻撃");
             float tmp = Random.Range(1.0f, 4.0f);              //1～攻撃種類数の乱数を取得
             int random = (int)tmp;                             //float型の乱数をint型にキャスト
                                                                
@@ -284,41 +297,55 @@ namespace OROCHI
             timetoattackreset = timetoattack;                          //攻撃までの時間のカウントをリセット
         }
 
+        /// <summary>
+        /// 攻撃後はMove状態に移行
+        /// </summary>
         public void AfterAttack()
         {
             SetMoveState();
         }
 
-        //当たり判定をONにする関数
+        /// <summary>
+        /// 剣の当たり判定をONにする関数
+        /// </summary>
         public void SetColliderOn(Collider collider)
         {
             SE.Instance.PlaySound(swing);
+            // 剣の軌跡エフェクトを表示
             swordeffect.SetActive(true);
             collider.enabled = true;
         }
 
-        //当たり判定をOFFにする関数
+        /// <summary>
+        /// 剣の当たり判定をOFFにする関数
+        /// </summary>
         public void SetColliderOff(Collider collider)
         {
+            // 剣の軌跡エフェクトを非表示
             swordeffect.SetActive(false);
             collider.enabled = false;
         }
 
+        /// <summary>
+        /// 見失った状態の処理
+        /// </summary>
         void UpdateForDiscover()
         {
             UpdateForMove();
         }
 
-        //待機状態の処理
+        /// <summary>
+        /// 待機状態の処理
+        /// </summary>
         void UpdateForIdle()
         {
             Vector3 vec = Vector3.zero;
             rigidbody.velocity = transform.forward * speed;
         }
 
-        float spd;
-        float cnt = 0;
-        //プレイやーに向かって動く処理
+        /// <summary>
+        /// プレイやーに向かって動く処理
+        /// </summary>
         void UpdateForMove()
         {
             if (!isDead)
@@ -356,7 +383,9 @@ namespace OROCHI
             }
         }
 
-        //攻撃範囲にとどまっている時間をカウントして一定時間を超えたらAttackStateに切り替える
+        /// <summary>
+        /// 攻撃範囲にとどまっている時間をカウントして一定時間を超えたらAttackStateに切り替える
+        /// </summary>
         void UpdateForAttackReady()
         {
             //移動速度を0にしプレイヤーの向きに回転する。
@@ -371,7 +400,9 @@ namespace OROCHI
             }
         }
 
-        //プレイヤーの方向に回転する関数
+        /// <summary>
+        /// プレイヤーの方向に回転する関数
+        /// </summary>
         void Rotate()
         {
             Quaternion rot = this.transform.rotation;
@@ -386,7 +417,9 @@ namespace OROCHI
             this.transform.rotation = rot;
         }
 
-        //Attackステート時の処理
+        /// <summary>
+        /// Attackステート時の処理
+        /// </summary>
         void UpdateForAttack()
         {
             var stateInfo = animator.GetCurrentAnimatorStateInfo(baseLayerIndex);
@@ -397,6 +430,9 @@ namespace OROCHI
             Rotate();
         }
 
+        /// <summary>
+        /// 死亡状態に移行
+        /// </summary>
         void SetDeadState()
         {
             currentState = EnemyState.Dead;
@@ -405,7 +441,9 @@ namespace OROCHI
             animator.SetTrigger(DeadId);
         }
 
-        //敵の遠距離攻撃のプレハブの生成
+        /// <summary>
+        /// 敵の遠距離攻撃のプレハブの生成
+        /// </summary>
         public void EnemyShotAttack()
         {
             SE.Instance.PlaySound(fire);
@@ -416,7 +454,10 @@ namespace OROCHI
             Destroy(shell, 1.0f);
         }
 
-        //敵のHPバーの処理
+        /// <summary>
+        /// 敵のHPバーの処理
+        /// </summary>
+        /// <param name="n"></param>
         public void EnemyDamage(float n)
         {
             if (currentState != EnemyState.Dead)
